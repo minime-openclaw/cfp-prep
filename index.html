@@ -30,6 +30,20 @@
     .nav-countdown { font-size: 13px; color: var(--muted); white-space: nowrap; padding: 6px 12px; background: var(--surface2); border-radius: 8px; border: 1px solid var(--border); }
     .nav-countdown span { color: var(--gold); font-weight: 700; }
 
+    /* Name Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 999; backdrop-filter: blur(4px); }
+    .modal-overlay.hidden { display: none; }
+    .modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+    .modal-emoji { font-size: 40px; margin-bottom: 12px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .modal-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 16px; color: var(--text); outline: none; text-align: center; transition: border 0.15s; }
+    .modal-input:focus { border-color: var(--gold); }
+    .modal-btn { margin-top: 16px; width: 100%; background: var(--gold); color: #000; border: none; border-radius: 10px; padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .modal-btn:hover { opacity: 0.88; }
+    .modal-skip { margin-top: 10px; font-size: 12px; color: var(--muted); cursor: pointer; text-decoration: underline; }
+    .modal-skip:hover { color: var(--text); }
+
     main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
     .page { display: none; }
     .page.active { display: block; }
@@ -161,6 +175,18 @@
 </head>
 <body>
 
+<!-- Name Modal -->
+<div class="modal-overlay" id="nameModal">
+  <div class="modal-box">
+    <div class="modal-emoji">📊</div>
+    <div class="modal-title">Welcome to CFP Command Center</div>
+    <div class="modal-sub">What's your name? We'll personalize the dashboard for you.</div>
+    <input class="modal-input" id="nameInput" type="text" placeholder="Your first name" maxlength="30" autocomplete="given-name" />
+    <button class="modal-btn" onclick="saveName()">Let's go →</button>
+    <div class="modal-skip" onclick="saveName('CFP Candidate')">Skip</div>
+  </div>
+</div>
+
 <nav>
   <div class="nav-brand">📊 CFP Command Center</div>
   <div class="nav-tabs">
@@ -176,7 +202,7 @@
 
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
-    <div class="section-title">Good morning, Nathan 👋</div>
+    <div class="section-title" id="greeting">Good morning 👋</div>
     <div class="section-sub" id="dash-subtitle">CFP exam countdown active — let's get some reps in.</div>
     <div class="grid-3" style="margin-bottom:20px">
       <div class="stat-box"><div class="stat-num" id="stat-today">0/100</div><div class="stat-label">Today's Goal</div></div>
@@ -2444,8 +2470,40 @@ function showPage(id) {
 }
 
 // ── INIT ─────────────────────────────────────────────────────
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+function applyName(name) {
+  const el = document.getElementById('greeting');
+  if (el) el.textContent = `${getGreeting()}, ${name} 👋`;
+}
+
+function saveName(forceName) {
+  const name = forceName || document.getElementById('nameInput').value.trim() || 'CFP Candidate';
+  localStorage.setItem('cfp-username', name);
+  document.getElementById('nameModal').classList.add('hidden');
+  applyName(name);
+}
+
+function checkName() {
+  const saved = localStorage.getItem('cfp-username');
+  if (saved) {
+    document.getElementById('nameModal').classList.add('hidden');
+    applyName(saved);
+  }
+  // Allow pressing Enter in the name field
+  document.getElementById('nameInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') saveName();
+  });
+}
+
 function init() {
   loadState();
+  checkName();
   updateCountdown();
   setInterval(updateCountdown, 60000);
   document.getElementById('exam-date-input').value = state.examDate || '2026-03-20';
