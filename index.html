@@ -1057,37 +1057,46 @@ function renderStudyPlan(stats) {
 
   studyPlanDomains = focus.slice(0, 2).map(d => d.id);
 
-  el.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <div>
-        <div style="font-size:24px;font-weight:800;color:var(--gold);line-height:1">${daysLeft}</div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">days to exam</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:24px;font-weight:800;line-height:1;color:${progressPct>=100?'var(--green)':'var(--foreground)'}">${todayDone}<span style="font-size:14px;font-weight:400;color:var(--muted)">/${dailyTarget}</span></div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">today's questions</div>
-      </div>
-    </div>
-    <div style="background:var(--border);border-radius:4px;height:6px;margin-bottom:14px;overflow:hidden">
-      <div style="width:${progressPct}%;background:${progressColor};height:100%;border-radius:4px;transition:width .5s ease"></div>
-    </div>
-    ${progressPct >= 100
-      ? '<div style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:12px">✅ Daily goal done! Extra reps always welcome.</div>'
-      : `<div style="font-size:12px;color:var(--muted);margin-bottom:12px">${remaining} more to hit today's goal</div>`}
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px">Focus Today</div>
-    ${allocations.map((d, i) => `
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;${i < allocations.length-1 ? 'border-bottom:1px solid var(--border)' : ''}">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:8px;height:8px;border-radius:50%;background:${d.color};flex-shrink:0"></div>
-          <div>
-            <div style="font-size:13px;font-weight:600">${d.name}</div>
-            <div style="font-size:11px;color:var(--muted)">${d.untouched ? `Not started · ${d.weight}% of exam` : d.acc === null ? `${d.total} attempt${d.total!==1?'s':''} · more data needed` : `${Math.round(d.acc*100)}% accuracy · ${d.total} attempts`}</div>
-          </div>
-        </div>
-        <div style="font-size:14px;font-weight:800;color:var(--gold)">${d.qTarget}q</div>
-      </div>`).join('')}
-    <div style="font-size:11px;color:var(--muted);margin:10px 0 12px">~${estMin} min · ${totalQ} questions</div>
-    <button class="btn btn-primary" style="font-size:13px;width:100%;padding:10px" onclick="startStudyPlan()">▶ Start Today's Drill</button>`;
+  // Build allocation rows without nested template literals (iOS Safari compat)
+  var rowsHtml = '';
+  for (var ri = 0; ri < allocations.length; ri++) {
+    var rd = allocations[ri];
+    var border = ri < allocations.length - 1 ? 'border-bottom:1px solid var(--border)' : '';
+    var subtext = '';
+    if (rd.untouched) {
+      subtext = 'Not started \u00b7 ' + rd.weight + '% of exam';
+    } else if (rd.acc === null) {
+      subtext = rd.total + ' attempt' + (rd.total !== 1 ? 's' : '') + ' \u00b7 more data needed';
+    } else {
+      subtext = Math.round(rd.acc * 100) + '% accuracy \u00b7 ' + rd.total + ' attempts';
+    }
+    rowsHtml += '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;' + border + '">'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<div style="width:8px;height:8px;border-radius:50%;background:' + rd.color + ';flex-shrink:0"></div>'
+      + '<div><div style="font-size:13px;font-weight:600">' + rd.name + '</div>'
+      + '<div style="font-size:11px;color:var(--muted)">' + subtext + '</div></div>'
+      + '</div>'
+      + '<div style="font-size:14px;font-weight:800;color:var(--gold)">' + rd.qTarget + 'q</div>'
+      + '</div>';
+  }
+
+  var goalMsg = progressPct >= 100
+    ? '<div style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:12px">\u2705 Daily goal done! Extra reps always welcome.</div>'
+    : '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">' + remaining + ' more to hit today\'s goal</div>';
+
+  el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'
+    + '<div><div style="font-size:24px;font-weight:800;color:var(--gold);line-height:1">' + daysLeft + '</div>'
+    + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">days to exam</div></div>'
+    + '<div style="text-align:right"><div style="font-size:24px;font-weight:800;line-height:1;color:' + (progressPct >= 100 ? 'var(--green)' : 'var(--foreground)') + '">' + todayDone
+    + '<span style="font-size:14px;font-weight:400;color:var(--muted)">/' + dailyTarget + '</span></div>'
+    + '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">today\'s questions</div></div></div>'
+    + '<div style="background:var(--border);border-radius:4px;height:6px;margin-bottom:14px;overflow:hidden">'
+    + '<div style="width:' + progressPct + '%;background:' + progressColor + ';height:100%;border-radius:4px;transition:width .5s ease"></div></div>'
+    + goalMsg
+    + '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px">Focus Today</div>'
+    + rowsHtml
+    + '<div style="font-size:11px;color:var(--muted);margin:10px 0 12px">~' + estMin + ' min \u00b7 ' + totalQ + ' questions</div>'
+    + '<button class="btn btn-primary" style="font-size:13px;width:100%;padding:10px" onclick="startStudyPlan()">\u25b6 Start Today\'s Drill</button>';
 }
 
 function startStudyPlan() {
@@ -1575,7 +1584,7 @@ function renderReport() {
 
   // Exam readiness summary
   const allAttempted = Object.keys(state.qStats).length;
-  const totalQ = QUESTIONS.length;
+  const totalQ = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.length : 500;
   const overallC = Object.values(state.qStats).reduce((s,d) => s+d.correct, 0);
   const overallT = Object.values(state.qStats).reduce((s,d) => s+d.total, 0);
   const overallPct = overallT > 0 ? Math.round(overallC / overallT * 100) : null;
