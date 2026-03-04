@@ -470,8 +470,8 @@
         <div id="weak-areas"></div>
       </div>
       <div class="card">
-        <div class="card-title">Today's Focus Recommendation</div>
-        <div id="todays-focus" style="font-size:14px;line-height:1.6;"></div>
+        <div class="card-title">📋 Daily Study Plan</div>
+        <div id="todays-focus"></div>
       </div>
     </div>
   </div>
@@ -915,20 +915,99 @@ function updateDashboard() {
         <div style="font-size:13px;font-weight:700;color:${d.pct<60?'var(--red)':d.pct<75?'var(--gold)':'var(--green)'}">${d.pct}%</div>
       </div>`).join('');
 
+  renderStudyPlan(stats);
+}
+
+// ── DAILY STUDY PLANNER ───────────────────────────────────────
+let studyPlanDomains = [];
+
+function renderStudyPlan(stats) {
+  const el = document.getElementById('todays-focus');
+  if (!el) return;
+
+  // Build cumulative domain stats from qStats (more accurate than last-answer only)
+  const qs = {};
+  DOMAINS.forEach(d => { qs[d.id] = { correct: 0, total: 0 }; });
+  Object.entries(state.qStats || {}).forEach(([qId, s]) => {
+    const q = QUESTIONS.find(q => q.id == qId);
+    if (!q || !qs[q.domain]) return;
+    qs[q.domain].total += s.total;
+    qs[q.domain].correct += s.correct;
+  });
+
+  // Days remaining
   const examDate = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-21T00:00:00');
-  const daysLeft = Math.floor((examDate - new Date()) / 86400000);
-  const needsPractice = DOMAINS.map(d => {
-    const s = stats[d.id];
-    return { ...d, score: s.total===0?-1:s.correct/s.total, total: s.total };
-  }).sort((a,b) => a.total===0&&b.total===0?b.weight-a.weight:a.total===0?-1:b.total===0?1:a.score-b.score)[0];
-  document.getElementById('todays-focus').innerHTML = `
-    <div style="font-size:13px;color:var(--muted);margin-bottom:8px">${daysLeft} days remaining</div>
-    <div style="font-size:15px;font-weight:600;color:var(--gold);margin-bottom:8px">${needsPractice.name}</div>
-    <div style="font-size:13px;color:var(--muted);line-height:1.6">${needsPractice.total===0
-      ?`You haven't practiced this domain yet. It carries ${needsPractice.weight}% of the exam — start here.`
-      :`Current accuracy: ${Math.round(needsPractice.score*100)}%. This is your weakest area — drill it today.`
-    }</div>
-    <button class="btn btn-primary" style="margin-top:14px;font-size:13px" onclick="setDomainFilter('${needsPractice.id}',null);showPage('practice')">Practice ${needsPractice.name} →</button>`;
+  const daysLeft = Math.max(0, Math.floor((examDate - new Date()) / 86400000));
+
+  // Daily question target based on urgency
+  const dailyTarget = daysLeft > 30 ? 15 : daysLeft > 14 ? 20 : daysLeft > 7 ? 25 : 35;
+
+  // Today's progress
+  const todayStr = new Date().toDateString();
+  const todayDone = Object.values(state.answers).filter(a => new Date(a.timestamp).toDateString() === todayStr).length;
+  const remaining = Math.max(0, dailyTarget - todayDone);
+  const progressPct = Math.min(100, Math.round(todayDone / dailyTarget * 100));
+  const progressColor = progressPct >= 100 ? 'var(--green)' : progressPct >= 50 ? 'var(--gold)' : 'var(--red)';
+
+  // Score each domain: lower accuracy + higher exam weight = higher priority
+  const ranked = DOMAINS.map(d => {
+    const ds = qs[d.id];
+    const untouched = ds.total === 0;
+    const acc = ds.total >= 3 ? ds.correct / ds.total : null;
+    // priority: unknown domains + weak domains + high-weight domains float to top
+    const priority = (acc === null ? 0.55 : (1 - acc)) * 0.6 + (d.weight / 30) * 0.4;
+    return { ...d, acc, total: ds.total, untouched, priority };
+  }).sort((a, b) => b.priority - a.priority);
+
+  const focus = ranked.slice(0, 3);
+  const totalFocusWeight = focus.reduce((s, d) => s + d.weight, 0);
+  const qToDistribute = remaining > 0 ? remaining : dailyTarget; // show full plan even if done
+  const allocations = focus.map(d => ({
+    ...d,
+    qTarget: Math.max(4, Math.round(qToDistribute * d.weight / totalFocusWeight))
+  }));
+  const totalQ = allocations.reduce((s, d) => s + d.qTarget, 0);
+  const estMin = Math.round(totalQ * 127 / 60);
+
+  studyPlanDomains = focus.slice(0, 2).map(d => d.id);
+
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div>
+        <div style="font-size:24px;font-weight:800;color:var(--gold);line-height:1">${daysLeft}</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">days to exam</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:24px;font-weight:800;line-height:1;color:${progressPct>=100?'var(--green)':'var(--foreground)'}">${todayDone}<span style="font-size:14px;font-weight:400;color:var(--muted)">/${dailyTarget}</span></div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">today's questions</div>
+      </div>
+    </div>
+    <div style="background:var(--border);border-radius:4px;height:6px;margin-bottom:14px;overflow:hidden">
+      <div style="width:${progressPct}%;background:${progressColor};height:100%;border-radius:4px;transition:width .5s ease"></div>
+    </div>
+    ${progressPct >= 100
+      ? '<div style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:12px">✅ Daily goal done! Extra reps always welcome.</div>'
+      : `<div style="font-size:12px;color:var(--muted);margin-bottom:12px">${remaining} more to hit today's goal</div>`}
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px">Focus Today</div>
+    ${allocations.map((d, i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;${i < allocations.length-1 ? 'border-bottom:1px solid var(--border)' : ''}">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;border-radius:50%;background:${d.color};flex-shrink:0"></div>
+          <div>
+            <div style="font-size:13px;font-weight:600">${d.name}</div>
+            <div style="font-size:11px;color:var(--muted)">${d.untouched ? `Not started · ${d.weight}% of exam` : d.acc === null ? `${d.total} attempt${d.total!==1?'s':''} · more data needed` : `${Math.round(d.acc*100)}% accuracy · ${d.total} attempts`}</div>
+          </div>
+        </div>
+        <div style="font-size:14px;font-weight:800;color:var(--gold)">${d.qTarget}q</div>
+      </div>`).join('')}
+    <div style="font-size:11px;color:var(--muted);margin:10px 0 12px">~${estMin} min · ${totalQ} questions</div>
+    <button class="btn btn-primary" style="font-size:13px;width:100%;padding:10px" onclick="startStudyPlan()">▶ Start Today's Drill</button>`;
+}
+
+function startStudyPlan() {
+  domainFilter = [...studyPlanDomains];
+  buildQueue();
+  showPage('practice');
 }
 
 // ── PRACTICE ─────────────────────────────────────────────────
