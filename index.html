@@ -173,20 +173,44 @@
     .section-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
     .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+
+    /* Auth modal tabs */
+    .auth-tabs { display:flex; gap:8px; margin-bottom:14px; }
+    .auth-tab { flex:1; padding:8px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text-muted); cursor:pointer; font-size:0.9rem; transition:all .2s; }
+    .auth-tab.active { background:var(--gold); color:#0d0d0d; border-color:var(--gold); font-weight:600; }
+    .auth-tab:hover:not(.active) { border-color:var(--gold); color:var(--gold); }
   </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
 <!-- Name Modal -->
-<div class="modal-overlay hidden" id="nameModal">
+<div class="modal-overlay hidden" id="authModal">
   <div class="modal-box">
     <div class="modal-emoji">📊</div>
-    <div class="modal-title">Welcome to CFP® Command Center</div>
-    <div class="modal-sub">What's your name? We'll personalize the dashboard for you.</div>
-    <input class="modal-input" id="nameInput" type="text" placeholder="Your first name" maxlength="30" autocomplete="given-name" />
-    <button class="modal-btn" onclick="saveName()">Let's go →</button>
-    <div class="modal-skip" onclick="saveName('CFP Candidate')">Skip</div>
+    <div class="modal-title">CFP® Command Center</div>
+    <div class="modal-sub" id="authSub">Sign in to sync your progress across devices</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab" id="registerTab" onclick="switchAuthTab('register')">Create Account</button>
+    </div>
+    <div id="loginForm">
+      <input class="modal-input" type="email" id="loginEmail" placeholder="Email" autocomplete="email" />
+      <input class="modal-input" type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+      <button class="modal-btn" id="authActionBtn" onclick="authAction()">Sign In →</button>
+    </div>
+    <div id="registerForm" style="display:none">
+      <input class="modal-input" type="text" id="regName" placeholder="Your name" maxlength="30" />
+      <input class="modal-input" type="email" id="regEmail" placeholder="Email" autocomplete="email" />
+      <input class="modal-input" type="password" id="regPassword" placeholder="Password (min 6 chars)" autocomplete="new-password" />
+    </div>
+    <div id="authError" style="color:#f87171;font-size:0.85rem;margin:6px 0;display:none;text-align:center;"></div>
+    <div class="modal-skip" onclick="continueLocal()">Continue without account (device only)</div>
   </div>
+</div>
 </div>
 
 <nav>
@@ -6033,7 +6057,7 @@ const TIPS = [
 let state = { answers: {}, examDate: null, streak: 0, lastStudyDate: null };
 
 function loadState() { try { const s = localStorage.getItem('cfp-v2'); if (s) state = JSON.parse(s); } catch(e) {} }
-function saveState() { try { localStorage.setItem('cfp-v2', JSON.stringify(state)); } catch(e) {} }
+function saveState() { try { localStorage.setItem('cfp-v2', JSON.stringify(state)); saveCloudProgress(); } catch(e) {} }
 function resetStep1() {
   document.getElementById('reset-wrap').innerHTML = `
     <span style="font-size:13px;color:var(--muted);margin-right:10px">Are you sure?</span>
@@ -6283,33 +6307,176 @@ function applyName(name) {
   if (el) el.textContent = `${getGreeting()}, ${name} 👋`;
 }
 
-function saveName(forceName) {
-  const name = forceName || document.getElementById('nameInput').value.trim() || 'CFP Candidate';
-  localStorage.setItem('cfp-username', name);
-  document.getElementById('nameModal').classList.add('hidden');
-  applyName(name);
+// ── FIREBASE AUTH & SYNC ──────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyB8Na6YMrfjpFbIGlKVUKYKuc6LLTEgHNU",
+  authDomain: "cfp-command-center.firebaseapp.com",
+  projectId: "cfp-command-center",
+  storageBucket: "cfp-command-center.firebasestorage.app",
+  messagingSenderId: "43010429330",
+  appId: "1:43010429330:web:6d58ec69cf219873d8714b"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+let currentUser = null;
+let authMode = 'login'; // 'login' or 'register'
+
+function switchAuthTab(mode) {
+  authMode = mode;
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const loginTab = document.getElementById('loginTab');
+  const registerTab = document.getElementById('registerTab');
+  const btn = document.getElementById('authActionBtn');
+  const sub = document.getElementById('authSub');
+  clearAuthError();
+  if (mode === 'login') {
+    loginForm.style.display = '';
+    registerForm.style.display = 'none';
+    loginTab.classList.add('active');
+    registerTab.classList.remove('active');
+    btn.textContent = 'Sign In →';
+    sub.textContent = 'Sign in to sync your progress across devices';
+  } else {
+    loginForm.style.display = 'none';
+    registerForm.style.display = '';
+    loginTab.classList.remove('active');
+    registerTab.classList.add('active');
+    btn.textContent = 'Create Account →';
+    sub.textContent = 'Create an account to sync progress on any device';
+  }
 }
 
-function checkName() {
-  const saved = localStorage.getItem('cfp-username');
-  if (saved) {
-    applyName(saved);
-    // modal stays hidden (default)
-  } else {
-    // Show modal only when JS is confirmed running
-    document.getElementById('nameModal').classList.remove('hidden');
-  }
-  const input = document.getElementById('nameInput');
-  if (input) {
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') saveName();
-    });
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function clearAuthError() {
+  const el = document.getElementById('authError');
+  el.style.display = 'none';
+  el.textContent = '';
+}
+
+async function authAction() {
+  clearAuthError();
+  const btn = document.getElementById('authActionBtn');
+  btn.disabled = true;
+  btn.textContent = authMode === 'login' ? 'Signing in...' : 'Creating account...';
+  try {
+    if (authMode === 'login') {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pw = document.getElementById('loginPassword').value;
+      if (!email || !pw) { showAuthError('Please enter email and password'); btn.disabled=false; btn.textContent='Sign In →'; return; }
+      await auth.signInWithEmailAndPassword(email, pw);
+    } else {
+      const name = document.getElementById('regName').value.trim() || 'CFP Candidate';
+      const email = document.getElementById('regEmail').value.trim();
+      const pw = document.getElementById('regPassword').value;
+      if (!email || !pw) { showAuthError('Please enter email and password'); btn.disabled=false; btn.textContent='Create Account →'; return; }
+      if (pw.length < 6) { showAuthError('Password must be at least 6 characters'); btn.disabled=false; btn.textContent='Create Account →'; return; }
+      const cred = await auth.createUserWithEmailAndPassword(email, pw);
+      await cred.user.updateProfile({ displayName: name });
+      // Save initial user doc
+      await db.collection('users').doc(cred.user.uid).set({ name, email, createdAt: new Date().toISOString(), progress: {} }, { merge: true });
+    }
+    // Auth state observer will handle the rest
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = authMode === 'login' ? 'Sign In →' : 'Create Account →';
+    const msgs = {
+      'auth/user-not-found': 'No account found with that email.',
+      'auth/wrong-password': 'Incorrect password.',
+      'auth/email-already-in-use': 'Email already in use. Try signing in.',
+      'auth/invalid-email': 'Invalid email address.',
+      'auth/weak-password': 'Password too weak — use 6+ characters.',
+      'auth/too-many-requests': 'Too many attempts. Try again later.',
+      'auth/invalid-credential': 'Email or password is incorrect.'
+    };
+    showAuthError(msgs[e.code] || e.message);
   }
 }
+
+function continueLocal() {
+  const name = localStorage.getItem('cfp-username') || 'CFP Candidate';
+  document.getElementById('authModal').classList.add('hidden');
+  localStorage.setItem('cfp-username', name);
+  updateDashboard();
+  updateCountdown();
+}
+
+// Load progress from Firestore for logged-in user
+async function loadCloudProgress(uid) {
+  try {
+    const doc = await db.collection('users').doc(uid).get();
+    if (doc.exists) {
+      const data = doc.data();
+      if (data.state) {
+        // Cloud state wins (most recent device wins)
+        localStorage.setItem('cfp-v2', JSON.stringify(data.state));
+        loadState(); // reload state from localStorage
+      }
+      if (data.name) localStorage.setItem('cfp-username', data.name);
+    }
+  } catch(e) { console.warn('Could not load cloud progress:', e); }
+}
+
+// Save progress to Firestore (debounced)
+let _syncTimer = null;
+function saveCloudProgress() {
+  if (!currentUser) return;
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(async () => {
+    try {
+      const stateData = JSON.parse(localStorage.getItem('cfp-v2') || '{}');
+      const name = localStorage.getItem('cfp-username') || '';
+      await db.collection('users').doc(currentUser.uid).set(
+        { state: stateData, name, lastSeen: new Date().toISOString() },
+        { merge: true }
+      );
+    } catch(e) { console.warn('Cloud sync failed:', e); }
+  }, 2000); // debounce 2s
+}
+
+// Patch the existing recordAnswer to also sync to cloud
+const _origRecordAnswer = typeof recordAnswer !== 'undefined' ? recordAnswer : null;
+
+// Auth state observer — runs on page load
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    currentUser = user;
+    await loadCloudProgress(user.uid);
+    document.getElementById('authModal').classList.add('hidden');
+    const name = user.displayName || localStorage.getItem('cfp-username') || 'CFP Candidate';
+    localStorage.setItem('cfp-username', name);
+    updateDashboard();
+    updateCountdown();
+    // Auto-save progress every 60s
+    setInterval(saveCloudProgress, 60000);
+  } else {
+    currentUser = null;
+    // Show auth modal if no local name set
+    const saved = localStorage.getItem('cfp-username');
+    if (!saved) {
+      document.getElementById('authModal').classList.remove('hidden');
+    } else {
+      updateDashboard();
+      updateCountdown();
+    }
+  }
+});
+
+// Handle Enter key in auth forms
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !document.getElementById('authModal').classList.contains('hidden')) {
+    authAction();
+  }
+});
 
 function init() {
   loadState();
-  checkName();
   updateCountdown();
   setInterval(updateCountdown, 60000);
   document.getElementById('exam-date-input').value = state.examDate || '2026-03-20';
