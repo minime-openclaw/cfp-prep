@@ -53,7 +53,82 @@
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .grid-3 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    @media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    /* ── MOBILE RESPONSIVE ─────────────────────────────────────── */
+    /* Add viewport meta already in head */
+
+    /* Touch targets */
+    .option-btn { min-height: 44px; }
+    .nav-tab { min-height: 40px; }
+    .modal-btn { min-height: 48px; font-size: 1rem; }
+
+    /* Tablet (≤768px) */
+    @media (max-width: 768px) {
+      main { padding: 16px 14px; }
+
+      /* Nav: stack brand + tabs */
+      nav { gap: 12px; padding: 0 14px; flex-wrap: wrap; }
+      .nav-brand { font-size: 15px; padding: 12px 0 8px; }
+      .nav-tabs { gap: 2px; flex-wrap: nowrap; overflow-x: auto; }
+      .nav-tab { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+      .nav-countdown { font-size: 11px; padding: 5px 8px; }
+
+      /* Stat grid: 2 cols */
+      .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+
+      /* Domain rows: shorter name width */
+      .domain-name { width: 130px; font-size: 12px; }
+      .domain-q-count { display: none; }
+
+      /* Cards */
+      .card { padding: 16px; }
+      .stat-box { padding: 14px; }
+      .stat-num { font-size: 28px; }
+
+      /* Questions */
+      .question-text { font-size: 15px; margin-bottom: 18px; }
+      .question-header { flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+      /* Tips */
+      .grid-2 { grid-template-columns: 1fr !important; }
+
+      /* Modal */
+      .modal-box { padding: 24px 18px; margin: 16px; max-width: calc(100vw - 32px); }
+    }
+
+    /* Mobile (≤480px) */
+    @media (max-width: 480px) {
+      main { padding: 12px 10px; }
+
+      /* Nav: hide brand text, show icon only on very small */
+      nav { padding: 0 10px; gap: 8px; }
+      .nav-brand { font-size: 13px; }
+      .nav-tab { padding: 5px 8px; font-size: 11px; }
+
+      /* Stat grid: 2 cols tight */
+      .stat-num { font-size: 24px; }
+      .stat-label { font-size: 11px; }
+
+      /* Domain rows: collapse weight + pct */
+      .domain-name { width: 100px; font-size: 11px; }
+      .domain-weight { display: none; }
+      .domain-pct { width: 28px; font-size: 11px; }
+
+      /* Options */
+      .option-btn { font-size: 13px; }
+      .option-why { font-size: 12px; }
+
+      /* Question */
+      .question-text { font-size: 14px; line-height: 1.5; }
+
+      /* Modal tighter */
+      .modal-box { padding: 20px 14px; }
+      .modal-emoji { font-size: 2rem; }
+      .modal-title { font-size: 1.2rem; }
+      .auth-tabs { gap: 6px; }
+      .auth-tab { font-size: 0.82rem; padding: 6px; }
+    }
+
 
     .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
     .stat-num { font-size: 36px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 6px; }
