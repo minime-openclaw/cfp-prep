@@ -178,7 +178,7 @@
 <body>
 
 <!-- Name Modal -->
-<div class="modal-overlay" id="nameModal">
+<div class="modal-overlay hidden" id="nameModal">
   <div class="modal-box">
     <div class="modal-emoji">📊</div>
     <div class="modal-title">Welcome to CFP Command Center</div>
@@ -6299,13 +6299,18 @@ function saveName(forceName) {
 function checkName() {
   const saved = localStorage.getItem('cfp-username');
   if (saved) {
-    document.getElementById('nameModal').classList.add('hidden');
     applyName(saved);
+    // modal stays hidden (default)
+  } else {
+    // Show modal only when JS is confirmed running
+    document.getElementById('nameModal').classList.remove('hidden');
   }
-  // Allow pressing Enter in the name field
-  document.getElementById('nameInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') saveName();
-  });
+  const input = document.getElementById('nameInput');
+  if (input) {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') saveName();
+    });
+  }
 }
 
 function init() {
