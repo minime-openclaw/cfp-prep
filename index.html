@@ -291,6 +291,8 @@
     .setup-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-bottom:8px; }
     #custom-length-wrap { display:none; align-items:center; gap:10px; margin-top:10px; }
     #custom-length-wrap.show { display:flex; }
+    #exam-custom-wrap { display:none; align-items:center; gap:10px; margin-top:10px; }
+    #exam-custom-wrap.show { display:flex; }
     .setup-count { font-size:13px; color:var(--muted); margin-top:4px; text-align:center; padding:8px; background:var(--surface2); border-radius:8px; }
     .session-end-domain-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--border); font-size:13px; }
     .session-end-domain-row:last-child { border-bottom:none; }
@@ -612,22 +614,57 @@
   <div class="page" id="page-exam">
     <!-- Start Screen -->
     <div id="exam-start-screen">
-      <div class="exam-start">
-        <div class="exam-start-icon">📝</div>
-        <div class="exam-start-title">CFP® Exam Simulator</div>
-        <div class="exam-start-sub">Experience real exam conditions. You'll see your answers only after submitting — just like the actual CFP exam. Questions are drawn proportionally by domain weight.</div>
-        <div class="exam-option-card" onclick="startExamSession(85, 180)">
-          <div class="exam-option-title">Exam Session</div>
-          <div class="exam-option-sub">Mirrors one of the two sessions you'll sit on exam day.</div>
-          <div class="exam-option-tags">
-            <span class="exam-option-tag">85 Questions</span>
-            <span class="exam-option-tag">3:00:00 Timer</span>
-            <span class="exam-option-tag">~2:07 / question</span>
-            <span class="exam-option-tag">Pass: ≥70%</span>
+      <div class="section-title">Exam Simulator</div>
+      <div class="section-sub">Real exam conditions — answers hidden until you submit, domain-weighted, timed.</div>
+      <div class="card">
+        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:20px">⚙️ Configure Exam</div>
+
+        <div class="setup-section">
+          <div class="setup-label">Session Length</div>
+          <div class="pill-row" id="exam-preset-pills">
+            <button class="pill" onclick="setExamPreset(20,this)">Quick (20q)</button>
+            <button class="pill" onclick="setExamPreset(42,this)">Half (42q)</button>
+            <button class="pill active" onclick="setExamPreset(85,this)">One Session (85q)</button>
+            <button class="pill" onclick="setExamPreset(170,this)">Full Exam (170q)</button>
+            <button class="pill" id="exam-custom-pill" onclick="setExamPreset(0,this)">Custom</button>
+          </div>
+          <div id="exam-custom-wrap">
+            <input type="number" id="exam-custom-input" min="1" max="170" value="50"
+              style="width:72px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:8px;font-size:14px;outline:none"
+              oninput="examConfig.questions=Math.min(170,Math.max(1,+this.value||1));updateExamPreview()">
+            <span style="font-size:13px;color:var(--muted)">questions (1–170)</span>
           </div>
         </div>
-        <div style="font-size:12px;color:var(--muted);max-width:420px;margin:0 auto;line-height:1.7">
-          The real CFP exam is 170 questions split across two 3-hour sessions with a lunch break.<br>This simulates one session. Your results count toward your Practice stats.
+
+        <div class="setup-section">
+          <div class="setup-label">Difficulty</div>
+          <div class="pill-row" id="exam-diff-pills">
+            <button class="pill active" data-diff="easy" onclick="toggleExamDiff('easy',this)">Easy</button>
+            <button class="pill active" data-diff="medium" onclick="toggleExamDiff('medium',this)">Medium</button>
+            <button class="pill active" data-diff="hard" onclick="toggleExamDiff('hard',this)">Hard</button>
+            <button class="pill active" data-diff="expert" onclick="toggleExamDiff('expert',this)">Expert</button>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <div class="setup-label">Domain Focus <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:11px">(optional — default proportional)</span></div>
+          <div class="pill-row" id="exam-domain-chips"></div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px">
+          <div>
+            <div class="setup-label" style="margin-bottom:2px">⏱ Exam Timer</div>
+            <div style="font-size:12px;color:var(--muted)" id="exam-timer-preview">Auto-calculated</div>
+          </div>
+          <button class="toggle-btn" id="exam-timed-toggle" onclick="toggleExamTimed()">ON</button>
+        </div>
+
+        <div id="exam-preview-count" class="setup-count">Loading...</div>
+        <button class="btn btn-primary" style="width:100%;margin-top:14px;font-size:15px;padding:13px" onclick="launchExam()">
+          Start Exam →
+        </button>
+        <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">
+          Answers revealed only after submitting · Results count toward Practice stats
         </div>
       </div>
     </div>
@@ -1264,6 +1301,7 @@ function showPage(id) {
   document.querySelectorAll('.nav-tab').forEach(t => { if (t.getAttribute('onclick')?.includes(`'${id}'`)) t.classList.add('active'); });
   if (id==='dashboard') updateDashboard();
   if (id==='profile') updateProfilePage();
+  if (id==='exam' && (!exam || exam.finished)) initExamSetup();
 }
 
 // ── PROFILE PAGE ──────────────────────────────────────────────
@@ -1607,38 +1645,172 @@ function stopQuestionTimer() {
 
 // ── EXAM SIMULATOR ────────────────────────────────────────────
 // Domain allocations for 85-question session (proportional to CFP Board weights, sum=85)
+// Domain weights based on official CFP exam blueprint (85-question session)
 const EXAM_DOMAIN_COUNTS = {
   professional: 6, general: 12, education: 5, risk: 9,
   investment: 14, tax: 11, retirement: 15, estate: 7, psychology: 6
 };
 
+let examConfig = {
+  questions: 85,
+  difficulties: ['easy','medium','hard','expert'],
+  domains: [],    // empty = all domains, proportional
+  timed: true
+};
+
 let exam = null;
 let examClockInterval = null;
 
-function buildExamQuestions() {
+function initExamSetup() {
+  const row = document.getElementById('exam-domain-chips');
+  if (row) {
+    row.innerHTML =
+      `<button class="pill ${examConfig.domains.length===0?'active':''}" id="exam-domain-all" onclick="toggleExamDomain('all',this)">All</button>` +
+      DOMAINS.map(d =>
+        `<button class="pill ${examConfig.domains.includes(d.id)?'active':''}" id="exam-domain-${d.id}" onclick="toggleExamDomain('${d.id}',this)">${d.name.split('&')[0].trim()}</button>`
+      ).join('');
+  }
+  updateExamPreview();
+}
+
+function setExamPreset(n, el) {
+  document.querySelectorAll('#exam-preset-pills .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const wrap = document.getElementById('exam-custom-wrap');
+  if (n === 0) {
+    wrap.classList.add('show');
+    examConfig.questions = Math.min(170, Math.max(1, parseInt(document.getElementById('exam-custom-input').value)||50));
+  } else {
+    wrap.classList.remove('show');
+    examConfig.questions = n;
+  }
+  updateExamPreview();
+}
+
+function toggleExamDiff(diff, el) {
+  if (examConfig.difficulties.includes(diff)) {
+    if (examConfig.difficulties.length === 1) return;
+    examConfig.difficulties = examConfig.difficulties.filter(d => d !== diff);
+    el.classList.remove('active');
+  } else {
+    examConfig.difficulties.push(diff);
+    el.classList.add('active');
+  }
+  updateExamPreview();
+}
+
+function toggleExamDomain(id, el) {
+  if (id === 'all') {
+    examConfig.domains = [];
+    document.querySelectorAll('#exam-domain-chips .pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+  } else {
+    document.getElementById('exam-domain-all').classList.remove('active');
+    if (examConfig.domains.includes(id)) {
+      examConfig.domains = examConfig.domains.filter(d => d !== id);
+      el.classList.remove('active');
+      if (examConfig.domains.length === 0) document.getElementById('exam-domain-all').classList.add('active');
+    } else {
+      examConfig.domains.push(id);
+      el.classList.add('active');
+    }
+  }
+  updateExamPreview();
+}
+
+function toggleExamTimed() {
+  examConfig.timed = !examConfig.timed;
+  const btn = document.getElementById('exam-timed-toggle');
+  btn.textContent = examConfig.timed ? 'ON' : 'OFF';
+  btn.className = 'toggle-btn' + (examConfig.timed ? '' : ' off');
+  updateExamPreview();
+}
+
+function getExamTotalSeconds() {
+  // 127s avg per question (weighted across difficulty distribution)
+  return Math.round(examConfig.questions * 127);
+}
+
+function buildExamQuestionsFromConfig() {
+  const domainsToUse = examConfig.domains.length > 0
+    ? DOMAINS.filter(d => examConfig.domains.includes(d.id))
+    : DOMAINS;
+  const totalWeight = domainsToUse.reduce((s, d) => s + (EXAM_DOMAIN_COUNTS[d.id] || 0), 0);
+  const total = examConfig.questions;
+  // Proportional allocation with largest-remainder rounding
+  let allocated = 0;
+  const slots = domainsToUse.map(d => {
+    const weight = EXAM_DOMAIN_COUNTS[d.id] || 0;
+    const exact = totalWeight > 0 ? (weight / totalWeight) * total : total / domainsToUse.length;
+    const floored = Math.floor(exact);
+    allocated += floored;
+    return { d, floored, remainder: exact - floored };
+  });
+  let remaining = total - allocated;
+  slots.sort((a, b) => b.remainder - a.remainder);
+  slots.forEach((s, i) => { if (i < remaining) s.floored++; });
   const qs = [];
-  DOMAINS.forEach(d => {
-    const n = EXAM_DOMAIN_COUNTS[d.id] || 0;
-    const pool = shuffle(QUESTIONS.filter(q => q.domain === d.id));
-    qs.push(...pool.slice(0, n));
+  slots.forEach(({ d, floored }) => {
+    if (floored <= 0) return;
+    const pool = shuffle(QUESTIONS.filter(q =>
+      q.domain === d.id && examConfig.difficulties.includes(q.difficulty)
+    ));
+    qs.push(...pool.slice(0, floored));
   });
   return shuffle(qs);
 }
 
-function startExamSession(totalQuestions, totalMinutes) {
-  const questions = buildExamQuestions().slice(0, totalQuestions);
+function updateExamPreview() {
+  const pool = buildExamQuestionsFromConfig();
+  const actual = pool.length;
+  const requested = examConfig.questions;
+  const el = document.getElementById('exam-preview-count');
+  const timerEl = document.getElementById('exam-timer-preview');
+  if (actual === 0) {
+    if (el) { el.textContent = '⚠️ No questions match — adjust difficulty or domain filters'; el.style.color = 'var(--red)'; }
+    if (timerEl) timerEl.textContent = '—';
+    return;
+  }
+  if (el) el.style.color = 'var(--muted)';
+  const secs = getExamTotalSeconds();
+  const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60), s = secs % 60;
+  const timeStr = h > 0
+    ? h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0')
+    : m + ':' + String(s).padStart(2,'0');
+  const perQ = Math.round(secs / requested);
+  const pqm = Math.floor(perQ / 60), pqs = perQ % 60;
+  const short = actual < requested ? ` (${actual} available)` : '';
+  if (el) el.textContent = examConfig.timed
+    ? `${actual}${short} questions · ${timeStr} · ~${pqm}:${String(pqs).padStart(2,'0')}/question · Pass: ≥70%`
+    : `${actual}${short} questions · No timer · Pass: ≥70%`;
+  if (timerEl) timerEl.textContent = examConfig.timed
+    ? `Auto: ${timeStr} for ${requested} questions`
+    : 'Timer disabled';
+}
+
+function launchExam() {
+  const questions = buildExamQuestionsFromConfig();
+  if (questions.length === 0) { updateExamPreview(); return; }
+  const secs = examConfig.timed ? getExamTotalSeconds() : 9999999;
   exam = {
     questions, answers: {}, flagged: new Set(),
     startTime: Date.now(), currentIdx: 0,
-    totalSeconds: totalMinutes * 60,
-    remainingSeconds: totalMinutes * 60,
-    finished: false
+    totalSeconds: secs, remainingSeconds: secs,
+    finished: false, timed: examConfig.timed
   };
   document.getElementById('exam-start-screen').style.display = 'none';
   document.getElementById('exam-in-progress').style.display = '';
   document.getElementById('exam-report-screen').style.display = 'none';
-  startExamClock();
+  if (examConfig.timed) startExamClock();
   showExamQuestion();
+}
+
+// Legacy compat — kept for any old references
+function buildExamQuestions() { return buildExamQuestionsFromConfig(); }
+function startExamSession(totalQuestions, totalMinutes) {
+  examConfig.questions = totalQuestions;
+  examConfig.timed = true;
+  launchExam();
 }
 
 function startExamClock() {
@@ -1655,6 +1827,8 @@ function startExamClock() {
 function updateExamClock() {
   const el = document.getElementById('exam-clock');
   if (!el || !exam) return;
+  if (!exam.timed) { el.style.display = 'none'; return; }
+  el.style.display = '';
   const s = exam.remainingSeconds;
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
   el.textContent = h + ':' + String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
@@ -1823,6 +1997,7 @@ function resetExam() {
   document.getElementById('exam-start-screen').style.display = '';
   document.getElementById('exam-in-progress').style.display = 'none';
   document.getElementById('exam-report-screen').style.display = 'none';
+  initExamSetup();
 }
 
 function init() {
