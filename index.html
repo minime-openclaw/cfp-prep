@@ -382,6 +382,19 @@
     .exam-report-bar { height:100%; border-radius:4px; transition:width .4s; }
     .exam-report-pct { font-size:12px; color:var(--muted); width:36px; text-align:right; }
     /* Cases */
+    /* ── FLASHCARD FLIP ──────────────────────────────────────── */
+    .card-flip-scene { width:100%; perspective:1200px; cursor:pointer; margin:0 auto; }
+    .card-flip-inner { position:relative; width:100%; min-height:260px; transition:transform 0.55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
+    .card-flip-inner.flipped { transform:rotateY(180deg); }
+    .card-flip-face { position:absolute; width:100%; min-height:260px; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:32px 28px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+    .card-flip-back { transform:rotateY(180deg); align-items:flex-start; justify-content:flex-start; }
+    /* Keep the scene height stable */
+    .card-flip-scene { min-height:260px; }
+    @media (max-width:480px) {
+      .card-flip-face { padding:20px 16px; min-height:220px; }
+      #card-term { font-size:22px !important; }
+    }
+
     .cases-placeholder { text-align:center; padding:56px 20px; }
     .cases-placeholder-icon { font-size:52px; margin-bottom:14px; }
     .cases-placeholder-title { font-size:22px; font-weight:700; margin-bottom:8px; }
@@ -440,6 +453,7 @@
     <button class="nav-tab" onclick="showPage('practice')">Practice</button>
     <button class="nav-tab" onclick="showPage('exam')">📝 Exam</button>
     <button class="nav-tab" onclick="showPage('cases')">📚 Cases</button>
+    <button class="nav-tab" onclick="showPage('cards')">🃏 Cards</button>
     <button class="nav-tab" onclick="showPage('report')">📊 Report</button>
     <button class="nav-tab" onclick="showPage('tips')">Concepts</button>
     <button class="nav-tab" onclick="showPage('settings')">Settings</button>
@@ -697,6 +711,52 @@
     <div id="exam-report-screen" style="display:none"></div>
   </div>
 
+  <!-- FLASHCARDS -->
+  <div class="page" id="page-cards">
+    <div class="section-title">🃏 Flashcards</div>
+    <div class="section-sub">Click a card to flip. Mark what you know.</div>
+
+    <!-- Domain filter pills -->
+    <div class="filter-tabs" id="card-domain-filters"></div>
+
+    <!-- Progress + known counter -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+      <span id="card-progress" style="font-size:13px;color:var(--muted);font-weight:600;">Card 1 of 125</span>
+      <span id="card-known-counter" style="font-size:13px;color:var(--green);font-weight:600;">Known: 0 / 125</span>
+    </div>
+
+    <!-- Flip card container -->
+    <div class="card-flip-scene" id="card-flip-scene">
+      <div class="card-flip-inner" id="card-flip-inner">
+        <!-- Front -->
+        <div class="card-flip-face card-flip-front" id="card-front">
+          <div id="card-front-badges" style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;"></div>
+          <div id="card-term" style="font-size:28px;font-weight:800;text-align:center;line-height:1.3;color:var(--text);"></div>
+          <div style="margin-top:24px;font-size:12px;color:var(--muted);">click to flip</div>
+        </div>
+        <!-- Back -->
+        <div class="card-flip-face card-flip-back" id="card-back">
+          <div id="card-back-badges" style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;"></div>
+          <div id="card-definition" style="font-size:15px;line-height:1.7;color:var(--text);text-align:left;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav buttons -->
+    <div style="display:flex;gap:10px;align-items:center;margin-top:20px;flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="prevCard()">← Prev</button>
+      <button class="btn btn-ghost" onclick="nextCard()">Next →</button>
+      <button class="btn btn-ghost" onclick="shuffleDeck()" style="margin-left:auto;">🔀 Shuffle</button>
+      <button class="btn btn-ghost" onclick="resetDeck()" style="color:var(--red);border-color:rgba(231,76,60,0.4);">↺ Reset</button>
+    </div>
+
+    <!-- Mark buttons -->
+    <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="markKnown()" style="flex:1;background:var(--green);color:#000;">✅ Known</button>
+      <button class="btn btn-ghost" onclick="markLearning()" style="flex:1;border-color:var(--gold);color:var(--gold);">🔄 Still Learning</button>
+    </div>
+  </div>
+
   <!-- CASE STUDIES -->
   <div class="page" id="page-cases">
     <div class="section-title">Case Studies</div>
@@ -782,6 +842,7 @@
 
 </main>
 
+<script src="flashcards.js"></script>
 <script src="questions.js"></script>
 <script>
 const DOMAINS = [
@@ -1526,6 +1587,7 @@ function showPage(id) {
   if (id==='profile') updateProfilePage();
   if (id==='exam' && (!exam || exam.finished)) initExamSetup();
   if (id==='report') renderReport();
+  if (id==='cards') initCards();
 }
 
 // ── PROFILE PAGE ──────────────────────────────────────────────
@@ -2236,6 +2298,192 @@ function init() {
   renderTips();
 }
 init();
+
+// ── FLASHCARD MODULE ─────────────────────────────────────────────────────────
+
+const CARD_DOMAIN_LABELS = {
+  professional: 'Professional', general: 'General', education: 'Education',
+  risk: 'Risk Mgmt', investment: 'Investments', tax: 'Tax Planning',
+  retirement: 'Retirement', estate: 'Estate', psychology: 'Psychology'
+};
+
+let cardDeck = [];
+let cardIdx = 0;
+let cardFlipped = false;
+let cardDomainFilter = 'all';
+let cardState = { known: {}, learning: {} };
+
+function loadCardState() {
+  try {
+    const raw = localStorage.getItem('cfp-cards-v1');
+    if (raw) cardState = JSON.parse(raw);
+    if (!cardState.known) cardState.known = {};
+    if (!cardState.learning) cardState.learning = {};
+  } catch(e) { cardState = { known: {}, learning: {} }; }
+}
+
+function saveCardState() {
+  localStorage.setItem('cfp-cards-v1', JSON.stringify(cardState));
+}
+
+function buildCardDeck() {
+  let deck = (typeof FLASHCARDS !== 'undefined') ? [...FLASHCARDS] : [];
+  if (cardDomainFilter !== 'all') {
+    deck = deck.filter(c => c.domain === cardDomainFilter);
+  }
+  cardDeck = deck;
+  cardIdx = 0;
+  cardFlipped = false;
+}
+
+function shuffleDeck() {
+  for (let i = cardDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cardDeck[i], cardDeck[j]] = [cardDeck[j], cardDeck[i]];
+  }
+  cardIdx = 0;
+  cardFlipped = false;
+  renderCard();
+}
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  const inner = document.getElementById('card-flip-inner');
+  if (inner) inner.classList.toggle('flipped', cardFlipped);
+}
+
+function nextCard() {
+  if (cardDeck.length === 0) return;
+  cardIdx = (cardIdx + 1) % cardDeck.length;
+  cardFlipped = false;
+  const inner = document.getElementById('card-flip-inner');
+  if (inner) inner.classList.remove('flipped');
+  renderCard();
+}
+
+function prevCard() {
+  if (cardDeck.length === 0) return;
+  cardIdx = (cardIdx - 1 + cardDeck.length) % cardDeck.length;
+  cardFlipped = false;
+  const inner = document.getElementById('card-flip-inner');
+  if (inner) inner.classList.remove('flipped');
+  renderCard();
+}
+
+function markKnown() {
+  if (cardDeck.length === 0) return;
+  const card = cardDeck[cardIdx];
+  cardState.known[card.id] = true;
+  delete cardState.learning[card.id];
+  saveCardState();
+  nextCard();
+  renderCounters();
+}
+
+function markLearning() {
+  if (cardDeck.length === 0) return;
+  const card = cardDeck[cardIdx];
+  cardState.learning[card.id] = true;
+  delete cardState.known[card.id];
+  saveCardState();
+  nextCard();
+  renderCounters();
+}
+
+function resetDeck() {
+  if (cardDomainFilter === 'all') {
+    cardState = { known: {}, learning: {} };
+  } else {
+    const toReset = cardDeck.map(c => c.id);
+    toReset.forEach(id => { delete cardState.known[id]; delete cardState.learning[id]; });
+  }
+  saveCardState();
+  buildCardDeck();
+  renderCard();
+  renderCounters();
+}
+
+function renderCounters() {
+  const deckIds = new Set(cardDeck.map(c => c.id));
+  const knownCount = [...deckIds].filter(id => cardState.known[id]).length;
+  document.getElementById('card-progress').textContent =
+    cardDeck.length ? `Card ${cardIdx + 1} of ${cardDeck.length}` : 'No cards';
+  document.getElementById('card-known-counter').textContent =
+    `Known: ${knownCount} / ${cardDeck.length} in this deck`;
+}
+
+function domainBadgeColor(domain) {
+  const map = {
+    professional:'#a78bfa', general:'#60a5fa', education:'#34d399',
+    risk:'#f87171', investment:'#fbbf24', tax:'#fb923c',
+    retirement:'#38bdf8', estate:'#e879f9', psychology:'#4ade80'
+  };
+  return map[domain] || 'var(--muted)';
+}
+
+function renderCard() {
+  if (cardDeck.length === 0) {
+    document.getElementById('card-term').textContent = 'No cards in this filter.';
+    document.getElementById('card-definition').textContent = '';
+    document.getElementById('card-front-badges').innerHTML = '';
+    document.getElementById('card-back-badges').innerHTML = '';
+    renderCounters();
+    return;
+  }
+  const card = cardDeck[cardIdx];
+  const color = domainBadgeColor(card.domain);
+  const badgeStyle = `background:${color}22;color:${color};border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;`;
+  const knownBadge = cardState.known[card.id] ? `<span style="background:rgba(46,204,113,0.2);color:var(--green);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">✅ Known</span>` :
+    (cardState.learning[card.id] ? `<span style="background:rgba(245,197,24,0.15);color:var(--gold);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">🔄 Learning</span>` : '');
+
+  document.getElementById('card-front-badges').innerHTML =
+    `<span style="${badgeStyle}">${CARD_DOMAIN_LABELS[card.domain] || card.domain}</span>` +
+    `<span style="background:var(--surface2);color:var(--muted);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">${card.category}</span>` +
+    knownBadge;
+  document.getElementById('card-back-badges').innerHTML =
+    `<span style="${badgeStyle}">${CARD_DOMAIN_LABELS[card.domain] || card.domain}</span>` +
+    `<span style="background:var(--surface2);color:var(--muted);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">${card.category}</span>` +
+    knownBadge;
+  document.getElementById('card-term').textContent = card.term;
+  document.getElementById('card-definition').textContent = card.definition;
+
+  // Attach click handler to scene
+  const scene = document.getElementById('card-flip-scene');
+  scene.onclick = flipCard;
+
+  renderCounters();
+}
+
+function renderCardDomainFilters() {
+  const container = document.getElementById('card-domain-filters');
+  if (!container) return;
+  const allDomains = [...new Set((typeof FLASHCARDS !== 'undefined' ? FLASHCARDS : []).map(c => c.domain))];
+  let html = `<button class="filter-tab ${cardDomainFilter==='all'?'active':''}" onclick="setCardDomain('all')">All (${typeof FLASHCARDS !== 'undefined' ? FLASHCARDS.length : 0})</button>`;
+  allDomains.forEach(d => {
+    const count = (typeof FLASHCARDS !== 'undefined' ? FLASHCARDS : []).filter(c => c.domain === d).length;
+    html += `<button class="filter-tab ${cardDomainFilter===d?'active':''}" onclick="setCardDomain('${d}')">${CARD_DOMAIN_LABELS[d] || d} (${count})</button>`;
+  });
+  container.innerHTML = html;
+}
+
+function setCardDomain(domain) {
+  cardDomainFilter = domain;
+  buildCardDeck();
+  renderCardDomainFilters();
+  const inner = document.getElementById('card-flip-inner');
+  if (inner) inner.classList.remove('flipped');
+  renderCard();
+}
+
+function initCards() {
+  loadCardState();
+  buildCardDeck();
+  renderCardDomainFilters();
+  const inner = document.getElementById('card-flip-inner');
+  if (inner) inner.classList.remove('flipped');
+  renderCard();
+}
+
 </script>
 </body>
 </html>
