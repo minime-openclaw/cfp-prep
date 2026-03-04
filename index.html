@@ -450,6 +450,7 @@
     <div class="section-title">Practice Mode</div>
     <div class="section-sub">CFP-style questions across all 9 domains. Select an answer to see why each choice is right or wrong.</div>
     <div class="filter-tabs" id="domain-filters"></div>
+    <div class="filter-tabs" id="diff-filters" style="margin-top:-12px;margin-bottom:20px"></div>
     <div class="card" id="question-card">
       <div class="question-header">
         <div class="q-meta">
@@ -842,13 +843,10 @@ function updateDashboard() {
 
 // ── PRACTICE ─────────────────────────────────────────────────
 let queue = [], qIdx = 0, sessionCorrect = 0, sessionTotal = 0, isAnswered = false, domainFilter = 'all';
-let sessionDomainStats = {}; // { domainId: { correct, total } } for current session
+let diffFilter = ['easy','medium','hard','expert'];
+let sessionDomainStats = {};
 let practiceConfig = {
-  length: 10,
-  domains: [],      // empty = all domains
-  difficulties: ['easy','medium','hard','expert'],
-  mode: 'smart',   // 'smart'|'new'|'weak'|'random'
-  timed: false
+  length: 10, domains: [], difficulties: ['easy','medium','hard','expert'], mode: 'smart', timed: false
 };
 
 function shuffle(arr) {
@@ -861,6 +859,34 @@ function initPractice() {
   document.getElementById('domain-filters').innerHTML =
     `<div class="filter-tab ${domainFilter==='all'?'active':''}" onclick="setDomainFilter('all',this)">All Domains</div>` +
     DOMAINS.map(d => `<div class="filter-tab ${domainFilter===d.id?'active':''}" onclick="setDomainFilter('${d.id}',this)">${d.name.split('&')[0].trim()}</div>`).join('');
+  renderDiffFilters();
+  buildQueue();
+}
+
+function renderDiffFilters() {
+  const diffs = [
+    { id: 'easy',   label: 'Easy',   color: 'var(--green)' },
+    { id: 'medium', label: 'Medium', color: 'var(--blue)'  },
+    { id: 'hard',   label: 'Hard',   color: 'var(--red)'   },
+    { id: 'expert', label: 'Expert', color: '#c4b5fd'      },
+  ];
+  document.getElementById('diff-filters').innerHTML =
+    diffs.map(d =>
+      `<div class="filter-tab ${diffFilter.includes(d.id)?'active':''}" style="${diffFilter.includes(d.id)?'color:'+d.color+';border-color:'+d.color+';background:'+d.color+'18':''}" onclick="toggleDiffFilter('${d.id}',this,'${d.color}')">${d.label}</div>`
+    ).join('');
+}
+
+function toggleDiffFilter(diff, el, color) {
+  if (diffFilter.includes(diff)) {
+    if (diffFilter.length === 1) return; // keep at least one
+    diffFilter = diffFilter.filter(d => d !== diff);
+    el.classList.remove('active');
+    el.style.color = ''; el.style.borderColor = ''; el.style.background = '';
+  } else {
+    diffFilter.push(diff);
+    el.classList.add('active');
+    el.style.color = color; el.style.borderColor = color; el.style.background = color + '18';
+  }
   buildQueue();
 }
 
@@ -893,7 +919,14 @@ function weightedShuffle(arr) {
 }
 
 function buildQueue() {
-  const pool = QUESTIONS.filter(q => domainFilter === 'all' || q.domain === domainFilter);
+  const pool = QUESTIONS.filter(q =>
+    (domainFilter === 'all' || q.domain === domainFilter) &&
+    diffFilter.includes(q.difficulty)
+  );
+  if (pool.length === 0) {
+    document.getElementById('question-card').innerHTML = '<div class="empty">No questions match this filter.</div>';
+    return;
+  }
   if (state.smartPractice) {
     queue = weightedShuffle(pool);
   } else {
