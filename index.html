@@ -297,6 +297,36 @@
     .session-end-domain-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--border); font-size:13px; }
     .session-end-domain-row:last-child { border-bottom:none; }
 
+    /* ── WEAK SPOT REPORT ──────────────────────────────────── */
+    .report-domain-row { display:grid; grid-template-columns:180px 1fr 52px 60px 80px; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+    .report-domain-row:last-child { border-bottom:none; }
+    .report-domain-name { font-size:13px; font-weight:600; }
+    .report-bar-wrap { height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+    .report-bar { height:100%; border-radius:4px; transition:width .5s; }
+    .report-pct { font-size:13px; font-weight:700; text-align:right; }
+    .report-count { font-size:11px; color:var(--muted); text-align:right; }
+    .report-status { font-size:11px; font-weight:700; padding:3px 8px; border-radius:12px; text-align:center; white-space:nowrap; }
+    .status-strong   { background:rgba(46,204,113,.15); color:var(--green); }
+    .status-solid    { background:rgba(74,144,217,.15);  color:var(--blue); }
+    .status-developing { background:rgba(245,197,24,.15); color:var(--gold); }
+    .status-weak     { background:rgba(231,76,60,.15);  color:var(--red); }
+    .status-unseen   { background:var(--surface2); color:var(--muted); }
+    .diff-stat-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+    .diff-stat-row:last-child { border-bottom:none; }
+    .diff-stat-label { font-size:13px; font-weight:600; width:60px; }
+    .diff-stat-bar-wrap { flex:1; height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+    .diff-stat-bar { height:100%; border-radius:4px; }
+    .diff-stat-right { font-size:13px; font-weight:700; width:44px; text-align:right; }
+    .diff-stat-count { font-size:11px; color:var(--muted); width:52px; text-align:right; }
+    .missed-row { padding:12px 0; border-bottom:1px solid var(--border); }
+    .missed-row:last-child { border-bottom:none; }
+    .missed-q-text { font-size:13px; color:var(--text); margin-bottom:6px; line-height:1.4; }
+    .missed-q-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    @media (max-width:600px) {
+      .report-domain-row { grid-template-columns:1fr auto auto; }
+      .report-bar-wrap, .report-count { display:none; }
+    }
+
     /* ── QUESTION TIMER ──────────────────────────────────────── */
     .q-timer-section { margin-bottom:16px; }
     .q-timer-label-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
@@ -410,6 +440,7 @@
     <button class="nav-tab" onclick="showPage('practice')">Practice</button>
     <button class="nav-tab" onclick="showPage('exam')">📝 Exam</button>
     <button class="nav-tab" onclick="showPage('cases')">📚 Cases</button>
+    <button class="nav-tab" onclick="showPage('report')">📊 Report</button>
     <button class="nav-tab" onclick="showPage('tips')">Concepts</button>
     <button class="nav-tab" onclick="showPage('settings')">Settings</button>
     <button class="nav-tab" onclick="showPage('profile')">👤 Profile</button>
@@ -684,6 +715,13 @@
         <div style="margin-top:12px;font-size:12px;color:var(--muted)">5 questions · All domains · Expert difficulty</div>
       </div>
     </div>
+  </div>
+
+  <!-- WEAK SPOT REPORT -->
+  <div class="page" id="page-report">
+    <div class="section-title">📊 Weak Spot Report</div>
+    <div class="section-sub">Where to focus your remaining study time — sorted weakest first.</div>
+    <div id="report-container"></div>
   </div>
 
   <!-- Profile Page -->
@@ -1237,6 +1275,142 @@ function updateSessionScore() {
 }
 
 // ── TIPS ─────────────────────────────────────────────────────
+// ── WEAK SPOT REPORT ─────────────────────────────────────────
+function renderReport() {
+  // Aggregate stats from qStats (cumulative attempts)
+  const ds = {};
+  DOMAINS.forEach(d => { ds[d.id] = { correct: 0, total: 0 }; });
+  const diffs = { easy:{c:0,t:0}, medium:{c:0,t:0}, hard:{c:0,t:0}, expert:{c:0,t:0} };
+
+  Object.entries(state.qStats).forEach(([qId, s]) => {
+    const q = QUESTIONS.find(q => q.id === +qId);
+    if (!q) return;
+    ds[q.domain].correct += s.correct;
+    ds[q.domain].total   += s.total;
+    if (diffs[q.difficulty]) { diffs[q.difficulty].c += s.correct; diffs[q.difficulty].t += s.total; }
+  });
+
+  // Sort domains: unseen first, then by accuracy asc
+  const sorted = DOMAINS.slice().sort((a, b) => {
+    const at = ds[a.id].total, bt = ds[b.id].total;
+    if (at === 0 && bt === 0) return 0;
+    if (at === 0) return -1;
+    if (bt === 0) return 1;
+    return (ds[a.id].correct/at) - (ds[b.id].correct/bt);
+  });
+
+  function statusBadge(total, pct) {
+    if (total === 0)   return '<span class="report-status status-unseen">Not started</span>';
+    if (pct >= 80)     return '<span class="report-status status-strong">Strong</span>';
+    if (pct >= 70)     return '<span class="report-status status-solid">Solid</span>';
+    if (pct >= 55)     return '<span class="report-status status-developing">Developing</span>';
+    return             '<span class="report-status status-weak">Weak ⚠️</span>';
+  }
+  function barColor(total, pct) {
+    if (total === 0) return 'var(--surface2)';
+    if (pct >= 80)   return 'var(--green)';
+    if (pct >= 70)   return 'var(--blue)';
+    if (pct >= 55)   return 'var(--gold)';
+    return 'var(--red)';
+  }
+
+  const domainRows = sorted.map(d => {
+    const s = ds[d.id];
+    const pct = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
+    const totalQs = QUESTIONS.filter(q => q.domain === d.id).length;
+    const color = barColor(s.total, pct);
+    return `<div class="report-domain-row">
+      <div class="report-domain-name">${d.name}</div>
+      <div class="report-bar-wrap"><div class="report-bar" style="width:${pct||0}%;background:${color}"></div></div>
+      <div class="report-pct" style="color:${pct!==null?color:'var(--muted)'}">${pct !== null ? pct + '%' : '—'}</div>
+      <div class="report-count">${s.total > 0 ? s.correct+'/'+s.total : '0 seen'}</div>
+      <button class="pill" style="font-size:11px;padding:4px 10px" onclick="setDomainFilter('${d.id}',null);showPage('practice')">Drill →</button>
+    </div>`;
+  }).join('');
+
+  // Difficulty breakdown
+  const diffLabels = { easy:'Easy', medium:'Medium', hard:'Hard', expert:'Expert' };
+  const diffColors = { easy:'var(--green)', medium:'var(--blue)', hard:'var(--red)', expert:'#c4b5fd' };
+  const diffRows = ['easy','medium','hard','expert'].map(d => {
+    const s = diffs[d];
+    const pct = s.t > 0 ? Math.round(s.c / s.t * 100) : null;
+    const totalQ = QUESTIONS.filter(q => q.difficulty === d).length;
+    return `<div class="diff-stat-row">
+      <div class="diff-stat-label" style="color:${diffColors[d]}">${diffLabels[d]}</div>
+      <div class="diff-stat-bar-wrap"><div class="diff-stat-bar" style="width:${pct||0}%;background:${diffColors[d]}"></div></div>
+      <div class="diff-stat-right" style="color:${pct!==null?diffColors[d]:'var(--muted)'}">${pct !== null ? pct + '%' : '—'}</div>
+      <div class="diff-stat-count">${s.t > 0 ? s.c+'/'+s.t : '0/'+totalQ+' seen'}</div>
+    </div>`;
+  }).join('');
+
+  // Most missed (≥2 attempts, accuracy <70%, worst first)
+  const missed = Object.entries(state.qStats)
+    .filter(([, s]) => s.total >= 2 && s.correct / s.total < 0.70)
+    .sort((a, b) => (a[1].correct/a[1].total) - (b[1].correct/b[1].total))
+    .slice(0, 10)
+    .map(([qId, s]) => {
+      const q = QUESTIONS.find(q => q.id === +qId);
+      if (!q) return '';
+      const pct = Math.round(s.correct / s.total * 100);
+      const dom = DOMAINS.find(d => d.id === q.domain);
+      const diffColor = {easy:'var(--green)',medium:'var(--blue)',hard:'var(--red)',expert:'#c4b5fd'}[q.difficulty]||'var(--muted)';
+      return `<div class="missed-row">
+        <div class="missed-q-text">${q.question.length > 120 ? q.question.slice(0,120)+'…' : q.question}</div>
+        <div class="missed-q-meta">
+          <span class="badge gold" style="font-size:11px">${dom?.name||q.domain}</span>
+          <span class="badge" style="font-size:11px;color:${diffColor};border-color:${diffColor}20;background:${diffColor}10">${q.difficulty}</span>
+          <span style="font-size:12px;color:var(--red);font-weight:700">${s.correct}/${s.total} correct (${pct}%)</span>
+        </div>
+      </div>`;
+    }).join('');
+
+  // Exam readiness summary
+  const allAttempted = Object.keys(state.qStats).length;
+  const totalQ = QUESTIONS.length;
+  const overallC = Object.values(state.qStats).reduce((s,d) => s+d.correct, 0);
+  const overallT = Object.values(state.qStats).reduce((s,d) => s+d.total, 0);
+  const overallPct = overallT > 0 ? Math.round(overallC / overallT * 100) : null;
+  const weakDomains = sorted.filter(d => ds[d.id].total > 0 && ds[d.id].correct/ds[d.id].total < 0.70);
+  const unseenDomains = sorted.filter(d => ds[d.id].total === 0);
+
+  const readinessHtml = `
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:0">
+      <div class="profile-stat">
+        <div class="profile-stat-num" style="color:${overallPct!==null?(overallPct>=70?'var(--green)':'var(--red)'):'var(--muted)'}">${overallPct !== null ? overallPct+'%' : '—'}</div>
+        <div class="profile-stat-label">Overall Accuracy</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-num">${allAttempted}</div>
+        <div class="profile-stat-label">Unique Questions Seen</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-num" style="color:${weakDomains.length===0?'var(--green)':'var(--red)'}">${weakDomains.length}</div>
+        <div class="profile-stat-label">Weak Domains</div>
+      </div>
+    </div>
+    ${unseenDomains.length > 0 ? `<div style="margin-top:12px;font-size:12px;color:var(--gold);font-weight:600">⚠️ Untouched domains: ${unseenDomains.map(d=>d.name.split('&')[0].trim()).join(', ')}</div>` : ''}`;
+
+  document.getElementById('report-container').innerHTML = `
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title" style="margin-bottom:16px">Exam Readiness</div>
+      ${readinessHtml}
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title" style="margin-bottom:4px">Domain Performance</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Sorted weakest first · Pass threshold: 70%</div>
+      ${domainRows}
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title" style="margin-bottom:16px">Difficulty Breakdown</div>
+      ${diffRows}
+    </div>
+    ${missed ? `<div class="card">
+      <div class="card-title" style="margin-bottom:4px">Most Missed Questions</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Answered ≥2 times with <70% accuracy</div>
+      ${missed || '<div class="empty" style="padding:24px;color:var(--muted)">No data yet — keep practicing!</div>'}
+    </div>` : `<div class="card"><div class="empty" style="padding:32px;color:var(--muted)">Answer more questions to unlock Most Missed analysis.</div></div>`}`;
+}
+
 function renderTips() {
   document.getElementById('tips-container').innerHTML = TIPS.map(t =>
     `<div class="tip-card"><div class="tip-domain">${t.domain}</div><div class="tip-text">${t.text}</div></div>`
@@ -1252,6 +1426,7 @@ function showPage(id) {
   if (id==='dashboard') updateDashboard();
   if (id==='profile') updateProfilePage();
   if (id==='exam' && (!exam || exam.finished)) initExamSetup();
+  if (id==='report') renderReport();
 }
 
 // ── PROFILE PAGE ──────────────────────────────────────────────
