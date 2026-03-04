@@ -251,6 +251,12 @@
     .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 
+    /* Smart practice badge */
+    .badge.smart { background:rgba(139,92,246,0.15); color:#c4b5fd; border-color:rgba(139,92,246,0.3); }
+    /* Settings toggle */
+    .toggle-btn { padding:6px 16px; border-radius:20px; border:none; font-size:13px; font-weight:700; cursor:pointer; background:var(--green); color:#0d0d0d; min-width:48px; transition:all .2s; }
+    .toggle-btn.off { background:var(--surface2); color:var(--muted); border:1px solid var(--border); }
+
     /* Profile page */
     .profile-row { display:flex; align-items:center; gap:16px; }
     .profile-avatar { width:56px; height:56px; border-radius:50%; background:var(--gold); color:#0d0d0d; font-size:22px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
@@ -359,6 +365,7 @@
         <div class="q-meta">
           <span class="badge gold" id="q-domain-badge">—</span>
           <span class="badge blue" id="q-diff-badge">—</span>
+          <span class="badge smart" id="smart-badge" title="Smart Practice: weighted toward your weak areas">🎯 Smart</span>
         </div>
         <div class="q-progress" id="q-progress">Q — / —</div>
       </div>
@@ -399,6 +406,13 @@
       <div class="settings-row">
         <div><div class="settings-label">Question Shuffle</div><div class="settings-sub">Questions are always shuffled each session</div></div>
         <span style="font-size:13px;color:var(--green)">✓ Enabled</span>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">🎯 Smart Practice</div>
+          <div class="settings-sub">Weights questions toward your weak areas. Gets smarter as you answer more.</div>
+        </div>
+        <button class="toggle-btn" id="smart-toggle" onclick="toggleSmartPractice()">ON</button>
       </div>
     </div>
     <div class="card">
@@ -6207,7 +6221,7 @@ const TIPS = [
 ];
 
 // ── STATE ────────────────────────────────────────────────────
-let state = { answers: {}, examDate: null, streak: 0, lastStudyDate: null };
+let state = { answers: {}, qStats: {}, examDate: null, streak: 0, lastStudyDate: null, smartPractice: true };
 
 function loadState() { try { const s = localStorage.getItem('cfp-v2'); if (s) state = JSON.parse(s); } catch(e) {} }
 function saveState() { try { localStorage.setItem('cfp-v2', JSON.stringify(state)); saveCloudProgress(); } catch(e) {} }
@@ -6221,7 +6235,7 @@ function resetCancel() {
   document.getElementById('reset-wrap').innerHTML = '<button class="btn-danger" onclick="resetStep1()">Reset Progress</button>';
 }
 function resetProgress() {
-  state.answers = {}; state.streak = 0; state.lastStudyDate = null;
+  state.answers = {}; state.qStats = {}; state.streak = 0; state.lastStudyDate = null;
   saveState(); updateDashboard(); initPractice();
 }
 function resetConfirm() {
@@ -6329,15 +6343,65 @@ function initPractice() {
   buildQueue();
 }
 
+// ── SMART PRACTICE: weighted question selection ──────────────
+function getQuestionWeight(q) {
+  const s = state.qStats[q.id];
+  if (!s || s.total === 0) return 1.5;           // never seen: slightly elevated
+  const acc = s.correct / s.total;
+  if (acc < 0.40) return 5.0;                    // struggling: 5x
+  if (acc < 0.60) return 3.0;                    // weak: 3x
+  if (acc < 0.75) return 1.8;                    // developing: 1.8x
+  if (acc < 0.90) return 0.8;                    // solid: slightly reduced
+  return 0.2;                                     // mastered: rarely seen
+}
+
+function weightedShuffle(arr) {
+  const weights = arr.map(q => getQuestionWeight(q));
+  const result = [];
+  const rem = [...arr];
+  const remW = [...weights];
+  while (rem.length > 0) {
+    let r = Math.random() * remW.reduce((a,b) => a+b, 0);
+    let i = 0;
+    while (i < remW.length - 1 && r > remW[i]) { r -= remW[i]; i++; }
+    result.push(rem[i]);
+    rem.splice(i, 1);
+    remW.splice(i, 1);
+  }
+  return result;
+}
+
 function buildQueue() {
   const pool = QUESTIONS.filter(q => domainFilter==='all' || q.domain===domainFilter);
-  const answered = new Set(Object.keys(state.answers).map(Number));
-  const unanswered = pool.filter(q => !answered.has(q.id));
-  const wrong = pool.filter(q => answered.has(q.id) && !state.answers[q.id]?.correct);
-  const right = pool.filter(q => answered.has(q.id) && state.answers[q.id]?.correct);
-  queue = [...shuffle(unanswered), ...shuffle(wrong), ...shuffle(right)];
+  if (state.smartPractice) {
+    queue = weightedShuffle(pool);
+  } else {
+    const answered = new Set(Object.keys(state.answers).map(Number));
+    const unanswered = pool.filter(q => !answered.has(q.id));
+    const wrong = pool.filter(q => answered.has(q.id) && !state.answers[q.id]?.correct);
+    const right = pool.filter(q => answered.has(q.id) && state.answers[q.id]?.correct);
+    queue = [...shuffle(unanswered), ...shuffle(wrong), ...shuffle(right)];
+  }
   qIdx = 0; sessionCorrect = 0; sessionTotal = 0;
   showQuestion();
+  updateSmartBadge();
+}
+
+function updateSmartBadge() {
+  const badge = document.getElementById('smart-badge');
+  if (badge) badge.style.display = state.smartPractice ? '' : 'none';
+  const toggle = document.getElementById('smart-toggle');
+  if (toggle) {
+    toggle.textContent = state.smartPractice ? 'ON' : 'OFF';
+    toggle.className = 'toggle-btn' + (state.smartPractice ? '' : ' off');
+  }
+}
+
+function toggleSmartPractice() {
+  state.smartPractice = !state.smartPractice;
+  saveState();
+  updateSmartBadge();
+  buildQueue(); // rebuild with new mode
 }
 
 function setDomainFilter(id, el) {
@@ -6412,6 +6476,10 @@ function selectOption(idx, qId) {
 
   // Save + streak
   state.answers[qId] = { qId, selected: idx, correct: isCorrect, timestamp: Date.now() };
+  // Cumulative per-question stats (for smart weighting)
+  if (!state.qStats[qId]) state.qStats[qId] = { total: 0, correct: 0 };
+  state.qStats[qId].total++;
+  if (isCorrect) state.qStats[qId].correct++;
   const today = new Date().toDateString();
   if (state.lastStudyDate !== today) {
     const yesterday = new Date(Date.now()-86400000).toDateString();
@@ -6468,11 +6536,16 @@ function updateProfilePage() {
   document.getElementById('profile-signed-out').style.display = user ? 'none' : '';
 
   // Stats
-  const stats = getDomainStats();
-  const totalQ = Object.values(state.answers).reduce((s, d) => s + (d.total||0), 0);
-  const totalC = Object.values(state.answers).reduce((s, d) => s + (d.correct||0), 0);
+  const totalQ = Object.keys(state.qStats).length > 0
+    ? Object.values(state.qStats).reduce((s, d) => s + d.total, 0)
+    : Object.keys(state.answers).length;
+  const totalC = Object.keys(state.qStats).length > 0
+    ? Object.values(state.qStats).reduce((s, d) => s + d.correct, 0)
+    : Object.values(state.answers).filter(a => a.correct === true).length;
   const acc = totalQ > 0 ? Math.round(totalC/totalQ*100) + '%' : '—';
-  const domainsStarted = Object.values(state.answers).filter(d => (d.total||0) > 0).length;
+  // Count domains with at least 1 answered question
+  const answeredQIds = new Set(Object.keys(state.answers).map(Number));
+  const domainsStarted = new Set(QUESTIONS.filter(q => answeredQIds.has(q.id)).map(q => q.domain)).size;
 
   document.getElementById('ps-total').textContent = totalQ;
   document.getElementById('ps-accuracy').textContent = acc;
@@ -6703,6 +6776,7 @@ document.addEventListener('keydown', (e) => {
 
 function init() {
   loadState();
+  updateSmartBadge();
   updateCountdown();
   setInterval(updateCountdown, 60000);
   document.getElementById('exam-date-input').value = state.examDate || '2026-03-20';
