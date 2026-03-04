@@ -932,7 +932,8 @@ function updateDashboard() {
 }
 
 // ── PRACTICE ─────────────────────────────────────────────────
-let queue = [], qIdx = 0, sessionCorrect = 0, sessionTotal = 0, isAnswered = false, domainFilter = 'all';
+let queue = [], qIdx = 0, sessionCorrect = 0, sessionTotal = 0, isAnswered = false;
+let domainFilter = []; // empty array = All Domains; otherwise array of selected domain IDs
 let diffFilter = ['easy','medium','hard','expert'];
 let sessionDomainStats = {};
 let psMode = 'smart';    // practice session mode
@@ -949,10 +950,31 @@ function shuffle(arr) {
 
 function initPractice() {
   psMode = state.smartPractice ? 'smart' : 'random';
-  document.getElementById('domain-filters').innerHTML =
-    `<div class="filter-tab ${domainFilter==='all'?'active':''}" onclick="setDomainFilter('all',this)">All Domains</div>` +
-    DOMAINS.map(d => `<div class="filter-tab ${domainFilter===d.id?'active':''}" onclick="setDomainFilter('${d.id}',this)">${d.name.split('&')[0].trim()}</div>`).join('');
+  renderDomainFilters();
   renderDiffFilters();
+  buildQueue();
+}
+
+function renderDomainFilters() {
+  document.getElementById('domain-filters').innerHTML =
+    `<div class="filter-tab ${domainFilter.length===0?'active':''}" onclick="toggleDomainFilter('all')">All Domains</div>` +
+    DOMAINS.map(d =>
+      `<div class="filter-tab ${domainFilter.includes(d.id)?'active':''}" onclick="toggleDomainFilter('${d.id}')">${d.name.split('&')[0].trim()}</div>`
+    ).join('');
+}
+
+function toggleDomainFilter(id) {
+  if (id === 'all') {
+    domainFilter = [];
+  } else {
+    if (domainFilter.includes(id)) {
+      domainFilter = domainFilter.filter(d => d !== id);
+      // If nothing selected, fall back to All
+    } else {
+      domainFilter.push(id);
+    }
+  }
+  renderDomainFilters();
   buildQueue();
 }
 
@@ -1065,7 +1087,7 @@ function weightedShuffle(arr) {
 
 function buildQueue() {
   let pool = QUESTIONS.filter(q =>
-    (domainFilter === 'all' || q.domain === domainFilter) &&
+    (domainFilter.length === 0 || domainFilter.includes(q.domain)) &&
     diffFilter.includes(q.difficulty)
   );
   if (pool.length === 0) {
@@ -1114,11 +1136,9 @@ function toggleSmartPractice() {
 }
 
 function setDomainFilter(id, el) {
-  domainFilter = id;
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  if (el) el.classList.add('active');
-  else document.querySelectorAll('.filter-tab').forEach(t => { if (t.getAttribute('onclick')?.includes(`'${id}'`)) t.classList.add('active'); });
-  buildQueue();
+  // Called from Dashboard "Drill →" buttons — sets a single domain
+  domainFilter = id === 'all' ? [] : [id];
+  showPage('practice');
 }
 
 function showQuestion() {
