@@ -6223,7 +6223,12 @@ const TIPS = [
 // ── STATE ────────────────────────────────────────────────────
 let state = { answers: {}, qStats: {}, examDate: null, streak: 0, lastStudyDate: null, smartPractice: true };
 
-function loadState() { try { const s = localStorage.getItem('cfp-v2'); if (s) state = JSON.parse(s); } catch(e) {} }
+function loadState() {
+  try { const s = localStorage.getItem('cfp-v2'); if (s) state = JSON.parse(s); } catch(e) {}
+  // Migration guards — ensure new fields exist for users with old saved state
+  if (!state.qStats) state.qStats = {};
+  if (state.smartPractice === undefined) state.smartPractice = true;
+}
 function saveState() { try { localStorage.setItem('cfp-v2', JSON.stringify(state)); saveCloudProgress(); } catch(e) {} }
 function resetStep1() {
   document.getElementById('reset-wrap').innerHTML = `
