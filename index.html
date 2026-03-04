@@ -1298,9 +1298,32 @@ function toggleSmartPractice() {
 }
 
 function setDomainFilter(id, el) {
-  // Called from Dashboard "Drill →" buttons — sets a single domain
+  // Generic: just set domain, used by Dashboard
   domainFilter = id === 'all' ? [] : [id];
   showPage('practice');
+}
+
+function drillDomain(id) {
+  // Called from Report "Drill →" buttons — targeted weak-areas session, 20q
+  domainFilter = [id];
+  // Switch to Weak Areas mode (falls back to Smart if no mistakes yet)
+  const hasWeakData = Object.values(state.qStats).some(s => s.total >= 1 && s.correct < s.total);
+  psMode = hasWeakData ? 'weak' : 'smart';
+  psLength = 20;
+  // Close settings drawer if open
+  const drawer = document.getElementById('practice-settings-drawer');
+  if (drawer) drawer.style.display = 'none';
+  buildQueue();
+  showPage('practice');
+  // Update settings UI to reflect new mode/length
+  requestAnimationFrame(() => {
+    document.querySelectorAll('#ps-mode-pills .pill').forEach(p => p.classList.remove('active'));
+    const mBtn = document.getElementById('ps-mode-' + psMode);
+    if (mBtn) mBtn.classList.add('active');
+    document.querySelectorAll('#ps-length-pills .pill').forEach(p => {
+      p.classList.toggle('active', +p.textContent === psLength);
+    });
+  });
 }
 
 function showQuestion() {
@@ -1506,7 +1529,7 @@ function renderReport() {
       <div class="report-bar-wrap"><div class="report-bar" style="width:${pct||0}%;background:${color}"></div></div>
       <div class="report-pct" style="color:${pct!==null?color:'var(--muted)'}">${pct !== null ? pct + '%' : '—'}</div>
       <div class="report-count">${s.total > 0 ? s.correct+'/'+s.total : '0 seen'}</div>
-      <button class="pill" style="font-size:11px;padding:4px 10px" onclick="setDomainFilter('${d.id}',null);showPage('practice')">Drill →</button>
+      <button class="pill" style="font-size:11px;padding:4px 10px" onclick="drillDomain('${d.id}')">Drill →</button>
     </div>`;
   }).join('');
 
