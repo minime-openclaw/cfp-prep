@@ -6579,7 +6579,7 @@ const QUESTIONS = [
       '✗ There is no 3-year rule for clawback — the anti-clawback regulations protect all gifts regardless of timing relative to death.'
     ]
   },
-,
+
   // ── PSYCHOLOGY (IDs 362–371) ─────────────────────────────────────────
   {
     id: 362, domain: 'psychology', difficulty: 'medium',
