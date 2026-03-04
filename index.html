@@ -1341,16 +1341,20 @@ function setDomainFilter(id, el) {
 function drillDomain(id) {
   // Called from Report "Drill →" buttons — targeted weak-areas session, 20q
   domainFilter = [id];
+  diffFilter = ['easy','medium','hard','expert']; // all difficulties
   // Switch to Weak Areas mode (falls back to Smart if no mistakes yet)
-  const hasWeakData = Object.values(state.qStats).some(s => s.total >= 1 && s.correct < s.total);
+  const hasWeakData = Object.values(state.qStats || {}).some(s => s && s.total >= 1 && s.correct < s.total);
   psMode = hasWeakData ? 'weak' : 'smart';
   psLength = 20;
   // Close settings drawer if open
   const drawer = document.getElementById('practice-settings-drawer');
   if (drawer) drawer.style.display = 'none';
+  // Update filter pills so Practice shows the correct active state
+  renderDomainFilters();
+  renderDiffFilters();
   buildQueue();
   showPage('practice');
-  // Update settings UI to reflect new mode/length
+  // Update mode/length pills
   requestAnimationFrame(() => {
     document.querySelectorAll('#ps-mode-pills .pill').forEach(p => p.classList.remove('active'));
     const mBtn = document.getElementById('ps-mode-' + psMode);
