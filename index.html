@@ -948,12 +948,15 @@ function updateCountdown() {
 function getDomainStats() {
   const s = {};
   DOMAINS.forEach(d => { s[d.id] = { correct: 0, total: 0 }; });
-  Object.values(state.answers).forEach(a => {
-    const q = QUESTIONS.find(q => q.id === a.qId);
-    if (!q) return;
-    s[q.domain].total++;
-    if (a.correct) s[q.domain].correct++;
-  });
+  try {
+    Object.values(state.answers || {}).forEach(a => {
+      if (!a || a.qId == null) return;
+      const q = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.find(q => q.id === a.qId) : null;
+      if (!q || !s[q.domain]) return;
+      s[q.domain].total++;
+      if (a.correct) s[q.domain].correct++;
+    });
+  } catch(e) { console.error('getDomainStats error', e); }
   return s;
 }
 
@@ -1010,10 +1013,11 @@ function renderStudyPlan(stats) {
   const qs = {};
   DOMAINS.forEach(d => { qs[d.id] = { correct: 0, total: 0 }; });
   Object.entries(state.qStats || {}).forEach(([qId, s]) => {
-    const q = QUESTIONS.find(q => q.id == qId);
+    if (!s) return;
+    const q = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.find(q => q.id == qId) : null;
     if (!q || !qs[q.domain]) return;
-    qs[q.domain].total += s.total;
-    qs[q.domain].correct += s.correct;
+    qs[q.domain].total += s.total || 0;
+    qs[q.domain].correct += s.correct || 0;
   });
 
   // Days remaining
@@ -1486,12 +1490,13 @@ function renderReport() {
   DOMAINS.forEach(d => { ds[d.id] = { correct: 0, total: 0 }; });
   const diffs = { easy:{c:0,t:0}, medium:{c:0,t:0}, hard:{c:0,t:0}, expert:{c:0,t:0} };
 
-  Object.entries(state.qStats).forEach(([qId, s]) => {
-    const q = QUESTIONS.find(q => q.id === +qId);
-    if (!q) return;
-    ds[q.domain].correct += s.correct;
-    ds[q.domain].total   += s.total;
-    if (diffs[q.difficulty]) { diffs[q.difficulty].c += s.correct; diffs[q.difficulty].t += s.total; }
+  Object.entries(state.qStats || {}).forEach(([qId, s]) => {
+    if (!s) return;
+    const q = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.find(q => q.id === +qId) : null;
+    if (!q || !ds[q.domain]) return;
+    ds[q.domain].correct += s.correct || 0;
+    ds[q.domain].total   += s.total || 0;
+    if (diffs[q.difficulty]) { diffs[q.difficulty].c += s.correct || 0; diffs[q.difficulty].t += s.total || 0; }
   });
 
   // Sort domains: unseen first, then by accuracy asc
@@ -1521,7 +1526,7 @@ function renderReport() {
   const domainRows = sorted.map(d => {
     const s = ds[d.id];
     const pct = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
-    const totalQs = QUESTIONS.filter(q => q.domain === d.id).length;
+    const totalQs = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.filter(q => q.domain === d.id).length : 0;
     const color = barColor(s.total, pct);
     return `<div class="report-domain-row">
       <div class="report-domain-name">${d.name}</div>
@@ -1538,7 +1543,7 @@ function renderReport() {
   const diffRows = ['easy','medium','hard','expert'].map(d => {
     const s = diffs[d];
     const pct = s.t > 0 ? Math.round(s.c / s.t * 100) : null;
-    const totalQ = QUESTIONS.filter(q => q.difficulty === d).length;
+    const totalQ = (typeof QUESTIONS !== 'undefined') ? QUESTIONS.filter(q => q.difficulty === d).length : 0;
     return `<div class="diff-stat-row">
       <div class="diff-stat-label" style="color:${diffColors[d]}">${diffLabels[d]}</div>
       <div class="diff-stat-bar-wrap"><div class="diff-stat-bar" style="width:${pct||0}%;background:${diffColors[d]}"></div></div>
