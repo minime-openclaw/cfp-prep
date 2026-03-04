@@ -449,82 +449,15 @@
   <div class="page" id="page-practice">
     <div class="section-title">Practice Mode</div>
     <div class="section-sub">CFP-style questions across all 9 domains. Select an answer to see why each choice is right or wrong.</div>
-
-    <!-- ── SETUP CARD ── -->
-    <div class="card" id="practice-setup-card">
-      <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:20px">⚙️ Configure Session</div>
-
-      <div class="setup-section">
-        <div class="setup-label">Number of Questions</div>
-        <div class="pill-row" id="length-pills">
-          <button class="pill" onclick="setPracticeLength(5,this)">5</button>
-          <button class="pill active" onclick="setPracticeLength(10,this)">10</button>
-          <button class="pill" onclick="setPracticeLength(20,this)">20</button>
-          <button class="pill" onclick="setPracticeLength(30,this)">30</button>
-          <button class="pill" onclick="setPracticeLength(50,this)">50</button>
-          <button class="pill" onclick="setPracticeLength(85,this)">85</button>
-          <button class="pill" onclick="setPracticeLength(170,this)">170</button>
-          <button class="pill" id="custom-len-pill" onclick="setPracticeLength(0,this)">Custom</button>
-        </div>
-        <div id="custom-length-wrap">
-          <input type="number" id="custom-length-input" min="1" max="361" value="25"
-            style="width:72px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:8px;font-size:14px;outline:none"
-            oninput="practiceConfig.length=Math.min(361,Math.max(1,+this.value||1));updateAvailableCount()">
-          <span style="font-size:13px;color:var(--muted)">questions (1–361 available)</span>
-        </div>
-      </div>
-
-      <div class="setup-section">
-        <div class="setup-label">Domains</div>
-        <div class="pill-row" id="domain-chip-row"></div>
-      </div>
-
-      <div class="setup-section">
-        <div class="setup-label">Difficulty</div>
-        <div class="pill-row" id="diff-pills">
-          <button class="pill active" data-diff="easy" onclick="toggleDiff('easy',this)">Easy</button>
-          <button class="pill active" data-diff="medium" onclick="toggleDiff('medium',this)">Medium</button>
-          <button class="pill active" data-diff="hard" onclick="toggleDiff('hard',this)">Hard</button>
-          <button class="pill active" data-diff="expert" onclick="toggleDiff('expert',this)">Expert</button>
-        </div>
-      </div>
-
-      <div class="setup-section">
-        <div class="setup-label">Question Selection</div>
-        <div class="pill-row" id="mode-pills">
-          <button class="pill active" id="mode-smart" onclick="setPracticeMode('smart',this)">🎯 Smart</button>
-          <button class="pill" id="mode-new" onclick="setPracticeMode('new',this)">🆕 Unanswered First</button>
-          <button class="pill" id="mode-weak" onclick="setPracticeMode('weak',this)">⚠️ Weak Areas</button>
-          <button class="pill" id="mode-random" onclick="setPracticeMode('random',this)">🔀 Random</button>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px">
-        <div>
-          <div class="setup-label" style="margin-bottom:2px">⏱ Timed Practice</div>
-          <div style="font-size:12px;color:var(--muted)">Per-difficulty time limits apply</div>
-        </div>
-        <button class="toggle-btn off" id="setup-timed-toggle" onclick="toggleSetupTimed()">OFF</button>
-      </div>
-
-      <div id="setup-count" class="setup-count">Loading...</div>
-      <button class="btn btn-primary" style="width:100%;margin-top:14px;font-size:15px;padding:13px" onclick="startPracticeSession()">
-        Start Session →
-      </button>
-    </div>
-
-    <!-- ── QUESTION CARD ── -->
-    <div class="card" id="question-card" style="display:none">
+    <div class="filter-tabs" id="domain-filters"></div>
+    <div class="card" id="question-card">
       <div class="question-header">
         <div class="q-meta">
           <span class="badge gold" id="q-domain-badge">—</span>
           <span class="badge blue" id="q-diff-badge">—</span>
-          <span class="badge smart" id="smart-badge" style="display:none" title="Smart Practice: weighted toward your weak areas">🎯 Smart</span>
+          <span class="badge smart" id="smart-badge" title="Smart Practice: weighted toward your weak areas">🎯 Smart</span>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="q-progress" id="q-progress">Q — / —</div>
-          <button class="pill" style="font-size:11px;padding:3px 10px" onclick="showSetup()">⚙️</button>
-        </div>
+        <div class="q-progress" id="q-progress">Q — / —</div>
       </div>
       <div class="q-timer-section" id="q-timer-section" style="display:none">
         <div class="q-timer-label-row">
@@ -539,22 +472,8 @@
       <div class="explanation" id="explanation"></div>
       <div class="q-actions">
         <button class="btn btn-ghost" onclick="skipQuestion()">Skip</button>
-        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next Question →</button>
         <div class="q-progress" id="session-score"></div>
-      </div>
-    </div>
-
-    <!-- ── SESSION END CARD ── -->
-    <div class="card" id="session-end-card" style="display:none;text-align:center;padding:40px 24px">
-      <div style="font-size:52px;margin-bottom:12px" id="session-end-emoji">🎉</div>
-      <div style="font-size:22px;font-weight:800;margin-bottom:8px" id="session-end-title">Session Complete!</div>
-      <div style="font-size:40px;font-weight:800;margin:12px 0" id="session-end-score">—</div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:24px" id="session-end-sub"></div>
-      <div id="session-end-domains" style="text-align:left;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto"></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-        <button class="btn btn-primary" onclick="startPracticeSession()">Repeat Session</button>
-        <button class="btn btn-ghost" onclick="showSetup()">Change Settings</button>
-        <button class="btn btn-ghost" onclick="showPage('dashboard')">Dashboard →</button>
       </div>
     </div>
   </div>
@@ -939,139 +858,10 @@ function shuffle(arr) {
 }
 
 function initPractice() {
-  // Sync defaults from saved state
-  practiceConfig.timed = !!state.timedPractice;
-  practiceConfig.mode = state.smartPractice ? 'smart' : 'random';
-  showSetup();
-}
-
-function showSetup() {
-  document.getElementById('practice-setup-card').style.display = '';
-  document.getElementById('question-card').style.display = 'none';
-  document.getElementById('session-end-card').style.display = 'none';
-  // Build domain chips
-  const row = document.getElementById('domain-chip-row');
-  if (row) {
-    row.innerHTML =
-      `<button class="pill ${practiceConfig.domains.length===0?'active':''}" id="domain-all" onclick="toggleDomain('all',this)">All Domains</button>` +
-      DOMAINS.map(d =>
-        `<button class="pill ${practiceConfig.domains.includes(d.id)?'active':''}" id="domain-${d.id}" onclick="toggleDomain('${d.id}',this)">${d.name.split('&')[0].trim()}</button>`
-      ).join('');
-  }
-  // Sync mode pills
-  document.querySelectorAll('#mode-pills .pill').forEach(p => p.classList.remove('active'));
-  const modeBtn = document.getElementById('mode-' + practiceConfig.mode);
-  if (modeBtn) modeBtn.classList.add('active');
-  // Sync diff pills
-  document.querySelectorAll('#diff-pills .pill').forEach(p => {
-    p.classList.toggle('active', practiceConfig.difficulties.includes(p.dataset.diff));
-  });
-  // Sync timed toggle
-  const tt = document.getElementById('setup-timed-toggle');
-  if (tt) { tt.textContent = practiceConfig.timed ? 'ON' : 'OFF'; tt.className = 'toggle-btn' + (practiceConfig.timed ? '' : ' off'); }
-  // Sync length pills
-  document.querySelectorAll('#length-pills .pill').forEach(p => p.classList.remove('active'));
-  const presets = [5,10,20,30,50,85,170];
-  const matchPill = [...document.querySelectorAll('#length-pills .pill')].find(p => +p.textContent == practiceConfig.length);
-  if (matchPill) matchPill.classList.add('active');
-  updateAvailableCount();
-}
-
-function getFilteredPool() {
-  return QUESTIONS.filter(q => {
-    const domainOk = practiceConfig.domains.length === 0 || practiceConfig.domains.includes(q.domain);
-    const diffOk = practiceConfig.difficulties.includes(q.difficulty);
-    return domainOk && diffOk;
-  });
-}
-
-function updateAvailableCount() {
-  const pool = getFilteredPool();
-  const len = Math.min(practiceConfig.length, pool.length);
-  const el = document.getElementById('setup-count');
-  if (!el) return;
-  if (pool.length === 0) {
-    el.textContent = '⚠️ No questions match this filter — try adjusting domains or difficulty';
-    el.style.color = 'var(--red)';
-  } else {
-    el.textContent = `${pool.length} questions available · session will use ${len}`;
-    el.style.color = 'var(--muted)';
-  }
-}
-
-function setPracticeLength(n, el) {
-  document.querySelectorAll('#length-pills .pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  const wrap = document.getElementById('custom-length-wrap');
-  if (n === 0) {
-    wrap.classList.add('show');
-    const val = parseInt(document.getElementById('custom-length-input').value) || 25;
-    practiceConfig.length = Math.min(361, Math.max(1, val));
-  } else {
-    wrap.classList.remove('show');
-    practiceConfig.length = n;
-  }
-  updateAvailableCount();
-}
-
-function toggleDomain(id, el) {
-  if (id === 'all') {
-    practiceConfig.domains = [];
-    document.querySelectorAll('#domain-chip-row .pill').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-  } else {
-    document.getElementById('domain-all').classList.remove('active');
-    if (practiceConfig.domains.includes(id)) {
-      practiceConfig.domains = practiceConfig.domains.filter(d => d !== id);
-      el.classList.remove('active');
-      if (practiceConfig.domains.length === 0) document.getElementById('domain-all').classList.add('active');
-    } else {
-      practiceConfig.domains.push(id);
-      el.classList.add('active');
-    }
-  }
-  updateAvailableCount();
-}
-
-function toggleDiff(diff, el) {
-  if (practiceConfig.difficulties.includes(diff)) {
-    if (practiceConfig.difficulties.length === 1) return; // keep at least one
-    practiceConfig.difficulties = practiceConfig.difficulties.filter(d => d !== diff);
-    el.classList.remove('active');
-  } else {
-    practiceConfig.difficulties.push(diff);
-    el.classList.add('active');
-  }
-  updateAvailableCount();
-}
-
-function setPracticeMode(mode, el) {
-  practiceConfig.mode = mode;
-  document.querySelectorAll('#mode-pills .pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-}
-
-function toggleSetupTimed() {
-  practiceConfig.timed = !practiceConfig.timed;
-  state.timedPractice = practiceConfig.timed;
-  saveState();
-  const btn = document.getElementById('setup-timed-toggle');
-  btn.textContent = practiceConfig.timed ? 'ON' : 'OFF';
-  btn.className = 'toggle-btn' + (practiceConfig.timed ? '' : ' off');
-}
-
-function startPracticeSession() {
-  const pool = getFilteredPool();
-  if (pool.length === 0) { updateAvailableCount(); return; }
+  document.getElementById('domain-filters').innerHTML =
+    `<div class="filter-tab ${domainFilter==='all'?'active':''}" onclick="setDomainFilter('all',this)">All Domains</div>` +
+    DOMAINS.map(d => `<div class="filter-tab ${domainFilter===d.id?'active':''}" onclick="setDomainFilter('${d.id}',this)">${d.name.split('&')[0].trim()}</div>`).join('');
   buildQueue();
-  sessionDomainStats = {};
-  sessionCorrect = 0; sessionTotal = 0;
-  document.getElementById('practice-setup-card').style.display = 'none';
-  document.getElementById('session-end-card').style.display = 'none';
-  document.getElementById('question-card').style.display = '';
-  qIdx = 0;
-  showQuestion();
-  updateSmartBadge();
 }
 
 // ── SMART PRACTICE: weighted question selection ──────────────
@@ -1103,30 +893,24 @@ function weightedShuffle(arr) {
 }
 
 function buildQueue() {
-  let pool = getFilteredPool();
-  const answered = new Set(Object.keys(state.answers).map(Number));
-  if (practiceConfig.mode === 'smart') {
-    pool = weightedShuffle(pool);
-  } else if (practiceConfig.mode === 'new') {
-    const unseen = pool.filter(q => !answered.has(q.id));
-    const seen = pool.filter(q => answered.has(q.id));
-    pool = [...shuffle(unseen), ...shuffle(seen)];
-  } else if (practiceConfig.mode === 'weak') {
-    const wrong = pool.filter(q => answered.has(q.id) && !state.answers[q.id]?.correct);
-    const unseen = pool.filter(q => !answered.has(q.id));
-    const right = pool.filter(q => answered.has(q.id) && state.answers[q.id]?.correct);
-    pool = [...shuffle(wrong), ...shuffle(unseen), ...shuffle(right)];
+  const pool = QUESTIONS.filter(q => domainFilter === 'all' || q.domain === domainFilter);
+  if (state.smartPractice) {
+    queue = weightedShuffle(pool);
   } else {
-    pool = shuffle([...pool]);
+    const answered = new Set(Object.keys(state.answers).map(Number));
+    const unanswered = pool.filter(q => !answered.has(q.id));
+    const wrong = pool.filter(q => answered.has(q.id) && !state.answers[q.id]?.correct);
+    const right = pool.filter(q => answered.has(q.id) && state.answers[q.id]?.correct);
+    queue = [...shuffle(unanswered), ...shuffle(wrong), ...shuffle(right)];
   }
-  queue = pool.slice(0, Math.min(practiceConfig.length, pool.length));
-  qIdx = 0;
+  qIdx = 0; sessionCorrect = 0; sessionTotal = 0;
+  showQuestion();
+  updateSmartBadge();
 }
 
 function updateSmartBadge() {
   const badge = document.getElementById('smart-badge');
-  if (badge) badge.style.display = practiceConfig.mode === 'smart' ? '' : 'none';
-  // Keep settings page smart toggle in sync
+  if (badge) badge.style.display = state.smartPractice ? '' : 'none';
   const toggle = document.getElementById('smart-toggle');
   if (toggle) {
     toggle.textContent = state.smartPractice ? 'ON' : 'OFF';
@@ -1136,15 +920,17 @@ function updateSmartBadge() {
 
 function toggleSmartPractice() {
   state.smartPractice = !state.smartPractice;
-  practiceConfig.mode = state.smartPractice ? 'smart' : 'random';
   saveState();
   updateSmartBadge();
+  buildQueue();
 }
 
 function setDomainFilter(id, el) {
-  domainFilter = id; // keep for compat
-  practiceConfig.domains = id === 'all' ? [] : [id];
-  showPage('practice');
+  domainFilter = id;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else document.querySelectorAll('.filter-tab').forEach(t => { if (t.getAttribute('onclick')?.includes(`'${id}'`)) t.classList.add('active'); });
+  buildQueue();
 }
 
 function showQuestion() {
@@ -1233,54 +1019,8 @@ function selectOption(idx, qId) {
   document.getElementById('next-btn').disabled = false;
 }
 
-function nextQuestion() {
-  qIdx++;
-  if (qIdx >= queue.length) { showSessionEnd(); updateDashboard(); return; }
-  showQuestion(); updateDashboard();
-}
-function skipQuestion() {
-  qIdx++;
-  if (qIdx >= queue.length) { showSessionEnd(); return; }
-  showQuestion();
-}
-
-function showSessionEnd() {
-  stopQuestionTimer();
-  document.getElementById('question-card').style.display = 'none';
-  document.getElementById('session-end-card').style.display = '';
-  const pct = sessionTotal === 0 ? 0 : Math.round(sessionCorrect / sessionTotal * 100);
-  const emoji = pct >= 90 ? '🔥' : pct >= 70 ? '🎉' : pct >= 50 ? '💪' : '📚';
-  const title = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Good Work!' : pct >= 50 ? 'Keep Pushing!' : 'Keep Practicing!';
-  document.getElementById('session-end-emoji').textContent = emoji;
-  document.getElementById('session-end-title').textContent = sessionTotal === 0 ? 'Session Skipped' : title;
-  document.getElementById('session-end-score').innerHTML = sessionTotal === 0 ? '<span style="color:var(--muted)">—</span>' :
-    `<span style="color:${pct>=70?'var(--green)':'var(--red)'}">${sessionCorrect}/${sessionTotal}</span>&nbsp;<span style="font-size:20px;color:var(--muted)">(${pct}%)</span>`;
-  const modeLabel = {smart:'Smart',new:'Unanswered first',weak:'Weak areas',random:'Random'}[practiceConfig.mode] || practiceConfig.mode;
-  const domainLabel = practiceConfig.domains.length === 0 ? 'All domains' :
-    practiceConfig.domains.map(id => DOMAINS.find(d=>d.id===id)?.name.split('&')[0].trim()).join(', ');
-  const diffLabel = practiceConfig.difficulties.length === 4 ? 'All difficulties' : practiceConfig.difficulties.join(', ');
-  document.getElementById('session-end-sub').textContent =
-    `${queue.length} questions · ${modeLabel} · ${domainLabel} · ${diffLabel}`;
-  // Domain breakdown
-  const statsKeys = Object.keys(sessionDomainStats);
-  if (statsKeys.length > 1) {
-    const rows = statsKeys.sort((a,b) => {
-      const pa = sessionDomainStats[a].correct/sessionDomainStats[a].total;
-      const pb = sessionDomainStats[b].correct/sessionDomainStats[b].total;
-      return pa - pb; // weakest first
-    }).map(dId => {
-      const d = DOMAINS.find(x=>x.id===dId);
-      const s = sessionDomainStats[dId];
-      const p = Math.round(s.correct/s.total*100);
-      const color = p>=70?'var(--green)':p>=50?'var(--gold)':'var(--red)';
-      return `<div class="session-end-domain-row"><span>${d?.name||dId}</span><span style="color:${color};font-weight:700">${s.correct}/${s.total} (${p}%)</span></div>`;
-    }).join('');
-    document.getElementById('session-end-domains').innerHTML =
-      '<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Domain Breakdown</div>' + rows;
-  } else {
-    document.getElementById('session-end-domains').innerHTML = '';
-  }
-}
+function nextQuestion() { qIdx = (qIdx + 1) % queue.length; showQuestion(); updateDashboard(); }
+function skipQuestion() { qIdx = (qIdx + 1) % queue.length; showQuestion(); }
 function updateSessionScore() {
   const el = document.getElementById('session-score');
   el.textContent = sessionTotal===0 ? '' : `Session: ${sessionCorrect}/${sessionTotal} (${Math.round(sessionCorrect/sessionTotal*100)}%)`;
