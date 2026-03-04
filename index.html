@@ -281,6 +281,79 @@
     .auth-tab { flex:1; padding:8px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text-muted); cursor:pointer; font-size:0.9rem; transition:all .2s; }
     .auth-tab.active { background:var(--gold); color:#0d0d0d; border-color:var(--gold); font-weight:600; }
     .auth-tab:hover:not(.active) { border-color:var(--gold); color:var(--gold); }
+
+    /* ── QUESTION TIMER ──────────────────────────────────────── */
+    .q-timer-section { margin-bottom:16px; }
+    .q-timer-label-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .q-timer-text { font-size:12px; font-weight:700; color:var(--muted); }
+    .q-timer-text.urgent { color:var(--red); }
+    .q-timer-wrap { height:3px; background:var(--surface2); border-radius:2px; overflow:hidden; }
+    .q-timer-bar { height:100%; background:var(--gold); border-radius:2px; transition:width 1s linear, background 0.3s; }
+    .q-timer-bar.urgent { background:var(--red); }
+
+    /* ── EXAM SIMULATOR ──────────────────────────────────────── */
+    .exam-start { text-align:center; padding:48px 20px; }
+    .exam-start-icon { font-size:52px; margin-bottom:16px; }
+    .exam-start-title { font-size:28px; font-weight:800; margin-bottom:8px; }
+    .exam-start-sub { font-size:15px; color:var(--muted); margin-bottom:32px; line-height:1.6; max-width:520px; margin-left:auto; margin-right:auto; }
+    .exam-option-card { background:var(--surface); border:2px solid var(--border); border-radius:var(--radius); padding:24px; text-align:left; cursor:pointer; transition:all .15s; max-width:480px; margin:0 auto 16px; }
+    .exam-option-card:hover { border-color:var(--gold); }
+    .exam-option-title { font-size:17px; font-weight:700; margin-bottom:4px; }
+    .exam-option-sub { font-size:13px; color:var(--muted); margin-bottom:10px; }
+    .exam-option-tags { display:flex; gap:8px; flex-wrap:wrap; }
+    .exam-option-tag { font-size:11px; padding:3px 8px; border-radius:12px; background:var(--surface2); color:var(--muted); }
+    .exam-top-bar { display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
+    .exam-counter { font-size:14px; color:var(--muted); font-weight:600; }
+    .exam-clock { font-size:22px; font-weight:800; color:var(--gold); font-variant-numeric:tabular-nums; margin-left:auto; }
+    .exam-clock.urgent { color:var(--red); animation:pulse 1s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.65} }
+    .exam-prog-bar { height:4px; background:var(--surface2); border-radius:2px; margin-bottom:20px; overflow:hidden; }
+    .exam-prog-fill { height:100%; background:var(--blue); border-radius:2px; transition:width .3s; }
+    .exam-option-btn { background:var(--surface2); border:2px solid var(--border); border-radius:10px; padding:14px 18px; text-align:left; cursor:pointer; font-size:14px; color:var(--text); display:flex; gap:14px; align-items:flex-start; transition:all .15s; width:100%; min-height:44px; line-height:1.5; margin-bottom:10px; }
+    .exam-option-btn:hover:not(:disabled) { border-color:var(--blue); background:rgba(74,144,217,0.08); }
+    .exam-option-btn.selected { border-color:var(--blue); background:rgba(74,144,217,0.15); }
+    .exam-option-key { font-weight:700; color:var(--muted); min-width:20px; flex-shrink:0; }
+    .exam-option-btn.selected .exam-option-key { color:var(--blue); }
+    .exam-nav-btns { display:flex; gap:10px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+    .exam-flag-btn { background:transparent; border:1px solid var(--border); border-radius:8px; padding:8px 14px; color:var(--muted); cursor:pointer; font-size:13px; font-weight:600; transition:all .15s; }
+    .exam-flag-btn:hover { border-color:var(--gold); color:var(--gold); }
+    .exam-flag-btn.flagged { border-color:var(--gold); color:var(--gold); background:rgba(245,197,24,0.08); }
+    .exam-q-grid { display:flex; flex-wrap:wrap; gap:5px; }
+    .exam-dot { width:26px; height:26px; border-radius:5px; background:var(--bg); border:1px solid var(--border); font-size:10px; font-weight:600; color:var(--muted); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .1s; }
+    .exam-dot.current { box-shadow:0 0 0 2px var(--text); color:var(--text); }
+    .exam-dot.answered { background:rgba(74,144,217,0.25); border-color:var(--blue); color:var(--blue); }
+    .exam-dot.flagged { background:rgba(245,197,24,0.15); border-color:var(--gold); color:var(--gold); }
+    .exam-dot.answered.flagged { background:rgba(245,197,24,0.2); border-color:var(--gold); color:var(--gold); }
+    /* Exam Report */
+    .exam-score-hero { text-align:center; padding:28px 16px; }
+    .exam-score-pct { font-size:76px; font-weight:800; line-height:1; margin:10px 0; }
+    .exam-score-pct.pass { color:var(--green); }
+    .exam-score-pct.fail { color:var(--red); }
+    .exam-score-verdict { font-size:20px; font-weight:700; margin-bottom:6px; }
+    .exam-score-detail { font-size:13px; color:var(--muted); }
+    .exam-report-domain { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+    .exam-report-domain-name { font-size:13px; width:200px; flex-shrink:0; }
+    .exam-report-bar-wrap { flex:1; height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+    .exam-report-bar { height:100%; border-radius:4px; transition:width .4s; }
+    .exam-report-pct { font-size:12px; color:var(--muted); width:36px; text-align:right; }
+    /* Cases */
+    .cases-placeholder { text-align:center; padding:56px 20px; }
+    .cases-placeholder-icon { font-size:52px; margin-bottom:14px; }
+    .cases-placeholder-title { font-size:22px; font-weight:700; margin-bottom:8px; }
+    .cases-placeholder-sub { font-size:14px; color:var(--muted); line-height:1.7; max-width:500px; margin:0 auto 28px; }
+    .case-preview-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; text-align:left; max-width:520px; margin:0 auto; opacity:.55; pointer-events:none; }
+    .case-preview-tag { font-size:11px; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }
+    .case-preview-title { font-size:16px; font-weight:700; margin-bottom:6px; }
+    .case-preview-sub { font-size:13px; color:var(--muted); line-height:1.6; }
+    @media (max-width:768px) {
+      .exam-report-domain-name { width:130px; font-size:12px; }
+      .exam-score-pct { font-size:60px; }
+    }
+    @media (max-width:480px) {
+      .exam-dot { width:22px; height:22px; font-size:9px; }
+      .exam-start-title { font-size:22px; }
+      .exam-clock { font-size:18px; }
+    }
   </style>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -320,6 +393,8 @@
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showPage('dashboard')">Dashboard</button>
     <button class="nav-tab" onclick="showPage('practice')">Practice</button>
+    <button class="nav-tab" onclick="showPage('exam')">📝 Exam</button>
+    <button class="nav-tab" onclick="showPage('cases')">📚 Cases</button>
     <button class="nav-tab" onclick="showPage('tips')">Key Concepts</button>
     <button class="nav-tab" onclick="showPage('settings')">Settings</button>
     <button class="nav-tab" onclick="showPage('profile')">👤 Profile</button>
@@ -369,6 +444,13 @@
         </div>
         <div class="q-progress" id="q-progress">Q — / —</div>
       </div>
+      <div class="q-timer-section" id="q-timer-section" style="display:none">
+        <div class="q-timer-label-row">
+          <span style="font-size:11px;color:var(--muted)">⏱ Time remaining</span>
+          <span class="q-timer-text" id="q-timer-text">2:07</span>
+        </div>
+        <div class="q-timer-wrap"><div class="q-timer-bar" id="q-timer-bar" style="width:100%"></div></div>
+      </div>
       <div class="question-text" id="question-text">Loading...</div>
       <div class="result-flash" id="result-flash"></div>
       <div class="options-grid" id="options-grid"></div>
@@ -414,6 +496,13 @@
         </div>
         <button class="toggle-btn" id="smart-toggle" onclick="toggleSmartPractice()">ON</button>
       </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">⏱ Timed Practice</div>
+          <div class="settings-sub">2:07 per question — matches real CFP exam pace. Auto-reveals answer on timeout.</div>
+        </div>
+        <button class="toggle-btn off" id="timed-toggle" onclick="toggleTimedPractice()">OFF</button>
+      </div>
     </div>
     <div class="card">
       <div class="card-title">About</div>
@@ -421,6 +510,75 @@
         Built by <strong style="color:var(--gold)">Nathan Allen & MiniMe 🤏</strong><br>
         All data stored locally in your browser. Nothing leaves your device.<br>
         Covers all 9 CFP exam domains per the CFP Board's current topic list.
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM SIMULATOR -->
+  <div class="page" id="page-exam">
+    <!-- Start Screen -->
+    <div id="exam-start-screen">
+      <div class="exam-start">
+        <div class="exam-start-icon">📝</div>
+        <div class="exam-start-title">CFP® Exam Simulator</div>
+        <div class="exam-start-sub">Experience real exam conditions. You'll see your answers only after submitting — just like the actual CFP exam. Questions are drawn proportionally by domain weight.</div>
+        <div class="exam-option-card" onclick="startExamSession(85, 180)">
+          <div class="exam-option-title">Exam Session</div>
+          <div class="exam-option-sub">Mirrors one of the two sessions you'll sit on exam day.</div>
+          <div class="exam-option-tags">
+            <span class="exam-option-tag">85 Questions</span>
+            <span class="exam-option-tag">3:00:00 Timer</span>
+            <span class="exam-option-tag">~2:07 / question</span>
+            <span class="exam-option-tag">Pass: ≥70%</span>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);max-width:420px;margin:0 auto;line-height:1.7">
+          The real CFP exam is 170 questions split across two 3-hour sessions with a lunch break.<br>This simulates one session. Your results count toward your Practice stats.
+        </div>
+      </div>
+    </div>
+    <!-- In Progress -->
+    <div id="exam-in-progress" style="display:none">
+      <div class="exam-top-bar">
+        <div class="exam-counter" id="exam-q-counter">Q 1 / 85</div>
+        <div class="exam-clock" id="exam-clock">3:00:00</div>
+        <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px" onclick="confirmEndExam()">Submit ✓</button>
+      </div>
+      <div class="exam-prog-bar"><div class="exam-prog-fill" id="exam-prog-fill" style="width:1%"></div></div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="question-text" id="exam-question-text">Loading...</div>
+        <div class="options-grid" id="exam-options-grid"></div>
+        <div class="exam-nav-btns">
+          <button class="btn btn-ghost" onclick="examPrev()">← Prev</button>
+          <button class="exam-flag-btn" id="exam-flag-btn" onclick="toggleExamFlag()">🏳 Flag</button>
+          <button class="btn btn-primary" id="exam-next-btn" onclick="examNext()" style="margin-left:auto">Next →</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Navigator — <span id="exam-answered-count">0</span> answered · <span id="exam-flagged-count">0</span> flagged</div>
+        <div class="exam-q-grid" id="exam-q-grid"></div>
+      </div>
+    </div>
+    <!-- Report -->
+    <div id="exam-report-screen" style="display:none"></div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div class="page" id="page-cases">
+    <div class="section-title">Case Studies</div>
+    <div class="section-sub">Multi-domain client scenarios — the hardest content on the CFP exam.</div>
+    <div class="cases-placeholder">
+      <div class="cases-placeholder-icon">📋</div>
+      <div class="cases-placeholder-title">Coming Soon</div>
+      <div class="cases-placeholder-sub">
+        Case studies will live here — multi-part questions built around a single client's situation, testing how well you integrate across all 9 domains at once.<br><br>
+        Nathan is curating real-exam-quality scenarios. Check back soon.
+      </div>
+      <div class="case-preview-card">
+        <div class="case-preview-tag">Case Study · Preview</div>
+        <div class="case-preview-title">The Martinez Family</div>
+        <div class="case-preview-sub">David (58) and Elena (55) are approaching retirement. David has a $1.8M 401(k), a pension, and a concentrated employer stock position with significant NUA potential. Elena runs an S-corp generating $320,000/year. They have two adult children, aging parents, and a blended estate worth $6.4M…</div>
+        <div style="margin-top:12px;font-size:12px;color:var(--muted)">5 questions · All domains · Expert difficulty</div>
       </div>
     </div>
   </div>
@@ -526,6 +684,7 @@ function loadState() {
   // Migration guards — ensure new fields exist for users with old saved state
   if (!state.qStats) state.qStats = {};
   if (state.smartPractice === undefined) state.smartPractice = true;
+  if (state.timedPractice === undefined) state.timedPractice = false;
 }
 function saveState() { try { localStorage.setItem('cfp-v2', JSON.stringify(state)); saveCloudProgress(); } catch(e) {} }
 function resetStep1() {
@@ -741,12 +900,15 @@ function showQuestion() {
       </div>
       <div class="option-why" id="opt-why-${i}"></div>
     </button>`).join('');
+  stopQuestionTimer();
+  if (state.timedPractice) startQuestionTimer(q);
   updateSessionScore();
 }
 
 function selectOption(idx, qId) {
   if (isAnswered) return;
   isAnswered = true;
+  stopQuestionTimer();
   const q = QUESTIONS.find(q => q.id === qId);
   const isCorrect = idx === q.correct;
   const keys = ['A','B','C','D','E'];
@@ -1077,9 +1239,306 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ── TIMED PRACTICE ────────────────────────────────────────────
+const TIMER_SECONDS = 127; // 2:07 per question (180 min / 85 Qs ≈ 2.12 min)
+let qTimerInterval = null;
+let qTimerRemaining = TIMER_SECONDS;
+let _timerCurrentQ = null;
+
+function updateTimerBadge() {
+  const toggle = document.getElementById('timed-toggle');
+  if (!toggle) return;
+  toggle.textContent = state.timedPractice ? 'ON' : 'OFF';
+  toggle.className = 'toggle-btn' + (state.timedPractice ? '' : ' off');
+}
+
+function toggleTimedPractice() {
+  state.timedPractice = !state.timedPractice;
+  saveState();
+  updateTimerBadge();
+  stopQuestionTimer();
+  if (state.timedPractice && !isAnswered && _timerCurrentQ) startQuestionTimer(_timerCurrentQ);
+}
+
+function startQuestionTimer(q) {
+  stopQuestionTimer();
+  _timerCurrentQ = q;
+  if (!state.timedPractice) return;
+  const secEl = document.getElementById('q-timer-section');
+  if (secEl) secEl.style.display = '';
+  qTimerRemaining = TIMER_SECONDS;
+  const bar = document.getElementById('q-timer-bar');
+  const txt = document.getElementById('q-timer-text');
+  function tick() {
+    const pct = (qTimerRemaining / TIMER_SECONDS) * 100;
+    if (bar) { bar.style.width = pct + '%'; bar.className = 'q-timer-bar' + (qTimerRemaining <= 20 ? ' urgent' : ''); }
+    if (txt) {
+      const m = Math.floor(qTimerRemaining / 60), s = qTimerRemaining % 60;
+      txt.textContent = m + ':' + String(s).padStart(2, '0');
+      txt.className = 'q-timer-text' + (qTimerRemaining <= 20 ? ' urgent' : '');
+    }
+    if (qTimerRemaining <= 0) {
+      stopQuestionTimer();
+      if (!isAnswered) {
+        isAnswered = true;
+        const keys = ['A','B','C','D','E'];
+        q.options.forEach((_, i) => {
+          const btn = document.getElementById('opt-'+i);
+          const why = document.getElementById('opt-why-'+i);
+          if (!btn) return;
+          btn.disabled = true;
+          if (i === q.correct) btn.classList.add('correct');
+          else btn.classList.add('neutral-revealed');
+          if (q.optionExplanations && q.optionExplanations[i] && why) { why.textContent = q.optionExplanations[i]; why.classList.add('show'); }
+        });
+        const flash = document.getElementById('result-flash');
+        if (flash) { flash.textContent = '⏰ Time\'s up! Correct answer: ' + keys[q.correct] + '.'; flash.className = 'result-flash wrong'; }
+        const exp = document.getElementById('explanation');
+        if (exp) { exp.innerHTML = q.explanation; exp.className = 'explanation show'; }
+        state.answers[q.id] = { qId: q.id, selected: -1, correct: false, timestamp: Date.now() };
+        if (!state.qStats[q.id]) state.qStats[q.id] = { total: 0, correct: 0 };
+        state.qStats[q.id].total++;
+        saveState(); sessionTotal++; updateSessionScore();
+        document.getElementById('next-btn').disabled = false;
+      }
+      return;
+    }
+    qTimerRemaining--;
+  }
+  tick();
+  qTimerInterval = setInterval(tick, 1000);
+}
+
+function stopQuestionTimer() {
+  if (qTimerInterval) { clearInterval(qTimerInterval); qTimerInterval = null; }
+  const secEl = document.getElementById('q-timer-section');
+  if (secEl) secEl.style.display = 'none';
+}
+
+// ── EXAM SIMULATOR ────────────────────────────────────────────
+// Domain allocations for 85-question session (proportional to CFP Board weights, sum=85)
+const EXAM_DOMAIN_COUNTS = {
+  professional: 6, general: 12, education: 5, risk: 9,
+  investment: 14, tax: 11, retirement: 15, estate: 7, psychology: 6
+};
+
+let exam = null;
+let examClockInterval = null;
+
+function buildExamQuestions() {
+  const qs = [];
+  DOMAINS.forEach(d => {
+    const n = EXAM_DOMAIN_COUNTS[d.id] || 0;
+    const pool = shuffle(QUESTIONS.filter(q => q.domain === d.id));
+    qs.push(...pool.slice(0, n));
+  });
+  return shuffle(qs);
+}
+
+function startExamSession(totalQuestions, totalMinutes) {
+  const questions = buildExamQuestions().slice(0, totalQuestions);
+  exam = {
+    questions, answers: {}, flagged: new Set(),
+    startTime: Date.now(), currentIdx: 0,
+    totalSeconds: totalMinutes * 60,
+    remainingSeconds: totalMinutes * 60,
+    finished: false
+  };
+  document.getElementById('exam-start-screen').style.display = 'none';
+  document.getElementById('exam-in-progress').style.display = '';
+  document.getElementById('exam-report-screen').style.display = 'none';
+  startExamClock();
+  showExamQuestion();
+}
+
+function startExamClock() {
+  if (examClockInterval) clearInterval(examClockInterval);
+  updateExamClock();
+  examClockInterval = setInterval(function() {
+    if (!exam || exam.finished) { clearInterval(examClockInterval); return; }
+    exam.remainingSeconds = Math.max(0, exam.remainingSeconds - 1);
+    updateExamClock();
+    if (exam.remainingSeconds <= 0) { clearInterval(examClockInterval); endExam(true); }
+  }, 1000);
+}
+
+function updateExamClock() {
+  const el = document.getElementById('exam-clock');
+  if (!el || !exam) return;
+  const s = exam.remainingSeconds;
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+  el.textContent = h + ':' + String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+  el.className = 'exam-clock' + (s <= 300 ? ' urgent' : '');
+}
+
+function showExamQuestion() {
+  if (!exam) return;
+  const q = exam.questions[exam.currentIdx];
+  const total = exam.questions.length;
+  document.getElementById('exam-q-counter').textContent = 'Q ' + (exam.currentIdx + 1) + ' / ' + total;
+  document.getElementById('exam-prog-fill').style.width = ((exam.currentIdx + 1) / total * 100) + '%';
+  document.getElementById('exam-question-text').textContent = q.question;
+  const keys = ['A','B','C','D','E'];
+  const selIdx = exam.answers[q.id] !== undefined ? exam.answers[q.id] : -1;
+  document.getElementById('exam-options-grid').innerHTML = q.options.map((opt, i) =>
+    '<button class="exam-option-btn' + (selIdx === i ? ' selected' : '') +
+    '" onclick="selectExamOption(' + i + ',' + q.id + ')">' +
+    '<span class="exam-option-key">' + keys[i] + '.</span><span>' + opt + '</span></button>'
+  ).join('');
+  const flagBtn = document.getElementById('exam-flag-btn');
+  const isFlagged = exam.flagged.has(q.id);
+  flagBtn.className = 'exam-flag-btn' + (isFlagged ? ' flagged' : '');
+  flagBtn.textContent = isFlagged ? '🏳 Flagged' : '🏳 Flag';
+  const prevBtns = document.querySelectorAll('#exam-in-progress .btn-ghost');
+  if (prevBtns[0]) prevBtns[0].disabled = (exam.currentIdx === 0);
+  const nextBtn = document.getElementById('exam-next-btn');
+  const isLast = exam.currentIdx === exam.questions.length - 1;
+  nextBtn.textContent = isLast ? 'Submit Exam ✓' : 'Next →';
+  nextBtn.onclick = isLast ? confirmEndExam : examNext;
+  renderExamGrid();
+  updateExamCounts();
+}
+
+function selectExamOption(idx, qId) {
+  if (!exam || exam.finished) return;
+  exam.answers[qId] = idx;
+  showExamQuestion();
+}
+
+function examNext() {
+  if (!exam || exam.currentIdx >= exam.questions.length - 1) return;
+  exam.currentIdx++; showExamQuestion();
+}
+
+function examPrev() {
+  if (!exam || exam.currentIdx <= 0) return;
+  exam.currentIdx--; showExamQuestion();
+}
+
+function examGoTo(idx) {
+  if (!exam) return;
+  exam.currentIdx = idx; showExamQuestion();
+}
+
+function toggleExamFlag() {
+  if (!exam) return;
+  const qId = exam.questions[exam.currentIdx].id;
+  if (exam.flagged.has(qId)) exam.flagged.delete(qId); else exam.flagged.add(qId);
+  showExamQuestion();
+}
+
+function renderExamGrid() {
+  if (!exam) return;
+  const grid = document.getElementById('exam-q-grid');
+  if (!grid) return;
+  grid.innerHTML = exam.questions.map(function(q, i) {
+    let cls = 'exam-dot';
+    if (i === exam.currentIdx) cls += ' current';
+    if (exam.answers[q.id] !== undefined) cls += ' answered';
+    if (exam.flagged.has(q.id)) cls += ' flagged';
+    return '<div class="' + cls + '" onclick="examGoTo(' + i + ')" title="Q' + (i+1) + '">' + (i+1) + '</div>';
+  }).join('');
+}
+
+function updateExamCounts() {
+  if (!exam) return;
+  const ac = document.getElementById('exam-answered-count');
+  const fc = document.getElementById('exam-flagged-count');
+  if (ac) ac.textContent = Object.keys(exam.answers).length;
+  if (fc) fc.textContent = exam.flagged.size;
+}
+
+function confirmEndExam() {
+  if (!exam) return;
+  const unanswered = exam.questions.length - Object.keys(exam.answers).length;
+  if (unanswered > 0 && !confirm(unanswered + ' question' + (unanswered !== 1 ? 's' : '') + ' unanswered. Submit anyway?')) return;
+  endExam(false);
+}
+
+function endExam(timeout) {
+  if (!exam || exam.finished) return;
+  exam.finished = true;
+  if (examClockInterval) { clearInterval(examClockInterval); examClockInterval = null; }
+  renderExamReport(timeout);
+  document.getElementById('exam-in-progress').style.display = 'none';
+  document.getElementById('exam-report-screen').style.display = '';
+}
+
+function renderExamReport(timeout) {
+  let correct = 0;
+  const ds = {};
+  DOMAINS.forEach(d => { ds[d.id] = { correct: 0, total: 0, color: d.color }; });
+  exam.questions.forEach(function(q) {
+    const sel = exam.answers[q.id];
+    const ok = (sel === q.correct);
+    if (ok) correct++;
+    ds[q.domain].total++;
+    if (ok) ds[q.domain].correct++;
+    if (sel !== undefined) {
+      state.answers[q.id] = { qId: q.id, selected: sel, correct: ok, timestamp: Date.now() };
+      if (!state.qStats[q.id]) state.qStats[q.id] = { total: 0, correct: 0 };
+      state.qStats[q.id].total++;
+      if (ok) state.qStats[q.id].correct++;
+    }
+  });
+  // Update streak
+  const today = new Date().toDateString();
+  if (state.lastStudyDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    state.streak = (state.lastStudyDate === yesterday) ? (state.streak || 0) + 1 : 1;
+    state.lastStudyDate = today;
+  }
+  saveState();
+  const total = exam.questions.length;
+  const pct = Math.round(correct / total * 100);
+  const pass = pct >= 70;
+  const used = exam.totalSeconds - exam.remainingSeconds;
+  const uh = Math.floor(used / 3600), um = Math.floor((used % 3600) / 60), us = used % 60;
+  const timeStr = uh > 0 ? uh + 'h ' + um + 'm' : um + 'm ' + String(us).padStart(2,'0') + 's';
+  const domainRows = DOMAINS.map(function(d) {
+    const s = ds[d.id];
+    const p = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
+    const barColor = p === null ? 'var(--surface2)' : p >= 70 ? 'var(--green)' : p >= 50 ? 'var(--gold)' : 'var(--red)';
+    return '<div class="exam-report-domain">' +
+      '<div class="exam-report-domain-name">' + d.name + '</div>' +
+      '<div class="exam-report-bar-wrap"><div class="exam-report-bar" style="width:' + (p || 0) + '%;background:' + barColor + '"></div></div>' +
+      '<div class="exam-report-pct">' + (p !== null ? p + '%' : '—') + '</div>' +
+      '<div style="font-size:11px;color:var(--muted);width:40px;text-align:right">' + s.correct + '/' + s.total + '</div>' +
+      '</div>';
+  }).join('');
+  document.getElementById('exam-report-screen').innerHTML =
+    '<div class="section-title">Session Results</div>' +
+    '<div class="section-sub">' + (timeout ? '⏰ Time expired · ' : '') +
+      new Date().toLocaleDateString('en-US', {weekday:'long', month:'short', day:'numeric'}) + '</div>' +
+    '<div class="card" style="margin-bottom:20px">' +
+      '<div class="exam-score-hero">' +
+        '<div style="font-size:13px;color:var(--muted);margin-bottom:4px">' + correct + ' of ' + total + ' correct</div>' +
+        '<div class="exam-score-pct ' + (pass ? 'pass' : 'fail') + '">' + pct + '%</div>' +
+        '<div class="exam-score-verdict">' + (pass ? '✅ PASS' : '❌ BELOW PASSING') + '</div>' +
+        '<div class="exam-score-detail">Time used: ' + timeStr + ' &nbsp;·&nbsp; Pass threshold: 70%' +
+          (exam.flagged.size > 0 ? ' &nbsp;·&nbsp; ' + exam.flagged.size + ' flagged' : '') + '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="card" style="margin-bottom:20px">' +
+      '<div class="card-title">Domain Breakdown</div>' + domainRows +
+    '</div>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
+      '<button class="btn btn-primary" onclick="resetExam()">New Session</button>' +
+      '<button class="btn btn-ghost" onclick="showPage(\'practice\')">Review in Practice →</button>' +
+    '</div>';
+}
+
+function resetExam() {
+  exam = null;
+  document.getElementById('exam-start-screen').style.display = '';
+  document.getElementById('exam-in-progress').style.display = 'none';
+  document.getElementById('exam-report-screen').style.display = 'none';
+}
+
 function init() {
   loadState();
   updateSmartBadge();
+  updateTimerBadge();
   updateCountdown();
   setInterval(updateCountdown, 60000);
   document.getElementById('exam-date-input').value = state.examDate || '2026-03-20';
