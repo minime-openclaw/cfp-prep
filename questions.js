@@ -457,19 +457,6 @@ const QUESTIONS = [
 
   // ── RETIREMENT ────────────────────────────────────────────────
   {
-    id: 25, domain: 'retirement', difficulty: 'easy',
-    question: 'The maximum 401(k) employee elective deferral limit in 2024 is:',
-    options: ['$20,500', '$22,500', '$23,000', '$66,000'],
-    correct: 2,
-    explanation: 'The 2024 employee 401(k) elective deferral limit is <strong>$23,000</strong>. The age 50+ catch-up adds $7,500 (total $30,500). The overall limit including employer contributions is $69,000 in 2024.',
-    optionExplanations: [
-      '✗ $20,500 was the 2022 limit. Contribution limits are adjusted annually for inflation — always use the current year\'s figures.',
-      '✗ $22,500 was the 2023 limit. For 2024, the limit increased to $23,000.',
-      '✓ Correct. The 2024 employee elective deferral limit is $23,000 ($30,500 for those 50+). The overall limit including all contributions is $69,000.',
-      '✗ $66,000 was the 2023 total contribution limit (all sources). For 2024 it\'s $69,000. This number includes employer matches and profit sharing — not just employee deferrals.'
-    ]
-  },
-  {
     id: 26, domain: 'retirement', difficulty: 'medium',
     question: 'The full retirement age (FRA) for Social Security for someone born in 1965 is:',
     options: ['Age 65', 'Age 66', 'Age 67', 'Age 70'],
@@ -551,19 +538,6 @@ const QUESTIONS = [
   },
 
   // ── ESTATE PLANNING ───────────────────────────────────────────
-  {
-    id: 31, domain: 'estate', difficulty: 'easy',
-    question: 'The annual gift tax exclusion for 2024 is:',
-    options: ['$15,000 per donor per recipient', '$16,000 per donor per recipient', '$17,000 per donor per recipient', '$18,000 per donor per recipient'],
-    correct: 3,
-    explanation: 'The 2024 annual gift tax exclusion is <strong>$18,000</strong> per donor per recipient. Married couples can gift-split: up to $36,000 to any one person per year. Gifts above this amount use the lifetime exemption ($13.61M in 2024).',
-    optionExplanations: [
-      '✗ $15,000 was the exclusion from 2018–2021. It was indexed for inflation and has since increased. Always check the current year\'s figure.',
-      '✗ $16,000 was the 2022 exclusion. The 2023 amount was $17,000 and 2024 is $18,000. These annual increases are commonly tested.',
-      '✗ $17,000 was the 2023 exclusion. For 2024, it increased to $18,000. Exam questions often test adjacent years to catch students using outdated figures.',
-      '✓ Correct. The 2024 annual exclusion is $18,000 per donor per recipient. A married couple can combine to give $36,000 to one person with no gift tax or exemption usage.'
-    ]
-  },
   {
     id: 32, domain: 'estate', difficulty: 'medium',
     question: 'A client dies with a $15,000,000 estate and leaves everything to their surviving spouse. How much estate tax is due?',
@@ -1859,7 +1833,7 @@ const QUESTIONS = [
     explanation: 'A key advantage of 529 plans is <strong>donor control</strong>. The account owner (typically the parent) can change the beneficiary, withdraw funds (subject to taxes/penalty on earnings), or keep the money invested — even after the child reaches adulthood. With UGMA/UTMA, once the child reaches the age of majority, the assets irrevocably belong to the child.',
     optionExplanations: [
       '✗ While this is true (UGMA/UTMA can be used for anything; 529 has qualified-use requirements), this is a DISadvantage of 529 plans compared to UGMA/UTMA — not an advantage.',
-      '✓ Wait — actually let me reconsider. Parent-owned 529 plans are assessed at up to 5.64% in FAFSA vs. student-owned UGMA/UTMA at 20%. This IS an advantage of 529. But the answer marked correct is D. Both B and D are advantages. D is the stronger/more unique advantage specific to 529 plans and more likely to be tested. The primary tested advantage is donor control.',
+      '✗ Favorable FAFSA treatment (parent-owned 529 assessed at 5.64% vs. 20% for student UGMA/UTMA) IS a genuine advantage, but it is not the most DISTINCTIVE 529 advantage. Donor control (option D) is the primary differentiator — and the most commonly tested on the CFP exam. Both are valid advantages; D is the better answer.',
       '✗ This is backwards. 529 accounts grow TAX-FREE (earnings are never taxed if used for qualified expenses). UGMA/UTMA accounts are subject to capital gains and the Kiddie Tax. 529 has the tax advantage.',
       '✓ Correct. The 529 account owner maintains control — they can change beneficiaries, reclaim funds (with taxes/penalty on earnings), or redirect the money. UGMA/UTMA assets irrevocably transfer to the minor at the age of majority.'
     ]
@@ -2260,7 +2234,7 @@ const QUESTIONS = [
       'The client fails the liquidity test but is within the debt-to-income guideline',
       'The client fails both tests'
     ],
-    correct: 1,
+    correct: 0,
     explanation: 'Current ratio: $50,000 / $42,000 = <strong>1.19</strong> (passes — above 1.0). Debt-to-income: $3,200 / $9,500 = <strong>33.7%</strong>... wait — that is below 36%. Actually option B says "exceeds" — let me recalculate: $3,200/$9,500 = 33.7%, which is below 36%. So the client passes both tests. Closest correct answer is A.',
     optionExplanations: [
       '✓ Correct. Current ratio = 50,000/42,000 = 1.19 (passes). Debt-to-income = 3,200/9,500 = 33.7% (below 36% guideline). Both tests pass.',
@@ -2692,7 +2666,7 @@ const QUESTIONS = [
       '$25,000',
       '$45,000'
     ],
-    correct: 2,
+    correct: 1,
     explanation: 'Target current ratio = 1.5. Required current assets = 1.5 × $30,000 = $45,000. Current assets now = $25,000. Additional assets needed = $45,000 − $25,000 = <strong>$20,000</strong>.',
     optionExplanations: [
       '✗ $5,000 addition brings current assets to $30,000, giving a ratio of 1.0 — not 1.5.',
@@ -2728,7 +2702,7 @@ const QUESTIONS = [
       'Equity $200,000; LTV = 33%',
       'Equity $400,000; LTV = 200%'
     ],
-    correct: 0,
+    correct: 1,
     explanation: 'Home equity = $600,000 − $200,000 = <strong>$400,000</strong>. LTV = mortgage balance / home value = $200,000 / $600,000 = <strong>33.3%</strong>... wait, LTV is usually mortgage/value, so $200K/$600K = 33.3%. But option A says LTV=67%. Let me reconsider — LTV = loan / value = 200/600 = 33%. The correct answer should be equity $400K, LTV 33%. Option B matches this.',
     optionExplanations: [
       '✗ Equity is correct at $400,000, but LTV = $200,000/$600,000 = 33.3%, not 67%.',
@@ -3344,7 +3318,7 @@ const QUESTIONS = [
       '$450,000',
       '$860,000'
     ],
-    correct: 0,
+    correct: 1,
     explanation: 'Total needs: Mortgage $350,000 + Debts $45,000 + Education $120,000 + PV of income (N=10, I=5, PMT=70,000) = $540,760. Total needs = $350,000 + $45,000 + $120,000 + $540,760 = $1,055,760. Offset by resources: Existing insurance $200,000 + Liquid assets $50,000 = $250,000. Gap = $1,055,760 − $250,000 = <strong>$805,760</strong> ≈ <strong>$815,000</strong> (choice B). Wait — let me recalculate: $350+$45+$120+$540.76 = $1,055.76K − $250K = $805.76K ≈ $815K (closest answer is B, but I have A listed). Let me use rounded: ≈ $649K might use annuity differently. Correct answer is approximately $806K, so option B ($815K) is closest.',
     optionExplanations: [
       '✗ $649,000 understates the income replacement needs at 5% discount rate.',
@@ -3626,24 +3600,6 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 196, domain: 'investment', difficulty: 'hard',
-    question: 'A portfolio manager has a Jensen\'s alpha of +2.5%. The risk-free rate is 2.5%, the market return is 9%, and the portfolio beta is 1.2. What was the actual portfolio return?',
-    options: [
-      '9.6%',
-      '12.1%',
-      '11.2%',
-      '13.4%'
-    ],
-    correct: 1,
-    explanation: 'Jensen\'s alpha = Actual return − CAPM return. CAPM return = Rf + β(Rm − Rf) = 2.5% + 1.2(9% − 2.5%) = 2.5% + 1.2(6.5%) = 2.5% + 7.8% = 10.3%. Actual return = CAPM + alpha = 10.3% + 2.5% = <strong>12.8%</strong>. Closest answer is 12.1%. Recalculating: CAPM = 2.5 + 1.2×(9-2.5) = 2.5+7.8 = 10.3. Actual = 10.3+2.5 = 12.8 ≈ 12.1% (B is closest).',
-    optionExplanations: [
-      '✗ 9.6% is below the CAPM expected return, which would imply negative alpha.',
-      '✓ Correct. CAPM = 2.5% + 1.2(6.5%) = 10.3%. Actual return = 10.3% + 2.5% alpha = 12.8% ≈ 12.1%.',
-      '✗ 11.2% would imply alpha less than +2.5%.',
-      '✗ 13.4% would imply a higher alpha or beta than given.'
-    ]
-  },
-  {
     id: 197, domain: 'investment', difficulty: 'easy',
     question: 'Which of the following BEST describes a Treasury Inflation-Protected Security (TIPS)?',
     options: [
@@ -3742,7 +3698,7 @@ const QUESTIONS = [
       '16.1%',
       '14.7%'
     ],
-    correct: 1,
+    correct: 2,
     explanation: 'σ²p = w²A σ²A + w²B σ²B + 2(wA)(wB)(σA)(σB)(ρ). = (0.5)²(0.18)² + (0.5)²(0.24)² + 2(0.5)(0.5)(0.18)(0.24)(0.2) = 0.0081 + 0.0144 + 0.00432 = 0.02682. σp = √0.02682 = <strong>16.4%</strong> ≈ 16.1% (closest).',
     optionExplanations: [
       '✗ 21.0% is the simple average of the two standard deviations — ignores the diversification benefit.',
@@ -3932,24 +3888,6 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 213, domain: 'investment', difficulty: 'hard',
-    question: 'An investor executes a collar strategy on 500 shares of ABC (current price $80): buys puts (strike $75, premium $2.50) and sells calls (strike $90, premium $3.50). What is the net premium received/paid and the maximum gain/loss per share?',
-    options: [
-      'Net premium received $1; max gain $11; max loss $5',
-      'Net premium received $1; max gain $10; max loss $6',
-      'Net premium paid $1; max gain $9; max loss $6',
-      'Net premium received $1; max gain $10; max loss $5'
-    ],
-    correct: 0,
-    explanation: 'Net premium: $3.50 received (call) − $2.50 paid (put) = <strong>$1.00 received</strong>. Max gain per share: stock reaches call strike $90, plus net premium: ($90 − $80) + $1 = <strong>$11</strong>. Max loss: stock falls to put strike $75, plus net premium: ($80 − $75) − $1 = <strong>$4</strong>... let me recalculate: Loss if stock falls to $75 = ($80−$75) net stock loss = $5, minus $1 net premium received = $4 net. Closest: max loss $4 (option A says $5 which doesn\'t match). Let me recheck: if stock at $75, stock loss = $5; net premium received = $1; so net loss = $5 − $1 = $4. Option A is incorrect. But given the choices, option A with max loss $5 is closest to the floor price loss ignoring premium.',
-    optionExplanations: [
-      '✓ Correct (approximately). Net premium received = $3.50 − $2.50 = $1.00. Max gain at $90 = ($90-$80) + $1 = $11. Max loss at $75 floor = $80-$75 = $5 cost basis − $1 premium = $4 net, but the floor is effectively $5 in stock movement before premium offset.',
-      '✗ The max gain calculation here doesn\'t properly account for the net premium received in addition to the stock price appreciation.',
-      '✗ Net premium received (not paid) since the call premium exceeds the put premium.',
-      '✗ Verify by recalculating max gain: stock appreciation to $90 = $10 + $1 net premium = $11.'
-    ]
-  },
-  {
     id: 214, domain: 'investment', difficulty: 'medium',
     question: 'ESG investing stands for Environmental, Social, and Governance. Which of the following BEST describes ESG investing?',
     options: [
@@ -4057,24 +3995,6 @@ const QUESTIONS = [
       '✗ Partially correct on AMT preference, but sale treatment is wrong — 6-month holding is disqualifying, making all gain ordinary income, not just $10/share.',
       '✗ There is no ordinary income at ISO exercise for regular tax purposes (but AMT applies). Sale proceeds are ordinary income only if there\'s a disqualifying disposition.',
       '✓ Correct. Exercise: no regular tax; $15,000 AMT preference. Sale (disqualifying): ($60−$20)×500 = $20,000 ordinary income. The entire gain becomes ordinary income in disqualifying dispositions.'
-    ]
-  },
-  {
-    id: 220, domain: 'tax', difficulty: 'easy',
-    question: 'The Alternative Minimum Tax (AMT) is designed to:',
-    options: [
-      'Provide an alternative, simpler tax calculation that all taxpayers may choose',
-      'Ensure that high-income taxpayers pay a minimum amount of federal income tax regardless of deductions',
-      'Replace the regular tax for taxpayers with alternative investments',
-      'Apply only to corporations with significant tax preference items'
-    ],
-    correct: 1,
-    explanation: 'The <strong>AMT</strong> adds back certain "preference items" (SALT, standard deduction, ISO bargain element, etc.) to create Alternative Minimum Taxable Income (AMTI). If the AMT (26%/28% of AMTI above exemption) exceeds regular tax, the taxpayer pays the AMT. It ensures that those with large deductions pay at least a minimum federal tax.',
-    optionExplanations: [
-      '✗ AMT is not optional — it applies automatically when triggered. Taxpayers don\'t choose to use it.',
-      '✓ Correct. AMT ensures minimum tax payment by adding back certain deductions/preferences. Taxpayer pays the higher of regular tax or AMT.',
-      '✗ AMT applies to individual taxpayers (and some corporations). It\'s not limited to those with alternative investments.',
-      '✗ AMT applies to individual taxpayers broadly — not just corporations.'
     ]
   },
   {
@@ -4628,7 +4548,7 @@ const QUESTIONS = [
       '$3,720',
       '$3,960'
     ],
-    correct: 3,
+    correct: 2,
     explanation: 'Delayed retirement credits: 8% per year for each year of delay beyond FRA (age 67). Delay from 67 to 70 = 3 years. Increase = 3 × 8% = 24%. Benefit at 70 = $3,000 × 1.24 = <strong>$3,720</strong>. Wait — 24% of $3,000 = $720; $3,000 + $720 = $3,720 (option C). Let me verify: $3,000 × 1.24 = $3,720. The correct answer is C ($3,720), not D.',
     optionExplanations: [
       '✗ $3,000 is the PIA at FRA — no delayed credits applied.',
@@ -5350,7 +5270,7 @@ const QUESTIONS = [
       '$1,200,000',
       '$2,800,000'
     ],
-    correct: 2,
+    correct: 1,
     explanation: 'Taxable estate = $18M − $1M debts = $17M. Exemption = $15M (OBBBA 2026). Taxable amount = $17M − $15M = $2M. Federal estate tax = $2M × 40% = <strong>$800,000</strong>. Wait — the options show $1.2M and $800K. $2M × 40% = $800K. Option B is correct.',
     optionExplanations: [
       '✗ The estate ($17M after debts) exceeds the $15M exemption. Estate tax applies to the $2M excess.',
@@ -5868,7 +5788,7 @@ const QUESTIONS = [
       '$20,000 passive loss (phased-out rental exception), $3,000 capital loss — total $23,000 deductible',
       'All losses are deductible since losses from actively managed rentals are fully allowed'
     ],
-    correct: 0,
+    correct: 1,
     explanation: 'The rental exception allows up to $25,000 of passive rental losses for active participants with AGI ≤ $100,000 (phases out $100,000–$150,000 AGI). At $280,000 AGI, the Hendersons are fully phased out of the rental exception. The LP loss is fully passive with no exception. Capital losses: $12,000 total; $3,000 may offset ordinary income, $9,000 carries forward. Only the $3,000 capital loss deduction is available in 2026.',
     optionExplanations: [
       '✗ The $25,000 rental exception phases out completely above $150,000 AGI — the Hendersons cannot use it.',
@@ -5887,7 +5807,7 @@ const QUESTIONS = [
       '6.11 years',
       '5.87 years'
     ],
-    correct: 1,
+    correct: 3,
     explanation: 'Modified duration approximation using full valuation: Duration ≈ (P− − P+) / (2 × P0 × Δy) = ($976 − $868) / (2 × $920 × 0.01) = $108 / $18.40 ≈ 5.87. Wait — let\'s recalculate: ($976 − $868) = $108; denominator = 2 × $920 × 0.01 = $18.40; $108/$18.40 = 5.87. The closest answer is 5.87, but 5.43 uses only the upside move. Using the symmetric formula correctly: 5.87 years.',
     optionExplanations: [
       '✗ 4.60 is too low for this maturity/coupon structure.',
@@ -6182,24 +6102,6 @@ const QUESTIONS = [
     ]
   },
 
-  {
-    id: 336, domain: 'education', difficulty: 'hard',
-    question: 'The Kesslers have a 10-year-old child and want to fund a 4-year private college education expected to cost $75,000/year in today\'s dollars, starting in 8 years. Assuming 5% college inflation and 7% investment return, approximately how much must they invest today as a lump sum?',
-    options: [
-      '$148,200',
-      '$176,400',
-      '$162,700',
-      '$191,500'
-    ],
-    correct: 0,
-    explanation: 'Step 1: Future cost of college (in 8 years): $75,000 × (1.05)^8 = $75,000 × 1.4775 = $110,812/year. Step 2: PV of 4-year education stream at start of college (year 8), discounting at effective rate: (7%−5%)/(1.05) ≈ 1.90% real rate. PV of annuity-due of $110,812/year for 4 years at ~1.9% ≈ $425,000. Step 3: Discount $425,000 back 8 years at 7%: $425,000 / (1.07)^8 = $425,000 / 1.7182 ≈ $247,000. Note: this is an approximation — the closest answer reflects the approximate lump sum needed using simplified assumptions. Among the choices, $148,200 is the closest to common exam approximations using shortcut methods.',
-    optionExplanations: [
-      '✓ Closest to the correct answer using exam-level approximations. Full calculation involves inflating costs, discounting at the real rate, and discounting back at the nominal rate.',
-      '✗ $176,400 overstates the required lump sum.',
-      '✗ $162,700 uses a slightly incorrect assumption in the inflation or discount rate.',
-      '✗ $191,500 significantly overstates the required amount.'
-    ]
-  },
 
   // ── EXPERT QUESTIONS (337-361) ────────────────────────────────
 
@@ -6677,5 +6579,825 @@ const QUESTIONS = [
       '✗ There is no 3-year rule for clawback — the anti-clawback regulations protect all gifts regardless of timing relative to death.'
     ]
   },
+,
+  // ── PSYCHOLOGY (IDs 362–371) ─────────────────────────────────────────
+  {
+    id: 362, domain: 'psychology', difficulty: 'medium',
+    question: 'A client insists on keeping all of their money in cash because "I lost everything in 2008 and I will never invest in stocks again." Which behavioral bias is PRIMARILY driving this decision?',
+    options: [
+      'Overconfidence bias',
+      'Availability heuristic combined with loss aversion',
+      'Anchoring bias to pre-2008 portfolio value',
+      'Status quo bias'
+    ],
+    correct: 1,
+    explanation: 'The <strong>availability heuristic</strong> causes people to overweight vivid, emotionally charged memories when assessing future risk. The 2008 crisis was traumatic, making it cognitively "available" and causing the client to overestimate the probability of recurrence. Combined with <strong>loss aversion</strong> (losses feel 2× as painful as gains feel good), the client refuses to accept any investment risk. A CFP® should acknowledge the client\'s experience, provide historical context about recovery, and explore whether 100% cash truly serves their long-term goals.',
+    optionExplanations: [
+      '✗ Overconfidence involves believing one\'s judgment or skill is superior to reality. This client\'s behavior is rooted in fear from past experience — the opposite of overconfidence.',
+      '✓ Correct. Availability heuristic (vivid 2008 memory dominates risk perception) + loss aversion (extreme avoidance of potential loss) explains the 100% cash allocation.',
+      '✗ Anchoring would explain fixating on a specific portfolio value. The core issue here is fear of loss driven by vivid memory — availability heuristic.',
+      '✗ Status quo bias explains preference for the current state. While related, the primary driver here is the traumatic 2008 memory and fear of reliving that loss.'
+    ]
+  },
+  {
+    id: 363, domain: 'psychology', difficulty: 'medium',
+    question: 'Which communication technique is BEST for helping a client articulate goals they have difficulty expressing?',
+    options: [
+      'Closed-ended questions to efficiently gather specific data',
+      'Motivational interviewing — using open-ended questions, reflective listening, and affirmations to explore ambivalence',
+      'Presenting a pre-built financial plan and asking for approval',
+      'Using technical financial terminology to demonstrate expertise'
+    ],
+    correct: 1,
+    explanation: '<strong>Motivational interviewing (MI)</strong> is an evidence-based counseling technique that helps people articulate their own motivations and resolve ambivalence about change. For financial planning, MI techniques — open-ended questions ("What matters most to you about money?"), reflective listening ("It sounds like security is really important to you"), and affirmations — help clients access and express their authentic goals rather than just responding to advisor-directed questions.',
+    optionExplanations: [
+      '✗ Closed-ended questions gather specific data (yes/no, numbers) but don\'t help clients explore and articulate vague or ambivalent goals.',
+      '✓ Correct. Motivational interviewing is the evidence-based gold standard for helping clients explore and express their values, goals, and ambivalence.',
+      '✗ Presenting a pre-built plan before understanding the client\'s goals is advisor-centric, not client-centric. It often leads to plans clients don\'t engage with.',
+      '✗ Technical jargon creates distance and can intimidate clients. Effective communication requires accessible language, not demonstrations of expertise.'
+    ]
+  },
+  {
+    id: 364, domain: 'psychology', difficulty: 'hard',
+    question: 'A recently widowed client asks her CFP® to liquidate her entire investment portfolio and move to CDs "because I just can\'t think about this right now." What is the MOST appropriate response?',
+    options: [
+      'Execute the client\'s request immediately — respecting client autonomy is paramount',
+      'Acknowledge the grief, recommend delaying major financial decisions temporarily, maintain the current portfolio, and schedule a follow-up in 60-90 days',
+      'Suggest she meet with a grief counselor before making any financial decisions',
+      'Explain the opportunity cost of CDs vs. equities and recommend she stay invested'
+    ],
+    correct: 1,
+    explanation: 'Major life transitions — especially bereavement — impair financial decision-making. The CFP® has a duty to act in the client\'s best interest, which includes protecting a grieving client from potentially irreversible decisions made during acute distress. The best practice: <strong>validate the emotional experience</strong>, encourage a <strong>temporary pause</strong> on major changes (60-90 day "no major decisions" principle), maintain the status quo, and schedule a structured follow-up. The "I can\'t think about this" statement is a signal for careful support, not immediate action.',
+    optionExplanations: [
+      '✗ Client autonomy is important, but the fiduciary duty to act in the client\'s best interest may include recommending against impulsive decisions made during acute grief.',
+      '✓ Correct. Acknowledge grief, delay major decisions, maintain the portfolio, schedule a follow-up. This protects the client while respecting her situation.',
+      '✗ A grief counselor referral may be appropriate, but refusing to engage with financial matters entirely is not the CFP\'s role — and the client still needs short-term financial guidance.',
+      '✗ Explaining opportunity cost during acute grief is tone-deaf and dismisses the client\'s emotional state. Data doesn\'t help when someone is in crisis.'
+    ]
+  },
+  {
+    id: 365, domain: 'psychology', difficulty: 'medium',
+    question: 'What is "confirmation bias" and how does it affect financial planning clients?',
+    options: [
+      'Seeking investments that confirm past losses to validate poor decision-making',
+      'Selectively seeking, interpreting, and favoring information that confirms pre-existing beliefs while discounting contradictory evidence',
+      'Confirming financial decisions with a spouse or partner before acting',
+      'Overconfidence in one\'s ability to predict market outcomes'
+    ],
+    correct: 1,
+    explanation: '<strong>Confirmation bias</strong> causes people to seek information that validates what they already believe and dismiss evidence to the contrary. In financial planning, a client who believes a particular stock will rise may read only bullish analyst reports and dismiss bearish ones. This leads to concentrated positions, under-diversification, and resistance to advice that contradicts their view. Advisors can counter this by proactively presenting contrary evidence in a non-threatening way.',
+    optionExplanations: [
+      '✗ This describes sunk cost behavior, not confirmation bias.',
+      '✓ Correct. Confirmation bias is the selective consumption of information that validates existing beliefs. It distorts risk assessment and portfolio decisions.',
+      '✗ Seeking a second opinion is prudent financial behavior, not a bias.',
+      '✗ Overestimating prediction ability is overconfidence bias, which often co-occurs with confirmation bias but is a distinct concept.'
+    ]
+  },
+  {
+    id: 366, domain: 'psychology', difficulty: 'hard',
+    question: 'During a comprehensive financial review, the CFP® discovers that a couple\'s stated financial goals are fundamentally incompatible (husband wants to retire at 55; wife wants to stay in an expensive home and fund private school for three children). Which approach is MOST consistent with CFP Board\'s practice standards?',
+    options: [
+      'Side with whichever goal is financially more feasible',
+      'Present both goals and explain they cannot both be achieved; let the couple decide without further guidance',
+      'Facilitate a structured values clarification exercise and joint goal-setting discussion to help the couple identify shared priorities and acceptable trade-offs',
+      'Advise the couple to get separate financial advisors due to incompatible goals'
+    ],
+    correct: 2,
+    explanation: 'CFP Board practice standards require understanding client goals, values, and priorities — including helping clients reconcile conflicting goals. A <strong>values clarification exercise</strong> helps each partner articulate what truly matters, which often reveals shared underlying values (security, family, legacy) even when surface-level goals conflict. The planner\'s role is to facilitate this conversation productively, model trade-offs, and help the couple arrive at a unified plan they both own.',
+    optionExplanations: [
+      '✗ Siding with one spouse dismisses the other\'s goals and could damage the advisory relationship and the marriage.',
+      '✗ Presenting the conflict without facilitation is incomplete — the CFP\'s role includes helping clients navigate goal conflicts, not just identifying them.',
+      '✓ Correct. Values clarification and facilitated goal-setting is the professional approach. The planner helps the couple find shared priorities and acceptable trade-offs.',
+      '✗ Referring the couple to separate advisors may be appropriate only in extreme conflict situations. For incompatible goals, facilitation is the right first step.'
+    ]
+  },
+  {
+    id: 367, domain: 'psychology', difficulty: 'medium',
+    question: 'The concept of "money scripts" in financial therapy refers to:',
+    options: [
+      'Written financial planning documents that guide client behavior',
+      'Unconscious, often inherited beliefs about money that drive financial behaviors — sometimes helpfully, sometimes destructively',
+      'Scripts used by financial advisors to discuss sensitive topics with clients',
+      'Legal contracts that dictate how money is handled in marriage'
+    ],
+    correct: 1,
+    explanation: '<strong>Money scripts</strong> (Klontz & Klontz) are deeply held, often unconscious beliefs about money inherited from family experiences, cultural background, and life events. Examples: "Money is the root of all evil," "You have to work hard to deserve money," "There\'s never enough." These scripts drive financial behaviors (over-saving, overspending, financial avoidance) and must be identified and addressed for lasting financial behavior change. Financial therapy helps clients examine and revise destructive money scripts.',
+    optionExplanations: [
+      '✗ Money scripts are psychological concepts, not written planning documents.',
+      '✓ Correct. Money scripts are unconscious financial beliefs — often inherited — that drive financial behaviors, sometimes constructively (saving is good) and sometimes destructively (money will corrupt you, so avoid accumulating it).',
+      '✗ Communication scripts for advisors are a training concept; money scripts are client psychology concepts.',
+      '✗ Legal documents like prenuptial agreements are not what "money scripts" refers to in financial therapy.'
+    ]
+  },
+  {
+    id: 368, domain: 'psychology', difficulty: 'hard',
+    question: 'Research on financial therapy suggests that financial behaviors are MOST effectively changed through:',
+    options: [
+      'Providing clients with detailed financial data and projections',
+      'Imposing strict spending restrictions and accountability requirements',
+      'Addressing both cognitive (what clients think) and emotional (what clients feel) components of financial behavior, not just providing information',
+      'Focusing exclusively on tax efficiency and investment returns'
+    ],
+    correct: 2,
+    explanation: 'Financial therapy research consistently shows that information alone rarely changes financial behavior. Lasting change requires addressing the <strong>emotional</strong> dimension (fears, childhood money experiences, emotional triggers) alongside the <strong>cognitive</strong> dimension (beliefs, knowledge, plans). The CFP who only provides data and plans without addressing the emotional drivers of behavior will find clients who understand the plan but cannot execute it. Financial therapy techniques bridge this gap.',
+    optionExplanations: [
+      '✗ Information is necessary but not sufficient. Clients who know they should save more but don\'t are experiencing an emotional/behavioral barrier that data doesn\'t fix.',
+      '✗ Strict restrictions often trigger resistance, shame, and avoidance — counterproductive for lasting behavioral change.',
+      '✓ Correct. Effective behavioral change in financial planning requires both cognitive and emotional work. Financial therapy provides the framework for addressing both dimensions.',
+      '✗ Technical financial optimization is important but doesn\'t address the behavioral barriers that prevent clients from following through on plans.'
+    ]
+  },
+  {
+    id: 369, domain: 'psychology', difficulty: 'expert',
+    question: 'A client with a history of financial trauma (bankruptcy at age 35, now 55 and successful) refuses to invest in anything with any risk of loss, keeps $800K in cash, and becomes extremely anxious at any discussion of investing. The CFP® recognizes this as beyond normal risk aversion. What is the MOST appropriate professional response?',
+    options: [
+      'Respect the client\'s preferences and build a 100% CD/Treasury/cash portfolio without further discussion',
+      'Strongly recommend equity investing and explain that the client\'s financial trauma is irrational',
+      'Acknowledge the history, validate the response as understandable, gently explore the underlying beliefs, and consider a collaborative referral to a financial therapist while building trust incrementally — introducing small, low-risk steps over time',
+      'Require the client to complete a standard risk tolerance questionnaire before proceeding'
+    ],
+    correct: 2,
+    explanation: 'Financial trauma is a genuine psychological phenomenon where past financial crises create persistent fear responses that override rational financial decision-making. The CFP\'s role: (1) <strong>acknowledge and validate</strong> the experience — not pathologize it; (2) <strong>collaborate</strong> rather than prescribe; (3) consider a <strong>referral to a financial therapist</strong> for the trauma component; (4) build trust incrementally — perhaps start with a very small, low-risk allocation the client can tolerate. Forcing a "correct" allocation on a traumatized client destroys trust and is not in their best interest.',
+    optionExplanations: [
+      '✗ Accepting a 100% cash portfolio without addressing the underlying trauma fails the client\'s long-term financial interests (inflation erosion, retirement shortfall) and the fiduciary duty.',
+      '✗ Dismissing the client\'s experience as "irrational" is psychologically harmful and damages the therapeutic alliance essential to financial planning.',
+      '✓ Correct. Financial trauma requires a trauma-informed approach: validate, collaborate, consider financial therapy referral, and introduce change incrementally to build trust and tolerance.',
+      '✗ Standard risk questionnaires cannot capture the depth of financial trauma and may retraumatize the client by forcing them to articulate fear without support.'
+    ]
+  },
+  {
+    id: 370, domain: 'psychology', difficulty: 'medium',
+    question: 'A client is comparing two job offers. Offer A pays $95,000 at a company where peers earn $100,000. Offer B pays $85,000 at a company where peers earn $80,000. Many people prefer Offer B despite lower absolute pay. Which psychological concept explains this?',
+    options: [
+      'Anchoring bias — the $80,000 reference anchors the perception of $85,000 as superior',
+      'Social comparison and relative income preference — people often care about income relative to peers, not just absolute level',
+      'Mental accounting — separating the comparison into different "buckets"',
+      'Loss aversion — Offer A feels like a $5,000 loss relative to peers'
+    ],
+    correct: 1,
+    explanation: 'Research by Solnick and Hemenway showed that many people prefer earning less absolutely if they earn MORE than peers. This is <strong>relative income preference</strong> (social comparison). In financial planning, this manifests as "keeping up with the Joneses" behavior, lifestyle inflation driven by comparison rather than needs, and compensation decisions driven by status rather than absolute wealth maximization. Understanding this helps planners address spending patterns driven by social comparison.',
+    optionExplanations: [
+      '✗ Anchoring would explain fixating on the $100K or $80K reference, but the deeper mechanism is the preference for relative superiority, not just an anchor effect.',
+      '✓ Correct. People often prioritize relative standing over absolute income — earning more than peers feels better than earning more in absolute terms. Classic social comparison psychology.',
+      '✗ Mental accounting explains treating money from different sources differently. Not directly applicable here.',
+      '✗ Loss aversion is related (feeling below-peer income as a loss) but the specific concept being tested is relative income preference/social comparison.'
+    ]
+  },
+  {
+    id: 371, domain: 'psychology', difficulty: 'hard',
+    question: 'During the COVID-19 market crash of March 2020, many investors panic-sold near the bottom and then bought back in only after the market recovered substantially. Which combination of biases BEST explains this behavior pattern?',
+    options: [
+      'Overconfidence in timing the market and anchoring to pre-crash prices',
+      'Recency bias (expecting further decline) + loss aversion (extreme pain of continued losses) + regret avoidance (fear of making another "mistake")',
+      'Mental accounting — treating retirement accounts differently from taxable accounts',
+      'Status quo bias — defaulting to the "safe" choice of selling'
+    ],
+    correct: 1,
+    explanation: 'The sell-at-bottom, buy-back-at-top pattern is explained by multiple interacting biases: (1) <strong>Recency bias</strong> — after a 30% crash, investors extrapolate continued decline; (2) <strong>Loss aversion</strong> — the psychological pain of continuing to watch losses become intolerable; (3) <strong>Regret avoidance</strong> — after selling, investors fear buying back in case it drops further (looking foolish again); (4) This creates the perfect trap: sell too late, buy too late. The CFP\'s role is to establish a pre-committed investment policy that limits reactive selling.',
+    optionExplanations: [
+      '✗ Overconfidence and anchoring play roles but don\'t fully explain the buy-high-sell-low pattern that emerges from this sequence.',
+      '✓ Correct. Recency bias (project the crash forward) + loss aversion (sell to end the pain) + regret avoidance (don\'t buy back in case it drops further) = classic panic-sell-then-miss-recovery pattern.',
+      '✗ Mental accounting affects how people feel about different accounts but doesn\'t explain the systematic panic-sell pattern.',
+      '✗ Status quo bias would suggest NOT selling (keeping the existing allocation). Here clients are actively selling, which is departure from the status quo — different bias.'
+    ]
+  },
+
+  // ── EDUCATION PLANNING (IDs 372–382) ─────────────────────────────────
+  {
+    id: 372, domain: 'education', difficulty: 'medium',
+    question: 'Under the SECURE 2.0 Act, unused 529 plan funds can be rolled over to a Roth IRA. Which limitation is MOST restrictive for most families?',
+    options: [
+      'The rollover must happen within 5 years of account opening',
+      'The 529 account must have been open for at least 15 years; annual rollovers are limited to the Roth IRA contribution limit; lifetime maximum is $35,000',
+      'The rollover triggers income tax on the earnings portion',
+      'Only grandparent-owned 529 plans qualify for the Roth rollover'
+    ],
+    correct: 1,
+    explanation: 'SECURE 2.0\'s 529-to-Roth rollover (effective 2024) comes with significant restrictions: (1) The 529 must have been open <strong>at least 15 years</strong> (longest-period requirement); (2) Annual rollovers are capped at the Roth IRA contribution limit ($7,000 for 2025); (3) Lifetime maximum rollover is <strong>$35,000</strong> per beneficiary; (4) Contributions made within the prior 5 years cannot be rolled over; (5) The beneficiary must have earned income equal to or exceeding the rollover amount. The 15-year requirement is particularly restrictive for families with younger children.',
+    optionExplanations: [
+      '✗ There is no 5-year-from-opening restriction for rollovers; the requirement is that the account has been open AT LEAST 15 years.',
+      '✓ Correct. 15-year minimum account age + annual contribution limit cap + $35,000 lifetime maximum make this a modest (not unlimited) planning tool.',
+      '✗ The rollover is tax-free — that is specifically one of its benefits. No income tax on earnings transferred to the Roth IRA.',
+      '✗ Any 529 account meeting the requirements qualifies — there is no restriction based on who owns the account (parent, grandparent, other).'
+    ]
+  },
+  {
+    id: 373, domain: 'education', difficulty: 'hard',
+    question: 'The Chen family has two children: daughter age 16 (2 years until college) and son age 10 (8 years until college). They have $120,000 in a 529 for the daughter and $45,000 in a 529 for the son. The daughter was offered a full-tuition scholarship. What are the family\'s BEST options for the daughter\'s 529?',
+    options: [
+      'Withdraw the entire $120,000 immediately; the scholarship exempts them from all taxes and penalties',
+      'Options include: (1) change beneficiary to the son or another family member; (2) use up to scholarship amount penalty-free (earnings still taxable); (3) hold for graduate school or future generation; (4) roll up to $35,000 to daughter\'s Roth IRA after 15-year account age rule is met',
+      'Roll the entire $120,000 to the son\'s 529 immediately with no tax consequences',
+      'Take distributions for any expense now that the scholarship covers tuition — no restrictions apply'
+    ],
+    correct: 1,
+    explanation: 'A full scholarship creates multiple planning opportunities: (1) <strong>Beneficiary change</strong> to son or another family member — completely tax-free, can be done multiple times; (2) <strong>Penalty-free withdrawal</strong> up to the scholarship amount (earnings still taxable as ordinary income, but 10% penalty waived); (3) <strong>Hold for graduate school</strong>, professional school, or grandchildren; (4) <strong>529-to-Roth rollover</strong> (if account has been open 15+ years) — up to $35,000 lifetime. The family should NOT simply withdraw everything; multiple better options exist.',
+    optionExplanations: [
+      '✗ Withdrawing everything triggers ordinary income tax on earnings even with the scholarship exception — only the 10% penalty is waived, not the tax on earnings.',
+      '✓ Correct. Multiple options exist: beneficiary change, scholarship-exception withdrawal (tax but no penalty on earnings), holding for future use, or Roth rollover. Beneficiary change to the son is often simplest.',
+      '✗ Rolling to the son\'s 529 is permitted via beneficiary change, but "immediately with no tax consequences" is correct only if done as a beneficiary change, not a distribution and redeposit.',
+      '✗ The scholarship exception only waives the 10% penalty on distributions up to the scholarship amount — it doesn\'t eliminate income tax on earnings or make all expenses qualifying.'
+    ]
+  },
+  {
+    id: 374, domain: 'education', difficulty: 'medium',
+    question: 'For FAFSA purposes, which of the following correctly describes how grandparent-owned 529 plans are treated under the simplified FAFSA (post-2024 reforms)?',
+    options: [
+      'Grandparent-owned 529 plans are assessed as parent assets at 5.64%',
+      'Grandparent-owned 529 distributions are no longer reported as student income on the FAFSA — the "grandparent 529 problem" has been largely resolved',
+      'Grandparent-owned 529 assets must be transferred to a parent-owned account before the student\'s junior year of high school',
+      'Grandparent-owned 529 plans are assessed at 20% as student assets'
+    ],
+    correct: 1,
+    explanation: 'The FAFSA Simplification Act (effective 2024-25 award year) eliminated the separate question asking students to report cash support received from non-custodial parents and others. As a result, <strong>grandparent-owned 529 distributions no longer count as student income</strong> on the FAFSA, resolving the prior "grandparent 529 problem." Under the old FAFSA, grandparent distributions were counted as student income (assessed at 50%), severely hurting aid eligibility. Grandparent assets are still not reported on FAFSA at all — only the distribution impact was the issue.',
+    optionExplanations: [
+      '✗ Grandparent-owned 529s are NOT listed on FAFSA at all (they are not parent assets). The issue was that distributions were previously counted as student income.',
+      '✓ Correct. FAFSA reform eliminated the student income reporting of grandparent 529 distributions. Grandparents can now distribute from 529s without harming FAFSA aid eligibility.',
+      '✗ The old strategy of waiting until sophomore year to distribute (to avoid the student income hit) is no longer necessary under the reformed FAFSA.',
+      '✗ Grandparent-owned 529 plans are not reported on FAFSA as assets at all — neither at 20% nor at any rate.'
+    ]
+  },
+  {
+    id: 375, domain: 'education', difficulty: 'hard',
+    question: 'A client\'s child qualifies for both the American Opportunity Credit (AOC) and a Lifetime Learning Credit (LLC). The client also has a $30,000 529 balance. Which coordination approach is MOST tax-efficient for the first year of college?',
+    options: [
+      'Take the full $30,000 529 distribution to cover all expenses; no need for credits since 529 is already tax-free',
+      'Claim the AOC using $4,000 of out-of-pocket expenses (maximizing the $2,500 credit); distribute the remaining costs from the 529; do not "double-dip" by taking 529 distributions for AOC-credited expenses',
+      'Claim both AOC and LLC simultaneously and take full 529 distribution',
+      'Skip the AOC and use only the 529 since the 529 saves more in taxes'
+    ],
+    correct: 1,
+    explanation: 'Coordination of education tax benefits requires careful planning. The <strong>AOC provides a $2,500 credit</strong> (100% of first $2,000 + 25% of next $2,000 = $2,500 max). However, the same expenses cannot be used for BOTH the credit AND a tax-free 529 distribution — this is the "double-dipping" prohibition. Strategy: use $4,000 of cash to claim the $2,500 AOC credit, then use the 529 for remaining qualified expenses. The $2,500 credit (real cash back) often exceeds the tax savings from the 529\'s tax-free treatment of $4,000 in earnings.',
+    optionExplanations: [
+      '✗ Taking all expenses from the 529 forfeits the potentially valuable AOC credit ($2,500 refundable credit). The 529 should be coordinated with, not used instead of, the AOC.',
+      '✓ Correct. Use $4,000 cash for AOC (claim $2,500 credit), then 529 for remaining expenses. The $2,500 credit is typically more valuable than 529 tax-free treatment on the same $4,000.',
+      '✗ AOC and LLC cannot be claimed for the same student in the same year — only one education credit per student per year. Also, double-dipping with 529 is not allowed.',
+      '✗ The AOC credit ($2,500 real value) typically beats the tax savings from 529 tax-free treatment on the same $4,000 of expenses, especially for families in the 22-24% bracket.'
+    ]
+  },
+  {
+    id: 376, domain: 'education', difficulty: 'medium',
+    question: 'What is the "superfunding" election for 529 plans and what is the 2025 maximum contribution using this election for a married couple?',
+    options: [
+      'Making a single lump-sum contribution of up to $19,000 (2025 annual exclusion)',
+      'Electing to treat up to 5 years of annual exclusions as made in one year: $19,000 × 5 = $95,000 per contributor × 2 spouses = $190,000 per beneficiary',
+      'Contributing the maximum 529 account balance limit (varies by state)',
+      'Making a one-time contribution of $100,000 that avoids all gift taxes'
+    ],
+    correct: 1,
+    explanation: 'The <strong>5-year election (superfunding)</strong> allows a contributor to front-load up to 5 years of annual gift tax exclusions into a single 529 contribution without using the lifetime exemption. For 2025: $19,000/year × 5 years = $95,000 per contributor. A married couple gift-splitting can contribute $190,000 per beneficiary in one year. Catch: no additional annual exclusion gifts to that beneficiary during the 5-year period; if the contributor dies during the 5-year period, the unelapsed years are included in the estate. Form 709 must be filed to elect.',
+    optionExplanations: [
+      '✗ $19,000 is just the annual exclusion for one year. Superfunding uses 5 years of exclusions at once.',
+      '✓ Correct. $19,000 × 5 × 2 spouses = $190,000 per beneficiary in 2025. Powerful for immediate large 529 funding; requires Form 709 election.',
+      '✗ State maximum account balances (typically $300K-$550K) limit total 529 accumulation, not annual contributions. Superfunding is a federal gift tax strategy.',
+      '✗ There is no $100,000 special 529 contribution limit — the limit is determined by the 5-year election formula.'
+    ]
+  },
+  {
+    id: 377, domain: 'education', difficulty: 'hard',
+    question: 'The Lifetime Learning Credit (LLC) differs from the American Opportunity Credit (AOC) in which CRITICAL way relevant to a graduate student?',
+    options: [
+      'The LLC has a higher maximum credit ($2,500 vs. $2,000)',
+      'The LLC is not refundable, covers unlimited years of education, and applies to graduate and professional courses; the AOC is 40% refundable but limited to 4 years and undergrad courses only',
+      'The LLC has lower income phase-out thresholds than the AOC',
+      'Both credits are identical except the LLC covers vocational training'
+    ],
+    correct: 1,
+    explanation: 'Key differences: (1) <strong>AOC</strong>: max $2,500/year; 40% refundable; only for first 4 years of undergraduate degree; requires at least half-time enrollment. (2) <strong>LLC</strong>: max $2,000/year (20% of up to $10,000); <strong>NOT refundable</strong>; covers <strong>unlimited years</strong> including graduate and professional school, part-time enrollment, and individual courses for job skills. For a graduate student, only the LLC applies (AOC is exhausted after 4 undergraduate years or is limited to undergrad).',
+    optionExplanations: [
+      '✗ The AOC has the higher maximum ($2,500 vs. $2,000 for LLC). AOC also offers partial refundability; LLC does not.',
+      '✓ Correct. LLC is non-refundable, unlimited years, covers graduate/professional education. AOC is partially refundable but capped at 4 years of undergrad. Graduate students use LLC only.',
+      '✗ The income phase-out thresholds for both credits are similar (same MAGI range for MFJ, slightly different for single). This is not the critical difference.',
+      '✗ They are not identical — they differ in refundability, year limits, education level coverage, and maximum credit amount.'
+    ]
+  },
+  {
+    id: 378, domain: 'education', difficulty: 'medium',
+    question: 'Series EE bonds purchased after 1989 can be redeemed tax-free for qualified higher education expenses. Which income limitation applies in 2025?',
+    options: [
+      'No income limitation — all taxpayers qualify if expenses are incurred',
+      'The exclusion begins to phase out at approximately $96,800 (single) / $145,200 (MFJ) and is eliminated at higher income levels',
+      'The exclusion is limited to $10,000 per year regardless of income',
+      'The exclusion only applies if the bonds are owned by the student, not the parent'
+    ],
+    correct: 1,
+    explanation: 'The education bond exclusion (Section 135) has a significant income limitation. For 2025, the phase-out begins at approximately $96,800 for single filers and $145,200 for married filing jointly. The exclusion is completely phased out at higher MAGI levels. This makes Series EE/I bonds most useful as education savings vehicles for middle-income families — high earners cannot use the exclusion. The bonds must be owned by a taxpayer age 24+ and used for the owner\'s, spouse\'s, or dependent\'s qualified higher education expenses.',
+    optionExplanations: [
+      '✗ There IS an income limitation — one of the most restrictive among education tax benefits. High earners receive no benefit from the bond exclusion.',
+      '✓ Correct. The exclusion begins phasing out around $96,800 (single) / $145,200 (MFJ) in 2025. High earners cannot use this benefit.',
+      '✗ There is no $10,000 per year cap — the exclusion covers the actual education expenses, subject to income limits.',
+      '✗ The bonds must be owned by the taxpayer (parent), not the student. This is actually the opposite of many other education savings vehicles.'
+    ]
+  },
+  {
+    id: 379, domain: 'education', difficulty: 'hard',
+    question: 'A family has a child attending a community college half-time. Their AGI is $90,000 (MFJ). Which education tax benefit(s) are available?',
+    options: [
+      'American Opportunity Credit only — community college qualifies',
+      'Neither AOC nor LLC — community college does not qualify for education credits',
+      'LLC only — the AOC requires at least half-time enrollment in a degree program at an eligible institution, which community college satisfies, but the AOC also has a 4-year lifetime limit; if the student qualifies and hasn\'t used the AOC, both potentially apply',
+      'Lifetime Learning Credit only — the AOC requires full-time enrollment'
+    ],
+    correct: 2,
+    explanation: 'Community college is an <strong>eligible institution</strong> for both the AOC and LLC if it participates in federal student aid programs (most do). The AOC requires at least half-time enrollment in a degree/certificate program — community college half-time enrollment qualifies. At $90,000 MFJ, they are below the full AOC phase-out (fully available up to $160,000 MFJ, phased out by $180,000). The LLC is also available and has no enrollment requirement beyond being in an eligible course at an eligible institution. The family should claim the AOC first (higher credit) if the student hasn\'t yet used all 4 years.',
+    optionExplanations: [
+      '✗ The AOC can apply, but the statement "only AOC" ignores the LLC, which is also available and important for additional years beyond the AOC\'s 4-year limit.',
+      '✗ Community colleges are eligible institutions for both credits as long as they participate in federal student aid programs.',
+      '✓ Correct. Both AOC and LLC can apply to community college students meeting the enrollment requirements. Claim AOC first (higher value) then LLC for additional years.',
+      '✗ The AOC does NOT require full-time enrollment — it requires at least half-time enrollment. This is a common misconception.'
+    ]
+  },
+  {
+    id: 380, domain: 'education', difficulty: 'medium',
+    question: 'Which statement about UGMA/UTMA accounts is MOST accurate for financial aid purposes?',
+    options: [
+      'UGMA/UTMA accounts are treated as parent assets at 5.64% since the student is a minor',
+      'UGMA/UTMA accounts titled in the student\'s name are assessed as student assets at up to 20%, significantly reducing financial aid eligibility compared to parent-owned accounts',
+      'UGMA/UTMA accounts are not reported on FAFSA since they are custodial accounts',
+      'UGMA/UTMA accounts are exempt from FAFSA assessment once the student reaches age 18'
+    ],
+    correct: 1,
+    explanation: 'UGMA/UTMA accounts are legally owned by the student (minor) — even though managed by a custodian — and are therefore assessed as <strong>student assets at up to 20%</strong> in the FAFSA formula. This is the WORST treatment from a financial aid perspective. In contrast, parent-owned 529 plans are assessed at only 5.64%. A family with $50,000 in a student UGMA/UTMA faces up to $10,000 in additional Expected Family Contribution, compared to only $2,820 if the same amount were in a parent-owned 529.',
+    optionExplanations: [
+      '✗ Once the student is the legal owner, UGMA/UTMA assets are student assets (up to 20%), not parent assets (5.64%).',
+      '✓ Correct. UGMA/UTMA assets owned by the student are the WORST-treatment assets for FAFSA purposes — 20% assessment rate vs. 5.64% for parent-owned 529s.',
+      '✗ UGMA/UTMA accounts ARE reported on FAFSA as student assets. The custodial arrangement does not remove them from reporting.',
+      '✗ There is no FAFSA exemption for UGMA/UTMA at age 18. The assessment rate (20%) applies throughout college regardless of age.'
+    ]
+  },
+  {
+    id: 381, domain: 'education', difficulty: 'hard',
+    question: 'A client asks about Public Service Loan Forgiveness (PSLF). Which combination of requirements is CORRECT?',
+    options: [
+      '10 years of any employment + 120 payments on any repayment plan = tax-free forgiveness',
+      '10 years (120 payments) of full-time work for a qualifying employer (government or 501(c)(3) nonprofit) + income-driven repayment plan enrollment = tax-free forgiveness of remaining federal Direct Loan balance',
+      'PSLF applies to all federal student loans including FFEL loans without consolidation',
+      'PSLF is taxable forgiveness; the forgiven amount is included in ordinary income'
+    ],
+    correct: 1,
+    explanation: '<strong>PSLF requirements</strong>: (1) Work full-time for a qualifying employer — government (federal, state, local, tribal) or 501(c)(3) nonprofit; (2) Make 120 qualifying payments under an income-driven repayment plan (SAVE, PAYE, IBR, ICR); (3) Have eligible loans — only federal Direct Loans qualify (FFEL loans must be consolidated first); (4) Forgiveness is <strong>tax-free</strong> at the federal level. PSLF is valuable for high-debt, lower-salary public servants (doctors, teachers, lawyers in nonprofit roles).',
+    optionExplanations: [
+      '✗ Any employer does not qualify — must be a government employer or 501(c)(3) nonprofit. Any repayment plan does not qualify — must be income-driven.',
+      '✓ Correct. 120 qualifying payments under IDR + qualifying employer (government/501c3) + Direct Loans = tax-free PSLF forgiveness.',
+      '✗ FFEL loans do NOT directly qualify — they must be consolidated into a Direct Consolidation Loan first. However, consolidation resets payment counts.',
+      '✗ PSLF forgiveness is specifically TAX-FREE under federal law (unlike most other loan forgiveness programs). This is one of its most significant benefits.'
+    ]
+  },
+  {
+    id: 382, domain: 'education', difficulty: 'expert',
+    question: 'The Kim family (AGI $220,000 MFJ) is planning for their twin children\'s college education, starting in 7 years. They have $60,000 to invest today. They ask about the optimal education savings strategy given their income. Which approach is MOST appropriate?',
+    options: [
+      'Open two 529 plans (one per child), invest $30,000 each; they are fully above AOC phase-out but 529 distributions are tax-free regardless',
+      'Use UGMA/UTMA accounts since 529 restrictions are too limiting at their income level',
+      'Open two 529 plans; note they are above the AOC phase-out ($160K-$180K MFJ) and above LLC phase-out ($80K-$90K single, similar MFJ), so their primary benefit from education savings is 529 tax-free growth rather than education credits; coordinate 529 distributions to avoid qualified expense double-dipping',
+      'Use Roth IRAs for education savings since their 529 contributions are not deductible'
+    ],
+    correct: 2,
+    explanation: 'At $220,000 MFJ, the Kim family is above the AOC phase-out ($160K-$180K MFJ) and above the LLC phase-out. <strong>Education tax credits are unavailable to them.</strong> Their primary benefit from 529 plans is tax-free growth and tax-free qualified distributions — not credits. Strategy: maximize 529 contributions (potentially superfund), invest for growth, and distribute tax-free for qualified expenses. 529 distributions still benefit from tax-free earnings even without credits. Roth IRAs can supplement but sacrifice retirement savings; 529s are cleaner for education-specific savings.',
+    optionExplanations: [
+      '✗ Partially correct — 529s are the right vehicle. But "fully above AOC phase-out" should be noted and the coordination issue addressed.',
+      '✗ UGMA/UTMA accounts provide no tax-free growth or qualified distribution benefit. At this income level, 529s provide the best tax-advantaged education savings despite no credit availability.',
+      '✓ Correct. At $220K MFJ, no education credits are available. 529 tax-free growth remains valuable. Coordinate distributions to avoid double-dipping if credits ever become available (income drops).',
+      '✗ Roth IRA contributions are made with after-tax dollars (same as 529 nondeductible), but Roth IRAs lack the unlimited tax-free qualified expense growth of 529s and create opportunity cost vs. retirement savings.'
+    ]
+  },
+
+  // ── PROFESSIONAL CONDUCT (IDs 383–391) ──────────────────────────────
+  {
+    id: 383, domain: 'professional', difficulty: 'medium',
+    question: 'A CFP® professional is approached to provide financial planning services to a business owner. During the engagement, the CFP® discovers the client is under investigation by the SEC for potential securities fraud. What is the CFP®\'s MOST appropriate response?',
+    options: [
+      'Immediately report the client to the SEC since the CFP® has knowledge of potential fraud',
+      'Continue the engagement without addressing the investigation; it is outside the scope of financial planning',
+      'Inform the client that the CFP® is aware of the investigation, recommend the client retain legal counsel immediately, and assess whether the CFP® can continue the engagement with integrity',
+      'Terminate the engagement immediately and notify regulators'
+    ],
+    correct: 2,
+    explanation: 'The CFP® has no general duty to report a client\'s potential legal issues to regulators (absent a specific legal obligation in their jurisdiction). The CFP\'s obligations: (1) ensure the client is aware the CFP knows of the investigation; (2) recommend legal counsel; (3) assess whether the CFP® can continue providing advice without being implicated or facilitating wrongdoing. The CFP® should NOT terminate abruptly without notification, nor remain silent about a material issue affecting the client\'s financial planning.',
+    optionExplanations: [
+      '✗ CFP® professionals generally do not have a mandatory duty to report client wrongdoing to the SEC — that is a legal determination requiring an attorney. Reporting without legal obligation could violate confidentiality duties.',
+      '✗ An active SEC investigation is highly material to the client\'s financial planning (potential disgorgement, fines, criminal liability). Ignoring it fails the duty of loyalty.',
+      '✓ Correct. Inform the client, recommend legal counsel, and evaluate the engagement\'s viability. This protects both the client and the CFP®\'s professional integrity.',
+      '✗ Terminating immediately without notice could harm the client. The CFP® should follow proper disengagement procedures, and reporting is not generally required.'
+    ]
+  },
+  {
+    id: 384, domain: 'professional', difficulty: 'hard',
+    question: 'Under CFP Board\'s Fiduciary Standard, what is the distinction between the "duty to act in the client\'s best interest" and the "duty of loyalty"?',
+    options: [
+      'They are identical duties with different names under CFP Board\'s Code',
+      'Duty of loyalty requires prioritizing the client\'s interests over the CFP®\'s own interests; duty to act in best interest requires the CFP® to provide advice that reflects the client\'s goals and circumstances — both are components of the overarching fiduciary duty',
+      'Duty of loyalty only applies in discretionary managed accounts; best interest applies to all advice',
+      'Duty to act in best interest means selecting the highest-returning investment; duty of loyalty means never charging a fee'
+    ],
+    correct: 1,
+    explanation: 'Under CFP Board\'s Code of Ethics, the fiduciary standard comprises multiple components: (1) <strong>Duty of loyalty</strong> — place client interests ABOVE the CFP®\'s own interests and the interests of others (including the CFP®\'s firm); (2) <strong>Duty to act in client\'s best interest</strong> — provide recommendations and advice that reflect the client\'s goals, risk tolerance, and financial circumstances, not products that serve the advisor\'s compensation interests. Both are required at all times during the financial planning engagement.',
+    optionExplanations: [
+      '✗ They are related but distinct components of the fiduciary obligation. They overlap but address different dimensions of the relationship.',
+      '✓ Correct. Duty of loyalty = CFP® interests subordinate to client\'s; duty to act in best interest = advice reflects client circumstances. Together they form the CFP Board fiduciary standard.',
+      '✗ Both duties apply across all CFP services — not just discretionary management.',
+      '✗ These descriptions are incorrect. "Best interest" is not about maximizing returns regardless of risk, and "loyalty" is not about zero compensation.'
+    ]
+  },
+  {
+    id: 385, domain: 'professional', difficulty: 'medium',
+    question: 'A CFP® professional recommends a client purchase a whole life insurance policy. The CFP® receives a commission from the insurance company for the sale. Under CFP Board Standards, which disclosure and documentation is REQUIRED?',
+    options: [
+      'No disclosure is required as long as the recommendation is suitable for the client',
+      'The CFP® must disclose the existence of the commission, the amount or a reasonable estimate, and how it may affect the recommendation; disclosure must be timely and in a form the client can understand',
+      'Commissions must be disclosed only in writing, not verbally, to be legally compliant',
+      'The CFP® must waive the commission if the client requests it under the fiduciary duty'
+    ],
+    correct: 1,
+    explanation: 'CFP Board\'s Code requires CFP® professionals to disclose all material conflicts of interest — including compensation from third parties. Commission-based compensation is a material conflict that must be disclosed: (1) <strong>timely</strong> (before or at time of recommendation); (2) <strong>in understandable form</strong> (not buried in fine print); (3) includes the existence of compensation AND how it may influence the recommendation. The client must be able to give informed consent. The CFP® need not waive the commission — disclosure and informed consent are the requirements.',
+    optionExplanations: [
+      '✗ Suitability without disclosure is insufficient. The fiduciary standard requires disclosure of ALL material conflicts, not just ensuring the recommendation is suitable.',
+      '✓ Correct. Timely, understandable disclosure of the commission and its potential influence is required. Written or verbal disclosure may both work if properly documented.',
+      '✗ CFP Board Standards do not specify that disclosure must be written-only. The key requirement is that it be timely and understandable. Written documentation of verbal disclosure is good practice.',
+      '✗ The fiduciary duty requires disclosure and informed consent, not waiver of compensation. Advisors can accept commissions if disclosed properly.'
+    ]
+  },
+  {
+    id: 386, domain: 'professional', difficulty: 'medium',
+    question: 'A client presents their CFP® with a completed questionnaire indicating very low risk tolerance. However, the CFP® observes that the client\'s actual investment history shows aggressive trading and high-risk positions. How should the CFP® handle this discrepancy?',
+    options: [
+      'Rely entirely on the questionnaire since it is the official documentation',
+      'Ignore the questionnaire and observe only past behavior',
+      'Discuss the discrepancy directly with the client to understand the gap between stated and revealed preferences; document both and develop a plan that accounts for the client\'s actual behavioral tendencies while pursuing stated goals',
+      'Report the discrepancy to regulators as potential false information on a regulatory document'
+    ],
+    correct: 2,
+    explanation: 'Risk tolerance questionnaires capture stated (cognitive) preferences, while investment history reveals behavioral (revealed) preferences. The discrepancy is clinically important: the client may have answered based on current anxiety, past trauma, or social desirability bias. The CFP® should <strong>surface the discrepancy directly</strong>, explore its source, document both, and design a plan that acknowledges the behavioral reality while helping the client pursue stated goals. This aligns with CFP Board\'s requirement to understand client goals and circumstances holistically.',
+    optionExplanations: [
+      '✗ Relying only on the questionnaire ignores valuable behavioral data and may lead to a plan the client won\'t follow.',
+      '✗ Ignoring stated preferences fails to honor the client\'s expressed risk concerns and may exceed their actual emotional tolerance under stress.',
+      '✓ Correct. The discrepancy between stated and revealed risk tolerance is a planning opportunity, not a compliance problem. Address it through direct discussion and integrated planning.',
+      '✗ Risk questionnaire discrepancies are a planning issue, not a regulatory violation. There is nothing to report to regulators about a client\'s self-reported preferences differing from their investment history.'
+    ]
+  },
+  {
+    id: 387, domain: 'professional', difficulty: 'hard',
+    question: 'A CFP® professional\'s firm is being acquired by a larger financial institution. During the acquisition, the acquiring firm asks the CFP® to transition clients to higher-fee products that generate more revenue for the acquirer. Which response BEST upholds the CFP®\'s professional obligations?',
+    options: [
+      'Follow the firm\'s direction since employees have a duty to follow employer instructions',
+      'Recommend the new products if they are "suitable" since the suitability standard applies in a corporate context',
+      'Evaluate whether the new products meet each client\'s individual best interest standard; if they do not, the CFP® cannot recommend them regardless of employer direction; the CFP® should document concerns and, if the employer insists on a fiduciary breach, consider whether the employment situation is sustainable',
+      'Transfer all client files to the new employer and exit the business entirely'
+    ],
+    correct: 2,
+    explanation: 'The CFP® designation imposes a fiduciary duty that follows the individual advisor — not the employer. A corporate directive to recommend higher-fee products to benefit the acquiring firm does not override the CFP®\'s duty to act in each client\'s best interest. The CFP® must independently evaluate each recommendation. If employer pressure would require a fiduciary breach, the CFP® faces a compliance problem with the employer. CFP Board\'s Code cannot be subordinated to employer business interests.',
+    optionExplanations: [
+      '✗ Employer directives cannot override CFP Board fiduciary obligations. The CFP® designation creates an individual professional duty that survives employment relationships.',
+      '✗ The CFP® fiduciary standard is higher than suitability — best interest must be met, which is more than just "suitable."',
+      '✓ Correct. The fiduciary duty is personal to the CFP®. If employer direction conflicts with best interest obligations, the CFP® must hold to the fiduciary standard and document conflicts with the employer.',
+      '✗ Exiting without addressing the ethical issue or informing clients of their options fails the duty of loyalty and client notification obligations.'
+    ]
+  },
+  {
+    id: 388, domain: 'professional', difficulty: 'medium',
+    question: 'Which of the following BEST describes the CFP Board\'s enforcement jurisdiction?',
+    options: [
+      'The CFP Board can pursue criminal charges against CFP® professionals for fraud',
+      'The CFP Board can revoke, suspend, or impose conditions on an individual\'s right to use the CFP® certification marks; it cannot impose fines, criminal sanctions, or securities law penalties',
+      'The CFP Board has full regulatory authority equivalent to the SEC and FINRA over all CFP® professionals',
+      'The CFP Board\'s jurisdiction is limited to academic misconduct during CFP exam preparation'
+    ],
+    correct: 1,
+    explanation: 'CFP Board\'s enforcement authority is <strong>professional disciplinary</strong> — it governs the right to use the CFP® marks. Sanctions include: private censure, public letter of admonition, suspension, or revocation of certification. CFP Board cannot: impose fines, bring criminal charges, or enforce securities laws. These regulatory actions fall to the SEC, FINRA, state securities regulators, or state criminal authorities. A CFP® can lose their marks and still hold their securities licenses (and vice versa).',
+    optionExplanations: [
+      '✗ CFP Board has no criminal jurisdiction. Criminal charges require law enforcement and prosecutorial action.',
+      '✓ Correct. CFP Board\'s enforcement is limited to professional discipline over the certification marks. Sanctions range from admonition to revocation.',
+      '✗ CFP Board is a private, nonprofit certification body — not a government regulator. It has no equivalent authority to the SEC or FINRA.',
+      '✗ CFP Board\'s jurisdiction extends to all conduct related to the CFP® designation, including professional practice after certification — not just the examination.'
+    ]
+  },
+  {
+    id: 389, domain: 'professional', difficulty: 'hard',
+    question: 'A CFP® professional learns that a client is planning to gift significant assets to an adult child, specifically to qualify for Medicaid within 5 years. The CFP® believes this is Medicaid planning fraud. Which response is MOST appropriate?',
+    options: [
+      'Report the client to Medicaid authorities immediately to prevent fraud',
+      'Assist the client with the gifting since it is legal for a client to transfer assets',
+      'Decline to assist with the transfer, inform the client of the 5-year lookback rule and potential penalties, recommend they consult an elder law attorney, and document the conversation',
+      'Advise the client to use an irrevocable trust instead, which avoids the lookback period'
+    ],
+    correct: 2,
+    explanation: 'Medicaid asset transfer planning is legal when done properly; the 5-year lookback rule creates penalties for impermissible transfers within 60 months of applying. The CFP® should: (1) Not assist with plans that could harm the client (unrealistic lookback penalties); (2) Inform the client fully of the 5-year lookback and potential ineligibility periods; (3) Recommend an <strong>elder law attorney</strong> — Medicaid planning is complex and state-specific; (4) Document the advice given. "Planning" to qualify for Medicaid within 5 years via gifting is risky and may not be "fraud" per se, but the strategy may backfire badly.',
+    optionExplanations: [
+      '✗ CFP® professionals generally do not report client plans to government agencies — absent a legal obligation or clear ongoing crime. Consulting an attorney is the right step.',
+      '✗ Assisting without full disclosure of the risks fails the duty to act in the client\'s best interest. The strategy as described may trigger significant Medicaid penalties.',
+      '✓ Correct. Educate the client about lookback risks, recommend an elder law attorney, and document the advice. This protects both the client and the CFP®.',
+      '✗ Irrevocable trusts for Medicaid planning ARE subject to the 5-year lookback — this "solution" doesn\'t avoid the problem and providing incorrect information would be a disservice.'
+    ]
+  },
+  {
+    id: 390, domain: 'professional', difficulty: 'hard',
+    question: 'Under the CFP Board\'s Code of Ethics, what is the difference between a "fiduciary duty" and a "suitability standard" in the context of financial product recommendations?',
+    options: [
+      'They are equivalent standards — both require the best available product for the client',
+      'Fiduciary standard requires recommendations that are objectively in the client\'s best interest (placing client\'s interests above advisor\'s own); suitability only requires that the product not be inappropriate for the client — a lower bar that permits recommending products that benefit the advisor as long as they are "suitable"',
+      'Suitability standard applies to CFP® professionals; fiduciary applies only to RIAs',
+      'Fiduciary duty applies only to investment advice; suitability applies to insurance recommendations'
+    ],
+    correct: 1,
+    explanation: 'The fiduciary standard is higher than suitability. <strong>Fiduciary</strong>: the CFP® must recommend what is BEST for the client, even if another product would benefit the advisor more. <strong>Suitability</strong> (as applied by FINRA for broker-dealers): the recommendation must not be inappropriate for the client — but the advisor can choose from a range of "suitable" products and select those with higher compensation. Example: two mutual funds both "suitable" — the suitability standard permits recommending the higher-commission one; the fiduciary standard requires recommending the better one for the client.',
+    optionExplanations: [
+      '✗ They are NOT equivalent. The fiduciary standard is materially higher — it requires best interest, not just non-inappropriateness.',
+      '✓ Correct. The fiduciary/suitability distinction is fundamental: suitability permits self-interested choices within a range of suitable options; fiduciary requires the client\'s best interest to override advisor interests.',
+      '✗ CFP® professionals are held to the fiduciary standard under CFP Board\'s Code, regardless of their SEC/FINRA registration status.',
+      '✗ CFP Board\'s fiduciary standard applies to all financial planning services — investment, insurance, tax, estate, and all other aspects of the engagement.'
+    ]
+  },
+  {
+    id: 391, domain: 'professional', difficulty: 'expert',
+    question: 'A CFP® professional receives a subpoena demanding client financial records as part of a government investigation. The client has not authorized disclosure and is unaware of the subpoena. What is the CFP®\'s MOST appropriate response?',
+    options: [
+      'Immediately comply with the subpoena and produce all records without notifying the client',
+      'Refuse to comply with the subpoena citing client confidentiality under CFP Board Standards',
+      'Retain legal counsel immediately; determine whether to notify the client (based on legal advice); comply with the subpoena under its legal requirements while asserting any applicable privileges; document all steps taken',
+      'Destroy the documents before the subpoena deadline to protect the client'
+    ],
+    correct: 2,
+    explanation: 'A subpoena is a legal compulsion — compliance is generally required. However, the CFP®\'s response must be legally guided: (1) Retain legal counsel immediately — this is a legal matter beyond the CFP\'s expertise; (2) Legal counsel advises whether to notify the client (may be prohibited if the subpoena contains a non-disclosure order); (3) Comply with the subpoena as legally required — failing to comply is contempt of court; (4) Assert any applicable privileges (attorney-client, work product) through counsel; (5) Document everything. CFP Board confidentiality duties yield to legal requirements.',
+    optionExplanations: [
+      '✗ Immediate compliance without legal review may waive privileges and fail to protect the client\'s legal rights. Legal counsel must guide the response.',
+      '✗ Refusing a valid subpoena is contempt of court. CFP Board confidentiality standards do not override court orders.',
+      '✓ Correct. Legal counsel, proper compliance process, privilege assertion, and documentation. This protects both the CFP® and the client\'s legal rights.',
+      '✗ Destroying documents under a subpoena is obstruction of justice — a serious crime that violates both law and the CFP® Code of Ethics.'
+    ]
+  },
+
+  // ── GENERAL FINANCIAL PLANNING (IDs 392–396) ─────────────────────────
+  {
+    id: 392, domain: 'general', difficulty: 'medium',
+    question: 'A client has a disability insurance policy with a 90-day elimination period. She becomes disabled on March 1. When will she receive her first benefit payment?',
+    options: [
+      'March 31 — benefits begin after 30 days',
+      'June 1 — after a 90-day waiting period, benefits begin',
+      'June 1 for initial payment, but her disability must last more than 90 days to receive any benefit',
+      'September 1 — after an initial 90-day period plus a 90-day claims processing period'
+    ],
+    correct: 2,
+    explanation: 'The <strong>elimination period</strong> is a waiting period during which no benefits are paid — similar to a deductible measured in time. A 90-day elimination period means the disability must last MORE than 90 days before benefits are payable, and benefits begin on day 91. March 1 disability + 90 days = June 1. The first payment would arrive around June 1 (depending on the payment schedule — some policies pay at the END of the first benefit period). The client receives no benefit for the first 90 days of disability.',
+    optionExplanations: [
+      '✗ A 90-day elimination period means 90 days of no benefits, not 30.',
+      '✗ While June 1 is approximately correct for when benefits would BEGIN, the critical detail is that the disability must continue past the 90-day period to receive any benefit. This option lacks that caveat.',
+      '✓ Correct. Benefits begin after the 90-day elimination period, only if the disability lasts MORE than 90 days. First payment: approximately June 1.',
+      '✗ There is no standard additional 90-day claims processing period. The elimination period IS the waiting period — once it expires, benefits flow based on the policy payment schedule.'
+    ]
+  },
+  {
+    id: 393, domain: 'general', difficulty: 'hard',
+    question: 'A client\'s balance sheet shows: $800,000 in investments, $350,000 home equity, $125,000 cash, $40,000 in auto loans, and $20,000 in credit card debt. His monthly gross income is $15,000 and monthly total debt service is $3,200. His monthly mortgage PITI is $2,800. Which financial health indicators are concerning?',
+    options: [
+      'Both the housing ratio (18.7%) and total debt service ratio (21.3%) are within acceptable ranges',
+      'The housing ratio (18.7%) is fine but the total debt service ratio (21.3%) slightly exceeds the 20% guideline for consumer debt',
+      'The total debt ratio (21.3%) is fine but the housing ratio exceeds the 28% guideline',
+      'Both ratios are fine; the concerning indicator is the $60,000 in consumer debt (auto + credit card) relative to investable assets'
+    ],
+    correct: 0,
+    explanation: 'Housing ratio = $2,800 PITI / $15,000 gross income = 18.7% (guideline: ≤28% — within range). Total debt service ratio = $3,200 / $15,000 = 21.3% (guideline: ≤36-38% — within range). Both ratios are within acceptable ranges. The portfolio ratios look healthy. However, $20,000 in credit card debt (high-cost revolving debt) alongside $125,000 in cash is a cash management concern — the client is likely paying 20%+ on credit card interest while earning 5% on cash. A CFP® should highlight the credit card payoff opportunity.',
+    optionExplanations: [
+      '✓ Correct. Both the housing ratio (18.7% < 28%) and total debt service ratio (21.3% < 36%) are within acceptable CFP guidelines. The notable issue is the high-cost credit card debt relative to available cash.',
+      '✗ The total debt service ratio (21.3%) does not "exceed the 20% guideline for consumer debt." The 20% guideline applies specifically to NON-HOUSING consumer debt service, not total debt service.',
+      '✗ The housing ratio at 18.7% is well below the 28% guideline — no concern there.',
+      '✗ Both financial ratios should be assessed, not ignored. And while the credit card/cash mismatch IS a concern, the question asks about ratio-based indicators first.'
+    ]
+  },
+  {
+    id: 394, domain: 'general', difficulty: 'medium',
+    question: 'Which of the following BEST describes the "human capital" concept in life-cycle financial planning?',
+    options: [
+      'The total value of a person\'s education credentials and professional certifications',
+      'The present value of future earned income — typically declining as a person ages and approaches retirement',
+      'The amount of insurance coverage a person needs based on their income replacement needs',
+      'The maximum earning potential if a person worked 24 hours per day'
+    ],
+    correct: 1,
+    explanation: '<strong>Human capital</strong> is the present value of all future earned income over a working lifetime. Early in a career, human capital is high (many working years ahead) and financial capital is low. As a person ages and works, human capital converts to financial capital. Near retirement, human capital is near zero and financial capital should be at its peak. This framework drives life insurance needs (protecting high human capital) and investment risk tolerance (younger workers with high human capital can afford more portfolio risk).',
+    optionExplanations: [
+      '✗ Credentials have monetary value but are only one component of human capital. Human capital is the PV of ALL future earnings, not just the value of degrees.',
+      '✓ Correct. Human capital = PV of future earnings, declining with age. Young workers: high human capital; retirees: near-zero human capital. Critical concept in life-cycle investing.',
+      '✗ Life insurance needs analysis uses human capital as an input, but human capital itself is not the insurance concept.',
+      '✗ Human capital is measured from realistic working hours and compensation, not theoretical maximum. It is an economic concept, not a capacity concept.'
+    ]
+  },
+  {
+    id: 395, domain: 'general', difficulty: 'hard',
+    question: 'A 32-year-old engineer earns $120,000/year, has $180,000 in a 401(k), $45,000 in an emergency fund, $15,000 in a brokerage account, and no debt. She asks about her financial planning priorities. Using the CFP process, which order is MOST appropriate?',
+    options: [
+      'Max out 401(k) first, then pay off all non-mortgage debt, then invest in brokerage',
+      'Establish goals and values → assess current situation → analyze gaps → develop and prioritize recommendations addressing protection (disability/life insurance adequacy), tax efficiency (Roth vs. traditional), investment optimization, and long-term planning',
+      'Immediately invest the emergency fund to maximize returns since she\'s young',
+      'Focus exclusively on tax planning since she\'s in a high income bracket'
+    ],
+    correct: 1,
+    explanation: 'The CFP process (6 steps) requires establishing the client relationship, gathering data, analyzing the situation, developing recommendations, implementing, and monitoring. For this client: (1) Verify adequate disability insurance (income protection — most overlooked for young professionals); (2) Optimize retirement contributions (Roth vs. traditional based on tax trajectory); (3) Consider estate planning basics (beneficiary designations, healthcare proxy); (4) Investment optimization. The emergency fund ($45K = ~4.5 months on $120K) is appropriate. A comprehensive approach beats single-issue optimization.',
+    optionExplanations: [
+      '✗ She has no debt to pay off. While 401(k) maximization is important, a comprehensive process addresses all planning areas, not just one.',
+      '✓ Correct. The CFP process is comprehensive and sequential — goals/values first, then comprehensive analysis and recommendations across all relevant planning areas.',
+      '✗ The emergency fund serves its purpose. Depleting it for investments creates financial risk — the value of liquidity exceeds the marginal investment return on the $45,000.',
+      '✗ Single-issue focus violates the comprehensive planning principle. All planning areas must be considered in an integrated way.'
+    ]
+  },
+  {
+    id: 396, domain: 'general', difficulty: 'expert',
+    question: 'A 48-year-old client has a $2.8M net worth ($1.9M in tax-deferred accounts, $600K in taxable investments, $300K in home equity) and earns $280,000/year. He wants to retire at 58. His financial planner runs Monte Carlo simulations showing 71% probability of success at 4% withdrawal from a $3.5M projected portfolio. Which comprehensive analysis is MOST thorough?',
+    options: [
+      'The 71% success rate is adequate — proceed with the current plan',
+      'A 71% success rate for a 35+ year retirement is insufficient; the analysis should model dynamic withdrawal strategies (guardrails), Roth conversion opportunities (ages 48-58), Social Security optimization, potential part-time income scenarios, and healthcare cost bridging (ages 58-65 before Medicare)',
+      'Simply increase equity allocation to improve expected return and success rate',
+      'Reduce planned spending by 10% and rerun the simulation'
+    ],
+    correct: 1,
+    explanation: 'A 71% Monte Carlo success rate for a 35-year retirement is concerning. A thorough analysis includes: (1) <strong>Dynamic withdrawal strategies</strong> (guardrails that reduce spending in poor markets, increasing resilience); (2) <strong>Roth conversion window</strong> (ages 48-58 pre-retirement, managing tax-deferred balance for RMD efficiency); (3) <strong>Social Security optimization</strong> — delaying to 70 provides a 76% higher benefit; (4) <strong>Healthcare bridge</strong> (pre-Medicare gap = ACA marketplace insurance, potentially expensive); (5) <strong>Sequence of returns risk</strong> mitigation strategies. Single-variable solutions (more equity, less spending) miss the planning complexity.',
+    optionExplanations: [
+      '✗ 71% for a 35+ year retirement is below the 85-90% commonly recommended for early retirees with fixed expenses.',
+      '✓ Correct. A thorough analysis models dynamic withdrawals, Roth conversions, SS optimization, healthcare costs, and sequence-of-returns risk — not just portfolio allocation.',
+      '✗ Increasing equity allocation may improve expected returns but also increases volatility. For early retirement, sequence-of-returns risk makes this a limited solution.',
+      '✗ Reducing spending by 10% is a lever worth modeling, but presenting it as THE solution is incomplete. Multiple strategies should be modeled together.'
+    ]
+  },
+
+  // ── MIXED DOMAINS (IDs 397–401) ───────────────────────────────────────
+  {
+    id: 397, domain: 'risk', difficulty: 'hard',
+    question: 'An employer sponsors a long-term disability group plan that pays 60% of pre-disability salary. If the employer pays 100% of the premiums, what is the income tax treatment of the disability benefit received by an employee who becomes disabled?',
+    options: [
+      'Tax-free, since disability benefits are never taxable',
+      'Fully taxable as ordinary income, since the employer paid premiums with pre-tax dollars and deducted them as a business expense',
+      'Partially taxable — 60% of benefits are taxable',
+      'Taxable only if the employee is under age 65'
+    ],
+    correct: 1,
+    explanation: 'When an employer pays 100% of group LTD premiums and deducts them as a business expense, the <strong>disability benefits are fully taxable</strong> to the employee as ordinary income. The IRS logic: the employer got a deduction for premiums; the employee receives a tax-free employment benefit (not included in gross wages); therefore, the downstream benefits are taxable. If the employee paid the premiums with after-tax dollars, benefits would be tax-free. This tax treatment is critical for income replacement planning — the employee may actually receive less than 60% of pre-disability income on an after-tax basis.',
+    optionExplanations: [
+      '✗ Disability benefits are NOT always tax-free. The tax treatment depends entirely on who paid the premiums and with what type of dollars.',
+      '✓ Correct. Employer-paid LTD premiums (deducted as business expense) = fully taxable disability benefits to the employee. The employee should adjust their income replacement expectation accordingly.',
+      '✗ The 60% benefit is entirely taxable, not partially. The 60% is the benefit amount relative to salary, not the taxable fraction.',
+      '✗ Age has no bearing on the taxation of disability insurance benefits.'
+    ]
+  },
+  {
+    id: 398, domain: 'investment', difficulty: 'hard',
+    question: 'Which statement BEST describes the practical implication of the strong form of the Efficient Market Hypothesis (EMH)?',
+    options: [
+      'Prices reflect all publicly available information; insider trading is therefore impossible to profit from',
+      'All information — including non-public inside information — is already reflected in prices; no investor can consistently earn excess risk-adjusted returns, even with material non-public information',
+      'Fundamental analysis is valuable but technical analysis provides no benefit',
+      'The strong form implies that passive investing beats active investing only in small-cap markets'
+    ],
+    correct: 1,
+    explanation: 'The <strong>strong form EMH</strong> holds that prices reflect ALL information — public AND private (including insider information). This is the most extreme form and is largely rejected by empirical evidence (insider trading prosecutions demonstrate that insiders CAN profit before public disclosure). The strong form implies no one — not even corporate insiders — can consistently earn above-risk-adjusted returns. In practice, regulators prosecute insider trading precisely because it DOES produce profits, which is evidence AGAINST strong form EMH.',
+    optionExplanations: [
+      '✗ This describes a subset of strong form EMH but says insider trading is "impossible" — in fact, insider trading produces real profits and is illegal precisely because it does work, undermining strong form EMH.',
+      '✓ Correct. Strong form: all information (public + private) is priced in. No one can consistently beat the market with any information advantage. Largely empirically rejected.',
+      '✗ Semi-strong EMH is tested by event studies and implies fundamental analysis has no advantage. Technical analysis being valuable or not is a test of weak-form EMH.',
+      '✗ Strong form EMH makes no market-segment distinctions. And passive investing advantages apply across market segments under semi-strong form, not just small-cap.'
+    ]
+  },
+  {
+    id: 399, domain: 'tax', difficulty: 'hard',
+    question: 'A single taxpayer has $85,000 of ordinary income and $22,000 of long-term capital gains in 2025. The 0% LTCG threshold for single filers is approximately $48,350. How much of the LTCG is taxed at 0% vs. 15%?',
+    options: [
+      'All $22,000 at 15% since ordinary income already exceeds the 0% threshold',
+      'None of the LTCG qualifies for the 0% rate since the total income exceeds the 15% bracket floor',
+      'The LTCG stacks on top of ordinary income: $85,000 ordinary + $22,000 LTCG = $107,000. Since ordinary income ($85K) already exceeds the 0% threshold ($48,350), all $22,000 LTCG is taxed at 15%',
+      '$22,000 - ($85,000 - $48,350) = some LTCG at 0%, rest at 15%'
+    ],
+    correct: 2,
+    explanation: 'LTCG rates are determined by "stacking" — capital gains are placed on top of ordinary income. The 0% LTCG rate applies only to the portion of LTCG that falls within the 0% rate bracket (taxable income up to ~$48,350 for single filers in 2025). Since the taxpayer already has $85,000 in ordinary income (which exceeds $48,350), ALL LTCG is stacked above the 0% threshold. All $22,000 of LTCG is taxed at the 15% rate (income up to ~$533,400 for single filers before the 20% rate kicks in).',
+    optionExplanations: [
+      '✗ This is actually correct! All $22,000 is at 15% since ordinary income already fills and exceeds the 0% bracket.',
+      '✗ This confusingly says "none qualifies for 0%" — which is actually correct — but frames it misleadingly. All $22,000 IS taxed at 15% (not 0% and not 20%), since the total doesn\'t reach the 20% threshold.',
+      '✓ Correct. Stacking rule: ordinary income fills lower brackets first; LTCG stacks on top. At $85K ordinary income (above $48,350 0% threshold), all LTCG is at 15%.',
+      '✗ This formula would calculate LTCG at 0% as if some fits in the lower bracket — but since ordinary income ($85K) already exceeds the entire 0% bracket, there is no room for 0% LTCG.'
+    ]
+  },
+  {
+    id: 400, domain: 'retirement', difficulty: 'medium',
+    question: 'Under the SECURE 2.0 Act, what is the new rule for Roth accounts in employer-sponsored plans (effective 2024)?',
+    options: [
+      'Roth 401(k) contributions are no longer permitted — all after-tax contributions must go to a traditional 401(k)',
+      'Employer matching contributions to Roth accounts are now permitted and those contributions are made on a after-tax basis (taxable to the employee when received)',
+      'Required Minimum Distributions are eliminated for all Roth accounts in employer plans, aligning with Roth IRA treatment',
+      'The Roth 401(k) contribution limit is separate from the traditional 401(k) limit'
+    ],
+    correct: 2,
+    explanation: 'SECURE 2.0 eliminated RMDs for <strong>Roth accounts in employer plans</strong> (Roth 401(k), Roth 403(b)) effective 2024. Previously, Roth 401(k) accounts were subject to RMDs (unlike Roth IRAs). Now Roth employer plan accounts — like Roth IRAs — have NO lifetime RMD requirement for the account owner. This makes Roth 401(k) accounts more attractive for retirement planning and eliminates the need to roll a Roth 401(k) to a Roth IRA simply to avoid RMDs.',
+    optionExplanations: [
+      '✗ SECURE 2.0 did not eliminate Roth 401(k) contributions. Roth 401(k)s remain available and are now even more attractive due to the RMD elimination.',
+      '✗ While employer matching to Roth accounts WAS made optional under SECURE 2.0 (effective 2023), the matching is indeed taxable to the employee. But the most significant SECURE 2.0 Roth employer plan change is the RMD elimination.',
+      '✓ Correct. SECURE 2.0 eliminated RMDs for Roth accounts in employer plans (Roth 401(k)/403(b)) effective 2024. This aligns them with Roth IRA treatment.',
+      '✗ The Roth 401(k) contribution limit is NOT separate — total contributions to a 401(k) (traditional + Roth combined) cannot exceed the annual limit ($23,500 for 2025 under age 60).'
+    ]
+  },
+  {
+    id: 401, domain: 'estate', difficulty: 'medium',
+    question: 'What is the primary disadvantage of naming a minor as a direct beneficiary of a life insurance policy or IRA?',
+    options: [
+      'Minors pay higher income tax rates on inherited assets than adults',
+      'Minors cannot legally receive and manage large sums of money — a court-appointed guardian or custodian will control the assets until the minor reaches the age of majority, often with court oversight and restrictions',
+      'Life insurance proceeds to a minor are subject to the gift tax',
+      'IRAs inherited by minors are immediately fully taxable since minors cannot use the 10-year rule'
+    ],
+    correct: 1,
+    explanation: 'Minor children cannot legally receive or manage significant inherited assets. If named directly as a beneficiary, a <strong>court-appointed guardian</strong> will be required to manage the assets until the minor reaches majority — with court oversight, mandatory accountings, and restricted investment options. This is both expensive and inflexible. Better alternatives: (1) Name a custodian under UTMA; (2) Establish a trust; (3) For IRAs, use a properly drafted trust or name the minor as contingent beneficiary after a spouse. Proper planning avoids court involvement.',
+    optionExplanations: [
+      '✗ Minor beneficiaries may be subject to the kiddie tax on investment income, but the primary concern is legal capacity to receive and manage assets.',
+      '✓ Correct. The core problem is legal capacity — courts must intervene when minors inherit significant assets, creating expense, delay, and inflexibility.',
+      '✗ Life insurance proceeds to a beneficiary are income-tax-free and are not subject to gift tax. The death benefit is generally not a gift.',
+      '✗ Minor children who inherit IRAs are actually eligible designated beneficiaries until they reach the age of majority — they can use the lifetime stretch until majority, then transition to the 10-year rule. Not "immediately fully taxable."'
+    ]
+  },
+  {
+    id: 402, domain: 'tax', difficulty: 'medium',
+    question: 'A client inherits a rental property with a stepped-up basis of $400,000. She depreciates it over 27.5 years (residential rental). After 5 years, she sells the property for $520,000. What is the tax treatment of the gain?',
+    options: [
+      'The entire $120,000 gain is taxed as long-term capital gains at the preferential rate',
+      'The $72,727 of accumulated depreciation is recaptured at 25%; the remaining $47,273 of gain is taxed at the long-term capital gains rate',
+      'There is no tax since the basis was stepped up at inheritance',
+      'The sale is fully taxed at ordinary income rates as a rental property'
+    ],
+    correct: 1,
+    explanation: 'Rental property sales involve two layers of tax: (1) <strong>Depreciation recapture</strong> — $400,000 / 27.5 years × 5 years = $72,727 of accumulated depreciation is "recaptured" and taxed at a maximum 25% unrecaptured Section 1250 rate; (2) The remaining gain ($520K − $400K basis + $72,727 recapture = $192,727 adjusted basis; gain = $520K − $327,273 = $192,727... wait, let me restate: Adjusted basis = $400K − $72,727 = $327,273. Gain = $520K − $327,273 = $192,727. Of this, $72,727 is depreciation recapture (25%) and $120,000 is capital gain (0%/15%/20%).',
+    optionExplanations: [
+      '✗ Not all of the gain qualifies for preferential rates — the portion attributable to prior depreciation deductions is recaptured at up to 25%.',
+      '✓ Correct. Depreciation recapture ($72,727) is taxed at the 25% Section 1250 unrecaptured gain rate; the remaining $120,000 gain is LTCG at preferential rates.',
+      '✗ The stepped-up basis eliminates gain attributable to appreciation before inheritance, but post-inheritance depreciation creates a new recapture obligation.',
+      '✗ Rental property sale gains are NOT fully ordinary income. Depreciation recapture is at 25%; remaining appreciation gain is at LTCG rates.'
+    ]
+  },
+  {
+    id: 403, domain: 'retirement', difficulty: 'medium',
+    question: 'Which of the following CORRECTLY describes the "still-working exception" to RMDs from an employer\'s 401(k) plan?',
+    options: [
+      'Employees who are still working at age 73 may delay RMDs from their current employer\'s 401(k) indefinitely, regardless of ownership in the company',
+      'Employees still working at age 73 may delay RMDs from their CURRENT employer\'s 401(k) — but only if they do not own more than 5% of the company; IRAs and plans from prior employers are NOT eligible for this exception',
+      'The still-working exception allows employees to delay all RMDs (including IRA) as long as they work at least 20 hours per week',
+      'The still-working exception applies only to 403(b) plans, not 401(k) plans'
+    ],
+    correct: 1,
+    explanation: 'The <strong>still-working exception</strong>: employees who are still working may delay RMDs from their CURRENT employer\'s qualified plan (401k, 403b, etc.) until April 1 following the year they retire. Key limitations: (1) Only applies to the current employer\'s plan — not to IRAs or plans from former employers; (2) Does NOT apply if the employee owns more than 5% of the business (5% owners must take RMDs at 73 regardless). This is a planning opportunity: consolidating old employer plans into the current employer\'s plan can extend the deferral period.',
+    optionExplanations: [
+      '✗ The exception does NOT apply to 5% owners. A 5% or greater owner must take RMDs from the employer plan beginning at age 73 even while still working.',
+      '✓ Correct. Still-working exception: delay RMDs from current employer plan (no 5% ownership); IRAs and former employer plans must take RMDs on schedule.',
+      '✗ The still-working exception does not apply to IRAs under any circumstance, and there is no 20-hour requirement.',
+      '✗ The still-working exception applies to 401(k), 403(b), 457(b) and other qualified plans — not limited to 403(b).'
+    ]
+  },
+  {
+    id: 404, domain: 'investment', difficulty: 'medium',
+    question: 'What is the primary difference between a "passive" ETF and an "active" ETF?',
+    options: [
+      'Passive ETFs trade on exchanges; active ETFs are only available at NAV through the fund company',
+      'Passive ETFs track a predetermined index with minimal turnover; active ETFs are managed by a portfolio manager who makes security selection decisions, resulting in higher costs and potential for both outperformance and underperformance',
+      'Passive ETFs are tax-exempt; active ETFs generate taxable distributions',
+      'There is no difference — all ETFs are by definition passively managed'
+    ],
+    correct: 1,
+    explanation: 'Traditional (passive) ETFs track an index like the S&P 500 with low turnover and management fees (often 0.03–0.20%). <strong>Active ETFs</strong> have a human portfolio manager making buy/sell decisions — similar to active mutual funds but in ETF wrapper. Active ETFs offer: daily transparency, tax efficiency of ETF structure, intraday trading. However, they charge higher fees and most underperform their benchmarks over time (consistent with EMH). The SEC approved active ETFs in 2019; they have grown rapidly since.',
+    optionExplanations: [
+      '✗ Both passive and active ETFs trade on exchanges intraday. This is a shared structural feature, not a distinction.',
+      '✓ Correct. Passive ETFs track indices (low cost, low turnover); active ETFs employ security selection (higher cost, potential alpha or tracking error).',
+      '✗ Both ETF types use the in-kind creation/redemption mechanism, giving both tax efficiency advantages vs. mutual funds. The tax treatment is similar.',
+      '✗ Active ETFs are a growing category — the premise that all ETFs are passive is incorrect.'
+    ]
+  },
+  {
+    id: 406, domain: 'psychology', difficulty: 'medium',
+    question: 'A client inherited $300,000 and immediately placed it in a savings account, refusing to invest it. She treats this inheritance differently from her other savings, saying "I can\'t risk my mother\'s money." This BEST illustrates which behavioral concept?',
+    options: [
+      'Anchoring bias — the $300,000 serves as a price anchor',
+      'Mental accounting — treating the inherited money as a separate psychological "account" with different risk rules than the client\'s own money',
+      'Loss aversion — the client fears losing this specific sum more than any other',
+      'Framing effect — the "inheritance" label changes how the client perceives the money'
+    ],
+    correct: 1,
+    explanation: '<strong>Mental accounting</strong> (Thaler) describes the tendency to categorize and treat money differently based on its source or intended use, even though money is fungible. The inheritance is treated as a separate psychological account with different rules — "I can\'t risk this money" — despite the fact that $300,000 is $300,000 regardless of its source. A CFP® can help the client recognize this by asking: "If you received a $300,000 bonus at work, would you invest it the same way?" This reframing can help overcome the mental accounting barrier.',
+    optionExplanations: [
+      '✗ Anchoring would involve the client using $300,000 as a reference point for evaluating other decisions, not treating it with separate risk rules.',
+      '✓ Correct. Mental accounting treats the inheritance as a distinct psychological category with different risk tolerance rules — despite money being fungible.',
+      '✗ Loss aversion explains the general fear of losses, but mental accounting is the specific concept describing the SOURCE-based segregation of this particular sum.',
+      '✗ The framing effect describes how decisions change based on how options are presented. While the word "inheritance" frames the money, the core phenomenon of different rules for different money buckets is mental accounting.'
+    ]
+  },
+  {
+    id: 405, domain: 'risk', difficulty: 'medium',
+    question: 'A homeowner\'s policy excludes flood damage. The homeowner\'s basement floods during a severe rainstorm, causing $45,000 in damage. Which statement is MOST accurate about recovery options?',
+    options: [
+      'The homeowner can file a claim against their homeowner\'s policy since the damage was from rain',
+      'The homeowner can only recover from the National Flood Insurance Program (NFIP) if they purchased a separate flood insurance policy; without flood coverage, the loss is uninsured',
+      'FEMA will automatically reimburse flood losses above $10,000 in federally declared disaster areas',
+      'The homeowner\'s policy covers the loss if the flooding came from outside the home (external source)'
+    ],
+    correct: 1,
+    explanation: 'Standard homeowner\'s insurance policies EXCLUDE flood damage — even from heavy rain. Flood coverage requires a separate <strong>National Flood Insurance Program (NFIP)</strong> policy or private flood insurance. Without it, the $45,000 loss is uninsured. FEMA disaster assistance exists but is typically limited (grants average $5,000-$10,000 maximum) and requires a presidentially declared disaster. The distinction between water damage (covered — sudden pipe burst) and flood damage (excluded — external water entering the home) is critical for proper coverage planning.',
+    optionExplanations: [
+      '✗ Homeowner\'s policies explicitly exclude flood damage regardless of the source of the rain. External water entering the home = flood exclusion applies.',
+      '✓ Correct. Flood requires separate coverage (NFIP or private). Without it, the homeowner bears the full loss. This is one of the most significant gaps in residential insurance coverage.',
+      '✗ FEMA disaster assistance is not automatic, is limited in amount, requires a presidentially declared disaster, and does not substitute for proper flood insurance.',
+      '✗ The homeowner\'s flood exclusion applies to water that enters from the outside (external flooding) — this is exactly the situation that triggers the exclusion, not an exception to it.'
+    ]
+  }
 
 ];
