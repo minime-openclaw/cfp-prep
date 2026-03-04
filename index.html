@@ -71,7 +71,7 @@
       .nav-brand { font-size: 14px; padding: 10px 14px 6px; }
       .nav-tabs { gap: 2px; padding: 0 10px 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
       .nav-tabs::-webkit-scrollbar { display: none; }
-      .nav-tab { padding: 6px 12px; font-size: 12px; white-space: nowrap; flex: 1; text-align: center; }
+      .nav-tab { padding: 6px 10px; font-size: 12px; white-space: nowrap; flex: 0 0 auto; text-align: center; }
       .nav-countdown { position: absolute; top: 10px; right: 14px; font-size: 11px; padding: 4px 8px; }
       nav { position: relative; }
 
@@ -395,7 +395,7 @@
     <button class="nav-tab" onclick="showPage('practice')">Practice</button>
     <button class="nav-tab" onclick="showPage('exam')">📝 Exam</button>
     <button class="nav-tab" onclick="showPage('cases')">📚 Cases</button>
-    <button class="nav-tab" onclick="showPage('tips')">Key Concepts</button>
+    <button class="nav-tab" onclick="showPage('tips')">Concepts</button>
     <button class="nav-tab" onclick="showPage('settings')">Settings</button>
     <button class="nav-tab" onclick="showPage('profile')">👤 Profile</button>
   </div>
@@ -641,6 +641,7 @@
 
 </main>
 
+<script src="questions.js"></script>
 <script>
 const DOMAINS = [
   { id: 'professional', name: 'Professional Conduct & Regulation',   weight: 7,  color: '#a78bfa' },
