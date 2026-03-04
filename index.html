@@ -593,6 +593,22 @@
         <input type="date" id="exam-date-input" onchange="saveExamDate(this.value)">
       </div>
       <div class="settings-row">
+        <div><div class="settings-label">Daily Question Goal</div><div class="settings-sub">Questions to answer per day. "Auto" scales with days to exam.</div></div>
+        <select id="daily-goal-select" onchange="saveDailyGoal(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:14px;color:var(--text);cursor:pointer">
+          <option value="">Auto</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="50">50</option>
+          <option value="75">75</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="settings-row">
         <div><div class="settings-label">Reset All Progress</div><div class="settings-sub">Clears all answers and resets domain progress</div></div>
         <div id="reset-wrap">
           <button class="btn-danger" onclick="resetStep1()">Reset Progress</button>
@@ -880,7 +896,7 @@ const TIPS = [
 ];
 
 // ── STATE ────────────────────────────────────────────────────
-let state = { answers: {}, qStats: {}, examDate: null, streak: 0, lastStudyDate: null, smartPractice: true };
+let state = { answers: {}, qStats: {}, examDate: null, streak: 0, lastStudyDate: null, smartPractice: true, dailyGoal: null };
 
 function loadState() {
   try { const s = localStorage.getItem('cfp-v2'); if (s) state = JSON.parse(s); } catch(e) {}
@@ -911,6 +927,7 @@ function resetConfirm() {
   }, 2000);
 }
 function saveExamDate(v) { state.examDate = v; saveState(); updateCountdown(); }
+function saveDailyGoal(v) { state.dailyGoal = v ? parseInt(v) : null; saveState(); updateDashboard(); }
 
 // ── COUNTDOWN ────────────────────────────────────────────────
 function updateCountdown() {
@@ -946,10 +963,13 @@ function updateDashboard() {
   const correct = Object.values(state.answers).filter(a => a.correct).length;
   const todayStr = new Date().toDateString();
   const todayCount = Object.values(state.answers).filter(a => new Date(a.timestamp).toDateString() === todayStr).length;
-  const goalPct = Math.min(100, Math.round(todayCount/100*100));
+  const examDate0 = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-21T00:00:00');
+  const daysLeft0 = Math.max(0, Math.floor((examDate0 - new Date()) / 86400000));
+  const autoGoal = daysLeft0 > 30 ? 15 : daysLeft0 > 14 ? 20 : daysLeft0 > 7 ? 25 : 35;
+  const dailyGoal = state.dailyGoal || autoGoal;
   const todayEl = document.getElementById('stat-today');
-  todayEl.textContent = todayCount >= 100 ? '✅ 100' : `${todayCount}/100`;
-  todayEl.style.color = todayCount >= 100 ? 'var(--green)' : todayCount >= 50 ? 'var(--gold)' : 'var(--gold)';
+  todayEl.textContent = todayCount >= dailyGoal ? `✅ ${dailyGoal}` : `${todayCount}/${dailyGoal}`;
+  todayEl.style.color = todayCount >= dailyGoal ? 'var(--green)' : todayCount >= dailyGoal * 0.5 ? 'var(--gold)' : 'var(--gold)';
   document.getElementById('stat-answered').textContent = total;
   document.getElementById('stat-accuracy').textContent = total ? Math.round(correct/total*100)+'%' : '—';
   document.getElementById('stat-streak').textContent = `🔥 ${state.streak||0}`;
@@ -1000,8 +1020,9 @@ function renderStudyPlan(stats) {
   const examDate = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-21T00:00:00');
   const daysLeft = Math.max(0, Math.floor((examDate - new Date()) / 86400000));
 
-  // Daily question target based on urgency
-  const dailyTarget = daysLeft > 30 ? 15 : daysLeft > 14 ? 20 : daysLeft > 7 ? 25 : 35;
+  // Daily question target — user override or auto-scale by urgency
+  const autoTarget = daysLeft > 30 ? 15 : daysLeft > 14 ? 20 : daysLeft > 7 ? 25 : 35;
+  const dailyTarget = state.dailyGoal || autoTarget;
 
   // Today's progress
   const todayStr = new Date().toDateString();
@@ -2293,6 +2314,7 @@ function init() {
   updateCountdown();
   setInterval(updateCountdown, 60000);
   document.getElementById('exam-date-input').value = state.examDate || '2026-03-21';
+  document.getElementById('daily-goal-select').value = state.dailyGoal ? String(state.dailyGoal) : '';
   updateDashboard();
   initPractice();
   renderTips();
