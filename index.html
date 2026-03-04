@@ -939,8 +939,9 @@ function updateCountdown() {
   const hrs = Math.floor((diff % 86400000) / 3600000);
   el.innerHTML = `Exam in <span>${days}d ${hrs}h</span>`;
   const sub = document.getElementById('dash-subtitle');
-  if (sub) sub.textContent = days <= 7 ? `⚠️ ${days} days — full review mode. 30+ questions/day.`
-    : days <= 21 ? `${days} days to exam — hit weak domains hard. 15–20 questions/day.`
+  if (sub) sub.textContent = days <= 7 ? `🔥 ${days} days — full send. 100 questions/day.`
+    : days <= 14 ? `⚠️ ${days} days — ramp it up. 50 questions/day.`
+    : days <= 30 ? `${days} days to exam — build momentum. 25 questions/day.`
     : `${days} days until your CFP exam. Consistent reps win. Let's go.`;
 }
 
@@ -965,7 +966,7 @@ function updateDashboard() {
   const todayCount = Object.values(state.answers).filter(a => new Date(a.timestamp).toDateString() === todayStr).length;
   const examDate0 = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-21T00:00:00');
   const daysLeft0 = Math.max(0, Math.floor((examDate0 - new Date()) / 86400000));
-  const autoGoal = daysLeft0 > 30 ? 15 : daysLeft0 > 14 ? 20 : daysLeft0 > 7 ? 25 : 35;
+  const autoGoal = daysLeft0 > 30 ? 15 : daysLeft0 > 14 ? 25 : daysLeft0 > 7 ? 50 : 100;
   const dailyGoal = state.dailyGoal || autoGoal;
   const todayEl = document.getElementById('stat-today');
   todayEl.textContent = todayCount >= dailyGoal ? `✅ ${dailyGoal}` : `${todayCount}/${dailyGoal}`;
@@ -1021,7 +1022,7 @@ function renderStudyPlan(stats) {
   const daysLeft = Math.max(0, Math.floor((examDate - new Date()) / 86400000));
 
   // Daily question target — user override or auto-scale by urgency
-  const autoTarget = daysLeft > 30 ? 15 : daysLeft > 14 ? 20 : daysLeft > 7 ? 25 : 35;
+  const autoTarget = daysLeft > 30 ? 15 : daysLeft > 14 ? 25 : daysLeft > 7 ? 50 : 100;
   const dailyTarget = state.dailyGoal || autoTarget;
 
   // Today's progress
