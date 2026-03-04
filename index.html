@@ -996,7 +996,7 @@ function updateDashboard() {
         <div style="font-size:13px;font-weight:700;color:${d.pct<60?'var(--red)':d.pct<75?'var(--gold)':'var(--green)'}">${d.pct}%</div>
       </div>`).join('');
 
-  renderStudyPlan(stats);
+  try { renderStudyPlan(stats); } catch(e) { console.error('renderStudyPlan failed', e); }
 }
 
 // ── DAILY STUDY PLANNER ───────────────────────────────────────
@@ -1627,11 +1627,11 @@ function showPage(id) {
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => { if (t.getAttribute('onclick')?.includes(`'${id}'`)) t.classList.add('active'); });
-  if (id==='dashboard') updateDashboard();
-  if (id==='profile') updateProfilePage();
-  if (id==='exam' && (!exam || exam.finished)) initExamSetup();
-  if (id==='report') renderReport();
-  if (id==='cards') initCards();
+  if (id==='dashboard') try { updateDashboard(); } catch(e) { console.error('updateDashboard',e); }
+  if (id==='profile') try { updateProfilePage(); } catch(e) {}
+  if (id==='exam' && (!exam || exam.finished)) try { initExamSetup(); } catch(e) {}
+  if (id==='report') try { renderReport(); } catch(e) { console.error('renderReport',e); }
+  if (id==='cards') try { initCards(); } catch(e) { console.error('initCards',e); }
 }
 
 // ── PROFILE PAGE ──────────────────────────────────────────────
@@ -2331,16 +2331,19 @@ function resetExam() {
 }
 
 function init() {
-  loadState();
-  updateSmartBadge();
-  updateTimerBadge();
-  updateCountdown();
-  setInterval(updateCountdown, 60000);
-  document.getElementById('exam-date-input').value = state.examDate || '2026-03-21';
-  document.getElementById('daily-goal-select').value = state.dailyGoal ? String(state.dailyGoal) : '';
-  updateDashboard();
-  initPractice();
-  renderTips();
+  try { loadState(); } catch(e) { console.error('loadState failed', e); }
+  try { updateSmartBadge(); } catch(e) {}
+  try { updateTimerBadge(); } catch(e) {}
+  try { updateCountdown(); setInterval(updateCountdown, 60000); } catch(e) {}
+  try {
+    const dateEl = document.getElementById('exam-date-input');
+    if (dateEl) dateEl.value = state.examDate || '2026-03-21';
+    const goalEl = document.getElementById('daily-goal-select');
+    if (goalEl) goalEl.value = state.dailyGoal ? String(state.dailyGoal) : '';
+  } catch(e) { console.error('Settings init failed', e); }
+  try { updateDashboard(); } catch(e) { console.error('updateDashboard failed', e); }
+  try { initPractice(); } catch(e) { console.error('initPractice failed', e); }
+  try { renderTips(); } catch(e) { console.error('renderTips failed', e); }
 }
 init();
 
