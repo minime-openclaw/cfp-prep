@@ -874,6 +874,12 @@ const DOMAINS = [
 
 // optionExplanations: 4 entries, one per answer choice (A/B/C/D), explaining why right or wrong
 // QUESTIONS loaded from questions.js (see <script src="questions.js">)
+// Runtime safety: strip any undefined/null slots (guards against stray commas in source)
+if (typeof QUESTIONS !== 'undefined') {
+  for (var _qi = QUESTIONS.length - 1; _qi >= 0; _qi--) {
+    if (QUESTIONS[_qi] === undefined || QUESTIONS[_qi] === null) { QUESTIONS.splice(_qi, 1); }
+  }
+}
 
 // ── KEY CONCEPTS ─────────────────────────────────────────────
 const TIPS = [
