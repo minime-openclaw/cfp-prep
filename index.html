@@ -1241,9 +1241,12 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ── TIMED PRACTICE ────────────────────────────────────────────
-const TIMER_SECONDS = 127; // 2:07 per question (180 min / 85 Qs ≈ 2.12 min)
+// Per-difficulty times weighted to average 2:07 across the question bank (65e/152m/106h/39x = 361 Qs)
+// Easy:80s  Medium:110s  Hard:150s  Expert:210s  → weighted avg ≈ 127s (2:07)
+const TIMER_BY_DIFF = { easy: 80, medium: 110, hard: 150, expert: 210 };
+function getTimerSeconds(q) { return TIMER_BY_DIFF[q.difficulty] || 127; }
 let qTimerInterval = null;
-let qTimerRemaining = TIMER_SECONDS;
+let qTimerRemaining = 127;
 let _timerCurrentQ = null;
 
 function updateTimerBadge() {
@@ -1267,16 +1270,18 @@ function startQuestionTimer(q) {
   if (!state.timedPractice) return;
   const secEl = document.getElementById('q-timer-section');
   if (secEl) secEl.style.display = '';
-  qTimerRemaining = TIMER_SECONDS;
+  const totalSecs = getTimerSeconds(q);
+  qTimerRemaining = totalSecs;
   const bar = document.getElementById('q-timer-bar');
   const txt = document.getElementById('q-timer-text');
   function tick() {
-    const pct = (qTimerRemaining / TIMER_SECONDS) * 100;
-    if (bar) { bar.style.width = pct + '%'; bar.className = 'q-timer-bar' + (qTimerRemaining <= 20 ? ' urgent' : ''); }
+    const pct = (qTimerRemaining / totalSecs) * 100;
+    const urgent = qTimerRemaining <= Math.round(totalSecs * 0.2);
+    if (bar) { bar.style.width = pct + '%'; bar.className = 'q-timer-bar' + (urgent ? ' urgent' : ''); }
     if (txt) {
       const m = Math.floor(qTimerRemaining / 60), s = qTimerRemaining % 60;
       txt.textContent = m + ':' + String(s).padStart(2, '0');
-      txt.className = 'q-timer-text' + (qTimerRemaining <= 20 ? ' urgent' : '');
+      txt.className = 'q-timer-text' + (urgent ? ' urgent' : '');
     }
     if (qTimerRemaining <= 0) {
       stopQuestionTimer();
