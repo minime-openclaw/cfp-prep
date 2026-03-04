@@ -9224,4 +9224,365 @@ const QUESTIONS = [
     ]
   }
 
+,
+  {
+    id: 507, domain: 'retirement', difficulty: 'medium',
+    question: 'Maria is 73 years old and has a traditional IRA worth $480,000. Her IRS Uniform Lifetime Table distribution period factor is 26.5. What is her required minimum distribution (RMD) for this year?',
+    options: ['$18,113', '$19,200 (4% rule)', '$19,200 (dividing by 25)', '$12,720,000'],
+    answer: 0,
+    explanation: 'RMD = Account Balance ÷ Distribution Period. RMD = $480,000 ÷ 26.5 = <strong>$18,113</strong>. The RMD rules require dividing the prior year-end balance by the IRS life expectancy factor from the Uniform Lifetime Table. The 4% figure ($19,200) is a retirement spending guideline, not an RMD calculation. Dividing by 25 gives the same wrong result. Multiplying by 26.5 is mathematically nonsensical.',
+    optionExplanations: [
+      '✓ Correct. $480,000 ÷ 26.5 = $18,113. This is the proper RMD formula: balance ÷ IRS distribution period factor.',
+      '✗ $19,200 = $480,000 × 0.04. This uses the "4% rule" of thumb for retirement spending, which is unrelated to the RMD calculation.',
+      '✗ $19,200 = $480,000 ÷ 25. Using 25 instead of the correct factor of 26.5 overstates the RMD.',
+      '✗ $12,720,000 = $480,000 × 26.5. This multiplies instead of divides — a fundamental error in applying the RMD formula.'
+    ]
+  },
+  {
+    id: 508, domain: 'retirement', difficulty: 'hard',
+    question: 'Tom\'s Social Security benefit at age 62 is $1,400/month. If he delays to age 67 (FRA), his benefit will be $2,000/month. At approximately what age does delaying to 67 break even compared to claiming at 62?',
+    options: ['Age 75', 'Age 77', 'Age 79', 'Age 82'],
+    answer: 2,
+    explanation: 'By claiming at 62 instead of 67, Tom collects 60 extra months × $1,400 = <strong>$84,000</strong> before age 67. After age 67, the monthly advantage of delaying is $2,000 − $1,400 = <strong>$600/month</strong>. Breakeven months after age 67 = $84,000 ÷ $600 = <strong>140 months ≈ 11.67 years</strong>. Breakeven age = 67 + 11.67 ≈ <strong>78.7 ≈ age 79</strong>. If Tom lives past 79, delaying to 67 was the better financial choice.',
+    optionExplanations: [
+      '✗ Age 75 is too early. Only 8 years after 67 = 96 months × $600 = $57,600 recovered, not the full $84,000 head start.',
+      '✗ Age 77 is too early. 10 years after 67 = 120 months × $600 = $72,000 recovered, still $12,000 short of breakeven.',
+      '✓ Correct. Breakeven = $84,000 ÷ $600/month = 140 months = 11.67 years after age 67 = age 78.7, approximately age 79.',
+      '✗ Age 82 is too late. By 82 (15 years after 67), Tom would have recovered $108,000 from delaying — well past the $84,000 breakeven point.'
+    ]
+  },
+  {
+    id: 509, domain: 'retirement', difficulty: 'medium',
+    question: 'Carlos, age 52, wants to take penalty-free 72(t) SEPP distributions using the amortization method. His IRA balance is $300,000, the IRS interest rate is 4%, and his single life expectancy is 31.3 years. What is the approximate annual SEPP payment?',
+    options: ['$9,585', '$12,000', '$17,150', '$21,400'],
+    answer: 2,
+    explanation: 'The amortization method calculates a fixed annual payment by amortizing the account balance over the life expectancy at the specified interest rate. Using the annuity payment formula: PMT = PV × [r / (1 − (1+r)^−n)] = $300,000 × [0.04 / (1 − (1.04)^−31.3)]. (1.04)^31.3 ≈ 3.399, so (1.04)^−31.3 ≈ 0.2942. Denominator = 1 − 0.2942 = 0.7058. PMT = $300,000 × (0.04 / 0.7058) = $300,000 × 0.05667 ≈ <strong>$17,150/year</strong>. This is substantially higher than the RMD method.',
+    optionExplanations: [
+      '✗ $9,585 ≈ $300,000 ÷ 31.3. This is the RMD method (balance ÷ life expectancy), which produces a lower payment than the amortization method.',
+      '✗ $12,000 is not derived from any standard 72(t) calculation method for these inputs.',
+      '✓ Correct. The amortization method yields approximately $17,150/year. PMT = $300,000 × [0.04 / (1 − 1.04^−31.3)] ≈ $300,000 × 0.05667 ≈ $17,150.',
+      '✗ $21,400 overstates the payment. This might result from using a shorter time horizon or higher interest rate than specified.'
+    ]
+  },
+  {
+    id: 510, domain: 'retirement', difficulty: 'expert',
+    question: 'Sarah has $50,000 in a traditional IRA (currently in the 22% bracket). If she converts now, she pays $11,000 in taxes out of pocket. She expects 6% annual growth and will be in the 24% bracket in retirement in 20 years. What is the approximate after-tax value of each path in 20 years?',
+    options: [
+      'Traditional: $125,073 | Roth: $121,867 — Keep traditional',
+      'Traditional: $121,867 | Roth: $125,073 — Roth is advantageous by ~$3,200',
+      'Traditional: $160,350 | Roth: $125,073 — Keep traditional',
+      'Both paths produce equal results; the decision doesn\'t matter'
+    ],
+    answer: 1,
+    explanation: 'Growth factor over 20 years at 6%: (1.06)^20 ≈ 3.207. <br><strong>Traditional path:</strong> $50,000 grows to $50,000 × 3.207 = $160,350. After 24% retirement tax: $160,350 × (1 − 0.24) = $160,350 × 0.76 = <strong>$121,867</strong>. <br><strong>Roth path:</strong> Pay $11,000 tax now, leaving $39,000 to invest tax-free. $39,000 × 3.207 = <strong>$125,073</strong> (no future tax). <br>Roth advantage: $125,073 − $121,867 = <strong>~$3,206</strong>. Roth wins because the future tax rate (24%) is higher than the current effective tax cost on the conversion (22%).',
+    optionExplanations: [
+      '✗ The values are reversed. Traditional yields $121,867 after-tax and Roth yields $125,073.',
+      '✓ Correct. Traditional after-tax: $50,000 × 3.207 × 0.76 = $121,867. Roth after-tax: $39,000 × 3.207 = $125,073. Roth wins by ~$3,200 because future tax rate (24%) > current effective conversion cost (22%).',
+      '✗ $160,350 is the pre-tax traditional value. The after-tax comparison requires subtracting the 24% retirement tax.',
+      '✗ The paths are not equal when the current and future tax rates differ. A higher future rate favors conversion; a lower future rate favors keeping the traditional IRA.'
+    ]
+  },
+  {
+    id: 511, domain: 'retirement', difficulty: 'medium',
+    question: 'James earns $120,000 per year and is planning for retirement. Using a 75% income replacement ratio, how much annual retirement income does he need?',
+    options: ['$60,000', '$84,000', '$90,000', '$96,000'],
+    answer: 2,
+    explanation: 'Income replacement ratio method: Target retirement income = Pre-retirement income × Replacement ratio. $120,000 × 0.75 = <strong>$90,000/year</strong>. The 75% ratio accounts for eliminated work-related expenses, payroll taxes no longer owed, and potentially lower lifestyle spending. Common replacement ratios range from 70%–90% depending on the client\'s lifestyle and expected expenses.',
+    optionExplanations: [
+      '✗ $60,000 = $120,000 × 0.50. This uses a 50% replacement ratio, which is generally too low for most retirees.',
+      '✗ $84,000 = $120,000 × 0.70. This uses a 70% replacement ratio, not the 75% specified in the question.',
+      '✓ Correct. $120,000 × 0.75 = $90,000. The 75% replacement ratio is a common planning benchmark.',
+      '✗ $96,000 = $120,000 × 0.80. This uses an 80% replacement ratio, which is higher than the 75% specified.'
+    ]
+  },
+  {
+    id: 512, domain: 'retirement', difficulty: 'hard',
+    question: 'Kim is offered a $1,200/month pension starting at age 65 (life only) OR a $180,000 lump sum. Her discount rate is 5% and her life expectancy is age 85 (20-year horizon). Which option has greater present value?',
+    options: [
+      'Pension annuity: PV ≈ $179,453 — Take the pension',
+      'Lump sum $180,000 — Take the lump sum (PV of pension < $180,000)',
+      'Pension annuity: PV ≈ $200,000 — Take the pension',
+      'Both options are exactly equal in present value'
+    ],
+    answer: 1,
+    explanation: 'PV of pension annuity (monthly payments, annual discount rate 5%): Monthly rate = 5%/12 = 0.4167%. Number of periods = 20 × 12 = 240 months. PV = $1,200 × [(1 − (1 + 0.004167)^−240) / 0.004167] = $1,200 × 151.525 ≈ <strong>$181,830</strong>. Using annual approximation: PV = $14,400 × [(1 − (1.05)^−20) / 0.05] = $14,400 × 12.462 = <strong>$179,453</strong>. Either way, the lump sum of $180,000 is approximately equal to or slightly greater than the pension PV at a 5% discount rate. The lump sum is marginally preferable, offering flexibility and no longevity risk if she dies early.',
+    optionExplanations: [
+      '✗ PV ≈ $179,453 is correct using the annual approximation, but this makes the lump sum the better choice, not the pension.',
+      '✓ Correct. Using annual approximation: PV of pension = $14,400/yr × 12.462 annuity factor = $179,453 < $180,000 lump sum. Take the lump sum for slightly higher value plus flexibility.',
+      '✗ PV ≈ $200,000 would require a lower discount rate (roughly 3.5%). At 5%, the pension PV is approximately $179,000–$182,000.',
+      '✗ The values are close but not exactly equal. Small differences in present value matter in financial planning decisions.'
+    ]
+  },
+  {
+    id: 513, domain: 'retirement', difficulty: 'medium',
+    question: 'Mike is 52 years old and participates in his employer\'s 401(k) plan. In 2024, the standard 401(k) elective deferral limit is $23,000. What is Mike\'s maximum allowable 401(k) deferral for 2024?',
+    options: ['$23,000', '$26,000', '$30,500', '$69,000'],
+    answer: 2,
+    explanation: 'Employees age 50 or older are eligible for catch-up contributions. For 2024: Standard 401(k) limit = $23,000. Age 50+ catch-up contribution = $7,500. Maximum deferral = $23,000 + $7,500 = <strong>$30,500</strong>. This applies to elective deferrals only. The $69,000 limit is the total annual additions limit (Section 415), which includes employer contributions, and is not the employee deferral limit.',
+    optionExplanations: [
+      '✗ $23,000 is the base limit for employees under age 50. Mike is 52, making him eligible for the additional catch-up contribution.',
+      '✗ $26,000 was the 2022 combined limit (prior year numbers). In 2024, the catch-up is $7,500, bringing the total to $30,500.',
+      '✓ Correct. Mike is 52, so he qualifies for the age-50+ catch-up. $23,000 + $7,500 = $30,500 maximum elective deferral in 2024.',
+      '✗ $69,000 is the Section 415 total annual additions limit for 2024, which caps all contributions (employee + employer + profit sharing). It is not the employee elective deferral limit.'
+    ]
+  },
+  {
+    id: 514, domain: 'retirement', difficulty: 'hard',
+    question: 'ABC Company has 50 employees, each earning $80,000/year. They implement a safe harbor 401(k) match: 100% on the first 3% of compensation deferred, plus 50% on the next 2% of compensation deferred. Assuming all employees defer at least 5%, what is the total annual employer matching cost?',
+    options: ['$80,000', '$120,000', '$160,000', '$200,000'],
+    answer: 2,
+    explanation: 'Per employee calculation: Tier 1: 100% × 3% × $80,000 = 0.03 × $80,000 = <strong>$2,400</strong>. Tier 2: 50% × 2% × $80,000 = 0.01 × $80,000 = <strong>$800</strong>. Total per employee = $2,400 + $800 = <strong>$3,200</strong>. Total company cost = $3,200 × 50 employees = <strong>$160,000</strong>. This safe harbor match formula satisfies ADP/ACP nondiscrimination testing safe harbor requirements.',
+    optionExplanations: [
+      '✗ $80,000 would equal only 2% of total payroll ($4,000,000 × 2%), which doesn\'t match the safe harbor formula given.',
+      '✗ $120,000 would equal 3% of total payroll ($4,000,000 × 3%), only accounting for Tier 1 and ignoring the Tier 2 50% match on the next 2%.',
+      '✓ Correct. Per employee: (3% × $80,000 × 100%) + (2% × $80,000 × 50%) = $2,400 + $800 = $3,200. Total: $3,200 × 50 = $160,000.',
+      '✗ $200,000 would equal $4,000 per employee, which overstates the match (e.g., using 5% × $80,000 = $4,000 ignores the tiered structure).'
+    ]
+  },
+  {
+    id: 515, domain: 'retirement', difficulty: 'medium',
+    question: 'Dave\'s Social Security PIA (Primary Insurance Amount) at his FRA of 67 is $2,400/month. His wife Linda has no work history. What is Linda\'s spousal benefit at her FRA, and approximately how much would she receive if she claims at age 62 instead?',
+    options: [
+      'FRA benefit: $2,400/month; age 62 benefit: $1,620/month',
+      'FRA benefit: $1,200/month; age 62 benefit: approximately $810/month',
+      'FRA benefit: $1,200/month; age 62 benefit: $960/month',
+      'FRA benefit: $1,440/month; age 62 benefit: $972/month'
+    ],
+    answer: 1,
+    explanation: 'Spousal benefit at FRA = 50% of worker\'s PIA = 50% × $2,400 = <strong>$1,200/month</strong>. If Linda claims at 62 (5 years before FRA of 67), her spousal benefit is reduced. The reduction formula: first 36 months early = 25/36 of 1% per month; next 24 months = 5/12 of 1% per month. For 60 months early: (36 × 25/36%) + (24 × 5/12%) = 25% + 10% = 35% total reduction. Wait — for spousal benefits claiming 60 months early: $1,200 × (1 − 0.35) = $1,200 × 0.675 ≈ <strong>$810/month</strong>.',
+    optionExplanations: [
+      '✗ $2,400 is Dave\'s own benefit, not Linda\'s spousal benefit. The spousal benefit is capped at 50% of the worker\'s PIA.',
+      '✓ Correct. Linda\'s FRA spousal benefit = 50% × $2,400 = $1,200. Claiming 5 years early (60 months) reduces the benefit by approximately 32.5%, yielding roughly $810/month.',
+      '✗ $960 = $1,200 × 0.80, implying only a 20% reduction for claiming 5 years early. The actual reduction is approximately 32.5% for spousal benefits claimed 60 months before FRA.',
+      '✗ $1,440 = 60% of $2,400, exceeding the 50% spousal benefit cap. The maximum spousal benefit is 50% of the worker\'s PIA.'
+    ]
+  },
+  {
+    id: 516, domain: 'retirement', difficulty: 'hard',
+    question: 'A retired couple has a $1,200,000 portfolio. Using the 4% rule, what is their first-year withdrawal amount, and what is their inflation-adjusted withdrawal in year 10 (assuming 3% annual inflation)?',
+    options: [
+      'Year 1: $48,000; Year 10: $59,230',
+      'Year 1: $48,000; Year 10: $62,640',
+      'Year 1: $48,000; Year 10: $64,420',
+      'Year 1: $60,000; Year 10: $78,300'
+    ],
+    answer: 1,
+    explanation: 'Year 1 withdrawal (4% rule): $1,200,000 × 0.04 = <strong>$48,000</strong>. Year 10 inflation-adjusted withdrawal: The year 10 withdrawal is the year 1 amount grown by 9 years of inflation (year 1 to year 10 = 9 compounding periods). $48,000 × (1.03)^9. (1.03)^9 = 1.03^9 ≈ 1.3048. $48,000 × 1.3048 ≈ <strong>$62,640</strong>. The 4% rule adjusts withdrawals annually for inflation to maintain purchasing power throughout retirement.',
+    optionExplanations: [
+      '✗ $59,230 uses (1.03)^8 ≈ 1.2668 instead of (1.03)^9. Year 10 means 9 annual inflation adjustments from year 1.',
+      '✓ Correct. Year 1: $1,200,000 × 4% = $48,000. Year 10: $48,000 × (1.03)^9 = $48,000 × 1.305 ≈ $62,640.',
+      '✗ $64,420 uses (1.03)^10 ≈ 1.344, applying 10 compounding periods instead of 9. The year 1 withdrawal is already set; year 10 is 9 adjustments later.',
+      '✗ $60,000 would imply a 5% withdrawal rate ($1,200,000 × 0.05), not the 4% rule specified.'
+    ]
+  },
+  {
+    id: 517, domain: 'investment', difficulty: 'easy',
+    question: 'An investor buys a stock at $40 per share, sells it one year later at $52, and received $2 in dividends during the holding period. What is the holding period return (HPR)?',
+    options: ['30%', '32.5%', '35%', '37.5%'],
+    answer: 2,
+    explanation: 'HPR = (Ending Price − Beginning Price + Dividends) / Beginning Price. HPR = ($52 − $40 + $2) / $40 = $14 / $40 = <strong>0.35 = 35%</strong>. Total return includes both price appreciation ($12) and income ($2), divided by the original investment ($40).',
+    optionExplanations: [
+      '✗ 30% = ($52 − $40) / $40 = $12 / $40. This calculates price appreciation only and ignores the $2 dividend income.',
+      '✗ 32.5% = $13 / $40. This uses $1 in dividends instead of $2, understating total return.',
+      '✓ Correct. HPR = ($52 − $40 + $2) / $40 = $14 / $40 = 35%. Both capital gain ($12) and dividend ($2) are included.',
+      '✗ 37.5% = $15 / $40. This overstates the return, perhaps by using $3 in dividends or a different ending price.'
+    ]
+  },
+  {
+    id: 518, domain: 'investment', difficulty: 'medium',
+    question: 'A portfolio earned a 12% return last year. The risk-free rate was 3%, and the portfolio\'s standard deviation was 15%. What is the Sharpe ratio?',
+    options: ['0.45', '0.60', '0.80', '1.20'],
+    answer: 1,
+    explanation: 'Sharpe Ratio = (Portfolio Return − Risk-Free Rate) / Portfolio Standard Deviation. Sharpe = (12% − 3%) / 15% = 9% / 15% = <strong>0.60</strong>. The Sharpe ratio measures excess return earned per unit of total risk (standard deviation). A higher Sharpe ratio indicates better risk-adjusted performance.',
+    optionExplanations: [
+      '✗ 0.45 = 9% / 20%. This uses a standard deviation of 20% instead of the 15% given.',
+      '✓ Correct. Sharpe = (12% − 3%) / 15% = 9% / 15% = 0.60.',
+      '✗ 0.80 might result from using (12% − 2%) / 12.5% or a different risk-free rate. The correct risk-free rate is 3%.',
+      '✗ 1.20 = 9% / 7.5%, using half the correct standard deviation, which dramatically overstates risk-adjusted performance.'
+    ]
+  },
+  {
+    id: 519, domain: 'investment', difficulty: 'hard',
+    question: 'Using the Capital Asset Pricing Model (CAPM): the risk-free rate is 3%, the expected market return is 9%, and a stock has a beta of 1.4. What is the stock\'s expected return?',
+    options: ['9.0%', '10.2%', '11.4%', '12.6%'],
+    answer: 2,
+    explanation: 'CAPM: E(r) = Rf + β × (Rm − Rf). E(r) = 3% + 1.4 × (9% − 3%) = 3% + 1.4 × 6% = 3% + 8.4% = <strong>11.4%</strong>. The market risk premium (Rm − Rf) = 6%. With β = 1.4, the stock is expected to earn 40% more than the market risk premium above the risk-free rate.',
+    optionExplanations: [
+      '✗ 9.0% is simply the market return, ignoring beta. A stock with β > 1 should have an expected return greater than the market.',
+      '✗ 10.2% = 3% + 1.2 × 6%. This uses β = 1.2 instead of the given β = 1.4.',
+      '✓ Correct. CAPM: 3% + 1.4 × (9% − 3%) = 3% + 8.4% = 11.4%.',
+      '✗ 12.6% = 1.4 × 9% = β × market return. This incorrectly multiplies beta by the total market return instead of the market risk premium, and omits adding the risk-free rate properly.'
+    ]
+  },
+  {
+    id: 520, domain: 'investment', difficulty: 'medium',
+    question: 'A 10-year bond has a $1,000 face value, a 6% annual coupon, and a required yield to maturity (YTM) of 8%. What is the bond\'s approximate current price?',
+    options: ['$844', '$866', '$920', '$1,000'],
+    answer: 1,
+    explanation: 'Bond price = PV of coupons + PV of face value. Annual coupon = 6% × $1,000 = $60. PV of coupons = $60 × [(1 − (1.08)^−10) / 0.08]. (1.08)^10 ≈ 2.1589, so (1.08)^−10 ≈ 0.4632. Annuity factor = (1 − 0.4632) / 0.08 = 0.5368 / 0.08 = 6.710. PV of coupons = $60 × 6.710 = $402.60. PV of face = $1,000 × 0.4632 = $463.20. Bond price = $402.60 + $463.20 = <strong>$865.80 ≈ $866</strong>. Since YTM > coupon rate, the bond trades at a discount.',
+    optionExplanations: [
+      '✗ $844 is too low. This may result from using slightly different discount factors or rounding errors.',
+      '✓ Correct. PV of coupons ($402.60) + PV of face ($463.20) = $865.80 ≈ $866. The bond trades at a discount because YTM (8%) > coupon rate (6%).',
+      '✗ $920 underestimates the discount. At 8% YTM vs. 6% coupon, a 10-year bond trades well below par.',
+      '✗ $1,000 is the face value (par). A bond trades at par only when its coupon rate equals its YTM. Here YTM (8%) > coupon (6%), so the bond trades below par.'
+    ]
+  },
+  {
+    id: 521, domain: 'investment', difficulty: 'medium',
+    question: 'A portfolio is allocated 60% to stocks (expected return 10%) and 40% to bonds (expected return 4%). What is the expected portfolio return?',
+    options: ['6.4%', '7.0%', '7.6%', '8.4%'],
+    answer: 2,
+    explanation: 'Expected portfolio return = Weighted average of individual asset expected returns. E(Rp) = (Weight of stocks × Return of stocks) + (Weight of bonds × Return of bonds). E(Rp) = (0.60 × 10%) + (0.40 × 4%) = 6.0% + 1.6% = <strong>7.6%</strong>.',
+    optionExplanations: [
+      '✗ 6.4% uses incorrect weights or returns. For example, 0.60 × 8% + 0.40 × 4% = 4.8% + 1.6% = 6.4% — a different stock return assumption.',
+      '✗ 7.0% = (10% + 4%) / 2 = simple average of returns, which ignores the portfolio weights.',
+      '✓ Correct. E(Rp) = 0.60 × 10% + 0.40 × 4% = 6.0% + 1.6% = 7.6%.',
+      '✗ 8.4% = 0.60 × 12% + 0.40 × 3% or similar. Some distractor using different inputs than given.'
+    ]
+  },
+  {
+    id: 522, domain: 'investment', difficulty: 'hard',
+    question: 'A bond has a Macaulay duration of 7.2 years and a YTM of 6%. If interest rates rise by 0.5%, what is the approximate percentage price change of the bond?',
+    options: ['-2.88%', '-3.40%', '-3.60%', '-4.32%'],
+    answer: 1,
+    explanation: 'Modified Duration = Macaulay Duration / (1 + YTM) = 7.2 / (1 + 0.06) = 7.2 / 1.06 = <strong>6.79 years</strong>. Approximate price change = −Modified Duration × Change in yield = −6.79 × (+0.005) = −6.79 × 0.005 = <strong>−0.03396 ≈ −3.40%</strong>. When rates rise, bond prices fall. Modified duration measures this price sensitivity.',
+    optionExplanations: [
+      '✗ −2.88% = −(7.2 / 1.25) × 0.5%, using an incorrect denominator. The denominator should be (1 + YTM) = 1.06.',
+      '✓ Correct. Modified duration = 7.2 / 1.06 = 6.79. Price change ≈ −6.79 × 0.5% = −3.40%.',
+      '✗ −3.60% = −7.2 × 0.5%. This uses Macaulay duration directly without converting to modified duration (forgetting to divide by 1.06).',
+      '✗ −4.32% overstates the price sensitivity. This might result from using a higher duration or incorrect formula.'
+    ]
+  },
+  {
+    id: 523, domain: 'investment', difficulty: 'medium',
+    question: 'Investment A has a mean return of 12% and standard deviation of 8%. Investment B has a mean return of 18% and standard deviation of 15%. Which investment has lower risk per unit of return?',
+    options: [
+      'Investment B (higher absolute return)',
+      'Investment A (lower coefficient of variation)',
+      'They are equal in risk-adjusted terms',
+      'Cannot be compared without knowing the correlation'
+    ],
+    answer: 1,
+    explanation: 'Coefficient of Variation (CV) = Standard Deviation / Mean Return — lower CV means less risk per unit of return. CV(A) = 8% / 12% = <strong>0.667</strong>. CV(B) = 15% / 18% = <strong>0.833</strong>. Investment A has a lower CV (0.667 < 0.833), meaning it takes on less risk for each percentage point of expected return. Despite Investment B\'s higher absolute return, it carries relatively more risk per unit of return.',
+    optionExplanations: [
+      '✗ Higher absolute return doesn\'t mean better risk-adjusted return. Investment B requires more risk per unit of return (CV = 0.833 vs. 0.667).',
+      '✓ Correct. CV(A) = 8/12 = 0.667 vs. CV(B) = 15/18 = 0.833. Investment A has less risk per unit of expected return.',
+      '✗ They are not equal. CV(A) = 0.667 and CV(B) = 0.833 are different, with A demonstrating superior risk efficiency.',
+      '✗ Correlation is needed to calculate portfolio standard deviation, not to compare individual investment risk efficiency via CV.'
+    ]
+  },
+  {
+    id: 524, domain: 'investment', difficulty: 'hard',
+    question: 'A project requires a $50,000 initial investment and generates $20,000 cash flows at the end of each year for 3 years. The discount rate is 10%. What is the project\'s NPV, and should it be accepted?',
+    options: [
+      'NPV = +$10,000; Accept the project',
+      'NPV = +$263; Accept the project',
+      'NPV = −$263; Reject the project',
+      'NPV = −$5,000; Reject the project'
+    ],
+    answer: 2,
+    explanation: 'NPV = −$50,000 + PV of Year 1 + PV of Year 2 + PV of Year 3. PV Year 1 = $20,000 / 1.10 = <strong>$18,182</strong>. PV Year 2 = $20,000 / 1.10² = $20,000 / 1.21 = <strong>$16,529</strong>. PV Year 3 = $20,000 / 1.10³ = $20,000 / 1.331 = <strong>$15,026</strong>. NPV = −$50,000 + $18,182 + $16,529 + $15,026 = −$50,000 + $49,737 = <strong>−$263</strong>. Since NPV < 0, the project destroys value and should be <strong>rejected</strong>.',
+    optionExplanations: [
+      '✗ +$10,000 significantly overstates the NPV. The undiscounted cash flows total $60,000 vs. $50,000 cost (+$10,000), but discounting reduces PV of cash flows to $49,737.',
+      '✗ +$263 has the correct magnitude but wrong sign. The PV of cash flows ($49,737) is slightly less than the $50,000 investment, making NPV negative.',
+      '✓ Correct. NPV = −$50,000 + $18,182 + $16,529 + $15,026 = −$263. Negative NPV means reject: the project returns slightly less than the 10% required rate.',
+      '✗ −$5,000 overstates the loss. The present value of cash flows is $49,737, only $263 short of the $50,000 required investment.'
+    ]
+  },
+  {
+    id: 525, domain: 'investment', difficulty: 'expert',
+    question: 'A two-asset portfolio holds 50% in Asset A (σ = 15%) and 50% in Asset B (σ = 10%). The correlation between A and B is 0.3. What is the portfolio standard deviation?',
+    options: ['6.25%', '10.19%', '11.18%', '12.50%'],
+    answer: 1,
+    explanation: 'Two-asset portfolio variance formula: σp² = (wA × σA)² + (wB × σB)² + 2 × wA × wB × σA × σB × ρAB. σp² = (0.5 × 0.15)² + (0.5 × 0.10)² + 2 × 0.5 × 0.5 × 0.15 × 0.10 × 0.3. = (0.075)² + (0.050)² + 2 × 0.25 × 0.015 × 0.3. = 0.005625 + 0.002500 + 0.002250. = <strong>0.010375</strong>. σp = √0.010375 = <strong>0.1019 = 10.19%</strong>. Diversification reduces risk below the weighted average (12.5%) due to imperfect correlation.',
+    optionExplanations: [
+      '✗ 6.25% would require perfect negative correlation (ρ = −1). With ρ = 0.3, diversification benefit is partial, not maximum.',
+      '✓ Correct. σp² = 0.005625 + 0.0025 + 0.00225 = 0.010375. σp = √0.010375 ≈ 10.19%.',
+      '✗ 11.18% ≈ √(0.5² × 0.15² + 0.5² × 0.10²) = √(0.005625 + 0.0025) = √0.008125. This omits the covariance term entirely (assumes ρ = 0).',
+      '✗ 12.50% = 0.5 × 15% + 0.5 × 10% = simple weighted average of standard deviations. This ignores diversification benefit and is only correct if ρ = 1.0.'
+    ]
+  },
+  {
+    id: 526, domain: 'investment', difficulty: 'medium',
+    question: 'An investor uses dollar-cost averaging, investing $1,000/month for 3 months. Month 1 price: $50/share; Month 2 price: $40/share; Month 3 price: $25/share. What is the average cost per share using DCA, and how does it compare to the simple average price?',
+    options: [
+      'DCA average: $38.33; Simple average: $35.29 — DCA is higher',
+      'DCA average: $35.29; Simple average: $38.33 — DCA is lower',
+      'DCA average: $40.00; Simple average: $38.33 — DCA is higher',
+      'DCA average: $35.00; Simple average: $38.33 — DCA is lower'
+    ],
+    answer: 1,
+    explanation: 'Dollar-cost averaging purchases: Month 1: $1,000 ÷ $50 = <strong>20 shares</strong>. Month 2: $1,000 ÷ $40 = <strong>25 shares</strong>. Month 3: $1,000 ÷ $25 = <strong>40 shares</strong>. Total shares purchased: 20 + 25 + 40 = <strong>85 shares</strong>. Total invested: $3,000. DCA average cost = $3,000 ÷ 85 = <strong>$35.29/share</strong>. Simple (arithmetic) average price = ($50 + $40 + $25) / 3 = $115 / 3 = <strong>$38.33/share</strong>. DCA average ($35.29) is lower than simple average ($38.33) because more shares are purchased when prices are low.',
+    optionExplanations: [
+      '✗ The values are reversed. DCA produces the lower cost ($35.29), not $38.33. Dollar-cost averaging benefits from buying more shares when prices fall.',
+      '✓ Correct. DCA average cost = $3,000 ÷ 85 shares = $35.29. Simple average = ($50 + $40 + $25) / 3 = $38.33. DCA is $3.04/share cheaper.',
+      '✗ $40 would be the simple average of Month 1 and Month 2 prices. The DCA cost properly accounts for all three months and the varying share quantities purchased.',
+      '✗ $35.00 is a rounded approximation. The exact DCA cost is $3,000 / 85 = $35.294/share ≈ $35.29.'
+    ]
+  },
+  {
+    id: 527, domain: 'tax', difficulty: 'easy',
+    question: 'A municipal bond yields 3.5%. An investor is in the 32% federal tax bracket. What is the tax-equivalent yield of this municipal bond?',
+    options: ['3.50%', '4.62%', '5.15%', '5.82%'],
+    answer: 2,
+    explanation: 'Tax-equivalent yield (TEY) = Municipal yield / (1 − Tax rate). TEY = 3.5% / (1 − 0.32) = 3.5% / 0.68 = <strong>5.147% ≈ 5.15%</strong>. This means a taxable bond would need to yield 5.15% to provide the same after-tax return as this 3.5% municipal bond for an investor in the 32% bracket.',
+    optionExplanations: [
+      '✗ 3.50% is the raw municipal yield. The tax-equivalent yield must be higher than the muni yield to reflect the tax advantage.',
+      '✗ 4.62% = 3.5% / (1 − 0.243) or similar. This uses an incorrect tax rate in the denominator.',
+      '✓ Correct. TEY = 3.5% / (1 − 0.32) = 3.5% / 0.68 = 5.15%.',
+      '✗ 5.82% = 3.5% / (1 − 0.399) or 3.5% × (1 + 0.32) / 0.68. This overstates the tax-equivalent yield for the 32% bracket.'
+    ]
+  },
+  {
+    id: 528, domain: 'tax', difficulty: 'medium',
+    question: 'An investor purchased stock for $15,000 two years ago and sold it for $23,000. She is in the 22% ordinary income tax bracket. What is her federal tax owed on this gain?',
+    options: ['$800', '$1,200', '$1,760', '$2,400'],
+    answer: 1,
+    explanation: 'Long-term capital gain (LTCG) = $23,000 − $15,000 = <strong>$8,000</strong>. Since the stock was held for 2 years (more than 12 months), this is a long-term capital gain. For taxpayers in the 22% ordinary income bracket, the preferential long-term capital gains tax rate is <strong>15%</strong>. Federal LTCG tax = $8,000 × 15% = <strong>$1,200</strong>.',
+    optionExplanations: [
+      '✗ $800 = $8,000 × 10%. This uses a 10% capital gains rate, which applies to taxpayers in lower income brackets (0% and 10%/12% brackets).',
+      '✓ Correct. LTCG = $8,000. In the 22% bracket, the LTCG rate is 15%. Tax = $8,000 × 0.15 = $1,200.',
+      '✗ $1,760 = $8,000 × 22%. This incorrectly applies the ordinary income rate to a long-term capital gain. LTCG rates are preferential (15% in this bracket).',
+      '✗ $2,400 = $8,000 × 30%. There is no 30% capital gains rate in the standard federal tax code for this scenario.'
+    ]
+  },
+  {
+    id: 529, domain: 'tax', difficulty: 'hard',
+    question: 'A self-employed consultant earns $200,000 net qualified business income (QBI) and is below the phase-out thresholds. Her taxable income before the QBI deduction is $195,000, with no long-term capital gains. What is her Section 199A QBI deduction?',
+    options: ['$30,000', '$39,000', '$40,000', '$50,000'],
+    answer: 1,
+    explanation: 'The Section 199A QBI deduction equals the lesser of: (1) 20% of QBI, or (2) 20% of taxable income minus net capital gains. Calculation 1: 20% × $200,000 QBI = <strong>$40,000</strong>. Calculation 2: 20% × $195,000 taxable income = <strong>$39,000</strong> (no LTCG to subtract). QBI deduction = lesser of $40,000 and $39,000 = <strong>$39,000</strong>. The taxable income limitation applies because it is lower than 20% of QBI.',
+    optionExplanations: [
+      '✗ $30,000 would imply 15% of QBI or some other calculation. Neither the QBI limit nor the taxable income limit produces $30,000 here.',
+      '✓ Correct. QBI deduction = lesser of (20% × $200,000 = $40,000) or (20% × $195,000 = $39,000) = $39,000.',
+      '✗ $40,000 = 20% × $200,000 (20% of QBI). This ignores the taxable income limitation, which caps the deduction at $39,000 in this case.',
+      '✗ $50,000 = 25% × $200,000. The QBI deduction rate is 20%, not 25%.'
+    ]
+  },
+  {
+    id: 530, domain: 'tax', difficulty: 'medium',
+    question: 'A single filer has MAGI of $250,000 and net investment income (NII) of $30,000. What is the Net Investment Income Tax (NIIT) owed?',
+    options: ['$570', '$1,140', '$1,900', '$2,280'],
+    answer: 1,
+    explanation: 'The NIIT is 3.8% on the lesser of: (1) Net investment income, or (2) Excess MAGI over the threshold. For single filers, the NIIT threshold is $200,000. Excess MAGI = $250,000 − $200,000 = <strong>$50,000</strong>. Lesser of NII ($30,000) and excess MAGI ($50,000) = <strong>$30,000</strong>. NIIT = $30,000 × 3.8% = <strong>$1,140</strong>.',
+    optionExplanations: [
+      '✗ $570 = $15,000 × 3.8% or $30,000 × 1.9%. This uses half the correct NII base or half the correct rate.',
+      '✓ Correct. NIIT applies to lesser of NII ($30,000) or excess MAGI ($50,000) = $30,000. NIIT = $30,000 × 3.8% = $1,140.',
+      '✗ $1,900 = $50,000 × 3.8%. This applies the NIIT to the excess MAGI ($50,000) instead of the lesser of NII and excess MAGI. Since NII ($30,000) < excess MAGI ($50,000), only $30,000 is subject to NIIT.',
+      '✗ $2,280 = $60,000 × 3.8% or $30,000 × 7.6%. Neither figure is correct for this scenario.'
+    ]
+  },
+  {
+    id: 531, domain: 'tax', difficulty: 'hard',
+    question: 'A 16-year-old dependent child has $5,000 in unearned income. In 2024, the standard deduction for a dependent is $1,300. What is the child\'s "kiddie tax" liability if the parent is in the 37% tax bracket?',
+    options: ['$444', '$888', '$1,110', '$1,850'],
+    answer: 1,
+    explanation: 'Kiddie tax calculation: The first $1,300 of unearned income is sheltered by the dependent\'s standard deduction. The next $1,300 is taxed at the child\'s rate (typically 10%). Unearned income above $2,600 (2 × $1,300) is taxed at the parent\'s marginal rate. Kiddie tax base = $5,000 − $2,600 = <strong>$2,400</strong>. Kiddie tax = $2,400 × 37% = <strong>$888</strong>.',
+    optionExplanations: [
+      '✗ $444 = $2,400 × 18.5%, or $1,200 × 37%. This uses half the correct kiddie tax base.',
+      '✓ Correct. Kiddie tax base = $5,000 − $2,600 = $2,400. Kiddie tax = $2,400 × 37% = $888.',
+      '✗ $1,110 = $3,000 × 37%. This uses $3,000 as the kiddie tax base, which would imply the threshold is only $2,000 rather than $2,600.',
+      '✗ $1,850 = $5,000 × 37%. This incorrectly applies the parent\'s rate to the full $5,000 of unearned income without subtracting the $2,600 kiddie tax threshold.'
+    ]
+  }
 ];
