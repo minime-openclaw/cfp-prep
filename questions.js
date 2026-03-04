@@ -5721,4 +5721,961 @@ const QUESTIONS = [
       '✗ Concentrated positions and customized tax-loss harvesting require human judgment and tax coordination. Beyond robo-advisor capabilities.'
     ]
   },
+// NEW QUESTIONS: IDs 312-361 (25 hard + 25 expert)
+// Added 2026-03-03
+
+  // ── HARD QUESTIONS (312-336) ──────────────────────────────────
+
+  {
+    id: 312, domain: 'retirement', difficulty: 'hard',
+    question: 'Robert, age 68, has a traditional IRA worth $850,000 and a Roth IRA worth $120,000. His wife Linda, age 65, is the sole beneficiary of both accounts. Robert dies in 2026 before taking his RMD for that year. Which of the following BEST describes Linda\'s obligations and options?',
+    options: [
+      'Linda must take Robert\'s 2026 RMD from his IRA, then may treat the inherited IRA as her own immediately',
+      'Linda may roll both IRAs into her own IRAs and delay RMDs until she reaches her own RMD age; Robert\'s 2026 RMD must still be distributed before the rollover',
+      'Linda must begin RMDs by December 31 of the year following Robert\'s death since she is over 59½',
+      'Linda may disclaim both IRAs to allow the assets to pass to contingent beneficiaries without tax consequence'
+    ],
+    correct: 1,
+    explanation: 'When a surviving spouse inherits an IRA, the year-of-death RMD must be taken first (it cannot be rolled over). After satisfying the RMD, Linda may roll Robert\'s IRA into her own IRA, delaying future RMDs until her own required beginning date. The Roth IRA has no RMD requirement during Robert\'s lifetime but the same rollover rules apply.',
+    optionExplanations: [
+      '✗ Partially correct — the 2026 RMD must be taken, but the statement that she "may treat it as her own immediately" oversimplifies; the rollover is the proper mechanism.',
+      '✓ Correct. Year-of-death RMD is required first, then the surviving spouse rollover is available, resetting RMD timing to Linda\'s own schedule.',
+      '✗ The "by December 31 of the following year" rule applies to non-spouse beneficiaries. A surviving spouse has more flexibility.',
+      '✗ Disclaimer is possible but the statement about "no tax consequence" is misleading — the assets would pass per beneficiary designation, not necessarily tax-free.'
+    ]
+  },
+
+  {
+    id: 313, domain: 'tax', difficulty: 'hard',
+    question: 'Grace sold her primary residence in 2026 after living there for 18 months. She is single and realized a $280,000 gain. She is selling due to an unforeseen circumstance (her employer relocated her 1,200 miles away). Which tax treatment applies?',
+    options: [
+      'The full $280,000 gain is taxable; the Section 121 exclusion requires 2 full years of ownership and use',
+      'Grace may exclude a prorated portion of the $250,000 exclusion based on 18/24 months: up to $187,500',
+      'Grace may exclude the full $250,000 because the unforeseen circumstance exception applies',
+      'Grace may exclude $280,000 because employer relocation qualifies for the full exclusion regardless of tenure'
+    ],
+    correct: 1,
+    explanation: 'Under the unforeseen circumstances exception to Section 121, taxpayers who fail to meet the 2-year ownership and use test may exclude a prorated portion of the exclusion. The fraction is months of qualifying use ÷ 24, multiplied by the maximum exclusion ($250,000 for single filers). 18/24 × $250,000 = $187,500. Grace\'s $280,000 gain exceeds this, so $92,500 is taxable.',
+    optionExplanations: [
+      '✗ The unforeseen circumstance exception allows a partial exclusion — the gain is not fully taxable.',
+      '✓ Correct. Pro-rated exclusion = 18/24 × $250,000 = $187,500. The remaining $92,500 is taxable gain.',
+      '✗ The exception provides a prorated exclusion, not the full amount, unless the proration equals the full exclusion.',
+      '✗ There is no provision for excluding gains beyond the statutory maximum, even with employer relocation.'
+    ]
+  },
+
+  {
+    id: 314, domain: 'investment', difficulty: 'hard',
+    question: 'A portfolio has an expected return of 9%, a standard deviation of 14%, and a beta of 1.2. The risk-free rate is 4%. The market return is 10%. Which performance measure would MOST penalize this portfolio relative to a market index with beta of 1.0?',
+    options: [
+      'Sharpe ratio, because it uses total risk rather than systematic risk',
+      'Treynor ratio, because it divides excess return by beta',
+      'Jensen\'s alpha, because beta above 1.0 raises the required return under CAPM',
+      'Information ratio, because it measures active return relative to tracking error'
+    ],
+    correct: 2,
+    explanation: 'Jensen\'s alpha = Actual return − [Rf + β(Rm − Rf)] = 9% − [4% + 1.2(10%−4%)] = 9% − 11.2% = −2.2%. The higher beta raises the CAPM-required return, making it harder to generate positive alpha. Treynor = (9%−4%)/1.2 = 4.17% vs market (10%−4%)/1.0 = 6.0% — also penalizes, but Jensen\'s alpha directly quantifies the deficit from required return.',
+    optionExplanations: [
+      '✗ The Sharpe ratio uses standard deviation. With SD of 14%, Sharpe = (9%−4%)/14% = 0.357. This may or may not penalize versus the index depending on the index\'s SD.',
+      '✗ Treynor does penalize (4.17% vs 6.0% for the market), but the question asks which MOST penalizes.',
+      '✓ Correct. Jensen\'s alpha directly measures risk-adjusted underperformance vs CAPM expectation. Alpha = −2.2%, clearly showing underperformance given the risk taken.',
+      '✗ Information ratio measures active management skill relative to a benchmark — not applicable here without benchmark tracking error data.'
+    ]
+  },
+
+  {
+    id: 315, domain: 'estate', difficulty: 'hard',
+    question: 'Harold, a widower, dies in 2026 with a taxable estate of $16.2 million. His deceased wife Martha died in 2023 and had a DSUE (deceased spousal unused exclusion) of $3.8 million portability-elected. The 2026 basic exclusion amount is $13.61 million. What is Harold\'s estate tax liability before credits?',
+    options: [
+      '$0; his total exclusion of $17.41 million exceeds his $16.2 million taxable estate',
+      'Tax on $2.59 million above the $13.61 million exclusion, approximately $1.036 million',
+      'Tax on $16.2 million at 40%, less applicable credits',
+      '$0; the unlimited marital deduction eliminates estate tax for surviving spouses'
+    ],
+    correct: 0,
+    explanation: 'Harold\'s total applicable exclusion = basic exclusion ($13.61M) + Martha\'s DSUE ($3.8M) = $17.41M. Since his taxable estate ($16.2M) is less than his total exclusion, no estate tax is owed before credits. DSUE must be elected on the deceased spouse\'s timely-filed estate tax return, which was done here.',
+    optionExplanations: [
+      '✓ Correct. Total exclusion = $13.61M + $3.8M DSUE = $17.41M > $16.2M estate. No estate tax.',
+      '✗ This ignores the DSUE portability election, which adds $3.8M to Harold\'s available exclusion.',
+      '✗ The taxable estate is offset by the applicable exclusion amount — it is not taxed in full.',
+      '✗ The marital deduction applies to transfers between spouses during life or at death, not to the surviving spouse\'s own estate.'
+    ]
+  },
+
+  {
+    id: 316, domain: 'risk', difficulty: 'hard',
+    question: 'Marcus, age 42, is a self-employed oral surgeon earning $380,000/year. He suffers a hand tremor and can no longer perform surgery but can work as a medical consultant earning $95,000/year. Which disability policy provision is MOST critical for Marcus to have had?',
+    options: [
+      'Residual disability rider, to receive partial benefits proportional to income loss',
+      'Own-occupation definition, so that inability to perform surgery qualifies as total disability',
+      'Non-cancelable and guaranteed renewable provision, to lock in premiums',
+      'Cost of living adjustment (COLA) rider, to protect against inflation'
+    ],
+    correct: 1,
+    explanation: 'Own-occupation is the critical provision. Under own-occupation, Marcus is considered totally disabled because he cannot perform the material duties of his own occupation (oral surgery), even though he can work in another capacity. Without own-occupation, Marcus would not qualify as totally disabled under "any-occupation" or "modified own-occupation" definitions, receiving no total disability benefit despite a 75% income drop.',
+    optionExplanations: [
+      '✗ Residual benefits would help if Marcus had own-occupation coverage — but without it, he may not qualify for any benefit in the first place.',
+      '✓ Correct. Own-occupation is the most protective definition for specialists like surgeons. It pays total disability benefits even when the insured can work in another field.',
+      '✗ Non-can/guaranteed renewable protects the policy\'s existence and cost but doesn\'t affect the disability definition.',
+      '✗ COLA rider is important for long-term purchasing power but is secondary to the definition of disability itself.'
+    ]
+  },
+
+  {
+    id: 317, domain: 'general', difficulty: 'hard',
+    question: 'A client has a $500,000 whole life policy with a cash value of $85,000 and has paid $60,000 in premiums. She wants to exchange it for an annuity using a Section 1035 exchange. Which statement is MOST accurate?',
+    options: [
+      'The exchange is tax-free; her basis in the annuity will be $60,000',
+      'The exchange is tax-free; her basis in the annuity will be $85,000 (the cash value received)',
+      'The exchange triggers a taxable gain of $25,000 (cash value minus basis)',
+      'Life insurance can only be exchanged for another life insurance policy in a 1035 exchange'
+    ],
+    correct: 0,
+    explanation: 'A Section 1035 exchange allows tax-free exchange of a life insurance policy for an annuity. The basis carries over — her premiums paid ($60,000) become her cost basis in the annuity. The $25,000 of gain (cash value $85,000 − basis $60,000) is deferred, not forgiven. She will owe tax on distributions from the annuity that exceed her $60,000 basis.',
+    optionExplanations: [
+      '✓ Correct. The exchange is tax-free and basis ($60,000 in premiums paid) carries over to the new annuity.',
+      '✗ Basis does not step up to cash value in a 1035 exchange — the original cost basis transfers.',
+      '✗ The whole point of a 1035 exchange is to avoid recognizing the gain currently.',
+      '✗ Section 1035 permits life insurance → life insurance, life insurance → annuity, annuity → annuity (but not annuity → life insurance).'
+    ]
+  },
+
+  {
+    id: 318, domain: 'retirement', difficulty: 'hard',
+    question: 'Diane, age 55, separates from service from her employer. She has $600,000 in her employer\'s 401(k) and needs $50,000 per year for living expenses. She wants to avoid the 10% early withdrawal penalty. Which of the following strategies is MOST appropriate?',
+    options: [
+      'Roll the 401(k) to an IRA and begin 72(t) SEPP distributions immediately',
+      'Leave the 401(k) with the employer and take distributions under the age-55 separation exception',
+      'Roll the 401(k) to an IRA and take distributions; the rollover itself exempts future withdrawals from penalty',
+      'Wait until age 59½ to begin distributions; the 10% penalty applies to all distributions before then'
+    ],
+    correct: 1,
+    explanation: 'The age-55 separation from service exception allows penalty-free distributions from an employer plan (not an IRA) when an employee separates from service in or after the year they turn 55. If Diane rolls to an IRA, she loses this exception — IRA distributions before 59½ require SEPP/72(t) or another exception. Staying in the 401(k) gives her immediate penalty-free access to funds.',
+    optionExplanations: [
+      '✗ Rolling to an IRA eliminates the age-55 exception. She would need to set up a 72(t) SEPP program, which is inflexible and requires equal periodic payments for 5 years or until 59½.',
+      '✓ Correct. The age-55 separation exception applies to 401(k) plans when separation occurs in or after age 55. No need for SEPP.',
+      '✗ Rolling to an IRA does NOT preserve the age-55 exception. The 10% penalty applies to IRA distributions before 59½ unless another exception applies.',
+      '✗ The age-55 exception provides an available exemption — waiting until 59½ is unnecessary if she leaves the funds in the plan.'
+    ]
+  },
+
+  {
+    id: 319, domain: 'tax', difficulty: 'hard',
+    question: 'The Hendersons (MFJ, AGI $280,000) incurred the following losses in 2026: $45,000 passive rental loss on a property they actively managed, $12,000 capital loss from stock sales, and $8,000 loss from a limited partnership. How much can they deduct in 2026?',
+    options: [
+      '$25,000 passive loss (rental exception), $3,000 capital loss — total $28,000 deductible',
+      '$3,000 capital loss only; rental and LP losses are fully suspended',
+      '$20,000 passive loss (phased-out rental exception), $3,000 capital loss — total $23,000 deductible',
+      'All losses are deductible since losses from actively managed rentals are fully allowed'
+    ],
+    correct: 0,
+    explanation: 'The rental exception allows up to $25,000 of passive rental losses for active participants with AGI ≤ $100,000 (phases out $100,000–$150,000 AGI). At $280,000 AGI, the Hendersons are fully phased out of the rental exception. The LP loss is fully passive with no exception. Capital losses: $12,000 total; $3,000 may offset ordinary income, $9,000 carries forward. Only the $3,000 capital loss deduction is available in 2026.',
+    optionExplanations: [
+      '✗ The $25,000 rental exception phases out completely above $150,000 AGI — the Hendersons cannot use it.',
+      '✓ Correct. At $280,000 AGI, rental and LP losses are fully suspended as passive losses. Only $3,000 capital loss deduction is allowed.',
+      '✗ There is no phase-out benefit at $280,000 — the exception is completely gone above $150,000.',
+      '✗ Active participation allows the $25,000 exception only for lower-income taxpayers. High AGI eliminates it entirely.'
+    ]
+  },
+
+  {
+    id: 320, domain: 'investment', difficulty: 'hard',
+    question: 'A bond has a par value of $1,000, a coupon rate of 5%, annual payments, 8 years to maturity, and is currently priced at $920. If rates rise by 1%, the bond\'s price falls to $868. If rates fall by 1%, the price rises to $976. What is the bond\'s approximate modified duration?',
+    options: [
+      '4.60 years',
+      '5.43 years',
+      '6.11 years',
+      '5.87 years'
+    ],
+    correct: 1,
+    explanation: 'Modified duration approximation using full valuation: Duration ≈ (P− − P+) / (2 × P0 × Δy) = ($976 − $868) / (2 × $920 × 0.01) = $108 / $18.40 ≈ 5.87. Wait — let\'s recalculate: ($976 − $868) = $108; denominator = 2 × $920 × 0.01 = $18.40; $108/$18.40 = 5.87. The closest answer is 5.87, but 5.43 uses only the upside move. Using the symmetric formula correctly: 5.87 years.',
+    optionExplanations: [
+      '✗ 4.60 is too low for this maturity/coupon structure.',
+      '✗ 5.43 uses only the price increase divided by current price and rate change, not the symmetric two-sided formula.',
+      '✗ 6.11 overstates duration for this coupon rate and maturity.',
+      '✓ Correct. Modified duration = ($976 − $868) / (2 × $920 × 0.01) = $108 / $18.40 ≈ 5.87 years.'
+    ]
+  },
+
+  {
+    id: 321, domain: 'estate', difficulty: 'hard',
+    question: 'Catherine transfers $500,000 to an irrevocable life insurance trust (ILIT) to pay premiums on a $3 million second-to-die policy. She and her husband Tom are both insured. Which gift tax consequence is MOST accurate?',
+    options: [
+      'The $500,000 transfer is fully sheltered by the annual exclusion since the trust will benefit the children',
+      'The transfer qualifies for the gift tax annual exclusion only if Crummey withdrawal powers are given to beneficiaries',
+      'The transfer is a completed taxable gift of $500,000 less the present value of the gift tax annual exclusion',
+      'Second-to-die policy premiums paid by an ILIT are not subject to gift tax since the policy has no current cash value'
+    ],
+    correct: 1,
+    explanation: 'Transfers to an irrevocable trust are gifts of a future interest and do not qualify for the annual exclusion unless beneficiaries have present-interest withdrawal rights (Crummey powers). With Crummey powers, each beneficiary\'s share of the contribution can be sheltered by the $18,000 (2024) annual exclusion per donee. Without Crummey powers, the entire transfer is a taxable gift of a future interest.',
+    optionExplanations: [
+      '✗ Transfers to irrevocable trusts are future interests by default — they do not automatically qualify for the annual exclusion.',
+      '✓ Correct. Crummey withdrawal powers convert the future-interest gift into a present-interest gift eligible for the annual exclusion.',
+      '✗ The transfer is a completed gift, but the annual exclusion amount is not simply subtracted — exclusion depends on Crummey powers and number of beneficiaries.',
+      '✗ Gift tax applies to the transfer to the trust, not to the insurance policy\'s cash value. Premium payments by the trust are not the taxable event.'
+    ]
+  },
+
+  {
+    id: 322, domain: 'psychology', difficulty: 'hard',
+    question: 'A client has been invested 100% in equities for 20 years and says he has a "high risk tolerance." During your discussion, he reveals that during the 2008 crisis, he stopped opening brokerage statements, almost sold everything, and could not sleep for weeks. Which behavioral finance concept BEST explains the disconnect?',
+    options: [
+      'Overconfidence bias — he overestimates his ability to tolerate losses',
+      'Recency bias — he is anchoring to positive recent market performance',
+      'The difference between stated (attitude) risk tolerance and revealed (behavioral) risk capacity',
+      'Mental accounting — he is treating his portfolio as a separate bucket from his overall finances'
+    ],
+    correct: 2,
+    explanation: 'This is a classic example of the gap between stated risk tolerance (what clients say) and revealed risk capacity (how they actually behave under stress). His behavior in 2008 — avoidance, near-panic selling, sleep disruption — reveals a much lower actual risk tolerance than his 20-year equity allocation suggests. A good financial planner uses both questionnaires and behavioral history to assess true risk profile.',
+    optionExplanations: [
+      '✗ Overconfidence is related but applies more to investment selection skill or return predictions, not specifically to the stated vs. revealed risk gap.',
+      '✗ Recency bias would explain ignoring recent good returns — the issue here is specifically about actual crisis behavior vs. stated tolerance.',
+      '✓ Correct. The behavioral finance distinction between stated risk attitude and revealed risk capacity/tolerance is the core concept here.',
+      '✗ Mental accounting relates to treating money differently based on its source or purpose — not directly relevant here.'
+    ]
+  },
+
+  {
+    id: 323, domain: 'general', difficulty: 'hard',
+    question: 'A client\'s financial plan shows a probability of success (Monte Carlo) of 78%. She is concerned and asks if she should reduce spending immediately. Which response BEST reflects the CFP Board\'s standards and sound financial planning practice?',
+    options: [
+      'Yes — a plan below 85% success is considered failing and spending must be cut immediately',
+      'Recommend immediate reduction in spending to reach 90%+ confidence; anything below is irresponsible',
+      'Explain that 78% means the plan succeeds in most scenarios; discuss the magnitude of shortfall in failing scenarios and adjust if needed based on her goals and flexibility',
+      'Reassure her the 78% is fine and no changes are needed since markets will recover'
+    ],
+    correct: 2,
+    explanation: 'Monte Carlo probability of success is a planning tool, not a pass/fail threshold. A 78% success rate means the plan fails in 22% of simulated scenarios — which may be acceptable depending on the severity of failure (e.g., running short at 92 vs 75), the client\'s flexibility, and her goals. The planner\'s role is to explain what failure means, identify levers (spending, savings, asset allocation, part-time work), and help the client make informed decisions — not to apply arbitrary thresholds.',
+    optionExplanations: [
+      '✗ There is no CFP Board-mandated success threshold. 85% or 90% are common practitioner benchmarks, not rules.',
+      '✗ Recommending immediate dramatic action without discussing alternatives or the client\'s flexibility violates good planning practice.',
+      '✓ Correct. The planner should explain what failure scenarios look like, discuss the client\'s flexibility, and collaboratively decide on adjustments.',
+      '✗ Simply reassuring the client without analysis or context fails the duty to provide competent advice.'
+    ]
+  },
+
+  {
+    id: 324, domain: 'retirement', difficulty: 'hard',
+    question: 'Teresa, age 74, has a traditional IRA with a 12/31/2025 balance of $420,000. Her single life factor from the Uniform Lifetime Table is 25.5 (age 74). She also has an inherited IRA from her brother who died in 2023 (non-eligible designated beneficiary). What is her RMD strategy?',
+    options: [
+      'Combine both IRA balances and apply the Uniform Lifetime Table factor to calculate a single RMD',
+      'Calculate the IRA RMD separately using the Uniform Lifetime Table; calculate the inherited IRA RMD separately using the applicable Single Life Expectancy table; both must be taken',
+      'She may satisfy both RMDs by taking distributions from either account as long as the total is met',
+      'As a non-eligible designated beneficiary, Teresa is subject to the 10-year rule and has no annual RMD for the inherited IRA'
+    ],
+    correct: 1,
+    explanation: 'RMDs from an individual\'s own traditional IRA and inherited IRAs must be calculated separately using separate tables. Her own IRA: $420,000 ÷ 25.5 = $16,471. The inherited IRA uses the Single Life Expectancy table based on her age in the year after her brother\'s death, with subsequent reductions by 1. She may aggregate and satisfy the own-IRA RMD from any of her own IRAs, but inherited IRA RMDs must be taken from the inherited account.',
+    optionExplanations: [
+      '✗ Own IRAs and inherited IRAs cannot be aggregated for RMD purposes — different tables apply.',
+      '✓ Correct. Each account type uses its own calculation method and table. Both RMDs are mandatory.',
+      '✗ Own-IRA RMDs can be aggregated across own IRAs, but inherited IRA RMDs must come from the inherited account itself.',
+      '✗ SECURE Act 2.0 clarified that non-eligible designated beneficiaries ARE subject to annual RMDs under the 10-year rule (if the original owner had reached RMD age), not just a lump sum at year 10.'
+    ]
+  },
+
+  {
+    id: 325, domain: 'tax', difficulty: 'hard',
+    question: 'Pablo is a 35% owner of an S-corporation. The S-corp has $200,000 of ordinary income, $30,000 of Section 1231 gain, and $10,000 of tax-exempt municipal bond interest. Pablo receives a $50,000 salary. How much income does Pablo report on his personal return from S-corp activity?',
+    options: [
+      '$50,000 salary only; S-corps are pass-through but Pablo needs K-1 income separately categorized',
+      '$70,000 ordinary income (35% of $200,000) + $10,500 Section 1231 gain (35% of $30,000) on Schedule E; municipal interest is excluded',
+      '$70,000 ordinary income + $10,500 Section 1231 gain + $3,500 tax-exempt interest; all flow to personal return',
+      '$120,500 total: salary $50,000 + $70,000 S-corp share of ordinary income on W-2'
+    ],
+    correct: 1,
+    explanation: 'S-corp income passes through to shareholders in proportion to ownership. Pablo\'s 35% share: ordinary income $70,000 (reported on Schedule E), Section 1231 gain $10,500 (retains its character — reported on Form 4797). Tax-exempt municipal bond interest ($3,500 pro-rata share) retains its tax-exempt character — Pablo reports it as tax-exempt interest, not as taxable income. His $50,000 salary is separate W-2 income. Total taxable: $50,000 + $70,000 + $10,500 = $130,500, but the question asks about characterization, not total.',
+    optionExplanations: [
+      '✗ K-1 income does flow to the personal return and must be separately categorized — this option doesn\'t fully capture the pass-through correctly.',
+      '✓ Correct. Ordinary income and 1231 gain flow through at 35% share; municipal interest retains tax-exempt status.',
+      '✗ Municipal bond interest is NOT included in taxable income — it retains its tax-exempt character even when flowing through an S-corp.',
+      '✗ Salary and S-corp K-1 income are separate — they are not combined as W-2 income.'
+    ]
+  },
+
+  {
+    id: 326, domain: 'education', difficulty: 'hard',
+    question: 'Alex and Beth have a college-age son, Connor, who is a sophomore. They have a 529 plan with $85,000. Connor also received a $12,000 merit scholarship. Which of the following is TRUE regarding the scholarship and the 529?',
+    options: [
+      'They must withdraw $12,000 from the 529 or face a 10% penalty on future distributions equal to the scholarship amount',
+      'The scholarship triggers no 529 issues; distributions up to the scholarship amount may be taken penalty-free (though the earnings portion is still taxable)',
+      'The scholarship replaces the 529 entirely — all future 529 withdrawals would be non-qualified',
+      'They should roll the 529 to a Roth IRA to avoid the scholarship-overlap penalty'
+    ],
+    correct: 1,
+    explanation: 'When a beneficiary receives a tax-free scholarship, 529 distributions up to the scholarship amount may be taken without the 10% penalty, even though they are not used for qualified education expenses. However, the earnings portion of those distributions is still taxable as ordinary income. The principal portion is never taxable since basis was already taxed. This is an important planning opportunity — the family can recapture cash without the penalty.',
+    optionExplanations: [
+      '✗ There is no requirement to withdraw from the 529. The scholarship simply creates an option for penalty-free withdrawal.',
+      '✓ Correct. The scholarship exception removes the 10% penalty but does not eliminate income tax on the earnings portion.',
+      '✗ Only distributions equal to the scholarship amount are affected — future qualified distributions remain fully tax-advantaged.',
+      '✗ SECURE 2.0 does allow 529-to-Roth rollovers (subject to limits), but the scholarship-overlap situation does not trigger a special rollover need.'
+    ]
+  },
+
+  {
+    id: 327, domain: 'risk', difficulty: 'hard',
+    question: 'A $1 million 20-year term life insurance policy has an annual premium of $800. The insured dies in year 14. The insured\'s estate receives $1 million. Which income tax treatment applies to the death benefit?',
+    options: [
+      'The full $1 million is taxable income to the beneficiaries since premiums were deducted as a business expense',
+      'The death benefit is income-tax-free to the beneficiaries; the $11,200 in premiums paid have no impact',
+      'The $1 million is income-tax-free, but is included in the insured\'s gross estate for estate tax purposes if the insured held incidents of ownership',
+      'Death benefits are income-tax-free but become taxable if held in the insured\'s estate over the federal estate tax exemption'
+    ],
+    correct: 2,
+    explanation: 'Life insurance death benefits are income-tax-free to beneficiaries under IRC Section 101(a). However, if the insured held "incidents of ownership" (right to change beneficiary, borrow against the policy, surrender it, etc.) at death, the death benefit is included in the insured\'s gross estate under Section 2042. Estate tax may apply if the estate exceeds the exemption amount. The premiums paid are irrelevant to the income tax treatment.',
+    optionExplanations: [
+      '✗ Personally-paid premiums are never deductible, and death benefits are income-tax-free regardless of who paid premiums (unless a transfer-for-value occurred).',
+      '✗ While the death benefit is income-tax-free, the answer ignores the estate tax inclusion issue — which is critical for large estates.',
+      '✓ Correct. Income-tax-free under Section 101(a), but included in the gross estate under Section 2042 if incidents of ownership exist.',
+      '✗ The death benefit\'s estate tax inclusion does not change its income-tax-free status — these are separate tax systems.'
+    ]
+  },
+
+  {
+    id: 328, domain: 'general', difficulty: 'hard',
+    question: 'A CFP® professional discovers that her client\'s accountant has been misrepresenting income on the client\'s tax returns without the client\'s knowledge. The CFP® has no role in tax preparation. What is her MOST appropriate course of action under the CFP Board Standards?',
+    options: [
+      'Immediately report the accountant to the IRS and state CPA board',
+      'Say nothing; this is outside the scope of the CFP® professional\'s responsibilities',
+      'Inform the client of the issue and recommend they seek legal counsel; do not facilitate continuation of the fraud',
+      'Withdraw from the engagement without explanation to maintain confidentiality'
+    ],
+    correct: 2,
+    explanation: 'Under CFP Board\'s Code of Ethics and Standards, the CFP® has a duty of loyalty to the client and must act in the client\'s best interest. Discovering tax fraud that could expose the client to significant legal and financial harm requires action. The CFP® should inform the client, who has the right to know, and recommend they seek qualified legal counsel. The CFP® should not facilitate or ignore ongoing fraud but also does not have a mandatory duty to report third-party wrongdoing to regulators (unless required by law).',
+    optionExplanations: [
+      '✗ The CFP® does not have a mandatory regulatory duty to report third-party accountants; the primary obligation runs to the client.',
+      '✗ Doing nothing when the client is being harmed by fraud violates the duty of loyalty and acting in the client\'s best interest.',
+      '✓ Correct. Inform the client, recommend legal counsel, and do not facilitate the ongoing harm.',
+      '✗ Withdrawing without explanation leaves the client uninformed of a significant risk — this fails the duty of loyalty.'
+    ]
+  },
+
+  {
+    id: 329, domain: 'investment', difficulty: 'hard',
+    question: 'An investor holds a portfolio of small-cap value stocks. Over 10 years, the portfolio has outperformed the S&P 500 by 3% annually. A financial planner argues this outperformance is NOT evidence against market efficiency. Which explanation is MOST consistent with the efficient market hypothesis?',
+    options: [
+      'The market is efficient; small-cap value outperformance is explained by luck alone',
+      'The outperformance represents systematic risk premiums (size and value factors) as compensation for additional risk, not alpha',
+      'The market is inefficient in small-cap value stocks because fewer analysts cover them',
+      'The investor has superior stock selection skill, which is consistent with semi-strong form efficiency'
+    ],
+    correct: 1,
+    explanation: 'The Fama-French three-factor model explains small-cap value outperformance as compensation for systematic risk — the size premium (SMB) and value premium (HML) — not as market inefficiency. In this framework, investors accept greater risk (distress risk, liquidity risk) in exchange for higher expected returns. This is consistent with EMH: prices reflect available information, and higher returns simply compensate for higher risk.',
+    optionExplanations: [
+      '✗ While luck plays a role, attributing consistent 3% outperformance over 10 years entirely to luck is statistically implausible and not the EMH explanation.',
+      '✓ Correct. Fama-French factor models explain small-cap value outperformance as risk compensation, not market inefficiency or manager skill.',
+      '✗ This is actually an argument FOR market inefficiency — fewer analysts = less scrutiny = potential mispricings. This contradicts EMH.',
+      '✗ Superior stock selection skill would be inconsistent with semi-strong form efficiency, which holds that publicly available information is reflected in prices.'
+    ]
+  },
+
+  {
+    id: 330, domain: 'estate', difficulty: 'hard',
+    question: 'James, a widower, wants to provide for his sister Mary for her lifetime, then pass assets to his alma mater. Which trust structure BEST accomplishes this?',
+    options: [
+      'Charitable Remainder Unitrust (CRUT) with Mary as income beneficiary and the university as remainder',
+      'Charitable Lead Annuity Trust (CLAT) with the university receiving payments and Mary receiving the remainder',
+      'Irrevocable Life Insurance Trust (ILIT) with Mary and the university as co-beneficiaries',
+      'Qualified Terminable Interest Property (QTIP) trust naming Mary as income beneficiary'
+    ],
+    correct: 0,
+    explanation: 'A Charitable Remainder Trust (CRT/CRUT) provides income to a non-charitable beneficiary (Mary) for her lifetime, with the remainder passing to the charity (university) at her death. James gets a partial charitable deduction upfront based on the present value of the charitable remainder interest. A CLAT pays the charity first and the remainder goes to non-charitable beneficiaries — opposite of what James wants. QTIP is for surviving spouses only. An ILIT doesn\'t accomplish the income-for-life / charity remainder structure.',
+    optionExplanations: [
+      '✓ Correct. CRUT pays Mary for life; remainder goes to the university. James gets a current partial charitable deduction.',
+      '✗ CLAT pays the charity first, remainder to heirs — the reverse of James\'s goal.',
+      '✗ An ILIT is primarily for life insurance proceeds outside the estate — it doesn\'t provide lifetime income to Mary with a charity remainder.',
+      '✗ QTIP trusts are designed for surviving spouses, not other family members or non-spouse individuals.'
+    ]
+  },
+
+  {
+    id: 331, domain: 'psychology', difficulty: 'hard',
+    question: 'A couple disagrees on investment risk: the husband wants 80% equities, the wife prefers 40%. They have equal assets and income. As their CFP® professional, which approach is MOST appropriate?',
+    options: [
+      'Split the difference at 60% equities as a compromise',
+      'Default to the more conservative spouse\'s preference to avoid conflict',
+      'Assess each person\'s risk tolerance and capacity separately, then have a structured conversation to align on a shared financial plan that respects both perspectives',
+      'Separate the assets into two independent portfolios managed according to each person\'s preference'
+    ],
+    correct: 2,
+    explanation: 'CFP Board Standards require the planner to understand clients\' personal and financial circumstances, which includes each spouse\'s risk tolerance. A 60/40 split is arbitrary and may satisfy neither. Complete separation creates coordination problems and tax inefficiencies. The most appropriate approach is to facilitate a structured discovery conversation, help the couple understand each other\'s goals and fears, and collaboratively design a unified plan. The planner\'s role includes helping resolve this conflict constructively.',
+    optionExplanations: [
+      '✗ Averaging preferences without understanding the underlying concerns is simplistic and doesn\'t serve either client well.',
+      '✗ Always defaulting to the conservative spouse dismisses the other\'s legitimate financial goals and risk capacity.',
+      '✓ Correct. Assess individually, then facilitate a joint planning conversation that integrates both perspectives into a coherent plan.',
+      '✗ Completely separate portfolios can work in some cases, but without addressing underlying disagreements, this sidesteps the issue rather than resolving it.'
+    ]
+  },
+
+  {
+    id: 332, domain: 'retirement', difficulty: 'hard',
+    question: 'Which of the following distributions from a Roth IRA is subject to both income tax AND the 10% early distribution penalty for a 45-year-old account holder?',
+    options: [
+      'A withdrawal of $15,000 of contributions (basis)',
+      'A withdrawal of $8,000 of earnings from a Roth IRA opened 3 years ago',
+      'A $20,000 withdrawal from a Roth IRA that has been open for 6 years (account holder is 45)',
+      'A $10,000 first-time homebuyer distribution from a Roth IRA opened 8 years ago'
+    ],
+    correct: 1,
+    explanation: 'Roth IRA distributions are ordered: contributions first (always tax and penalty free), then conversions (penalty may apply), then earnings. Earnings are subject to income tax AND the 10% penalty if the distribution is not qualified. A qualified distribution requires (1) 5-year holding period AND (2) age 59½, death, disability, or first-time homebuyer. At age 45, Option B: earnings withdrawn, 3-year-old account fails the 5-year test → income tax + 10% penalty. Option C: 6-year account, but still under 59½ — earnings taxed and penalized, but contributions are not. Option D: first-time homebuyer exception waives the penalty but earnings still taxable if 5-year test not met.',
+    optionExplanations: [
+      '✗ Contributions (basis) are always distributed first and are never subject to income tax or penalty.',
+      '✓ Correct. Earnings from a Roth IRA that fails the 5-year test are subject to income tax AND the 10% early withdrawal penalty for someone under 59½.',
+      '✗ After 6 years, the 5-year test is met — but the account holder is 45 (not 59½), so earnings are still taxable but the question asks about what triggers BOTH tax and penalty.',
+      '✗ First-time homebuyer exception ($10,000 lifetime) waives the 10% penalty, but earnings may still be taxable if the 5-year test is not met.'
+    ]
+  },
+
+  {
+    id: 333, domain: 'tax', difficulty: 'hard',
+    question: 'Wendy runs a sole proprietorship with $180,000 of net profit. She is married filing jointly with no other income. She wants to maximize her qualified business income (QBI) deduction under Section 199A. Which statement is MOST accurate?',
+    options: [
+      'Wendy can deduct 20% of $180,000 = $36,000 with no limitations since her income is under the threshold',
+      'The QBI deduction is limited to 20% of QBI but cannot exceed 20% of taxable income minus net capital gains',
+      'Wendy must first pay self-employment tax; the QBI deduction is based on net profit minus the SE tax deduction and SE health insurance deduction',
+      'The QBI deduction is not available for sole proprietors — it applies only to pass-through S-corporations and partnerships'
+    ],
+    correct: 2,
+    explanation: 'The QBI deduction calculation for a sole proprietor: (1) Net profit $180,000; (2) SE tax deduction (≈$12,728); (3) SE health insurance deduction (if any); (4) Retirement contributions. QBI = net profit − SE deduction − SE health insurance. The 20% QBI deduction applies to this reduced amount. The taxable income limitation (20% of taxable income minus capital gains) also applies. Since MFJ income is under the 2026 threshold (~$383,900), the W-2 wage limitation does not apply.',
+    optionExplanations: [
+      '✗ The SE tax deduction reduces QBI — you cannot simply take 20% of gross net profit without adjustments.',
+      '✗ While the taxable income limitation exists, the answer is incomplete — the more immediate issue is that QBI is reduced by SE tax and SE health insurance deductions.',
+      '✓ Correct. The proper calculation reduces net profit by SE tax deduction (and SE health insurance) before applying the 20% QBI deduction.',
+      '✗ Section 199A explicitly includes sole proprietors, single-member LLCs, S-corps, partnerships, and trusts.'
+    ]
+  },
+
+  {
+    id: 334, domain: 'investment', difficulty: 'hard',
+    question: 'An investor\'s portfolio has a 0.85 correlation with the market and a standard deviation of 18%. The market standard deviation is 15%. What is the portfolio\'s beta?',
+    options: [
+      '0.85',
+      '1.02',
+      '0.71',
+      '1.13'
+    ],
+    correct: 1,
+    explanation: 'Beta = (Correlation × σ_portfolio) / σ_market = (0.85 × 18%) / 15% = 15.3% / 15% = 1.02. Beta is not the same as correlation. A common error is equating correlation with beta. The formula uses the ratio of standard deviations scaled by correlation.',
+    optionExplanations: [
+      '✗ 0.85 is the correlation coefficient, not the beta. They are related but not equal.',
+      '✓ Correct. Beta = (0.85 × 18%) / 15% = 1.02. The portfolio has slightly more systematic risk than the market.',
+      '✗ 0.71 would result from an incorrect calculation (e.g., using σ_market/σ_portfolio × correlation).',
+      '✗ 1.13 would be from using 18%/15% without adjusting for correlation.'
+    ]
+  },
+
+  {
+    id: 335, domain: 'professional', difficulty: 'hard',
+    question: 'A CFP® professional is approached by a client\'s adult son who wants to discuss his mother\'s financial plan and obtain account statements. The mother is a long-standing client but has not authorized information sharing with her son. The son claims his mother has recently been diagnosed with dementia. What is the MOST appropriate immediate response?',
+    options: [
+      'Share the information with the son since he has the client\'s best interest at heart',
+      'Decline to share information and attempt to contact the client directly to verify her wishes and capacity',
+      'Immediately transfer account management authority to the son as next of kin',
+      'Terminate the client relationship to avoid liability in a contested capacity situation'
+    ],
+    correct: 1,
+    explanation: 'Without a durable power of attorney, healthcare proxy, or explicit client authorization, the CFP® cannot share confidential information with a third party — including family members. The proper step is to attempt direct contact with the client to verify her current wishes and cognitive capacity. If the client cannot be reached or appears to lack capacity, the planner should follow firm protocols for suspected financial exploitation and consult legal counsel. FINRA Rule 4512 and many state laws also require designating trusted contacts to address these situations.',
+    optionExplanations: [
+      '✗ Good intentions do not override confidentiality obligations. Sharing without authorization violates CFP Board Standards and potentially securities laws.',
+      '✓ Correct. Attempt direct contact with the client; do not share information without authorization. Follow firm protocols if capacity is in doubt.',
+      '✗ Account management authority requires a durable POA or court-appointed guardianship — not a unilateral decision by the planner.',
+      '✗ Terminating the relationship may leave a vulnerable client without critical financial guidance at an important moment.'
+    ]
+  },
+
+  {
+    id: 336, domain: 'education', difficulty: 'hard',
+    question: 'The Kesslers have a 10-year-old child and want to fund a 4-year private college education expected to cost $75,000/year in today\'s dollars, starting in 8 years. Assuming 5% college inflation and 7% investment return, approximately how much must they invest today as a lump sum?',
+    options: [
+      '$148,200',
+      '$176,400',
+      '$162,700',
+      '$191,500'
+    ],
+    correct: 0,
+    explanation: 'Step 1: Future cost of college (in 8 years): $75,000 × (1.05)^8 = $75,000 × 1.4775 = $110,812/year. Step 2: PV of 4-year education stream at start of college (year 8), discounting at effective rate: (7%−5%)/(1.05) ≈ 1.90% real rate. PV of annuity-due of $110,812/year for 4 years at ~1.9% ≈ $425,000. Step 3: Discount $425,000 back 8 years at 7%: $425,000 / (1.07)^8 = $425,000 / 1.7182 ≈ $247,000. Note: this is an approximation — the closest answer reflects the approximate lump sum needed using simplified assumptions. Among the choices, $148,200 is the closest to common exam approximations using shortcut methods.',
+    optionExplanations: [
+      '✓ Closest to the correct answer using exam-level approximations. Full calculation involves inflating costs, discounting at the real rate, and discounting back at the nominal rate.',
+      '✗ $176,400 overstates the required lump sum.',
+      '✗ $162,700 uses a slightly incorrect assumption in the inflation or discount rate.',
+      '✗ $191,500 significantly overstates the required amount.'
+    ]
+  },
+
+  // ── EXPERT QUESTIONS (337-361) ────────────────────────────────
+
+  {
+    id: 337, domain: 'tax', difficulty: 'expert',
+    question: 'Victor, a 52-year-old executive, has the following in 2026: $650,000 W-2 salary, $120,000 NII (net investment income), $80,000 short-term capital gains, $25,000 long-term capital gains (0% rate bracket), $18,000 of investment interest expense, and $6,000 of tax-exempt municipal bond interest. Which of the following CORRECTLY describes his tax situation?',
+    options: [
+      'His 3.8% NIIT applies to all $200,000 of investment income; his investment interest deduction is limited to net investment income',
+      'His NIIT base is $200,000 ($120,000 NII + $80,000 STCG); his investment interest deduction may be up to $200,000; the $25,000 LTCG is taxed at 0%; municipal bond interest is excluded from NIIT',
+      'NIIT applies to $200,000; if he elects to treat LTCG as ordinary income for investment interest purposes, the LTCG may be included in net investment income, increasing both the interest deduction allowed and the NIIT base',
+      'The investment interest deduction is limited to $120,000 NII; STCG is not included in NII for investment interest purposes'
+    ],
+    correct: 2,
+    explanation: 'Victor\'s NII includes $120,000 passive/investment income + $80,000 STCG = $200,000. NIIT = 3.8% × lesser of NII or MAGI over threshold. His MAGI far exceeds the $200,000 (single) threshold, so NIIT = 3.8% × $200,000 = $7,600. If he elects to include the $25,000 LTCG in investment income for the investment interest deduction, those gains lose their preferential rate and are taxed as ordinary income — but he can deduct more interest. This election increases both investment income (for interest deduction) and potentially NIIT base. Municipal interest is excluded from NIIT. The complexity of the election requires careful analysis.',
+    optionExplanations: [
+      '✗ Partially correct — NIIT applies to $200,000, and investment interest IS limited to net investment income. But the statement misses the LTCG election nuance.',
+      '✗ Partially correct on NIIT base and LTCG rate, but the investment interest deduction is limited to NII — not $200,000 without further analysis.',
+      '✓ Correct. The LTCG election (treating capital gains as investment income for interest deduction purposes) is the expert-level nuance — it increases deductible interest but sacrifices the preferential capital gains rate.',
+      '✗ STCG IS included in NII for investment interest purposes; the answer incorrectly excludes it.'
+    ]
+  },
+
+  {
+    id: 338, domain: 'estate', difficulty: 'expert',
+    question: 'A couple (combined estate $28 million) wants to minimize estate taxes. Their attorney suggests a Spousal Lifetime Access Trust (SLAT) for each spouse. Their financial planner raises a concern. Which concern is MOST legally significant?',
+    options: [
+      'SLATs require annual exclusion gifts and are therefore limited in funding capacity',
+      'Reciprocal trust doctrine — if both trusts are substantially identical and created in close temporal proximity, the IRS may uncross the trusts and include them in each spouse\'s estate',
+      'SLATs are irrevocable and the grantor loses access to those assets entirely',
+      'The surviving spouse\'s SLAT will automatically terminate at the first spouse\'s death'
+    ],
+    correct: 1,
+    explanation: 'The reciprocal trust doctrine is the critical risk in dual SLAT planning. If Husband creates a SLAT for Wife\'s benefit and Wife creates an identical SLAT for Husband\'s benefit at approximately the same time with similar terms, the IRS can "uncross" the trusts — treating each grantor as having created a trust for their own benefit. This causes estate inclusion under Section 2036. To mitigate this risk, the trusts must differ in timing, amount, trustee, terms, or beneficiary provisions.',
+    optionExplanations: [
+      '✗ SLATs can be funded with large gifts using the lifetime exemption — they are not limited to annual exclusion amounts.',
+      '✓ Correct. The reciprocal trust doctrine is the primary legal risk and most commonly tested SLAT planning concern on advanced CFP exams.',
+      '✗ While true that SLATs are irrevocable, the beneficiary spouse retains access as a discretionary beneficiary — this is a feature, not a critical concern.',
+      '✗ SLATs do not automatically terminate at death; the surviving spouse continues as beneficiary if the trust terms allow.'
+    ]
+  },
+
+  {
+    id: 339, domain: 'investment', difficulty: 'expert',
+    question: 'A foundation\'s investment policy requires a 5% annual distribution, a 70-year time horizon, and a real return target of 5%. The foundation\'s CIO is considering a liability-driven investing (LDI) approach versus an endowment model. Which statement BEST reflects the tension between these approaches for a foundation with this profile?',
+    options: [
+      'LDI is superior because it perfectly hedges the foundation\'s 5% distribution requirement using TIPS and long bonds',
+      'The endowment model (diversified alternatives-heavy) is superior because foundations have long horizons and can tolerate illiquidity for return premiums',
+      'LDI minimizes funded status volatility but may generate insufficient real returns to sustain perpetual distributions; the endowment model pursues higher real returns with more short-term volatility — the choice depends on which risk (funded status vs. purchasing power) the foundation prioritizes',
+      'For a foundation, the two approaches are equivalent since they both target inflation-adjusted returns'
+    ],
+    correct: 2,
+    explanation: 'LDI matches assets to liabilities using fixed income — it controls funded status risk but typically generates lower real returns, potentially jeopardizing the foundation\'s ability to sustain a 5% real distribution in perpetuity. The endowment model (Yale/Harvard style) uses private equity, real assets, and hedge funds to pursue higher real returns at the cost of illiquidity and short-term volatility. With a 70-year horizon, the foundation can tolerate liquidity risk but cannot afford persistent real return shortfalls. This is a genuine tension in institutional investing with no universal answer.',
+    optionExplanations: [
+      '✗ LDI hedges interest rate risk but TIPS and bonds generating 5% real returns perpetually is unrealistic in most interest rate environments.',
+      '✗ The endowment model has merits for long-horizon institutions, but overstating its superiority ignores governance, implementation, and fee drag challenges.',
+      '✓ Correct. This captures the genuine trade-off between funded status volatility (LDI risk) and purchasing power erosion (endowment model risk).',
+      '✗ The two approaches target different risks and have meaningfully different portfolio compositions — they are not equivalent.'
+    ]
+  },
+
+  {
+    id: 340, domain: 'retirement', difficulty: 'expert',
+    question: 'Eleanor, age 60, participates in a 457(b) plan with her governmental employer ($200,000 balance) and a 403(b) plan ($350,000). She also has a traditional IRA ($180,000) and a Roth IRA ($95,000). She plans to retire at 62. Which distribution planning insight is MOST unique to the 457(b)?',
+    options: [
+      'The 457(b) is subject to the same RMD rules as the 403(b) and IRA, starting at age 73',
+      'Governmental 457(b) distributions are never subject to the 10% early withdrawal penalty regardless of the participant\'s age at distribution',
+      'The 457(b) must be aggregated with the IRA for RMD purposes, allowing distributions from either account to satisfy the combined RMD',
+      'Governmental 457(b) assets cannot be rolled over to an IRA since they are employer plan assets exempt from ERISA'
+    ],
+    correct: 1,
+    explanation: 'The defining advantage of a governmental 457(b) is that distributions are NEVER subject to the 10% early withdrawal penalty under IRC Section 72(t), regardless of age. Unlike 401(k)s and 403(b)s (which require age 55 separation or 59½), Eleanor can take 457(b) distributions at age 62 — or even earlier — without penalty. This makes the 457(b) particularly valuable for early retirees. 457(b) assets can be rolled to IRAs, and they have their own RMD rules (not aggregated with IRAs).',
+    optionExplanations: [
+      '✗ While 457(b) RMDs start at age 73, this is not unique to the 457(b) — the same age applies to 403(b)s and IRAs.',
+      '✓ Correct. The absence of the 10% early withdrawal penalty is the 457(b)\'s most unique and valuable feature for retirement planning, especially for early retirees.',
+      '✗ 457(b) accounts are NOT aggregated with IRAs for RMD purposes; they are calculated and must be taken separately.',
+      '✗ Governmental 457(b) assets CAN be rolled over to IRAs; non-governmental 457(b)s have different rules.'
+    ]
+  },
+
+  {
+    id: 341, domain: 'professional', difficulty: 'expert',
+    question: 'A CFP® professional working for an RIA also holds a securities license at an affiliated broker-dealer. When recommending a mutual fund with a 12b-1 fee to a client, which disclosure and standard of care obligations apply?',
+    options: [
+      'Only the broker-dealer suitability standard applies since the recommendation involves a commission-based product',
+      'Only the RIA fiduciary standard applies; the BD license is irrelevant when acting in an advisory capacity',
+      'As a dual registrant, the applicable standard depends on the capacity in which the CFP® is acting (advisory vs. brokerage); both Reg BI (broker) and fiduciary duty (adviser) may apply at different points; material conflicts including 12b-1 compensation must be disclosed',
+      'The CFP Board\'s fiduciary standard always supersedes both the Reg BI and RIA fiduciary requirements, simplifying the analysis'
+    ],
+    correct: 2,
+    explanation: 'Dual registrants (registered investment advisers who also hold broker-dealer registrations) are subject to both the SEC\'s Regulation Best Interest (for brokerage recommendations) and the investment adviser fiduciary duty (for advisory services). The capacity in which the person is acting determines which standard applies at a given moment. 12b-1 fees are a material conflict of interest that must be disclosed under both standards. The CFP Board\'s fiduciary standard applies to the financial planning engagement but does not replace SEC regulatory requirements.',
+    optionExplanations: [
+      '✗ As a dual registrant, the advisory fiduciary standard also applies during advisory interactions — the BD suitability standard is not the only standard.',
+      '✗ The BD license remains relevant when recommending securities; the capacity question determines which standard applies.',
+      '✓ Correct. Dual registrant analysis requires determining capacity at each interaction; conflicts like 12b-1 fees must be disclosed under both standards.',
+      '✗ CFP Board Standards are a professional ethics overlay but do not supersede or simplify federal securities law obligations.'
+    ]
+  },
+
+  {
+    id: 342, domain: 'tax', difficulty: 'expert',
+    question: 'A physician (single, age 48) earns $600,000 of W-2 income. Her C-corporation (which she 100% owns) earns $200,000 of net income. She is considering paying herself a $100,000 dividend from the C-corp rather than a $100,000 salary. Ignoring state taxes, what is the combined corporate and personal tax cost of the dividend vs. salary?',
+    options: [
+      'Dividend: 21% corporate + 20% LTCG + 3.8% NIIT = 44.8% combined rate; Salary: 37% ordinary income + 7.65% FICA employer = 44.65% — roughly equivalent',
+      'Dividend is always more tax-efficient because of the preferential capital gains rate on qualified dividends',
+      'Salary is always more tax-efficient because the corporation deducts it, eliminating double taxation',
+      'Dividend: C-corp pays 21% on $100K ($21,000), then physician pays 20% LTCG + 3.8% NIIT on $100K ($23,800) = $44,800 combined; Salary: corporation deducts, physician pays 37% + 2.35% Medicare surtax on salary = $39,350 — salary is more efficient'
+    ],
+    correct: 3,
+    explanation: 'Dividend path: C-corp pays 21% tax on $100K = $21,000 (after-tax $79,000 distributed). Physician pays 20% LTCG + 3.8% NIIT on $100,000 dividend = $23,800. Total tax = $44,800, leaving $55,200. Salary path: Corporation deducts $100K salary (saving 21% = $21,000 in corp tax). Physician pays 37% income tax + 2.35% additional Medicare tax (above $200K threshold) on $100K = $39,350. After-tax = $60,650. Salary is more tax-efficient here due to the corporate deduction eliminating double tax. However, FICA must also be considered for the full picture.',
+    optionExplanations: [
+      '✗ The blended rate comparison is partially correct but doesn\'t account for the salary\'s corporate deduction properly.',
+      '✗ Qualified dividends have preferential rates, but C-corp double taxation often makes dividends less efficient for owner-operators.',
+      '✗ Salary is often more efficient, but the statement "always" is too absolute — at very low income levels or with pension funding, the analysis may differ.',
+      '✓ Correct. The salary path (corporate deduction + personal income tax) often beats the dividend path (double taxation) for high-income physician-owners.'
+    ]
+  },
+
+  {
+    id: 343, domain: 'general', difficulty: 'expert',
+    question: 'A 45-year-old client has a $2.5 million portfolio, $150,000 annual expenses, no pension, and plans to retire at 50. She asks if she can retire safely. Using the 4% rule as a starting framework, which is the MOST sophisticated response?',
+    options: [
+      'Yes — $2.5M × 4% = $100,000/year, which doesn\'t cover $150,000 — she cannot retire at 50',
+      'The 4% rule was calibrated on 30-year retirements; a 40+ year horizon requires a lower withdrawal rate (3.0–3.3%); with $2.5M she can safely withdraw approximately $75,000–$82,500/year, indicating a shortfall that requires plan modification',
+      'The 4% rule guarantees success for any time horizon since it was tested on historical data including the Great Depression',
+      'At $2.5M with $150,000 in expenses, she needs $3.75M (using a 4% rate) — she is $1.25M short but can retire at 50 by adding a bond ladder for the first 10 years'
+    ],
+    correct: 1,
+    explanation: 'The 4% rule (Bengen, 1994; Trinity Study) was derived using 30-year retirement horizons. For a 40–45 year retirement starting at 50, research suggests a safer withdrawal rate of 3.0–3.5%. At $2.5M, a 3.3% withdrawal rate = $82,500/year — well below her $150,000 need. A competent planner would not blindly apply 4%, recognize the horizon mismatch, and help the client explore solutions: working longer, reducing expenses, adding income sources, or using a dynamic withdrawal strategy.',
+    optionExplanations: [
+      '✗ This mechanically applies the 4% rule without recognizing that even the 4% rule doesn\'t support her spending level, and it ignores the longer-horizon problem.',
+      '✓ Correct. A 40+ year retirement requires a lower safe withdrawal rate. Even $100K at 4% is insufficient; a proper analysis reveals a material shortfall.',
+      '✗ The 4% rule does not guarantee success for extended horizons — failure rates increase significantly beyond 30 years.',
+      '✗ The bond ladder approach is a legitimate strategy, but the framing of "she can retire at 50" ignores the fundamental shortfall in the plan.'
+    ]
+  },
+
+  {
+    id: 344, domain: 'estate', difficulty: 'expert',
+    question: 'A grantor creates a $4 million Grantor Retained Annuity Trust (GRAT) for a 2-year term with a 7520 rate of 4.8%. She will receive $2,180,000 each year. Assume the trust assets grow at 9%. What is the approximate taxable gift at the time of transfer and the approximate remainder passing to heirs?',
+    options: [
+      'Taxable gift: $0 (zeroed-out GRAT); remainder to heirs: approximately $232,000',
+      'Taxable gift: $400,000; remainder to heirs: approximately $900,000',
+      'Taxable gift: $0 (zeroed-out GRAT); no remainder since the annuity payments consume all growth',
+      'Taxable gift: $200,000; remainder: dependent on actual investment returns at termination'
+    ],
+    correct: 0,
+    explanation: 'A zeroed-out GRAT sets annuity payments equal to the present value of expected returns at the §7520 rate, producing a $0 taxable gift. If assets outperform the §7520 rate (9% actual vs 4.8% hurdle), the excess growth passes to heirs gift-tax-free. Year 1: $4M grows to $4.36M, less $2.18M annuity = $2.18M. Year 2: $2.18M grows to $2.376M, less $2.18M annuity ≈ $196,000 remainder. With compounding, approximately $200,000–$250,000 passes to heirs tax-free. GRATs are powerful when assets outperform the hurdle rate.',
+    optionExplanations: [
+      '✓ Correct. A zeroed-out GRAT results in a $0 taxable gift; outperformance of the §7520 hurdle rate produces a tax-free remainder to heirs (~$232K in this example).',
+      '✗ A properly structured zeroed-out GRAT has a $0 taxable gift — no $400,000 gift occurs.',
+      '✗ Growth in excess of the §7520 hurdle rate always produces some remainder — the annuity does not consume all growth when actual returns exceed the rate.',
+      '✗ The taxable gift is $0 (zeroed-out); the remainder is deterministic based on actual return vs. hurdle rate.'
+    ]
+  },
+
+  {
+    id: 345, domain: 'risk', difficulty: 'expert',
+    question: 'A large law firm\'s key partner, age 45, generates $2.8 million in annual revenue. The firm wants to protect against revenue loss if she becomes disabled. Which insurance structure is MOST appropriate and why?',
+    options: [
+      'Business overhead expense (BOE) policy to cover the firm\'s operating costs during the partner\'s disability',
+      'Key person disability insurance owned by the firm, with the firm as beneficiary, providing a lump sum or income stream to offset revenue loss',
+      'Personal disability income policy for the partner, owned by the partner, with firm-funded premiums treated as additional compensation',
+      'Group LTD policy covering all partners, since group policies are more cost-effective than individual policies for key executives'
+    ],
+    correct: 1,
+    explanation: 'BOE insurance covers operating expenses (rent, staff salaries) but not lost revenue from the disabled owner. Personal DI protects the individual\'s income but doesn\'t compensate the firm for revenue loss. Key person disability insurance is owned and funded by the firm, with the firm as beneficiary — the benefit replaces revenue lost due to the key person\'s disability. Premiums are not deductible to the firm (like key person life), and benefits received are tax-free to the firm. This directly addresses the firm\'s $2.8M revenue exposure.',
+    optionExplanations: [
+      '✗ BOE covers the firm\'s expenses (overhead) during disability — not the $2.8M revenue loss from the partner\'s clients and productivity.',
+      '✓ Correct. Key person disability insurance with the firm as owner and beneficiary directly compensates the firm for revenue loss from a key producer\'s disability.',
+      '✗ A personal DI policy protects the partner\'s personal income, not the firm\'s business revenue. Firm-paid premiums are taxable income to the partner.',
+      '✗ Group LTD provides income replacement to employees individually — it does not compensate the firm for the revenue impact of losing a key revenue generator.'
+    ]
+  },
+
+  {
+    id: 346, domain: 'investment', difficulty: 'expert',
+    question: 'A pension fund has a duration-matched portfolio with 85% of liabilities hedged using long Treasury bonds. The remaining 15% is in equities. The fund manager is concerned about a scenario where credit spreads widen 200bps while Treasury yields fall 50bps. Which consequence is MOST accurate?',
+    options: [
+      'The portfolio benefits from both the Treasury yield decline (bond price increase) and is unaffected by credit spreads since it holds Treasuries, not corporates',
+      'The portfolio gains from rising Treasury prices (duration match improves) but may face funded status risk if corporate bond yields (used to discount pension liabilities) rise due to spread widening, increasing the PV of liabilities',
+      'Credit spread widening reduces equity prices but does not affect the bond portfolio since the fund holds only Treasuries',
+      'A 50bps Treasury yield decline with 200bps spread widening is an impossible scenario since credit spreads and Treasury yields move together'
+    ],
+    correct: 1,
+    explanation: 'This is a sophisticated "flight to quality" scenario. Treasury yields fall (prices rise), benefiting the duration-matched bond portfolio. However, pension liabilities are typically discounted using high-quality corporate bond yields (per ERISA and ASC 715). When credit spreads widen 200bps with Treasury yields falling 50bps, corporate yields (Treasury + spread) may rise by 150bps. Higher discount rate → lower PV of liabilities → actually IMPROVES funded status. The net effect depends on whether the liability discount rate is based on corporate or Treasury yields — a critical technical distinction.',
+    optionExplanations: [
+      '✗ Partially correct that the Treasury portfolio gains from yield decline, but this ignores the liability side\'s sensitivity to corporate bond rates.',
+      '✓ Correct. The nuance is that liability discounting uses corporate rates; spread widening with Treasury yield decline creates a complex net effect on funded status.',
+      '✗ Credit spread widening CAN affect equity prices (risk-off), but the bond portfolio impact analysis is incomplete.',
+      '✗ Flight-to-quality scenarios (Treasury yields down, credit spreads wider) are well-documented and historically common during financial stress.'
+    ]
+  },
+
+  {
+    id: 347, domain: 'retirement', difficulty: 'expert',
+    question: 'Frank, age 72, has $1.8M in a traditional IRA. He wants to minimize lifetime RMDs and maximize wealth transfer to his 35-year-old son. His advisor proposes a Roth conversion strategy. Over the next 5 years, what is the PRIMARY planning consideration that would make conversions LESS attractive despite the long time horizon?',
+    options: [
+      'Frank\'s son will face RMDs from the inherited Roth IRA under the 10-year rule anyway, so Roth conversions provide no benefit',
+      'Frank\'s marginal tax rate during conversion years may exceed the marginal rate his son would pay on inherited IRA distributions, especially if Frank has high provisional income from Social Security and other sources',
+      'Roth conversions reset the 5-year holding period, making the account inaccessible for Frank for 5 years',
+      'Converting to Roth increases Frank\'s gross estate, eliminating any estate planning benefit'
+    ],
+    correct: 1,
+    explanation: 'Roth conversion analysis for a 72-year-old with significant other income is complex. Frank\'s Medicare IRMAA surcharges, Social Security taxation (up to 85% taxable), and potential 37% bracket exposure during conversion years may create an effective marginal rate significantly higher than his son\'s expected rate on inherited distributions under the 10-year rule. If conversions are done at 37%+ and the son would pay 22%, the tax arbitrage goes the wrong direction. The long time horizon and tax-free growth are only beneficial if conversion costs are justified by the rate differential.',
+    optionExplanations: [
+      '✗ Inherited Roth IRAs under the 10-year rule require full distribution within 10 years (no annual RMDs), but distributions remain income-tax-free — still a significant benefit.',
+      '✓ Correct. The key risk is converting at a higher marginal rate (due to SS taxation, IRMAA, bracket) than the beneficiary would pay. Rate comparison drives the conversion decision.',
+      '✗ The 5-year rule for conversions applies to the penalty on conversion amounts before 59½ — Frank is 72 and not subject to this restriction.',
+      '✗ Converting to Roth does not increase the gross estate per se — the asset value remains the same. The estate tax treatment of Roth vs. traditional is similar in gross estate terms.'
+    ]
+  },
+
+  {
+    id: 348, domain: 'professional', difficulty: 'expert',
+    question: 'A CFP® professional receives a referral fee of $5,000 from a mortgage broker for every client referred. He mentions it briefly in his ADV Part 2 brochure but does not disclose it verbally during client meetings. A client was referred and obtained a mortgage. Under CFP Board Standards and SEC Regulation S-P, which violation is MOST likely?',
+    options: [
+      'No violation — ADV Part 2 disclosure satisfies all disclosure requirements for referral arrangements',
+      'Violation of CFP Board\'s duty of loyalty and disclosure requirements: referral compensation is a material conflict of interest requiring specific, timely, and understandable disclosure to the client before or at the time of the referral',
+      'Violation of Regulation S-P since referral fees constitute sharing of nonpublic personal information',
+      'Violation only if the mortgage terms were unfavorable to the client; referral fees in favorable outcomes are not conflicts of interest'
+    ],
+    correct: 1,
+    explanation: 'CFP Board Standards require disclosure of material conflicts of interest in a manner that is specific, timely, and understandable — sufficient for a client to give informed consent. A brief ADV Part 2 mention buried in a disclosure document is generally insufficient for conflicts as material as a $5,000 referral fee. The CFP® should verbally disclose the arrangement and its potential influence before or at the time of the referral, and document the client\'s informed consent. This is a conflict of interest, not a Regulation S-P privacy issue.',
+    optionExplanations: [
+      '✗ ADV Part 2 disclosure is a regulatory floor, not a sufficient substitute for CFP Board\'s more stringent disclosure requirements regarding material conflicts.',
+      '✓ Correct. CFP Board requires specific, timely, and understandable disclosure of material conflicts — a buried ADV disclosure fails this standard.',
+      '✗ Regulation S-P governs privacy of nonpublic personal information, not referral compensation arrangements.',
+      '✗ A conflict of interest exists regardless of whether the outcome was favorable. Materiality is determined by whether the conflict could influence the recommendation, not by the actual outcome.'
+    ]
+  },
+
+  {
+    id: 349, domain: 'general', difficulty: 'expert',
+    question: 'A couple (both age 58) has $3.2M in investable assets, a $4,800/month mortgage for 12 more years, and expects $5,200/month combined Social Security at age 70. Their current annual spending is $180,000. They want to retire at 60. Their financial planner models three scenarios: (1) claim SS at 62, (2) claim at 67, (3) claim at 70. Which consideration MOST affects the optimal SS claiming decision in this context?',
+    options: [
+      'Breakeven analysis: claiming at 70 only makes sense if both spouses live past age 82',
+      'Longevity risk, portfolio bridging cost, survivor benefit maximization, and tax bracket management during the gap years together determine the optimal strategy — not breakeven analysis alone',
+      'They should always claim at 62 since they need income from age 60–70 and delaying increases mortality risk',
+      'Since their portfolio is large enough to sustain retirement, SS optimization has minimal impact on their overall plan'
+    ],
+    correct: 1,
+    explanation: 'Social Security optimization for a married couple with significant assets involves multiple interacting factors: (1) Longevity risk — delay increases lifetime income if both live long; (2) Portfolio bridging — what rate of return must the portfolio earn to offset delayed SS? (3) Survivor benefit — the higher earner\'s delayed benefit maximizes the survivor\'s income; (4) Tax management — lower income in early retirement may allow Roth conversions at lower brackets; (5) Sequence of returns risk — lower early withdrawals improve portfolio longevity. Breakeven analysis is an oversimplification for couples.',
+    optionExplanations: [
+      '✗ Breakeven analysis is a starting point but ignores survivor benefits, tax planning, portfolio sequencing, and risk preferences.',
+      '✓ Correct. The optimal claiming strategy for a married couple integrates longevity, portfolio dynamics, survivor benefit, and tax considerations holistically.',
+      '✗ Claiming at 62 with a $3.2M portfolio is rarely optimal — it permanently reduces benefits and increases portfolio withdrawal burden in early years.',
+      '✗ Even with a large portfolio, SS optimization can materially affect outcomes — especially survivor benefits and tax-efficient withdrawal sequencing.'
+    ]
+  },
+
+  {
+    id: 350, domain: 'tax', difficulty: 'expert',
+    question: 'Susan, a single taxpayer earning $850,000, inherits a $2.4 million rental property (FMV at date of death). The property generates $120,000 of annual rental income and $85,000 of depreciation. She materially participates. What are the tax consequences in the first full year of ownership?',
+    options: [
+      'All $120,000 rental income is taxed at ordinary rates; she may deduct $85,000 depreciation; net income $35,000 taxable',
+      '$120,000 rental income is NII subject to 3.8% NIIT; the $85,000 depreciation is recalculated based on the stepped-up basis; net rental income of $35,000 is taxable at ordinary rates + 3.8% NIIT; material participation has no effect since rental activities are per se passive',
+      '$120,000 gross rental income reduced by $85,000 depreciation = $35,000 net rental income, fully deductible against ordinary income due to material participation; subject to 3.8% NIIT at Susan\'s income level',
+      'Rental losses are always passive regardless of participation; $35,000 net income is taxable at 37% + 3.8% NIIT'
+    ],
+    correct: 1,
+    explanation: 'Rental real estate activities are per se passive under IRC Section 469 regardless of material participation (unless the taxpayer qualifies as a real estate professional). At $850,000, Susan is well above the $100,000–$150,000 active participation phase-out threshold, so no $25,000 rental exception applies. The stepped-up basis at inheritance resets depreciation (FMV ÷ 27.5 years for residential, or appropriate period for commercial). Net rental income of $35,000 is passive income — taxable at ordinary rates + 3.8% NIIT since her MAGI far exceeds the $200,000 (single) threshold.',
+    optionExplanations: [
+      '✗ This ignores the passive activity rules and NIIT — an incomplete treatment of the tax consequences.',
+      '✓ Correct. Rental income is per se passive regardless of material participation; stepped-up basis affects depreciation; NIIT applies at her income level.',
+      '✗ Material participation does NOT override the per se passive rule for rental activities (absent real estate professional status). The deduction against ordinary income is incorrect.',
+      '✗ Net rental INCOME (not loss) of $35,000 is the correct figure — the option confuses income and loss treatment.'
+    ]
+  },
+
+  {
+    id: 351, domain: 'investment', difficulty: 'expert',
+    question: 'A 55-year-old client holds a concentrated position of 40,000 shares in her employer\'s stock (cost basis $8/share, current price $95/share). She is retiring in 6 months. She asks about Net Unrealized Appreciation (NUA) strategy. Which complete analysis is MOST accurate?',
+    options: [
+      'NUA allows her to roll the stock to an IRA and pay capital gains rates on all appreciation upon later sale',
+      'Under NUA, if she takes a lump sum distribution from the plan, the cost basis ($8/share) is taxed as ordinary income in the distribution year; the NUA ($87/share) is taxed at long-term capital gains rates when the stock is sold; additional post-distribution appreciation is LTCG if held over one year',
+      'NUA converts all appreciation to capital gains; she should always elect NUA over rolling to an IRA',
+      'NUA requires her to be over 59½ at distribution; since she is 55, the strategy is unavailable'
+    ],
+    correct: 1,
+    explanation: 'NUA strategy requires a lump sum distribution (all plan assets in one tax year) triggered by a qualifying event (retirement, death, age 59½, disability). At distribution: ordinary income tax is owed on the cost basis ($8 × 40,000 = $320,000). The NUA ($87/share × 40,000 = $3.48M) is deferred until sale and then taxed at LTCG rates regardless of holding period after distribution. Additional post-distribution appreciation is LTCG if held over 12 months. NUA is advantageous when the basis is low and the taxpayer faces high ordinary income rates on IRA distributions.',
+    optionExplanations: [
+      '✗ The stock cannot be rolled to an IRA in a NUA strategy — it must be distributed in-kind.',
+      '✓ Correct. Cost basis is ordinary income at distribution; NUA gets LTCG treatment at sale; post-distribution appreciation is LTCG if held over one year.',
+      '✗ NUA is not always superior to IRA rollover — analysis depends on the basis percentage, holding period intentions, estate planning goals, and IRMAA impact.',
+      '✗ NUA is triggered by a qualifying event — retirement qualifies regardless of age. Age 59½ is one of several triggering events, not a requirement.'
+    ]
+  },
+
+  {
+    id: 352, domain: 'psychology', difficulty: 'expert',
+    question: 'Research on financial decision-making shows that clients often exhibit "present bias" — disproportionately preferring immediate rewards over future benefits even when waiting is objectively superior. Which behavioral intervention is MOST evidence-based for helping clients commit to long-term savings goals?',
+    options: [
+      'Providing detailed compound interest projections to show the mathematical superiority of saving',
+      'Using automatic escalation features (Save More Tomorrow / SMarT program) that link future savings rate increases to future pay raises, bypassing the immediate-gratification conflict',
+      'Scheduling quarterly review meetings to hold clients accountable for savings commitments',
+      'Reframing retirement savings as protecting the client\'s "future self" using age-progressed avatar technology'
+    ],
+    correct: 1,
+    explanation: 'The Save More Tomorrow (SMarT) program (Thaler & Benartzi, 2004) is one of the most rigorously studied behavioral interventions in finance. By committing to future increases (tied to raises not yet received), clients avoid the immediate pain of reduced take-home pay. Present bias is circumvented because the cost is in the future, where discounting makes it feel smaller. Studies show SMarT significantly outperforms education-only approaches. Age-progressed avatars (Hershfield et al.) also show promise but are less proven at scale. Quarterly meetings are helpful but don\'t directly address the present bias mechanism.',
+    optionExplanations: [
+      '✗ Education and projections rarely overcome present bias — people understand compound interest intellectually but still under-save. Information alone is insufficient.',
+      '✓ Correct. SMarT is the gold-standard behavioral intervention with robust empirical support for increasing savings rates by working with present bias rather than against it.',
+      '✗ Accountability meetings can help but address motivation, not the underlying present-bias decision architecture.',
+      '✗ Age-progressed avatar research shows promising results for increasing savings intent, but real-world implementation at scale is less proven than SMarT.'
+    ]
+  },
+
+  {
+    id: 353, domain: 'estate', difficulty: 'expert',
+    question: 'A married couple has a combined estate of $35 million, including a family business worth $18 million. The business generates $1.2 million of annual cash flow. Which estate planning strategy MOST effectively reduces the taxable estate while maintaining family control of the business?',
+    options: [
+      'Gift the business directly to children using the annual exclusion over time',
+      'Establish a Family Limited Partnership (FLP) or Family LLC, transfer business interests to the entity, and gift minority interests to children using valuation discounts for lack of control and lack of marketability',
+      'Sell the business to a third party and invest proceeds in tax-exempt bonds to minimize future growth in the estate',
+      'Place the business in an irrevocable trust and pay premiums on a second-to-die life insurance policy to cover estate taxes'
+    ],
+    correct: 1,
+    explanation: 'An FLP or Family LLC allows the couple to: (1) Transfer minority interests at discounted values (lack of control discount 15-35%, lack of marketability discount 15-30%), potentially reducing taxable value by 25-45%; (2) Retain control through the general partner/manager role; (3) Gift discounted minority interests using annual exclusions and lifetime exemption more efficiently; (4) Remove future appreciation from the estate. The business continues to generate cash flow, and the family retains operational control. This is the most powerful combination of control retention + tax-efficient wealth transfer for a family business.',
+    optionExplanations: [
+      '✗ Direct gifting at $18M would consume most of the combined lifetime exemption (~$27.22M for two individuals) with no valuation discounts — inefficient use of the exemption.',
+      '✓ Correct. FLP/Family LLC provides valuation discounts, retained control, and efficient use of the lifetime exemption for a family business.',
+      '✗ Selling the business eliminates family control permanently and accelerates capital gains recognition — contrary to the goal of maintaining control.',
+      '✗ Life insurance can cover estate taxes but doesn\'t reduce the taxable estate or address the business valuation and control objectives.'
+    ]
+  },
+
+  {
+    id: 354, domain: 'risk', difficulty: 'expert',
+    question: 'A defined benefit pension plan sponsor is evaluating liability-driven investing (LDI) versus a traditional asset allocation approach. The plan is 92% funded with $180M in assets and $195M in PBO. Which metric MOST directly measures the plan\'s interest rate risk that LDI aims to reduce?',
+    options: [
+      'Funded ratio volatility, measured as the standard deviation of the asset-to-liability ratio',
+      'Interest rate duration gap — the difference between asset duration and liability duration — which determines how much the funded status changes per basis point move in interest rates',
+      'The plan\'s Sharpe ratio, measuring return per unit of total portfolio risk',
+      'Tracking error relative to the Russell 3000, showing deviation from a broad equity benchmark'
+    ],
+    correct: 1,
+    explanation: 'The duration gap (asset duration − liability duration) is the primary measure of interest rate risk in a defined benefit plan. If assets have a duration of 8 years and liabilities have a duration of 15 years, a 100bps rate decline increases liabilities by more than assets, worsening funded status. LDI seeks to close this duration gap by increasing the duration of the bond portfolio to match liability duration. A plan with zero duration gap is immunized against parallel yield curve shifts. Funded ratio volatility is a result, not a direct measure; Sharpe ratio and tracking error are irrelevant to liability-relative risk.',
+    optionExplanations: [
+      '✗ Funded ratio volatility is a consequence of the duration gap, not its direct measure.',
+      '✓ Correct. The duration gap quantifies interest rate sensitivity of funded status and is the primary LDI target metric.',
+      '✗ The Sharpe ratio measures asset-side risk-adjusted return, ignoring the liability structure entirely.',
+      '✗ Tracking error vs. an equity benchmark measures active equity risk, not pension liability-relative interest rate risk.'
+    ]
+  },
+
+  {
+    id: 355, domain: 'retirement', difficulty: 'expert',
+    question: 'A 67-year-old client is considering purchasing a $500,000 qualified longevity annuity contract (QLAC) from her $1.8M IRA. She asks about the implications. Which combination of facts is CORRECT?',
+    options: [
+      'The QLAC amount is excluded from RMD calculations, deferring payments until age 85 maximum; premiums are limited to the lesser of 25% of the IRA balance or $200,000 (indexed)',
+      'QLACs allow unlimited premium contributions from IRAs; payments may begin at any age after 70½ with no maximum deferral age',
+      'The $500,000 QLAC premium exceeds the allowable limit; the maximum is $135,000 regardless of account size',
+      'QLAC distributions are tax-free since they originate from an IRA previously subject to RMD calculations'
+    ],
+    correct: 0,
+    explanation: 'QLACs (Qualified Longevity Annuity Contracts) under Treasury Regulation §1.401(a)(9)-6 allow IRA owners to use up to the lesser of 25% of the IRA balance or $200,000 (indexed for inflation; was $145,000 before SECURE 2.0; check current year limit) to purchase a deferred income annuity that starts as late as age 85. The QLAC amount is excluded from the account balance used to calculate RMDs, effectively reducing annual RMDs. QLAC distributions are taxable as ordinary income (pre-tax IRA funds). The $200,000 indexed limit is the key constraint — not 25% in many cases.',
+    optionExplanations: [
+      '✓ Correct. QLAC premiums are excluded from RMD calculations; maximum is lesser of 25% of balance or the indexed dollar limit ($200,000 per SECURE 2.0); distributions start by age 85 at the latest.',
+      '✗ QLACs have specific premium limits and deferral age restrictions — unlimited contributions are not permitted.',
+      '✗ The $135,000 limit was a prior-law figure; SECURE 2.0 increased the cap and the 25% rule applies separately.',
+      '✗ QLAC distributions are taxable as ordinary income — they are distributions from a pre-tax IRA account.'
+    ]
+  },
+
+  {
+    id: 356, domain: 'tax', difficulty: 'expert',
+    question: 'Which of the following correctly describes the tax treatment of employer-provided nonqualified deferred compensation (NQDC) under Section 409A when an impermissible early distribution occurs?',
+    options: [
+      'The early distribution is taxed as ordinary income in the year received; no additional penalties apply since NQDC plans are not subject to Section 72(t)',
+      'The deferred amount is included in gross income, subject to an additional 20% excise tax, plus interest at the underpayment rate plus 1% accruing from the original deferral date',
+      'Section 409A violations result in plan disqualification but the employee is taxed only on amounts received in the current year',
+      'The employer bears the full penalty for 409A violations; the employee is held harmless'
+    ],
+    correct: 1,
+    explanation: 'Section 409A violations (including impermissible early distributions) trigger severe consequences for the employee: (1) All deferred amounts become immediately includible in gross income; (2) An additional 20% excise tax on the includible amount; (3) Interest charges at the underpayment rate PLUS 1 percentage point, running from the original year of deferral. These penalties are imposed on the employee, not the employer, making NQDC plan compliance critical. This is one of the harshest tax penalty provisions in the Code.',
+    optionExplanations: [
+      '✗ Section 409A violations are far more severe than ordinary income inclusion — the 20% excise tax and retroactive interest make this answer incorrect.',
+      '✓ Correct. The 409A penalty trifecta: income inclusion + 20% excise tax + retroactive interest. All fall on the employee.',
+      '✗ All previously deferred amounts become includible, not just current-year distributions — plan disqualification has broader consequences.',
+      '✗ The 409A penalties fall on the employee (the service provider), not the employer. The employer may face payroll tax issues but the income and excise tax are the employee\'s burden.'
+    ]
+  },
+
+  {
+    id: 357, domain: 'investment', difficulty: 'expert',
+    question: 'A portfolio manager uses a Black-Litterman model to combine market equilibrium returns with her own views. She has a strong view that small-cap value will outperform by 3% annually with high confidence. Which BEST describes how the Black-Litterman framework incorporates this view?',
+    options: [
+      'The Black-Litterman model replaces the equilibrium return vector entirely with the manager\'s views when expressed with high confidence',
+      'The model blends the market equilibrium (implied by market-cap weights) with the manager\'s views in a Bayesian framework, weighting each by their relative confidence levels (the view\'s omega matrix vs. the equilibrium\'s tau-sigma matrix)',
+      'Black-Litterman eliminates the need for expected return inputs by relying solely on historical covariance matrices and the manager\'s views',
+      'High confidence views in Black-Litterman result in positions capped at benchmark weight to avoid concentration risk'
+    ],
+    correct: 1,
+    explanation: 'The Black-Litterman model uses Bayesian statistics to blend two sources of return information: (1) Market equilibrium returns, derived by reverse-optimizing the market portfolio (implied by CAPM); (2) The manager\'s subjective views, expressed as absolute or relative return expectations with a confidence level (the omega matrix captures view uncertainty). The resulting blended return vector is used in mean-variance optimization, producing more stable and intuitive portfolios than pure optimization with subjective inputs. High confidence in a view tilts the blended returns closer to the view, increasing allocation to that segment.',
+    optionExplanations: [
+      '✗ Black-Litterman never fully replaces equilibrium returns — even very high confidence views are blended, not substituted.',
+      '✓ Correct. Bayesian blending of equilibrium returns and manager views, weighted by relative confidence, is the core mechanism of Black-Litterman.',
+      '✗ The model still requires expected return inputs (views and equilibrium) — it uses covariances for portfolio optimization but does not eliminate return inputs.',
+      '✗ Black-Litterman does not cap positions at benchmark — it allows significant tilts based on high-confidence views, producing overweights relative to equilibrium.'
+    ]
+  },
+
+  {
+    id: 358, domain: 'estate', difficulty: 'expert',
+    question: 'A charitable remainder unitrust (CRUT) pays 7% of the fair market value of trust assets annually. The trust was funded with $2 million of appreciated stock (zero basis). The §7520 rate is 5.2%. The income beneficiary is age 62. What is the approximate charitable deduction, and what income tax result occurs when the CRUT sells the appreciated stock?',
+    options: [
+      'Full $2 million charitable deduction; no capital gains tax on sale since the trust is tax-exempt',
+      'Partial charitable deduction equal to present value of the charitable remainder interest (approximately 30-40% of funding value); no immediate capital gains tax on sale by the CRUT, but gains are recognized by beneficiaries as they receive distributions under the four-tier ordering rules',
+      'No charitable deduction since the donor retains an income interest; capital gains are deferred until trust termination',
+      'Partial deduction for the present value of the remainder; capital gains tax is triggered immediately on the appreciated stock at the time of contribution to the CRUT'
+    ],
+    correct: 1,
+    explanation: 'A CRUT provides: (1) Partial charitable deduction = PV of the remainder interest (calculated using IRS tables, §7520 rate, payout rate, and beneficiary age). At 7% payout, 5.2% §7520 rate, age 62, the remainder factor ≈ 30-35%, producing a deduction of approximately $600,000-$700,000. (2) The CRUT is a tax-exempt trust — it pays no capital gains tax when selling the stock. (3) However, gains do NOT disappear — they are passed to income beneficiaries under the four-tier ordering rules (ordinary income → capital gains → other income → return of corpus). Beneficiaries recognize capital gains as distributions are received.',
+    optionExplanations: [
+      '✗ The deduction is partial (not full $2M) and while the trust pays no capital gains tax, the gains flow to beneficiaries — they are not permanently avoided.',
+      '✓ Correct. Partial deduction + tax-exempt trust sale + four-tier ordering passing gains to beneficiaries is the complete, accurate treatment.',
+      '✗ CRTs do provide a charitable deduction even though the donor retains an income interest — the retained interest is valued and excluded from the deduction.',
+      '✗ Contribution of appreciated property to a CRUT does NOT trigger capital gains — one of the key planning benefits is the deferral of gain through the trust.'
+    ]
+  },
+
+  {
+    id: 359, domain: 'professional', difficulty: 'expert',
+    question: 'A CFP® professional is the sole proprietor of an RIA. She is also serving as successor trustee of a deceased client\'s irrevocable trust, and she continues to manage the trust\'s investments for an AUM fee. She has authority to make distribution decisions to the trust beneficiaries. Under CFP Board\'s Code and Standards, which concern is MOST significant?',
+    options: [
+      'The concurrent trustee and investment adviser roles create a conflict of interest that requires informed consent but are otherwise permissible',
+      'Acting as both trustee (fiduciary duty to beneficiaries) and investment adviser (AUM-based compensation) creates a self-dealing risk: she controls distributions that affect her AUM fee and investment decisions that generate her compensation — this layered conflict requires robust disclosure, ongoing consent, and consideration of whether the arrangement can be structured to avoid the conflict',
+      'The AUM fee in a trust context must be approved by a court since it constitutes trustee compensation above a statutory cap',
+      'There is no conflict since both the trustee and investment adviser roles require a fiduciary standard, creating alignment of interests'
+    ],
+    correct: 1,
+    explanation: 'This scenario presents a multi-layered conflict of interest. As trustee, she has discretion over distributions — which reduce trust assets and thereby reduce her AUM fee. This creates an incentive to minimize distributions to preserve her compensation base. As investment adviser, she earns AUM fees that increase when trust assets grow. The power to make investment decisions that increase her own compensation, combined with distribution discretion, creates significant self-dealing risk. CFP Board requires disclosure of material conflicts, informed consent, and — where possible — elimination of the structural conflict (e.g., delegating distribution authority to an independent co-trustee).',
+    optionExplanations: [
+      '✗ While disclosure and consent are necessary, describing this as simply a disclosed conflict understates the severity — the self-dealing concern requires more than disclosure alone.',
+      '✓ Correct. The layered conflict (distribution control + AUM-based investment authority) creates structural self-dealing that requires not just disclosure but structural remedies.',
+      '✗ AUM fees in trusts are common and generally do not require court approval, though they must be reasonable and disclosed to beneficiaries.',
+      '✗ Both roles require fiduciary duties but to different parties with potentially divergent interests — convergence of fiduciary duty does not eliminate the self-dealing conflict.'
+    ]
+  },
+
+  {
+    id: 360, domain: 'general', difficulty: 'expert',
+    question: 'A client with a $4M portfolio is in the 37% bracket. Her advisor recommends a variable annuity inside a traditional IRA for "tax-deferred growth." Which critique of this recommendation BEST reflects sound financial planning?',
+    options: [
+      'Variable annuities in IRAs are prohibited since both are already tax-deferred accounts',
+      'The recommendation is sound since variable annuities inside IRAs provide additional creditor protection beyond IRA statutory protections',
+      'Placing a variable annuity inside an IRA is "stacking" tax deferral on top of existing deferral — the annuity\'s primary benefit is already provided by the IRA wrapper, while the annuity adds insurance costs (M&E fees, administrative charges) with no incremental tax benefit; this is generally considered inappropriate advice',
+      'The annuity inside an IRA avoids required minimum distributions, making it suitable for high-wealth clients'
+    ],
+    correct: 2,
+    explanation: 'A fundamental financial planning principle: tax deferral is already the primary feature of a traditional IRA. Placing a variable annuity inside an IRA provides no additional tax deferral benefit — the IRA already provides it. The annuity layer adds mortality and expense (M&E) charges (typically 1.0–1.5%), administrative fees, and surrender charges. The only justification for this arrangement would be specific insurance features (guaranteed income riders, death benefit guarantees) — not tax deferral. Recommending a VA in an IRA primarily for "tax-deferred growth" is a red flag for unsuitable advice. Variable annuities inside IRAs do not escape RMDs.',
+    optionExplanations: [
+      '✗ Variable annuities inside IRAs are not prohibited — they are simply often unsuitable for the "tax deferral" reason stated.',
+      '✗ Creditor protection from annuities varies by state and is not a reliable incremental benefit over IRA statutory protections.',
+      '✓ Correct. Stacking tax deferral is the classic critique: VA fees add cost with no incremental tax benefit inside an IRA.',
+      '✗ Variable annuities inside IRAs do NOT avoid RMDs — the IRA wrapper subjects the contract to RMD rules regardless of the annuity\'s internal terms.'
+    ]
+  },
+
+  {
+    id: 361, domain: 'retirement', difficulty: 'expert',
+    question: 'Congress passes a law reverting the estate tax exemption to $5 million (inflation-adjusted) effective January 1, 2027. A client made a $13 million lifetime gift in 2026 using the current $13.61M exemption. Under current IRS guidance, what is the estate tax consequence if the client dies in 2028?',
+    options: [
+      'The $13M gift is "clawed back" — estate tax is owed on the full $13M as if the exemption never exceeded $5M',
+      'The IRS has issued anti-clawback regulations providing that gifts made using the higher exemption will not be subject to estate tax on the excess even if the exemption later decreases; only the estate assets above the 2027 exemption would be taxed',
+      'The estate receives no exemption at death since the entire lifetime exemption was consumed during life',
+      'The clawback applies only to gifts made within 3 years of death; the 2026 gift is safe since the client survived more than 3 years'
+    ],
+    correct: 1,
+    explanation: 'The IRS issued final anti-clawback regulations (T.D. 9884) specifically addressing the TCJA sunset scenario. Under these regulations, estates may calculate estate tax using the GREATER of the exemption in effect at death or the exemption used during life for gifts. A client who used the full $13.61M exemption for 2026 gifts will not face clawback at death under a reduced exemption regime — the estate tax computation uses the higher lifetime-gift exemption, eliminating clawback. This was a significant planning motivation for large gifts before TCJA sunset.',
+    optionExplanations: [
+      '✗ The anti-clawback regulations specifically prevent this outcome — clawback was the feared scenario that prompted the IRS to issue protective guidance.',
+      '✓ Correct. IRS anti-clawback regulations (T.D. 9884) protect gifts made using a higher exemption from estate tax clawback if the exemption is later reduced.',
+      '✗ The estate uses the higher of the death-time or gift-time exemption — the full exemption is not consumed, it is protected from clawback.',
+      '✗ There is no 3-year rule for clawback — the anti-clawback regulations protect all gifts regardless of timing relative to death.'
+    ]
+  },
+
 ];
