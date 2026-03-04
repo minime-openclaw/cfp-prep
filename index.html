@@ -854,7 +854,7 @@ function saveExamDate(v) { state.examDate = v; saveState(); updateCountdown(); }
 // ── COUNTDOWN ────────────────────────────────────────────────
 function updateCountdown() {
   const el = document.getElementById('countdown');
-  const target = state.examDate ? new Date(state.examDate + 'T00:00:00') : new Date('2026-03-20T00:00:00');
+  const target = state.examDate ? new Date(state.examDate + 'T00:00:00') : new Date('2026-03-21T00:00:00');
   const diff = target - new Date();
   if (diff <= 0) { el.innerHTML = '🎓 Exam day!'; return; }
   const days = Math.floor(diff / 86400000);
@@ -915,7 +915,7 @@ function updateDashboard() {
         <div style="font-size:13px;font-weight:700;color:${d.pct<60?'var(--red)':d.pct<75?'var(--gold)':'var(--green)'}">${d.pct}%</div>
       </div>`).join('');
 
-  const examDate = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-20T00:00:00');
+  const examDate = state.examDate ? new Date(state.examDate+'T00:00:00') : new Date('2026-03-21T00:00:00');
   const daysLeft = Math.floor((examDate - new Date()) / 86400000);
   const needsPractice = DOMAINS.map(d => {
     const s = stats[d.id];
@@ -2151,7 +2151,7 @@ function init() {
   updateTimerBadge();
   updateCountdown();
   setInterval(updateCountdown, 60000);
-  document.getElementById('exam-date-input').value = state.examDate || '2026-03-20';
+  document.getElementById('exam-date-input').value = state.examDate || '2026-03-21';
   updateDashboard();
   initPractice();
   renderTips();
