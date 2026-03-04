@@ -251,6 +251,25 @@
     .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 
+    /* Profile page */
+    .profile-row { display:flex; align-items:center; gap:16px; }
+    .profile-avatar { width:56px; height:56px; border-radius:50%; background:var(--gold); color:#0d0d0d; font-size:22px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .profile-info { flex:1; min-width:0; }
+    .profile-name { font-size:18px; font-weight:700; color:var(--text); margin-bottom:2px; }
+    .profile-email { font-size:13px; color:var(--muted); }
+    .profile-sync-badge { font-size:11px; color:var(--green); margin-top:4px; }
+    .profile-stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:8px; }
+    .profile-stat { background:var(--surface2); border-radius:10px; padding:14px; text-align:center; }
+    .profile-stat-num { font-size:26px; font-weight:800; color:var(--gold); line-height:1; margin-bottom:4px; }
+    .profile-stat-label { font-size:11px; color:var(--muted); font-weight:500; }
+    .btn-small { padding:6px 12px; border-radius:8px; border:1px solid var(--gold); background:var(--gold); color:#0d0d0d; font-size:12px; font-weight:600; cursor:pointer; }
+    .btn-small.btn-ghost { background:transparent; color:var(--muted); border-color:var(--border); }
+    .btn-small.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+    .btn-action { display:block; width:100%; padding:10px 16px; border-radius:10px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:14px; font-weight:500; cursor:pointer; text-align:left; transition:all .15s; }
+    .btn-action:hover { border-color:var(--gold); color:var(--gold); }
+    .btn-action.btn-danger-outline { border-color:rgba(231,76,60,0.4); color:var(--red); }
+    .btn-action.btn-danger-outline:hover { background:rgba(231,76,60,0.08); border-color:var(--red); }
+
     /* Auth modal tabs */
     .auth-tabs { display:flex; gap:8px; margin-bottom:14px; }
     .auth-tab { flex:1; padding:8px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text-muted); cursor:pointer; font-size:0.9rem; transition:all .2s; }
@@ -297,6 +316,7 @@
     <button class="nav-tab" onclick="showPage('practice')">Practice</button>
     <button class="nav-tab" onclick="showPage('tips')">Key Concepts</button>
     <button class="nav-tab" onclick="showPage('settings')">Settings</button>
+    <button class="nav-tab" onclick="showPage('profile')">👤 Profile</button>
   </div>
   <div class="nav-countdown" id="countdown">Loading...</div>
 </nav>
@@ -387,6 +407,62 @@
         Built by <strong style="color:var(--gold)">Nathan Allen & MiniMe 🤏</strong><br>
         All data stored locally in your browser. Nothing leaves your device.<br>
         Covers all 9 CFP exam domains per the CFP Board's current topic list.
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Page -->
+  <div class="page" id="page-profile">
+    <div class="section-title">My Profile</div>
+    <div class="section-sub">Your account and progress summary.</div>
+
+    <!-- Account card -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">Account</div>
+      <div class="profile-row">
+        <div class="profile-avatar" id="profile-avatar">?</div>
+        <div class="profile-info">
+          <div class="profile-name" id="profile-display-name">—</div>
+          <div class="profile-email" id="profile-display-email">Not signed in</div>
+          <div id="profile-sync-badge" class="profile-sync-badge" style="display:none">☁️ Cloud sync active</div>
+        </div>
+      </div>
+
+      <!-- Edit name -->
+      <div id="profile-edit-wrap" style="margin-top:16px;display:none">
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="modal-input" type="text" id="profile-name-input" placeholder="Display name" style="margin:0;flex:1" />
+          <button class="btn-small" onclick="saveProfileName()">Save</button>
+          <button class="btn-small btn-ghost" onclick="toggleEditName(false)">Cancel</button>
+        </div>
+      </div>
+      <div id="profile-edit-btn-wrap" style="margin-top:12px">
+        <button class="btn-small btn-ghost" onclick="toggleEditName(true)">✏️ Edit name</button>
+      </div>
+    </div>
+
+    <!-- Stats summary -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">Your Stats</div>
+      <div class="profile-stats-grid">
+        <div class="profile-stat"><div class="profile-stat-num" id="ps-total">0</div><div class="profile-stat-label">Questions Answered</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="ps-accuracy">—</div><div class="profile-stat-label">Accuracy</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="ps-streak">0</div><div class="profile-stat-label">Day Streak 🔥</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="ps-domains">0/9</div><div class="profile-stat-label">Domains Started</div></div>
+      </div>
+    </div>
+
+    <!-- Account actions -->
+    <div class="card" style="margin-bottom:16px" id="profile-auth-card">
+      <div class="card-title">Account Actions</div>
+      <div id="profile-signed-in" style="display:none">
+        <button class="btn-action" onclick="sendPasswordReset()">🔑 Send password reset email</button>
+        <div id="profile-pw-msg" style="font-size:12px;color:var(--green);margin-top:6px;display:none"></div>
+        <button class="btn-action btn-danger-outline" style="margin-top:10px" onclick="signOutUser()">Sign out</button>
+      </div>
+      <div id="profile-signed-out">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Sign in to sync your progress across all your devices.</p>
+        <button class="btn-action" onclick="showPage('dashboard'); document.getElementById('authModal').classList.remove('hidden');">Sign in / Create account</button>
       </div>
     </div>
   </div>
@@ -6369,6 +6445,79 @@ function showPage(id) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => { if (t.getAttribute('onclick')?.includes(`'${id}'`)) t.classList.add('active'); });
   if (id==='dashboard') updateDashboard();
+  if (id==='profile') updateProfilePage();
+}
+
+// ── PROFILE PAGE ──────────────────────────────────────────────
+function updateProfilePage() {
+  const user = typeof firebase !== 'undefined' ? firebase.auth().currentUser : null;
+  const name = localStorage.getItem('cfp-username') || 'CFP Candidate';
+
+  // Avatar + name + email
+  document.getElementById('profile-avatar').textContent = (name[0] || '?').toUpperCase();
+  document.getElementById('profile-display-name').textContent = name;
+  document.getElementById('profile-display-email').textContent = user ? user.email : 'Local only (not signed in)';
+  document.getElementById('profile-name-input').value = name;
+
+  // Sync badge
+  const syncBadge = document.getElementById('profile-sync-badge');
+  syncBadge.style.display = user ? '' : 'none';
+
+  // Signed in / out state
+  document.getElementById('profile-signed-in').style.display = user ? '' : 'none';
+  document.getElementById('profile-signed-out').style.display = user ? 'none' : '';
+
+  // Stats
+  const stats = getDomainStats();
+  const totalQ = Object.values(state.answers).reduce((s, d) => s + (d.total||0), 0);
+  const totalC = Object.values(state.answers).reduce((s, d) => s + (d.correct||0), 0);
+  const acc = totalQ > 0 ? Math.round(totalC/totalQ*100) + '%' : '—';
+  const domainsStarted = Object.values(state.answers).filter(d => (d.total||0) > 0).length;
+
+  document.getElementById('ps-total').textContent = totalQ;
+  document.getElementById('ps-accuracy').textContent = acc;
+  document.getElementById('ps-streak').textContent = state.streak || 0;
+  document.getElementById('ps-domains').textContent = domainsStarted + '/9';
+}
+
+function toggleEditName(show) {
+  document.getElementById('profile-edit-wrap').style.display = show ? '' : 'none';
+  document.getElementById('profile-edit-btn-wrap').style.display = show ? 'none' : '';
+  if (show) document.getElementById('profile-name-input').focus();
+}
+
+function saveProfileName() {
+  const newName = document.getElementById('profile-name-input').value.trim() || 'CFP Candidate';
+  localStorage.setItem('cfp-username', newName);
+  const user = typeof firebase !== 'undefined' ? firebase.auth().currentUser : null;
+  if (user) {
+    user.updateProfile({ displayName: newName }).catch(() => {});
+    saveCloudProgress();
+  }
+  toggleEditName(false);
+  updateProfilePage();
+  applyName(newName);
+}
+
+async function sendPasswordReset() {
+  const user = typeof firebase !== 'undefined' ? firebase.auth().currentUser : null;
+  if (!user) return;
+  try {
+    await firebase.auth().sendPasswordResetEmail(user.email);
+    const msg = document.getElementById('profile-pw-msg');
+    msg.textContent = `✓ Reset email sent to ${user.email}`;
+    msg.style.display = '';
+    setTimeout(() => { msg.style.display = 'none'; }, 5000);
+  } catch(e) { alert('Could not send reset email: ' + e.message); }
+}
+
+function signOutUser() {
+  if (!confirm('Sign out of your account?')) return;
+  firebase.auth().signOut().then(() => {
+    localStorage.removeItem('cfp-username');
+    showPage('dashboard');
+    document.getElementById('authModal').classList.remove('hidden');
+  });
 }
 
 // ── INIT ─────────────────────────────────────────────────────
