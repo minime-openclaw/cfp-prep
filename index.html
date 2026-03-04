@@ -451,6 +451,41 @@
     <div class="section-sub">CFP-style questions across all 9 domains. Select an answer to see why each choice is right or wrong.</div>
     <div class="filter-tabs" id="domain-filters"></div>
     <div class="filter-tabs" id="diff-filters" style="margin-top:-12px;margin-bottom:20px"></div>
+
+    <!-- Practice Settings Drawer (hidden by default) -->
+    <div id="practice-settings-drawer" style="display:none;margin-bottom:16px">
+      <div class="card" style="padding:20px">
+        <div class="setup-section">
+          <div class="setup-label">Question Selection</div>
+          <div class="pill-row" id="ps-mode-pills">
+            <button class="pill active" id="ps-mode-smart"  onclick="setPracticeMode('smart',this)">🎯 Smart</button>
+            <button class="pill" id="ps-mode-new"   onclick="setPracticeMode('new',this)">🆕 Unanswered First</button>
+            <button class="pill" id="ps-mode-weak"  onclick="setPracticeMode('weak',this)">⚠️ Weak Areas</button>
+            <button class="pill" id="ps-mode-random" onclick="setPracticeMode('random',this)">🔀 Random</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px">
+          <div>
+            <div class="setup-label" style="margin-bottom:2px">⏱ Timed Practice</div>
+            <div style="font-size:12px;color:var(--muted)">Per-difficulty time limits</div>
+          </div>
+          <button class="toggle-btn off" id="ps-timed-toggle" onclick="togglePSTimed()">OFF</button>
+        </div>
+        <div class="setup-section" style="margin-bottom:0">
+          <div class="setup-label">Session Length <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:11px">(optional — default: unlimited)</span></div>
+          <div class="pill-row" id="ps-length-pills">
+            <button class="pill active" onclick="setPSLength(0,this)">∞ Unlimited</button>
+            <button class="pill" onclick="setPSLength(10,this)">10</button>
+            <button class="pill" onclick="setPSLength(20,this)">20</button>
+            <button class="pill" onclick="setPSLength(30,this)">30</button>
+            <button class="pill" onclick="setPSLength(50,this)">50</button>
+            <button class="pill" onclick="setPSLength(85,this)">85</button>
+            <button class="pill" onclick="setPSLength(170,this)">170</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card" id="question-card">
       <div class="question-header">
         <div class="q-meta">
@@ -458,7 +493,10 @@
           <span class="badge blue" id="q-diff-badge">—</span>
           <span class="badge smart" id="smart-badge" title="Smart Practice: weighted toward your weak areas">🎯 Smart</span>
         </div>
-        <div class="q-progress" id="q-progress">Q — / —</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="q-progress" id="q-progress">Q — / —</div>
+          <button class="pill" style="font-size:13px;padding:4px 10px;border-radius:8px" onclick="togglePracticeSettings()" id="ps-gear-btn" title="Session settings">⚙️</button>
+        </div>
       </div>
       <div class="q-timer-section" id="q-timer-section" style="display:none">
         <div class="q-timer-label-row">
@@ -475,6 +513,20 @@
         <button class="btn btn-ghost" onclick="skipQuestion()">Skip</button>
         <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next Question →</button>
         <div class="q-progress" id="session-score"></div>
+      </div>
+    </div>
+
+    <!-- Session End (only shown when session length is set) -->
+    <div class="card" id="ps-end-card" style="display:none;text-align:center;padding:36px 24px">
+      <div style="font-size:48px;margin-bottom:10px" id="ps-end-emoji">🎉</div>
+      <div style="font-size:20px;font-weight:800;margin-bottom:8px" id="ps-end-title">Session Complete!</div>
+      <div style="font-size:36px;font-weight:800;margin:10px 0" id="ps-end-score">—</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px" id="ps-end-sub"></div>
+      <div id="ps-end-domains" style="text-align:left;margin-bottom:22px;max-width:400px;margin-left:auto;margin-right:auto"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="btn btn-primary" onclick="restartPracticeSession()">Again</button>
+        <button class="btn btn-ghost" onclick="endSessionKeepPracticing()">Keep Practicing</button>
+        <button class="btn btn-ghost" onclick="showPage('dashboard')">Dashboard →</button>
       </div>
     </div>
   </div>
@@ -845,6 +897,8 @@ function updateDashboard() {
 let queue = [], qIdx = 0, sessionCorrect = 0, sessionTotal = 0, isAnswered = false, domainFilter = 'all';
 let diffFilter = ['easy','medium','hard','expert'];
 let sessionDomainStats = {};
+let psMode = 'smart';    // practice session mode
+let psLength = 0;        // 0 = unlimited
 let practiceConfig = {
   length: 10, domains: [], difficulties: ['easy','medium','hard','expert'], mode: 'smart', timed: false
 };
@@ -856,6 +910,7 @@ function shuffle(arr) {
 }
 
 function initPractice() {
+  psMode = state.smartPractice ? 'smart' : 'random';
   document.getElementById('domain-filters').innerHTML =
     `<div class="filter-tab ${domainFilter==='all'?'active':''}" onclick="setDomainFilter('all',this)">All Domains</div>` +
     DOMAINS.map(d => `<div class="filter-tab ${domainFilter===d.id?'active':''}" onclick="setDomainFilter('${d.id}',this)">${d.name.split('&')[0].trim()}</div>`).join('');
@@ -874,6 +929,58 @@ function renderDiffFilters() {
     diffs.map(d =>
       `<div class="filter-tab ${diffFilter.includes(d.id)?'active':''}" style="${diffFilter.includes(d.id)?'color:'+d.color+';border-color:'+d.color+';background:'+d.color+'18':''}" onclick="toggleDiffFilter('${d.id}',this,'${d.color}')">${d.label}</div>`
     ).join('');
+}
+
+function togglePracticeSettings() {
+  const drawer = document.getElementById('practice-settings-drawer');
+  const btn = document.getElementById('ps-gear-btn');
+  const open = drawer.style.display === 'none';
+  drawer.style.display = open ? '' : 'none';
+  btn.style.color = open ? 'var(--gold)' : '';
+  btn.style.borderColor = open ? 'var(--gold)' : '';
+  if (open) syncPracticeSettingsUI();
+}
+
+function syncPracticeSettingsUI() {
+  // Mode pills
+  document.querySelectorAll('#ps-mode-pills .pill').forEach(p => p.classList.remove('active'));
+  const mBtn = document.getElementById('ps-mode-' + psMode);
+  if (mBtn) mBtn.classList.add('active');
+  // Timed toggle
+  const tt = document.getElementById('ps-timed-toggle');
+  if (tt) { tt.textContent = state.timedPractice ? 'ON' : 'OFF'; tt.className = 'toggle-btn' + (state.timedPractice ? '' : ' off'); }
+  // Length pills
+  document.querySelectorAll('#ps-length-pills .pill').forEach(p => p.classList.remove('active'));
+  const lBtns = document.querySelectorAll('#ps-length-pills .pill');
+  lBtns.forEach(p => { if ((psLength === 0 && p.textContent.includes('∞')) || +p.textContent === psLength) p.classList.add('active'); });
+}
+
+function setPracticeMode(mode, el) {
+  psMode = mode;
+  state.smartPractice = (mode === 'smart');
+  document.querySelectorAll('#ps-mode-pills .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  saveState();
+  buildQueue();
+  updateSmartBadge();
+}
+
+function togglePSTimed() {
+  state.timedPractice = !state.timedPractice;
+  saveState();
+  const btn = document.getElementById('ps-timed-toggle');
+  btn.textContent = state.timedPractice ? 'ON' : 'OFF';
+  btn.className = 'toggle-btn' + (state.timedPractice ? '' : ' off');
+  // Apply immediately if question is active
+  if (state.timedPractice && !isAnswered && queue[qIdx]) startQuestionTimer(queue[qIdx]);
+  else if (!state.timedPractice) stopQuestionTimer();
+}
+
+function setPSLength(n, el) {
+  psLength = n;
+  document.querySelectorAll('#ps-length-pills .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  buildQueue(); // rebuild to apply length
 }
 
 function toggleDiffFilter(diff, el, color) {
@@ -919,7 +1026,7 @@ function weightedShuffle(arr) {
 }
 
 function buildQueue() {
-  const pool = QUESTIONS.filter(q =>
+  let pool = QUESTIONS.filter(q =>
     (domainFilter === 'all' || q.domain === domainFilter) &&
     diffFilter.includes(q.difficulty)
   );
@@ -927,16 +1034,26 @@ function buildQueue() {
     document.getElementById('question-card').innerHTML = '<div class="empty">No questions match this filter.</div>';
     return;
   }
-  if (state.smartPractice) {
-    queue = weightedShuffle(pool);
-  } else {
-    const answered = new Set(Object.keys(state.answers).map(Number));
-    const unanswered = pool.filter(q => !answered.has(q.id));
+  const answered = new Set(Object.keys(state.answers).map(Number));
+  if (psMode === 'smart' || state.smartPractice) {
+    pool = weightedShuffle(pool);
+  } else if (psMode === 'new') {
+    const unseen = pool.filter(q => !answered.has(q.id));
+    const seen = pool.filter(q => answered.has(q.id));
+    pool = [...shuffle(unseen), ...shuffle(seen)];
+  } else if (psMode === 'weak') {
     const wrong = pool.filter(q => answered.has(q.id) && !state.answers[q.id]?.correct);
+    const unseen = pool.filter(q => !answered.has(q.id));
     const right = pool.filter(q => answered.has(q.id) && state.answers[q.id]?.correct);
-    queue = [...shuffle(unanswered), ...shuffle(wrong), ...shuffle(right)];
+    pool = [...shuffle(wrong), ...shuffle(unseen), ...shuffle(right)];
+  } else {
+    pool = shuffle([...pool]);
   }
-  qIdx = 0; sessionCorrect = 0; sessionTotal = 0;
+  // Apply session length if set
+  queue = psLength > 0 ? pool.slice(0, Math.min(psLength, pool.length)) : pool;
+  qIdx = 0; sessionCorrect = 0; sessionTotal = 0; sessionDomainStats = {};
+  document.getElementById('question-card').style.display = '';
+  document.getElementById('ps-end-card').style.display = 'none';
   showQuestion();
   updateSmartBadge();
 }
@@ -1045,15 +1162,75 @@ function selectOption(idx, qId) {
   }
   saveState();
   sessionTotal++; if (isCorrect) sessionCorrect++;
-  if (!sessionDomainStats[q.domain]) sessionDomainStats[q.domain] = { correct: 0, total: 0 };
-  sessionDomainStats[q.domain].total++;
-  if (isCorrect) sessionDomainStats[q.domain].correct++;
+  if (psLength > 0) {
+    if (!sessionDomainStats[q.domain]) sessionDomainStats[q.domain] = { correct: 0, total: 0 };
+    sessionDomainStats[q.domain].total++;
+    if (isCorrect) sessionDomainStats[q.domain].correct++;
+  }
   updateSessionScore();
   document.getElementById('next-btn').disabled = false;
 }
 
-function nextQuestion() { qIdx = (qIdx + 1) % queue.length; showQuestion(); updateDashboard(); }
-function skipQuestion() { qIdx = (qIdx + 1) % queue.length; showQuestion(); }
+function nextQuestion() {
+  if (psLength > 0) {
+    qIdx++;
+    if (qIdx >= queue.length) { showPracticeSessionEnd(); updateDashboard(); return; }
+  } else {
+    qIdx = (qIdx + 1) % queue.length;
+  }
+  showQuestion(); updateDashboard();
+}
+function skipQuestion() {
+  if (psLength > 0) {
+    qIdx++;
+    if (qIdx >= queue.length) { showPracticeSessionEnd(); return; }
+  } else {
+    qIdx = (qIdx + 1) % queue.length;
+  }
+  showQuestion();
+}
+
+function showPracticeSessionEnd() {
+  stopQuestionTimer();
+  document.getElementById('question-card').style.display = 'none';
+  document.getElementById('ps-end-card').style.display = '';
+  const pct = sessionTotal === 0 ? 0 : Math.round(sessionCorrect / sessionTotal * 100);
+  const emoji = pct >= 90 ? '🔥' : pct >= 70 ? '🎉' : pct >= 50 ? '💪' : '📚';
+  document.getElementById('ps-end-emoji').textContent = emoji;
+  document.getElementById('ps-end-title').textContent = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Good Work!' : pct >= 50 ? 'Keep Pushing!' : 'Keep Practicing!';
+  document.getElementById('ps-end-score').innerHTML = sessionTotal === 0 ? '<span style="color:var(--muted)">—</span>' :
+    `<span style="color:${pct>=70?'var(--green)':'var(--red)'}">${sessionCorrect}/${sessionTotal}</span>&nbsp;<span style="font-size:18px;color:var(--muted)">(${pct}%)</span>`;
+  document.getElementById('ps-end-sub').textContent = `${queue.length}-question session`;
+  // Domain breakdown
+  const keys = Object.keys(sessionDomainStats);
+  if (keys.length > 1) {
+    const rows = keys.sort((a,b) => sessionDomainStats[a].correct/sessionDomainStats[a].total - sessionDomainStats[b].correct/sessionDomainStats[b].total)
+      .map(id => {
+        const d = DOMAINS.find(x=>x.id===id), s = sessionDomainStats[id];
+        const p = Math.round(s.correct/s.total*100);
+        const c = p>=70?'var(--green)':p>=50?'var(--gold)':'var(--red)';
+        return `<div class="session-end-domain-row"><span>${d?.name||id}</span><span style="color:${c};font-weight:700">${s.correct}/${s.total} (${p}%)</span></div>`;
+      }).join('');
+    document.getElementById('ps-end-domains').innerHTML =
+      '<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Domain Breakdown</div>' + rows;
+  } else {
+    document.getElementById('ps-end-domains').innerHTML = '';
+  }
+}
+
+function restartPracticeSession() {
+  document.getElementById('ps-end-card').style.display = 'none';
+  buildQueue();
+}
+
+function endSessionKeepPracticing() {
+  psLength = 0;
+  document.querySelectorAll('#ps-length-pills .pill').forEach(p => p.classList.remove('active'));
+  const unlimitedBtn = document.querySelector('#ps-length-pills .pill');
+  if (unlimitedBtn) unlimitedBtn.classList.add('active');
+  document.getElementById('ps-end-card').style.display = 'none';
+  buildQueue();
+}
 function updateSessionScore() {
   const el = document.getElementById('session-score');
   el.textContent = sessionTotal===0 ? '' : `Session: ${sessionCorrect}/${sessionTotal} (${Math.round(sessionCorrect/sessionTotal*100)}%)`;
