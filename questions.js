@@ -9909,5 +9909,330 @@ const QUESTIONS = [
       '✗ $2,500 is the deduction amount, not the tax savings. The 22% tax rate must be applied to find the dollar savings.',
       '✗ $0 is incorrect. Sara\'s MAGI of $70,000 is below the phase-out floor, so she qualifies for the full deduction.'
     ]
+  },
+  {
+    id: 557, domain: 'investment', difficulty: 'medium',
+    question: 'A portfolio has a return of 14%, the risk-free rate is 3%, and the portfolio beta is 1.2. What is the Treynor ratio?',
+    options: ['9.17%', '11.67%', '7.33%', '16.8%'],
+    answer: 0,
+    explanation: 'The Treynor ratio measures excess return per unit of systematic risk (beta). Formula: Treynor = (Portfolio Return − Risk-Free Rate) / Beta = (14% − 3%) / 1.2 = 11% / 1.2 = 9.17%.',
+    optionExplanations: [
+      '✓ Correct. (14% − 3%) / 1.2 = 11% / 1.2 = 9.17%.',
+      '✗ Wrong. 11.67% would result from dividing 14% / 1.2, ignoring the risk-free rate subtraction.',
+      '✗ Wrong. 7.33% mistakenly uses only part of the excess return in the calculation.',
+      '✗ Wrong. 16.8% incorrectly multiplies rather than divides by beta.'
+    ]
+  },
+  {
+    id: 558, domain: 'investment', difficulty: 'hard',
+    question: 'A portfolio returned 13%. The risk-free rate is 3%, beta is 1.1, and the market returned 10%. What is Jensen\'s alpha?',
+    options: ['2.3%', '-2.3%', '3.3%', '0%'],
+    answer: 0,
+    explanation: 'Jensen\'s alpha measures outperformance vs. CAPM expectations. Step 1: Expected return (CAPM) = Risk-Free + Beta × (Market − Risk-Free) = 3% + 1.1 × (10% − 3%) = 3% + 7.7% = 10.7%. Step 2: Alpha = Actual − Expected = 13% − 10.7% = 2.3%. Positive alpha indicates outperformance.',
+    optionExplanations: [
+      '✓ Correct. Alpha = 13% − 10.7% = 2.3%, indicating the manager added value above CAPM expectations.',
+      '✗ Wrong. −2.3% would mean underperformance; the portfolio actually beat expectations by 2.3%.',
+      '✗ Wrong. 3.3% incorrectly subtracts only the risk-free rate from the portfolio return without using CAPM.',
+      '✗ Wrong. 0% would mean performance exactly matched CAPM expectations, which is not the case here.'
+    ]
+  },
+  {
+    id: 559, domain: 'investment', difficulty: 'expert',
+    question: 'An investor earns a nominal return of 8%, inflation is 3%, and the tax rate is 30%. What is the after-tax real return?',
+    options: ['2.52%', '5%', '2.6%', '3.5%'],
+    answer: 0,
+    explanation: 'Step 1: After-tax nominal return = 8% × (1 − 0.30) = 5.6%. Step 2: Real after-tax return = (1 + After-tax nominal) / (1 + Inflation) − 1 = (1.056 / 1.03) − 1 = 1.02524 − 1 = 2.52%. This is the correct method; subtracting inflation directly overstates the result.',
+    optionExplanations: [
+      '✓ Correct. After-tax nominal = 5.6%; real after-tax = (1.056/1.03) − 1 = 2.52%.',
+      '✗ Wrong. 5% incorrectly uses the after-tax nominal return without adjusting for inflation.',
+      '✗ Wrong. 2.6% results from simple subtraction (5.6% − 3%) instead of the correct division formula.',
+      '✗ Wrong. 3.5% ignores taxes and only adjusts for inflation (8% − 3% = 5%, then applies partial tax incorrectly).'
+    ]
+  },
+  {
+    id: 560, domain: 'investment', difficulty: 'medium',
+    question: 'A stock trades at $60 with EPS of $4. The industry average P/E is 18. What is the stock\'s implied fair value, and what is the upside?',
+    options: ['Fair value $72; upside 20%', 'P/E = 12; overvalued', 'Fair value $80; upside 33%', 'Fair value $72; upside 25%'],
+    answer: 0,
+    explanation: 'Current P/E = $60 / $4 = 15. The industry average P/E is 18, suggesting the stock may be undervalued. Fair value at industry P/E = $4 × 18 = $72. Upside = ($72 − $60) / $60 = $12 / $60 = 20%.',
+    optionExplanations: [
+      '✓ Correct. P/E = 15 (below industry average of 18), fair value = $4 × 18 = $72, upside = 20%.',
+      '✗ Wrong. P/E = 12 is incorrect; $60 / $4 = 15. The stock is below, not above, the industry multiple.',
+      '✗ Wrong. Fair value of $80 would require a P/E of 20, which is above the industry average of 18.',
+      '✗ Wrong. The upside is 20% ($12/$60), not 25%. 25% would require a $15 gain on a $60 stock.'
+    ]
+  },
+  {
+    id: 561, domain: 'investment', difficulty: 'hard',
+    question: 'A bond has modified duration of 7.5 and convexity of 65. Interest rates fall by 1% (100 bps). What is the estimated price change including the convexity adjustment?',
+    options: ['7.825%', '6.5%', '8.5%', '7.5%'],
+    answer: 0,
+    explanation: 'Price change ≈ (−Duration × Δy) + (0.5 × Convexity × Δy²). Since rates fall, Δy = −0.01. Duration effect = −(7.5) × (−0.01) = +7.5%. Convexity adjustment = 0.5 × 65 × (0.01)² = 0.5 × 65 × 0.0001 = 0.00325 = +0.325%. Total = 7.5% + 0.325% = 7.825%. Convexity always adds value (positive adjustment for both rate increases and decreases).',
+    optionExplanations: [
+      '✓ Correct. Duration effect 7.5% + convexity adjustment 0.325% = 7.825%.',
+      '✗ Wrong. 6.5% underestimates by ignoring convexity and using an incorrect duration calculation.',
+      '✗ Wrong. 8.5% overstates the convexity adjustment beyond what the math supports.',
+      '✗ Wrong. 7.5% is the duration-only estimate; it ignores the positive convexity adjustment of +0.325%.'
+    ]
+  },
+  {
+    id: 562, domain: 'investment', difficulty: 'medium',
+    question: 'An investment returns +20%, −10%, and +15% over three consecutive years. What is the geometric mean annual return?',
+    options: ['7.51%', '8.33%', '6.67%', '9%'],
+    answer: 0,
+    explanation: 'Geometric mean = [(1.20)(0.90)(1.15)]^(1/3) − 1. Product = 1.20 × 0.90 × 1.15 = 1.2420. Cube root: 1.2420^(1/3) = 1.0751. Geometric mean = 7.51%. Note: arithmetic mean = (20 − 10 + 15) / 3 = 8.33%, which overstates the true compound return.',
+    optionExplanations: [
+      '✓ Correct. Geometric mean = [(1.20)(0.90)(1.15)]^(1/3) − 1 = 7.51%, reflecting the actual compound growth.',
+      '✗ Wrong. 8.33% is the arithmetic mean, which overstates performance because it ignores the compounding effect of losses.',
+      '✗ Wrong. 6.67% is too low; it may result from incorrectly averaging without the correct geometric formula.',
+      '✗ Wrong. 9% is also an arithmetic estimate variant that does not account for the compounding impact of the −10% year.'
+    ]
+  },
+  {
+    id: 563, domain: 'investment', difficulty: 'hard',
+    question: 'A portfolio is worth $5,000,000 with a beta of 1.2. S&P 500 futures contracts are priced at 4,000 with a multiplier of 250 (contract value $1,000,000). How many contracts are needed to fully hedge the portfolio?',
+    options: ['6 contracts', '5 contracts', '7 contracts', '4 contracts'],
+    answer: 0,
+    explanation: 'Number of futures contracts = (Beta × Portfolio Value) / Futures Contract Value = (1.2 × $5,000,000) / $1,000,000 = $6,000,000 / $1,000,000 = 6 contracts. Selling 6 futures contracts offsets the systematic risk of the portfolio.',
+    optionExplanations: [
+      '✓ Correct. (1.2 × $5,000,000) / $1,000,000 = 6 contracts needed to fully hedge systematic risk.',
+      '✗ Wrong. 5 contracts would only hedge a portfolio with beta 1.0 at this size; it under-hedges by one contract.',
+      '✗ Wrong. 7 contracts would over-hedge the portfolio, creating a net short position.',
+      '✗ Wrong. 4 contracts only hedges $4,000,000 of systematic exposure, leaving 20% of risk unhedged.'
+    ]
+  },
+  {
+    id: 564, domain: 'investment', difficulty: 'medium',
+    question: 'A stock just paid a dividend of $3.00 (D0). Dividends grow at 4% per year indefinitely. The required return is 9%. What is the stock\'s intrinsic value using the Gordon Growth Model?',
+    options: ['$62.40', '$60.00', '$75.00', '$33.33'],
+    answer: 0,
+    explanation: 'Gordon Growth Model (DDM): Value = D1 / (k − g). D1 = D0 × (1 + g) = $3.00 × 1.04 = $3.12. Value = $3.12 / (0.09 − 0.04) = $3.12 / 0.05 = $62.40.',
+    optionExplanations: [
+      '✓ Correct. D1 = $3.00 × 1.04 = $3.12; Value = $3.12 / 0.05 = $62.40.',
+      '✗ Wrong. $60.00 uses D0 ($3.00) instead of D1 ($3.12): $3.00 / 0.05 = $60.00, missing next year\'s growth.',
+      '✗ Wrong. $75.00 uses an incorrect denominator, perhaps (0.09 − 0.05) = 0.04 rather than the correct 0.05.',
+      '✗ Wrong. $33.33 treats the dividend as a perpetuity without growth: $3.00 / 0.09 = $33.33, ignoring the growth rate.'
+    ]
+  },
+  {
+    id: 565, domain: 'investment', difficulty: 'hard',
+    question: 'An investor has $30,000 in short-term capital gains taxed at 37%. By harvesting $30,000 in losses, how much tax is saved? If that tax savings is reinvested at 7% for 10 years, what is its future value?',
+    options: ['$21,834', '$11,100', '$7,770', '$18,600'],
+    answer: 0,
+    explanation: 'Step 1: Tax saved = $30,000 × 37% = $11,100. Step 2: FV of $11,100 invested at 7% for 10 years = $11,100 × (1.07)^10 = $11,100 × 1.9672 = $21,836 ≈ $21,834. Tax-loss harvesting accelerates tax savings and allows reinvestment for compounding.',
+    optionExplanations: [
+      '✓ Correct. Tax saved = $11,100; FV = $11,100 × (1.07)^10 ≈ $21,834.',
+      '✗ Wrong. $11,100 is only the immediate tax savings, before accounting for reinvestment growth over 10 years.',
+      '✗ Wrong. $7,770 = $30,000 × 25.9%; this uses the wrong tax rate in the calculation.',
+      '✗ Wrong. $18,600 is an intermediate estimate that does not correctly apply the (1.07)^10 compounding factor.'
+    ]
+  },
+  {
+    id: 566, domain: 'investment', difficulty: 'medium',
+    question: 'A property generates $120,000 in annual net operating income (NOI). It was purchased for $1,500,000. Comparable properties trade at a 7% cap rate. What is the current cap rate and the implied market value?',
+    options: ['Cap rate 8%; implied value $1,714,286', 'Cap rate 6%; implied value $2,000,000', 'Cap rate 8%; implied value $1,200,000', 'Cap rate 10%; implied value $1,200,000'],
+    answer: 0,
+    explanation: 'Cap rate = NOI / Purchase Price = $120,000 / $1,500,000 = 8.0%. Implied market value using 7% market cap rate = NOI / Market Cap Rate = $120,000 / 0.07 = $1,714,286. Since the property\'s cap rate (8%) exceeds the market cap rate (7%), the property appears undervalued relative to comparables.',
+    optionExplanations: [
+      '✓ Correct. Cap rate = $120,000 / $1,500,000 = 8%; implied value at 7% market cap rate = $120,000 / 0.07 = $1,714,286.',
+      '✗ Wrong. 6% cap rate would mean a purchase price of $2,000,000, not $1,500,000.',
+      '✗ Wrong. $1,200,000 implied value uses the wrong cap rate or NOI in the denominator.',
+      '✗ Wrong. 10% cap rate would mean the purchase price was $1,200,000, not $1,500,000.'
+    ]
+  },
+  {
+    id: 567, domain: 'investment', difficulty: 'expert',
+    question: 'Which factor does NOT increase the value of a call option?',
+    options: ['A higher strike price', 'A higher underlying stock price', 'More time to expiration', 'Higher implied volatility'],
+    answer: 0,
+    explanation: 'A higher strike price reduces call option value because it makes the option more expensive to exercise (less intrinsic value or deeper out-of-the-money). The other factors increase call value: a higher stock price increases intrinsic value; more time to expiration increases time value; higher volatility increases the probability of profitable outcomes. Key rule: call value and strike price move in opposite directions.',
+    optionExplanations: [
+      '✓ Correct. A higher strike price DECREASES call option value — it raises the exercise cost, reducing intrinsic value and profit potential.',
+      '✗ Wrong. A higher stock price INCREASES call option value by increasing intrinsic value (or moving the option closer to in-the-money).',
+      '✗ Wrong. More time to expiration INCREASES call value by giving the stock more time to move favorably.',
+      '✗ Wrong. Higher volatility INCREASES call value because greater price swings improve the probability of finishing in-the-money.'
+    ]
+  },
+  {
+    id: 568, domain: 'investment', difficulty: 'medium',
+    question: 'A company has $400,000 in debt at 6% pre-tax and $600,000 in equity with a 12% cost. The tax rate is 30%. What is the WACC?',
+    options: ['8.88%', '9.6%', '8.4%', '10.2%'],
+    answer: 0,
+    explanation: 'WACC = (Weight of Debt × After-Tax Cost of Debt) + (Weight of Equity × Cost of Equity). Total capital = $1,000,000. Weight of debt = 400/1,000 = 40%. Weight of equity = 600/1,000 = 60%. After-tax cost of debt = 6% × (1 − 0.30) = 4.2%. WACC = (0.40 × 4.2%) + (0.60 × 12%) = 1.68% + 7.2% = 8.88%.',
+    optionExplanations: [
+      '✓ Correct. WACC = (0.40 × 4.2%) + (0.60 × 12%) = 1.68% + 7.2% = 8.88%.',
+      '✗ Wrong. 9.6% ignores the tax shield on debt: (0.40 × 6%) + (0.60 × 12%) = 2.4% + 7.2% = 9.6% uses pre-tax cost.',
+      '✗ Wrong. 8.4% may result from an arithmetic error in weighting or applying the tax rate incorrectly.',
+      '✗ Wrong. 10.2% overweights the equity cost or fails to apply the tax shield to the debt component.'
+    ]
+  },
+  {
+    id: 569, domain: 'investment', difficulty: 'hard',
+    question: 'A portfolio has a target of 60% stocks / 40% bonds. Current value: stocks $720,000, bonds $380,000 (total $1,100,000). What rebalancing action is required?',
+    options: ['Sell $60,000 of stocks and buy $60,000 of bonds', 'Sell $20,000 of stocks and buy $20,000 of bonds', 'Sell $80,000 of stocks and buy $80,000 of bonds', 'No rebalancing needed'],
+    answer: 0,
+    explanation: 'Target allocations: Stocks = 60% × $1,100,000 = $660,000. Bonds = 40% × $1,100,000 = $440,000. Current stocks = $720,000 (over by $60,000). Current bonds = $380,000 (under by $60,000). Action: sell $60,000 of stocks and use the proceeds to buy $60,000 of bonds to restore target weights.',
+    optionExplanations: [
+      '✓ Correct. Stocks are $60,000 above target ($720k vs $660k); bonds are $60,000 below target ($380k vs $440k).',
+      '✗ Wrong. $20,000 is too small; it would leave stocks at $700,000 (63.6%) rather than the target 60%.',
+      '✗ Wrong. $80,000 would undershoot: stocks would drop to $640,000 (58.2%), below the 60% target.',
+      '✗ Wrong. Rebalancing is needed; stocks are at 65.5% ($720k / $1,100k), well above the 60% target.'
+    ]
+  },
+  {
+    id: 570, domain: 'investment', difficulty: 'medium',
+    question: 'A bond is purchased at $920, has a face value of $1,000, and pays a 7% annual coupon. What is the current yield, and how does YTM compare?',
+    options: ['Current yield 7.61%; YTM > current yield', 'Current yield 7.61%; YTM < current yield', 'Current yield 7%; YTM = current yield', 'Current yield 7.61%; YTM = current yield'],
+    answer: 0,
+    explanation: 'Annual coupon = $1,000 × 7% = $70. Current yield = Coupon / Price = $70 / $920 = 7.61%. Since the bond is purchased at a discount ($920 < $1,000), the YTM is greater than the current yield. YTM includes the capital gain earned as the bond approaches par at maturity, making it higher than the current yield alone.',
+    optionExplanations: [
+      '✓ Correct. Current yield = $70 / $920 = 7.61%. YTM > current yield because discount bonds include price appreciation in the YTM.',
+      '✗ Wrong. YTM is NOT less than current yield for discount bonds. YTM < current yield applies to premium bonds.',
+      '✗ Wrong. Current yield is 7.61%, not 7%. The 7% is the coupon rate relative to face value, not market price.',
+      '✗ Wrong. YTM and current yield are equal only for par bonds (price = face value); this bond is at a discount.'
+    ]
+  },
+  {
+    id: 571, domain: 'investment', difficulty: 'expert',
+    question: 'A couple with $1,500,000 plans to withdraw $75,000/year. A Monte Carlo simulation shows a 68% success rate over 30 years. Which action would MOST effectively improve the success rate to 85%?',
+    options: ['Reduce withdrawals to $60,000/year (4% rate)', 'Increase equity allocation from 50/50 to 80/20 only', 'Withdraw more in early years to reduce later burden', 'Ignore inflation adjustments to preserve capital'],
+    answer: 0,
+    explanation: 'The 5% withdrawal rate ($75,000 on $1,500,000) is historically aggressive. The most effective single lever is reducing withdrawals to $60,000/year (4% rate), which has historically shown 90%+ success rates in Monte Carlo simulations. Research (including the "4% rule" from the Trinity Study) shows withdrawal rate is the dominant factor in retirement success. Increasing equities alone adds volatility without the same reliability improvement.',
+    optionExplanations: [
+      '✓ Correct. Reducing to a 4% withdrawal rate ($60,000/year) is historically the most reliable way to improve Monte Carlo success rates to 85%+.',
+      '✗ Wrong. Increasing equity allocation adds return potential but also sequence-of-returns risk; alone it does not reliably move success from 68% to 85%.',
+      '✗ Wrong. Withdrawing MORE in early years depletes the portfolio faster, dramatically reducing success probability.',
+      '✗ Wrong. Ignoring inflation means real purchasing power erodes over time, understating the actual withdrawal burden in later years.'
+    ]
+  },
+  {
+    id: 572, domain: 'retirement', difficulty: 'hard',
+    question: 'Maria, age 50, wants to set up SEPP (72(t)) payments from her IRA worth $450,000 using the RMD method. The IRS single life expectancy factor for age 50 is 34.2. What is her annual SEPP payment?',
+    options: ['$13,158', '$15,000', '$18,000', '$9,000'],
+    answer: 0,
+    explanation: 'Under the RMD method, annual SEPP = IRA Balance / Life Expectancy Factor = $450,000 / 34.2 = $13,158 (rounded). This method produces the lowest payments of the three SEPP methods. The payment must continue for the longer of 5 years or until age 59½. Since Maria is 50, she must continue until 59½ (9.5 years, which is longer than 5 years).',
+    optionExplanations: [
+      '✓ Correct. $450,000 / 34.2 = $13,158 using the IRS RMD method.',
+      '✗ Wrong. $15,000 might result from using a different life expectancy factor or the amortization method.',
+      '✗ Wrong. $18,000 is too high for the RMD method; it would apply to a smaller life expectancy factor or larger balance.',
+      '✗ Wrong. $9,000 uses an incorrectly inflated denominator or wrong balance in the calculation.'
+    ]
+  },
+  {
+    id: 573, domain: 'retirement', difficulty: 'medium',
+    question: 'Linda turns 73 in 2024. What is her Required Beginning Date (RBD) for RMDs, and how many RMDs must she take in 2025?',
+    options: ['April 1, 2025; two RMDs in 2025', 'April 1, 2024; one RMD in 2024', 'December 31, 2024; one RMD in 2024', 'April 1, 2026; one RMD in 2026'],
+    answer: 0,
+    explanation: 'Under SECURE 2.0, the RMD age is 73. The Required Beginning Date is April 1 of the year FOLLOWING the year the participant reaches age 73. Linda turns 73 in 2024, so her RBD is April 1, 2025. Her first RMD (for 2024) must be taken by April 1, 2025. Her second RMD (for 2025) must be taken by December 31, 2025. This means two distributions occur in 2025.',
+    optionExplanations: [
+      '✓ Correct. RBD = April 1, 2025. First RMD by April 1, 2025; second RMD by December 31, 2025 — two in 2025.',
+      '✗ Wrong. April 1, 2024 is incorrect; the RBD is always April 1 of the year AFTER reaching RMD age.',
+      '✗ Wrong. December 31, 2024 is the deadline for subsequent RMDs, not the first-year RBD.',
+      '✗ Wrong. April 1, 2026 would apply if Linda turned 73 in 2025, not 2024.'
+    ]
+  },
+  {
+    id: 574, domain: 'retirement', difficulty: 'expert',
+    question: 'Robert, age 74, has three traditional IRAs worth $200,000, $300,000, and $150,000. His IRS uniform lifetime factor is 25.5. What is his total RMD, and how must it be distributed across accounts?',
+    options: ['$25,490 total; can be taken from any one or combination of IRAs', '$25,490 must be taken proportionally from each IRA', '$8,497 must be taken from each IRA separately', '$25,490 from each IRA individually'],
+    answer: 0,
+    explanation: 'Total IRA balance = $200,000 + $300,000 + $150,000 = $650,000. Total RMD = $650,000 / 25.5 = $25,490. Under the IRA aggregation rule, the total RMD can be taken from any single IRA or any combination — Robert can satisfy the full obligation from just one account. Note: 401(k) RMDs must be taken from each plan separately; 403(b) plans also have their own aggregation rule.',
+    optionExplanations: [
+      '✓ Correct. Total RMD = $650,000 / 25.5 = $25,490, which can be drawn from any IRA(s) in any combination.',
+      '✗ Wrong. Proportional distribution is not required by the IRS for IRAs; the aggregation rule gives full flexibility.',
+      '✗ Wrong. $8,497 per account ($25,490 / 3) would be proportional, which is not required for IRA aggregation.',
+      '✗ Wrong. Taking $25,490 from each IRA would result in a total of $76,470 — far more than the required amount.'
+    ]
+  },
+  {
+    id: 575, domain: 'retirement', difficulty: 'medium',
+    question: 'Margaret (single) receives $24,000 in Social Security benefits. Her AGI is $34,000, and she has $500 in nontaxable interest. How much of her Social Security is taxable?',
+    options: ['$20,400', '$12,000', '$24,000', '$0'],
+    answer: 0,
+    explanation: 'Combined income = AGI + Nontaxable interest + 50% of SS = $34,000 + $500 + $12,000 = $46,500. Single thresholds: $25,000 (lower) and $34,000 (upper). Since $46,500 > $34,000, up to 85% of SS benefits are taxable. Taxable SS = 85% × $24,000 = $20,400.',
+    optionExplanations: [
+      '✓ Correct. Combined income of $46,500 exceeds the $34,000 upper threshold; 85% × $24,000 = $20,400 is taxable.',
+      '✗ Wrong. $12,000 represents 50% of SS benefits, which applies when combined income is between $25,000 and $34,000.',
+      '✗ Wrong. $24,000 (100% of SS) is never fully taxable under current law; maximum taxable is 85%.',
+      '✗ Wrong. $0 would apply only if combined income were below $25,000; at $46,500 it is well above the threshold.'
+    ]
+  },
+  {
+    id: 576, domain: 'retirement', difficulty: 'hard',
+    question: 'Jim has 25 years of service and a final salary of $120,000. His defined benefit plan pays 1.5% per year of service times final salary. What is his annual pension and monthly benefit?',
+    options: ['$45,000/year ($3,750/month)', '$36,000/year ($3,000/month)', '$54,000/year ($4,500/month)', '$30,000/year ($2,500/month)'],
+    answer: 0,
+    explanation: 'Annual pension = Benefit rate × Years of service × Final salary = 1.5% × 25 × $120,000 = 37.5% × $120,000 = $45,000/year. Monthly = $45,000 / 12 = $3,750/month. This is the standard defined benefit formula: accrual rate × service years × final (or average) compensation.',
+    optionExplanations: [
+      '✓ Correct. 1.5% × 25 = 37.5%; $120,000 × 37.5% = $45,000/year = $3,750/month.',
+      '✗ Wrong. $36,000/year ($3,000/month) would result from using a 1.2% accrual rate or 20 years of service instead of 25.',
+      '✗ Wrong. $54,000/year ($4,500/month) implies a 1.8% accrual rate or 30 years of service — above Jim\'s actual numbers.',
+      '✗ Wrong. $30,000/year ($2,500/month) would require only a 1.0% accrual rate, below the stated 1.5%.'
+    ]
+  },
+  {
+    id: 577, domain: 'retirement', difficulty: 'expert',
+    question: 'A pension offers $3,500/month for life. The lump sum is calculated using a 20-year annuity factor. At a 4% discount rate, the annuity factor is 12.462; at 6% it is 11.470. What happens to the lump sum when interest rates rise?',
+    options: ['The lump sum decreases (PV falls from ~$523,404 to ~$481,740)', 'The lump sum increases because higher rates mean more growth', 'Interest rates have no effect on the lump sum calculation', 'The lump sum equals $3,500 × 240 = $840,000 regardless of rates'],
+    answer: 0,
+    explanation: 'Lump sum at 4%: $3,500 × 12 months × 12.462 = $523,404. Lump sum at 6%: $3,500 × 12 months × 11.470 = $481,740. When interest rates rise, the discount rate increases, reducing the present value of future pension payments. This means higher rates produce a LOWER lump sum offer — a critical planning consideration when rates are rising.',
+    optionExplanations: [
+      '✓ Correct. Higher discount rates reduce PV: at 4% the lump sum is ~$523,404; at 6% it falls to ~$481,740.',
+      '✗ Wrong. Higher rates do NOT increase the lump sum. They increase the discount rate, which reduces present value.',
+      '✗ Wrong. Interest rates directly affect the calculation; the lump sum is the present value of future payments.',
+      '✗ Wrong. $3,500 × 240 = $840,000 is the undiscounted sum — it ignores the time value of money entirely.'
+    ]
+  },
+  {
+    id: 578, domain: 'retirement', difficulty: 'medium',
+    question: 'Tom (age 48) earns $80,000. His wife Susan (age 55) has no earned income. They file jointly. What is the maximum combined IRA contribution they can make in 2024?',
+    options: ['$15,000', '$7,000 total', '$14,000', '$16,000'],
+    answer: 0,
+    explanation: 'Tom can contribute to a spousal IRA for Susan even though she has no earned income, as long as the couple files jointly and Tom has sufficient earned income. 2024 IRA limits: $7,000 base + $1,000 catch-up if age 50+. Susan is 55, so her limit = $8,000. Tom is 48, so his limit = $7,000. Combined maximum = $8,000 + $7,000 = $15,000.',
+    optionExplanations: [
+      '✓ Correct. Susan (55) = $8,000; Tom (48) = $7,000; combined = $15,000.',
+      '✗ Wrong. $7,000 total ignores the spousal IRA rule, which allows contributions for a non-earning spouse.',
+      '✗ Wrong. $14,000 assumes both spouses are under 50 ($7,000 × 2), missing Susan\'s $1,000 catch-up contribution.',
+      '✗ Wrong. $16,000 would require both to be 50+; Tom is 48 and not eligible for the catch-up contribution.'
+    ]
+  },
+  {
+    id: 579, domain: 'retirement', difficulty: 'hard',
+    question: 'Tom holds company stock in his 401(k) with a cost basis of $50,000 and FMV of $200,000. He takes a lump-sum distribution using the NUA strategy (37% ordinary income rate, 15% LTCG). What is his total tax, and how much does NUA save vs. ordinary income tax on the full amount?',
+    options: ['Total tax $41,000; saves $33,000', 'NUA is taxed as ordinary income; no savings', 'Total tax $74,000; NUA offers no benefit', 'Total tax $51,000; saves $10,000'],
+    answer: 0,
+    explanation: 'NUA Strategy: Cost basis ($50,000) taxed as ordinary income = $50,000 × 37% = $18,500. NUA ($150,000 = $200,000 − $50,000) taxed at LTCG rate = $150,000 × 15% = $22,500. Total NUA tax = $18,500 + $22,500 = $41,000. Without NUA: full $200,000 × 37% = $74,000. Tax savings = $74,000 − $41,000 = $33,000.',
+    optionExplanations: [
+      '✓ Correct. NUA tax = $18,500 + $22,500 = $41,000; without NUA = $74,000; savings = $33,000.',
+      '✗ Wrong. NUA is NOT taxed as ordinary income. Only the cost basis receives ordinary income treatment; the NUA receives LTCG treatment.',
+      '✗ Wrong. Without NUA the tax would be $74,000; the NUA strategy significantly reduces the tax burden.',
+      '✗ Wrong. Total tax is $41,000, not $51,000; savings are $33,000, not $10,000. The $10,000 figure understates the benefit.'
+    ]
+  },
+  {
+    id: 580, domain: 'retirement', difficulty: 'medium',
+    question: 'Carlos earns $100,000. His employer offers a 100% match on the first 6% of salary contributed to his 401(k). He contributes only 3%. How much employer match does he receive, and how much is he leaving on the table?',
+    options: ['Receives $3,000 match; leaves $3,000 on the table', 'Must contribute 3% to receive the full match', 'Employer matches 50 cents per dollar up to 6%', 'Maximum employer match is $3,000 regardless of contribution'],
+    answer: 0,
+    explanation: 'Full match requires contributing at least 6% of salary = $6,000. At 3% contribution ($3,000), employer matches 100% = $3,000. To get the full match of $6,000, Carlos must contribute $6,000 (6%). By contributing only 3%, he forfeits $3,000 in free employer matching money — equivalent to leaving a 3% pay raise unclaimed.',
+    optionExplanations: [
+      '✓ Correct. Carlos contributes $3,000 (3%), gets $3,000 match, but misses $3,000 by not contributing the full 6%.',
+      '✗ Wrong. Contributing 3% does NOT trigger the full match. The full 100% match requires a full 6% contribution.',
+      '✗ Wrong. The match is 100 cents per dollar (100%), not 50 cents. A 50% match is a common plan design but not described here.',
+      '✗ Wrong. The maximum match is $6,000 (6% of $100,000), not $3,000. Carlos is only capturing half the available match.'
+    ]
+  },
+  {
+    id: 581, domain: 'retirement', difficulty: 'expert',
+    question: 'Sarah\'s FRA benefit is $2,500/month at age 67. She delays to age 70, earning 8%/year in delayed credits. What is her age-70 benefit, and what is her break-even age?',
+    options: ['$3,100/month; break-even age 82.5', '$3,100/month; break-even age 78', '$3,000/month; break-even age 85', '$3,100/month; break-even age 80'],
+    answer: 0,
+    explanation: 'Delayed credit = 8% × 3 years = 24%. Benefit at 70 = $2,500 × 1.24 = $3,100/month. Foregone benefits (age 67–70) = $2,500 × 36 months = $90,000. Monthly advantage of waiting = $3,100 − $2,500 = $600. Break-even = $90,000 / $600 = 150 months = 12.5 years after age 70 = age 82.5. If Sarah lives past 82.5, delaying was financially advantageous.',
+    optionExplanations: [
+      '✓ Correct. Benefit = $3,100/month; break-even = 150 months after age 70 = age 82.5.',
+      '✗ Wrong. Age 78 would require only 96 months of break-even, implying a monthly advantage of $937 — much larger than the actual $600.',
+      '✗ Wrong. $3,000/month uses a 20% increase instead of the correct 24% (8% × 3 years).',
+      '✗ Wrong. Age 80 implies a 120-month break-even, requiring a monthly advantage of $750, not the correct $600.'
+    ]
   }
 ];
