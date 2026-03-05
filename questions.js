@@ -9584,5 +9584,330 @@ const QUESTIONS = [
       '✗ $1,110 = $3,000 × 37%. This uses $3,000 as the kiddie tax base, which would imply the threshold is only $2,000 rather than $2,600.',
       '✗ $1,850 = $5,000 × 37%. This incorrectly applies the parent\'s rate to the full $5,000 of unearned income without subtracting the $2,600 kiddie tax threshold.'
     ]
+  },
+  {
+    id: 532, domain: 'estate', difficulty: 'easy',
+    question: 'In 2024, the annual gift tax exclusion is $18,000 per donee. Robert gives $25,000 to his daughter. How much is the taxable gift?',
+    options: ['$7,000', '$25,000', '$18,000', '$0'],
+    answer: 0,
+    explanation: 'Annual gift tax exclusion calculation: Robert gives $25,000. The annual exclusion shields $18,000. Taxable gift = $25,000 − $18,000 = <strong>$7,000</strong>. Only the amount above the annual exclusion is counted as a taxable gift subject to the unified credit or gift tax.',
+    optionExplanations: [
+      '✓ Correct. $25,000 − $18,000 annual exclusion = $7,000 taxable gift.',
+      '✗ $25,000 is the total gift, not the taxable portion. The annual exclusion of $18,000 reduces the taxable gift.',
+      '✗ $18,000 is the excluded amount, not the taxable gift.',
+      '✗ $0 would be correct only if the gift did not exceed the $18,000 annual exclusion.'
+    ]
+  },
+  {
+    id: 533, domain: 'estate', difficulty: 'medium',
+    question: 'Married couple Bob and Carol want to give their son $36,000 in 2024. If they elect gift splitting, what is the total taxable gift?',
+    options: ['$0', '$18,000', '$7,000', '$36,000'],
+    answer: 0,
+    explanation: 'Gift splitting calculation: With gift splitting, each spouse is treated as making half the gift — $18,000 each. Each spouse\'s $18,000 gift equals the 2024 annual exclusion of $18,000. Taxable gift per spouse = $18,000 − $18,000 = $0. Total taxable gift = $0 + $0 = <strong>$0</strong>.',
+    optionExplanations: [
+      '✓ Correct. Gift splitting treats each spouse as giving $18,000. Each $18,000 is fully covered by the annual exclusion, resulting in $0 taxable gift.',
+      '✗ $18,000 would be the taxable amount if only one spouse\'s annual exclusion was applied to the full $36,000 gift.',
+      '✗ $7,000 would result from a single $25,000 gift minus the $18,000 exclusion — not applicable here.',
+      '✗ $36,000 would be the taxable gift only if no annual exclusions applied, which is incorrect.'
+    ]
+  },
+  {
+    id: 534, domain: 'estate', difficulty: 'hard',
+    question: 'In 2024, the lifetime gift/estate tax exemption is $13,610,000. Frank has made $500,000 in prior taxable gifts. He now makes another taxable gift of $200,000. What is his remaining lifetime exemption?',
+    options: ['$12,910,000', '$88,000 gift tax owed', '$13,110,000', '$13,410,000'],
+    answer: 0,
+    explanation: 'Unified credit calculation: Frank starts with $13,610,000 lifetime exemption. Prior taxable gifts used $500,000. Current taxable gift uses $200,000. Remaining exemption = $13,610,000 − $500,000 − $200,000 = <strong>$12,910,000</strong>. No gift tax is owed because his cumulative taxable gifts ($700,000) are far below the lifetime exemption.',
+    optionExplanations: [
+      '✓ Correct. $13,610,000 − $500,000 − $200,000 = $12,910,000 remaining exemption. No gift tax owed.',
+      '✗ No gift tax is owed. Frank\'s total taxable gifts of $700,000 are well below the $13,610,000 lifetime exemption.',
+      '✗ $13,110,000 would only subtract the $500,000 prior gifts, ignoring the new $200,000 gift.',
+      '✗ $13,410,000 would only subtract the $200,000 current gift, ignoring the $500,000 in prior gifts.'
+    ]
+  },
+  {
+    id: 535, domain: 'estate', difficulty: 'medium',
+    question: 'Janet inherited stock from her father. Her father\'s cost basis was $20,000; the FMV at his death was $85,000. Janet sells the stock for $90,000. What is her taxable gain?',
+    options: ['$5,000', '$70,000', '$85,000', '$0'],
+    answer: 0,
+    explanation: 'Step-up in basis: Under IRC §1014, inherited assets receive a stepped-up basis equal to FMV at date of death. Janet\'s basis = $85,000 (not her father\'s $20,000). Taxable gain = $90,000 sale price − $85,000 stepped-up basis = <strong>$5,000</strong>.',
+    optionExplanations: [
+      '✓ Correct. Stepped-up basis = $85,000 FMV at death. Gain = $90,000 − $85,000 = $5,000.',
+      '✗ $70,000 = $90,000 − $20,000. This incorrectly uses the father\'s original cost basis without applying the step-up.',
+      '✗ $85,000 is the stepped-up basis, not the gain.',
+      '✗ $0 would be correct only if Janet sold for exactly $85,000 (the stepped-up basis).'
+    ]
+  },
+  {
+    id: 536, domain: 'estate', difficulty: 'hard',
+    question: 'A Grantor Retained Annuity Trust (GRAT) is funded with $500,000. The IRS Section 7520 rate is 4%. The annuity factor for 5 years at 4% is 4.452. What annual annuity payment must the grantor retain to "zero out" the remainder interest?',
+    options: ['$112,333', '$100,000', '$125,000', '$92,500'],
+    answer: 0,
+    explanation: 'GRAT zeroed-out calculation: To zero out the remainder (no taxable gift), the PV of the annuity must equal the initial funding amount. Annual annuity = $500,000 ÷ 4.452 annuity factor = <strong>$112,333/year</strong>. If the trust assets grow faster than the 4% hurdle rate, the excess growth passes to heirs gift-tax-free.',
+    optionExplanations: [
+      '✓ Correct. $500,000 ÷ 4.452 = $112,333/year zeroes out the remainder interest.',
+      '✗ $100,000/year implies an annuity factor of 5.0, which corresponds to a higher rate — not 4% for 5 years.',
+      '✗ $125,000/year implies an annuity factor of 4.0, overstating the annuity above what is needed to zero out the trust.',
+      '✗ $92,500/year understates the required annuity and would leave a taxable remainder gift.'
+    ]
+  },
+  {
+    id: 537, domain: 'estate', difficulty: 'medium',
+    question: 'A Charitable Remainder Unitrust (CRUT) is funded with $1,000,000 at a 6% payout rate. The portfolio grows to $1,080,000 by the end of Year 1. What is the Year 2 distribution?',
+    options: ['$64,800', '$60,000', '$120,000', '$48,000'],
+    answer: 0,
+    explanation: 'CRUT payout calculation: A unitrust pays a fixed percentage of the trust\'s FMV each year (revalued annually). Year 1 distribution = $1,000,000 × 6% = $60,000. After distributions and growth, the portfolio is $1,080,000 at the start of Year 2. Year 2 distribution = $1,080,000 × 6% = <strong>$64,800</strong>.',
+    optionExplanations: [
+      '✓ Correct. Year 2 distribution = $1,080,000 × 6% = $64,800. The unitrust revalues annually.',
+      '✗ $60,000 = $1,000,000 × 6%. This is the Year 1 distribution; a unitrust revalues, so Year 2 differs.',
+      '✗ $120,000 = $1,000,000 × 12% or Year 1 + Year 2 combined. Neither is the Year 2 distribution alone.',
+      '✗ $48,000 = $1,000,000 × 4.8%. This understates the Year 2 distribution and uses an incorrect rate.'
+    ]
+  },
+  {
+    id: 538, domain: 'estate', difficulty: 'hard',
+    question: 'A decedent\'s gross estate is $15,000,000. Allowable deductions: debts $200,000, funeral expenses $50,000, charitable bequest $500,000. The 2024 exemption is $13,610,000. What is the estate tax owed?',
+    options: ['$256,000', '$640,000', '$128,000', '$5,700,000'],
+    answer: 0,
+    explanation: 'Estate tax calculation: Taxable estate = $15,000,000 − $200,000 − $50,000 − $500,000 = $14,250,000. Taxable amount above exemption = $14,250,000 − $13,610,000 = $640,000. Estate tax at 40% = $640,000 × 40% = <strong>$256,000</strong>.',
+    optionExplanations: [
+      '✓ Correct. Taxable estate = $14,250,000. Amount above exemption = $640,000. Tax = $640,000 × 40% = $256,000.',
+      '✗ $640,000 is the taxable amount above the exemption, not the tax itself. The tax rate of 40% must still be applied.',
+      '✗ $128,000 = $640,000 × 20%. This applies half the correct estate tax rate of 40%.',
+      '✗ $5,700,000 = $15,000,000 × 38% (approx). This applies the rate to the entire gross estate without deductions or the exemption.'
+    ]
+  },
+  {
+    id: 539, domain: 'estate', difficulty: 'medium',
+    question: 'A husband dies in 2024 with a $10,000,000 estate, using $10,000,000 of his $13,610,000 exemption. His wife timely elects portability. What is her total available exemption?',
+    options: ['$17,220,000', '$13,610,000', '$27,220,000', '$7,220,000'],
+    answer: 0,
+    explanation: 'Portability calculation: Husband\'s unused exemption (DSUE) = $13,610,000 − $10,000,000 = $3,610,000. Wife\'s own exemption = $13,610,000. Total with portability election = $13,610,000 + $3,610,000 = <strong>$17,220,000</strong>.',
+    optionExplanations: [
+      '✓ Correct. Wife\'s $13,610,000 + husband\'s DSUE of $3,610,000 = $17,220,000 total exemption.',
+      '✗ $13,610,000 is only the wife\'s own exemption, ignoring the portable DSUE amount from the husband.',
+      '✗ $27,220,000 = $13,610,000 × 2. This assumes the husband used none of his exemption, which is incorrect.',
+      '✗ $7,220,000 represents only the DSUE ($3,610,000) doubled or some other incorrect combination.'
+    ]
+  },
+  {
+    id: 540, domain: 'estate', difficulty: 'hard',
+    question: 'A $2,000,000 life insurance policy is placed in an Irrevocable Life Insurance Trust (ILIT) with Crummey powers. The estate tax rate is 40%. What is the estate tax savings compared to keeping the policy in the insured\'s estate?',
+    options: ['$800,000', '$1,200,000', '$2,000,000', '$400,000'],
+    answer: 0,
+    explanation: 'ILIT estate tax savings: If the policy remains in the estate, estate tax = $2,000,000 × 40% = <strong>$800,000</strong>. In an ILIT with Crummey powers, the death benefit is excluded from the taxable estate. Estate tax savings = $800,000. Annual premiums ($15,000) are funded via annual exclusion gifts, so there is no gift tax cost.',
+    optionExplanations: [
+      '✓ Correct. $2,000,000 × 40% estate tax rate = $800,000 in estate tax savings by using an ILIT.',
+      '✗ $1,200,000 = $2,000,000 − $800,000. This is the net amount heirs would receive after estate tax, not the tax savings.',
+      '✗ $2,000,000 is the full death benefit, not the tax savings. The estate tax rate of 40% must be applied.',
+      '✗ $400,000 = $2,000,000 × 20%. This uses half the correct 40% estate tax rate.'
+    ]
+  },
+  {
+    id: 541, domain: 'estate', difficulty: 'medium',
+    question: 'Parents use a 2503(c) minor\'s trust and contribute $18,000 per parent per year for 10 years via gift splitting. What is the total taxable gift over the 10 years?',
+    options: ['$0', '$180,000', '$360,000', '$90,000'],
+    answer: 0,
+    explanation: '2503(c) trust and gift splitting: Each parent gives $18,000/year. With gift splitting, each gift equals exactly the annual exclusion, so taxable gift per parent per year = $0. Over 10 years: total contributions = $18,000 × 2 parents × 10 years = $360,000, but taxable gifts = <strong>$0</strong> because every gift is fully covered by the annual exclusion.',
+    optionExplanations: [
+      '✓ Correct. Each $18,000 gift exactly equals the annual exclusion. No taxable gifts are created over the 10 years.',
+      '✗ $180,000 = $18,000 × 10 years. This represents one parent\'s total contributions but ignores that each annual gift is fully excluded.',
+      '✗ $360,000 is the total dollars contributed, not the taxable amount. The annual exclusion eliminates the taxable portion each year.',
+      '✗ $90,000 = $18,000 × 5 years (half the years). This is neither the total contribution nor the taxable amount.'
+    ]
+  },
+  {
+    id: 542, domain: 'estate', difficulty: 'expert',
+    question: 'A closely-held business interest with FMV of $1,000,000 is gifted by a married couple after applying a 30% combined valuation discount. What is the taxable gift (after annual exclusions of $18,000 per spouse)?',
+    options: ['$664,000', '$964,000', '$700,000', '$1,000,000'],
+    answer: 0,
+    explanation: 'Valuation discount and taxable gift: Discounted value = $1,000,000 × (1 − 0.30) = $700,000. Combined annual exclusions = $18,000 × 2 spouses = $36,000. Taxable gift = $700,000 − $36,000 = <strong>$664,000</strong>, which is applied against the couple\'s lifetime exemption.',
+    optionExplanations: [
+      '✓ Correct. Discounted value = $700,000. Less $36,000 in annual exclusions = $664,000 taxable gift.',
+      '✗ $964,000 = $1,000,000 − $36,000. This subtracts the annual exclusions from the undiscounted FMV, ignoring the 30% valuation discount.',
+      '✗ $700,000 is the discounted value before subtracting the $36,000 in annual exclusions.',
+      '✗ $1,000,000 is the undiscounted FMV. Both the valuation discount and annual exclusions must be applied.'
+    ]
+  },
+  {
+    id: 543, domain: 'estate', difficulty: 'medium',
+    question: 'A husband died in 2020 (no portability elected) with an $8,000,000 estate. A bypass trust was funded with $8,000,000. By the wife\'s death the bypass trust grew to $12,000,000. At the 40% estate tax rate, what is the estate tax saved by the bypass trust vs. no planning?',
+    options: ['$4,800,000', '$0', '$2,400,000', '$3,200,000'],
+    answer: 0,
+    explanation: 'Bypass trust savings: Because the bypass trust is not included in the wife\'s taxable estate, the entire $12,000,000 of grown assets passes to heirs free of estate tax. Without the bypass trust, these assets would have been in the wife\'s estate. Estate tax savings = $12,000,000 × 40% = <strong>$4,800,000</strong>.',
+    optionExplanations: [
+      '✓ Correct. $12,000,000 (grown bypass trust) × 40% estate tax rate = $4,800,000 in estate tax savings.',
+      '✗ $0 ignores the bypass trust\'s purpose. Without planning, the $12,000,000 would be in the wife\'s estate and subject to tax.',
+      '✗ $2,400,000 = $12,000,000 × 20%. This uses half the correct 40% estate tax rate.',
+      '✗ $3,200,000 = $8,000,000 × 40%. This applies the tax to the original funding amount, not the grown trust value.'
+    ]
+  },
+  {
+    id: 544, domain: 'risk', difficulty: 'medium',
+    question: 'James, age 35, earns $90,000/year and expects to work 30 more years. His personal consumption is 30% of income. Using a 5% discount rate and annuity factor of 15.372, what is his Human Life Value?',
+    options: ['$968,436', '$2,700,000', '$63,000', '$1,200,000'],
+    answer: 0,
+    explanation: 'Human Life Value method: Net contribution to family = $90,000 × (1 − 0.30) = $63,000/year. PV of $63,000/year for 30 years at 5% = $63,000 × 15.372 = <strong>$968,436</strong> (approximately $970,000). This represents the PV of future earnings net of personal consumption.',
+    optionExplanations: [
+      '✓ Correct. $90,000 × 70% = $63,000 net. $63,000 × 15.372 annuity factor = $968,436.',
+      '✗ $2,700,000 = $90,000 × 30 years. This ignores personal consumption and fails to discount future earnings to present value.',
+      '✗ $63,000 is only the annual net contribution, not the present value over 30 years.',
+      '✗ $1,200,000 does not correspond to any correct calculation step in the Human Life Value method here.'
+    ]
+  },
+  {
+    id: 545, domain: 'risk', difficulty: 'hard',
+    question: 'Using the needs approach: Frank\'s family needs $500,000 (mortgage), $200,000 (college), $60,000/year income for 20 years (PV factor 12.462 at 5%), and $25,000 (final expenses). Existing resources: $300,000 savings + $150,000 life insurance. What additional insurance is needed?',
+    options: ['$1,022,720', '$1,472,720', '$772,720', '$1,200,000'],
+    answer: 0,
+    explanation: 'Needs approach: Total needs = $500,000 + $200,000 + ($60,000 × 12.462) + $25,000 = $500,000 + $200,000 + $747,720 + $25,000 = $1,472,720. Existing resources = $300,000 + $150,000 = $450,000. Insurance gap = $1,472,720 − $450,000 = <strong>$1,022,720</strong>.',
+    optionExplanations: [
+      '✓ Correct. Total needs = $1,472,720. Resources = $450,000. Gap = $1,472,720 − $450,000 = $1,022,720.',
+      '✗ $1,472,720 is the total needs amount before subtracting existing resources of $450,000.',
+      '✗ $772,720 = $1,472,720 − $700,000. This overstates resources by $250,000.',
+      '✗ $1,200,000 does not result from any correct application of the needs approach calculation.'
+    ]
+  },
+  {
+    id: 546, domain: 'risk', difficulty: 'medium',
+    question: 'Maria earns $8,000/month. Her disability income policy replaces 60% of gross income with a 90-day elimination period. If she is disabled for exactly 2 years, what is her total DI benefit received?',
+    options: ['$100,800', '$115,200', '$4,800', '$57,600'],
+    answer: 0,
+    explanation: 'DI benefit calculation: Monthly DI benefit = $8,000 × 60% = $4,800. The 90-day (3-month) elimination period means no benefit for the first 3 months. Benefits are paid for months 4–24 = 21 months. Total benefit = $4,800 × 21 = <strong>$100,800</strong>.',
+    optionExplanations: [
+      '✓ Correct. $4,800/month × 21 months (months 4–24 after 3-month elimination period) = $100,800.',
+      '✗ $115,200 = $4,800 × 24 months. This ignores the 90-day (3-month) elimination period.',
+      '✗ $4,800 is the monthly benefit, not the total benefit over the disability period.',
+      '✗ $57,600 = $4,800 × 12 months. This counts only one year of benefits instead of 21 months.'
+    ]
+  },
+  {
+    id: 547, domain: 'risk', difficulty: 'medium',
+    question: 'A health plan has a $1,500 deductible, 80/20 coinsurance, and a $6,000 out-of-pocket maximum. Total medical bill is $10,000. How much does the patient pay in total?',
+    options: ['$3,200', '$2,000', '$6,000', '$1,700'],
+    answer: 0,
+    explanation: 'Health coinsurance calculation: Patient pays deductible first: $1,500. Remaining bill = $10,000 − $1,500 = $8,500. Patient pays 20% coinsurance on $8,500 = $1,700. Total patient cost = $1,500 + $1,700 = <strong>$3,200</strong>. Since $3,200 < $6,000 OOP max, the maximum does not apply.',
+    optionExplanations: [
+      '✓ Correct. $1,500 deductible + 20% of $8,500 ($1,700) = $3,200 total patient cost.',
+      '✗ $2,000 = 20% of $10,000. This applies coinsurance to the entire bill without first subtracting the deductible.',
+      '✗ $6,000 is the out-of-pocket maximum. The patient\'s actual cost of $3,200 does not reach this cap.',
+      '✗ $1,700 is only the coinsurance portion (20% of $8,500), excluding the $1,500 deductible.'
+    ]
+  },
+  {
+    id: 548, domain: 'risk', difficulty: 'hard',
+    question: 'A home with a $400,000 replacement cost is insured for $240,000 (the coinsurance requirement is 80%). A fire causes $80,000 in damage. How much does the insurance company pay?',
+    options: ['$60,000', '$80,000', '$64,000', '$48,000'],
+    answer: 0,
+    explanation: 'Property coinsurance penalty: Required coverage = 80% × $400,000 = $320,000. Actual coverage = $240,000. Coinsurance ratio = $240,000 ÷ $320,000 = 0.75. Insurance payment = 0.75 × $80,000 = <strong>$60,000</strong>. The homeowner bears the remaining $20,000 as a penalty for being underinsured.',
+    optionExplanations: [
+      '✓ Correct. ($240,000 ÷ $320,000) × $80,000 = 0.75 × $80,000 = $60,000.',
+      '✗ $80,000 is the full loss amount. Because the home is underinsured, the coinsurance penalty reduces the payout to $60,000.',
+      '✗ $64,000 = 80% × $80,000. This applies the coinsurance percentage directly to the loss instead of the correct coinsurance ratio.',
+      '✗ $48,000 = 60% × $80,000. This uses an incorrect ratio of $240,000 ÷ $400,000 instead of $240,000 ÷ $320,000.'
+    ]
+  },
+  {
+    id: 549, domain: 'risk', difficulty: 'medium',
+    question: 'An LTC policy costs $3,600/year in premiums and provides $150/day for a 3-year benefit period. Approximately how many years of premium payments equal the total potential benefit?',
+    options: ['45.6 years', '30 years', '55 years', '20 years'],
+    answer: 0,
+    explanation: 'LTC break-even analysis: Total potential benefit = $150/day × 365 days × 3 years = $164,250. Break-even = $164,250 ÷ $3,600/year = <strong>45.6 years</strong> of premiums. This illustrates the value of LTC insurance: one claim more than pays for decades of premiums.',
+    optionExplanations: [
+      '✓ Correct. $150 × 365 × 3 = $164,250 total benefit. $164,250 ÷ $3,600 = 45.6 years.',
+      '✗ 30 years underestimates the break-even. 30 × $3,600 = $108,000 < $164,250 total benefit.',
+      '✗ 55 years overestimates the break-even. 55 × $3,600 = $198,000 > $164,250 total benefit.',
+      '✗ 20 years significantly underestimates: 20 × $3,600 = $72,000, far less than the $164,250 total benefit.'
+    ]
+  },
+  {
+    id: 550, domain: 'risk', difficulty: 'hard',
+    question: 'A life insurance policy has a $500,000 death benefit with $3,000/year premiums paid for 20 years. If the insured dies at the end of year 20, what is the approximate internal rate of return (IRR) on the premiums?',
+    options: ['12.2%', '8%', '15%', '6%'],
+    answer: 0,
+    explanation: 'Life insurance IRR: Using TVM: N=20 years, PMT=−$3,000/year, FV=$500,000, PV=0. Solving for I/Y gives approximately <strong>12.2%</strong>. This represents the return earned by the policyholder\'s premium dollars relative to the death benefit received. Total premiums paid = $3,000 × 20 = $60,000 vs. $500,000 received.',
+    optionExplanations: [
+      '✓ Correct. Solving N=20, PMT=−$3,000, FV=$500,000, PV=0 for I/Y ≈ 12.2%.',
+      '✗ 8% underestimates the IRR. At 8%, the FV of $3,000/year for 20 years = $137,286, far less than $500,000.',
+      '✗ 15% overestimates the IRR. At 15%, the FV of $3,000/year for 20 years = $245,677, still less than $500,000.',
+      '✗ 6% significantly underestimates. At 6%, the FV of $3,000/year for 20 years = $110,357, far below $500,000.'
+    ]
+  },
+  {
+    id: 551, domain: 'education', difficulty: 'medium',
+    question: 'Parents open a 529 plan for a newborn and invest $200/month for 18 years at 6% annual return (0.5%/month). Using FV = PMT × [(1+r)^n − 1]/r with n=216 months, approximately how much will the account hold?',
+    options: ['$77,600', '$43,200', '$62,000', '$95,000'],
+    answer: 0,
+    explanation: '529 future value: Monthly rate = 6%/12 = 0.5%. N = 18 × 12 = 216 months. FV = $200 × [(1.005)^216 − 1] / 0.005 = $200 × 290.8 ≈ <strong>$77,600</strong>. Without growth, total contributions = $200 × 216 = $43,200, demonstrating the significant benefit of compounding.',
+    optionExplanations: [
+      '✓ Correct. FV = $200 × [(1.005)^216 − 1] / 0.005 ≈ $200 × 290.8 = $77,600.',
+      '✗ $43,200 = $200 × 216 months. This is the total contributions with no investment growth — no compounding applied.',
+      '✗ $62,000 underestimates the FV. This might result from using an incorrect rate or number of periods.',
+      '✗ $95,000 overestimates the FV; this could result from using a higher return assumption than 6%.'
+    ]
+  },
+  {
+    id: 552, domain: 'education', difficulty: 'easy',
+    question: 'The annual Coverdell ESA contribution limit is $2,000 per beneficiary. Grandparents contribute $2,000 and parents also contribute $2,000 in the same year. What is the 6% excise tax penalty on the excess contribution?',
+    options: ['$120', '$0', '$240', '$4,000 allowed'],
+    answer: 0,
+    explanation: 'Coverdell ESA excess contribution: The $2,000 limit is per beneficiary, regardless of the number of contributors. Total contributed = $4,000. Excess = $4,000 − $2,000 = $2,000. Excise tax = $2,000 × 6% = <strong>$120</strong>. The excess must be withdrawn to avoid a continued annual 6% penalty.',
+    optionExplanations: [
+      '✓ Correct. Excess contribution = $2,000. Excise tax = $2,000 × 6% = $120.',
+      '✗ $0 is incorrect. Contributions from all sources cannot exceed $2,000/year per beneficiary; the excess is penalized.',
+      '✗ $240 = $4,000 × 6%. This applies the excise tax to the total contribution instead of only the $2,000 excess.',
+      '✗ $4,000 allowed is incorrect. The ESA limit is $2,000 per beneficiary — not per contributor.'
+    ]
+  },
+  {
+    id: 553, domain: 'education', difficulty: 'hard',
+    question: 'Marcus has $12,000 in qualified education expenses in Year 1 of college and a MAGI of $75,000 (single). What is his American Opportunity Tax Credit (AOTC), and how much is refundable?',
+    options: ['$2,500 credit; $1,000 refundable', '$2,400 credit', '$2,000 credit', '$3,000 credit'],
+    answer: 0,
+    explanation: 'AOTC calculation: AOTC = 100% of first $2,000 + 25% of next $2,000 = $2,000 + $500 = $2,500 (maximum). Marcus\'s MAGI of $75,000 is below the $80,000 phase-out threshold (single), so he receives the full credit. Refundable portion = 40% × $2,500 = $1,000. Total credit = <strong>$2,500; $1,000 refundable</strong>.',
+    optionExplanations: [
+      '✓ Correct. AOTC = $2,000 + $500 = $2,500. Refundable portion = 40% × $2,500 = $1,000.',
+      '✗ $2,400 = $12,000 × 20%. This incorrectly applies the Lifetime Learning Credit rate to AOTC expenses.',
+      '✗ $2,000 is only the first tier of the AOTC (100% of first $2,000). The second tier (25% of next $2,000 = $500) is missing.',
+      '✗ $3,000 exceeds the AOTC maximum of $2,500. No credit formula for the AOTC produces $3,000.'
+    ]
+  },
+  {
+    id: 554, domain: 'education', difficulty: 'medium',
+    question: 'Sarah pays $5,000 in tuition for community college courses. Her MAGI is $78,000 (single). What is her Lifetime Learning Credit (LLC)?',
+    options: ['$1,000', '$2,000', '$1,250', '$500'],
+    answer: 0,
+    explanation: 'Lifetime Learning Credit: LLC = 20% of the first $10,000 in qualified expenses (max credit $2,000). Sarah\'s qualified expenses = $5,000. LLC = 20% × $5,000 = <strong>$1,000</strong>. Her MAGI of $78,000 is below the $80,000 single phase-out, so no reduction applies. The LLC is nonrefundable.',
+    optionExplanations: [
+      '✓ Correct. LLC = 20% × $5,000 = $1,000. Below phase-out threshold, full credit applies.',
+      '✗ $2,000 is the LLC maximum (20% of $10,000). Sarah\'s $5,000 in expenses yields only a $1,000 credit.',
+      '✗ $1,250 = $5,000 × 25%. This applies the AOTC second-tier rate (25%) instead of the LLC rate (20%).',
+      '✗ $500 = $5,000 × 10%. This uses half the correct LLC rate of 20%.'
+    ]
+  },
+  {
+    id: 555, domain: 'education', difficulty: 'hard',
+    question: 'Jake withdraws $10,000 from a 529 plan for non-qualified expenses. Of the $10,000, $4,000 represents earnings and $6,000 is return of contributions. What is the 10% penalty amount?',
+    options: ['$400', '$1,000', '$400 penalty + tax on $10,000', '$0'],
+    answer: 0,
+    explanation: '529 non-qualified withdrawal penalty: The 10% penalty applies only to the earnings portion of the withdrawal, not the return of contributions. Earnings = $4,000. Penalty = $4,000 × 10% = <strong>$400</strong>. Additionally, the $4,000 earnings are included in ordinary income and taxed at Jake\'s marginal rate.',
+    optionExplanations: [
+      '✓ Correct. Penalty = 10% × $4,000 earnings = $400. The $6,000 return of contributions is not penalized.',
+      '✗ $1,000 = $10,000 × 10%. This incorrectly applies the penalty to the entire withdrawal, including the return of contributions.',
+      '✗ The ordinary income tax applies only to the $4,000 earnings, not to the full $10,000 withdrawal.',
+      '✗ $0 is incorrect. Non-qualified withdrawals of earnings are subject to both the 10% penalty and ordinary income tax.'
+    ]
+  },
+  {
+    id: 556, domain: 'education', difficulty: 'medium',
+    question: 'In 2024, Sara paid $3,800 in student loan interest. Her MAGI is $70,000 (single, below the $75,000 phase-out floor). The student loan interest deduction is capped at $2,500. At a 22% tax bracket, what is her tax savings?',
+    options: ['$550', '$836', '$2,500', '$0'],
+    answer: 0,
+    explanation: 'Student loan interest deduction: The deduction is capped at $2,500 regardless of actual interest paid. Sara\'s MAGI of $70,000 is below the $75,000 phase-out, so she receives the full $2,500 deduction. Tax savings = $2,500 × 22% = <strong>$550</strong>.',
+    optionExplanations: [
+      '✓ Correct. Deduction capped at $2,500. Tax savings = $2,500 × 22% = $550.',
+      '✗ $836 = $3,800 × 22%. This applies the tax rate to the actual interest paid ($3,800) rather than the $2,500 cap.',
+      '✗ $2,500 is the deduction amount, not the tax savings. The 22% tax rate must be applied to find the dollar savings.',
+      '✗ $0 is incorrect. Sara\'s MAGI of $70,000 is below the phase-out floor, so she qualifies for the full deduction.'
+    ]
   }
 ];
