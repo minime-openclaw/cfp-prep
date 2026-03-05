@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CFP® Command Center by Nathan & MiniMe</title>
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';
+    script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com;
+    style-src 'self' 'unsafe-inline';
+    connect-src https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com https://*.cloudfunctions.net wss://*.firebaseio.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com;
+    font-src 'self' data:;
+    img-src 'self' data: https:;
+    frame-src https://cfp-command-center.firebaseapp.com;
+    base-uri 'self';
+    form-action 'none';
+  ">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <style>
     :root {
       --bg: #0f1117;
@@ -857,8 +872,8 @@
 
 </main>
 
-<script src="flashcards.js?v=b0ce933"></script>
-<script src="questions.js?v=b0ce933"></script>
+<script src="flashcards.js?v=f6f5929"></script>
+<script src="questions.js?v=f6f5929"></script>
 <script>
 const DOMAINS = [
   { id: 'professional', name: 'Professional Conduct & Regulation',   weight: 7,  color: '#a78bfa' },
