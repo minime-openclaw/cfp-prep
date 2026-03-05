@@ -10234,5 +10234,330 @@ const QUESTIONS = [
       '✗ Wrong. $3,000/month uses a 20% increase instead of the correct 24% (8% × 3 years).',
       '✗ Wrong. Age 80 implies a 120-month break-even, requiring a monthly advantage of $750, not the correct $600.'
     ]
+  },
+  {
+    id: 582, domain: 'tax', difficulty: 'medium',
+    question: 'A single filer has Alternative Minimum Taxable Income (AMTI) of $150,000. The 2024 AMT exemption for a single filer is $85,700 (no phase-out applies at this income level). The tentative minimum tax (TMT) rate is 26%. The taxpayer\'s regular income tax is $22,000. What is the AMT owed?',
+    options: ['$0', '$16,718', '$5,282', '$39,000'],
+    answer: 0,
+    explanation: 'AMT calculation: Step 1 — Subtract exemption: $150,000 − $85,700 = $64,300 of AMT base. Step 2 — Compute TMT: $64,300 × 26% = <strong>$16,718</strong>. Step 3 — Compare to regular tax: TMT ($16,718) &lt; Regular tax ($22,000). When regular tax exceeds TMT, <strong>no AMT is owed</strong>. AMT = regular tax − TMT only when TMT &gt; regular tax. The taxpayer pays only the regular tax of $22,000.',
+    optionExplanations: [
+      '✓ Correct. TMT ($16,718) is less than regular tax ($22,000), so no additional AMT is owed.',
+      '✗ $16,718 is the tentative minimum tax (TMT), but AMT = TMT − regular tax only when TMT exceeds regular tax. Here TMT < regular tax, so AMT = $0.',
+      '✗ $5,282 = $22,000 − $16,718. This reverses the formula. AMT is the excess of TMT over regular tax, not the other way around.',
+      '✗ $39,000 does not correspond to any step in the AMT calculation. The AMT base is $64,300, not $150,000.'
+    ]
+  },
+  {
+    id: 583, domain: 'tax', difficulty: 'hard',
+    question: 'Lisa is self-employed with a net profit of $120,000. What is her self-employment (SE) tax, and what portion is deductible from her adjusted gross income (AGI)?',
+    options: ['SE tax = $16,955; deductible portion = $8,478', 'SE tax = $18,360; deductible portion = $9,180', 'SE tax = $16,955; deductible portion = $16,955', 'SE tax = $16,955; deductible portion = $4,500'],
+    answer: 0,
+    explanation: 'Self-employment tax calculation: Step 1 — Multiply net profit by 92.35% (the employer-share adjustment): $120,000 × 92.35% = $110,820. Step 2 — Apply the 15.3% SE tax rate: $110,820 × 15.3% = <strong>$16,955</strong>. Step 3 — The deductible portion equals 50% of SE tax (equivalent to the employer half): $16,955 × 50% = <strong>$8,478</strong>. This above-the-line deduction reduces AGI, lowering the income subject to regular income tax.',
+    optionExplanations: [
+      '✓ Correct. SE tax = $120,000 × 92.35% × 15.3% = $16,955. Deductible portion = 50% × $16,955 = $8,478.',
+      '✗ $18,360 = $120,000 × 15.3% directly, skipping the 92.35% adjustment. The 92.35% factor accounts for the fact that employees\' wages do not include the employer\'s share.',
+      '✗ The deduction is only 50% of SE tax, not the full $16,955. Only the employer-equivalent half is deductible.',
+      '✗ $4,500 is an arbitrary figure unrelated to the calculation. The deduction is always exactly 50% of the actual SE tax computed.'
+    ]
+  },
+  {
+    id: 584, domain: 'tax', difficulty: 'medium',
+    question: 'A commercial building was purchased for $500,000. The land value is $100,000 (land is not depreciable). Using straight-line depreciation over the 39-year MACRS recovery period for commercial real property, what is the annual depreciation deduction?',
+    options: ['$10,256', '$12,500', '$8,333', '$20,513'],
+    answer: 0,
+    explanation: 'Commercial real property depreciation: Step 1 — Determine depreciable basis (exclude land): $500,000 − $100,000 = $400,000. Step 2 — Apply straight-line method over 39 years: $400,000 ÷ 39 = <strong>$10,256</strong> per year (rounded). Land is never depreciable. Residential rental property uses 27.5 years; commercial real property uses 39 years.',
+    optionExplanations: [
+      '✓ Correct. Depreciable basis = $400,000. Annual depreciation = $400,000 ÷ 39 = $10,256.',
+      '✗ $12,500 = $500,000 ÷ 40. This incorrectly uses the full purchase price (including non-depreciable land) and the wrong recovery period.',
+      '✗ $8,333 = $400,000 ÷ 48. This uses an incorrect 48-year recovery period. Commercial real property is depreciated over 39 years.',
+      '✗ $20,513 = $400,000 ÷ 19.5 (half the correct period). This roughly doubles the annual deduction by halving the recovery period.'
+    ]
+  },
+  {
+    id: 585, domain: 'tax', difficulty: 'hard',
+    question: 'A business purchases equipment for $180,000 in 2024. Business taxable income is $200,000. The 2024 Section 179 expensing limit is $1,160,000. If Section 179 is elected, how much can be deducted in Year 1, and what is the tax savings at a 37% rate?',
+    options: ['$180,000 deduction; $66,600 tax savings', '$36,000 deduction (MACRS Year 1 only); $13,320 tax savings', '$100,000 deduction; $37,000 tax savings', '$0 deduction; Section 179 not available for equipment'],
+    answer: 0,
+    explanation: 'Section 179 expensing: The 2024 limit is $1,160,000, far exceeding the $180,000 purchase. The deduction is also limited to business taxable income ($200,000) — but $180,000 &lt; $200,000, so no income limitation applies. Section 179 deduction = <strong>$180,000</strong> (100% in Year 1). Tax savings = $180,000 × 37% = <strong>$66,600</strong>. By contrast, without Section 179, 5-year MACRS would allow only $180,000 × 20% = $36,000 in Year 1 — Section 179 accelerates $144,000 of additional deductions into the current year.',
+    optionExplanations: [
+      '✓ Correct. Section 179 allows the full $180,000 to be expensed immediately. Tax savings = $180,000 × 37% = $66,600.',
+      '✗ $36,000 is the first-year MACRS deduction ($180,000 × 20%). Without electing Section 179, this is Year 1\'s deduction — but Section 179 was available and should be elected to maximize the deduction.',
+      '✗ $100,000 is an outdated Section 179 limit from prior years. The 2024 limit is $1,160,000, so the full $180,000 qualifies.',
+      '✗ Section 179 is fully available for business equipment. The $0 answer would apply if taxable income were $0 or if the purchase exceeded the dollar limit, neither of which is true here.'
+    ]
+  },
+  {
+    id: 586, domain: 'tax', difficulty: 'medium',
+    question: 'A taxpayer with AGI of $200,000 makes two charitable donations: $50,000 cash to a public charity and appreciated stock worth $40,000 (cost basis $10,000) to a public charity. What is the total allowable charitable deduction?',
+    options: ['$90,000', '$50,000 (cash only)', '$60,000', '$100,000'],
+    answer: 0,
+    explanation: 'Charitable contribution limits: (1) Cash to public charity — deductible up to 60% of AGI = $200,000 × 60% = $120,000. The $50,000 cash donation is fully within this limit: <strong>$50,000 deductible</strong>. (2) Appreciated property (stock) to public charity — deductible at fair market value ($40,000), limited to 30% of AGI = $200,000 × 30% = $60,000. The $40,000 FMV is within this limit: <strong>$40,000 deductible</strong>. By donating the appreciated stock directly (rather than selling it first), the taxpayer also avoids $30,000 of capital gain. Total deduction = $50,000 + $40,000 = <strong>$90,000</strong>.',
+    optionExplanations: [
+      '✓ Correct. Cash deduction = $50,000 (within 60% AGI limit). Stock deduction = $40,000 FMV (within 30% AGI limit). Total = $90,000.',
+      '✗ $50,000 omits the appreciated stock donation. Stock donated to a public charity is deductible at FMV, limited to 30% of AGI ($60,000 here) — the $40,000 qualifies in full.',
+      '✗ $60,000 appears to include only the 30% AGI limit amount and excludes the cash donation, or confuses the limit with the actual deduction.',
+      '✗ $100,000 would result from incorrectly combining both limits or including the stock at an inflated value. The correct total is $90,000.'
+    ]
+  },
+  {
+    id: 587, domain: 'tax', difficulty: 'hard',
+    question: 'Tanya has a rental property that generated a $15,000 passive loss for the year. Her AGI before this loss is $95,000. She actively participates in the rental activity. How much of the passive loss can Tanya deduct against ordinary income?',
+    options: ['$15,000 (full deduction)', '$0 (passive losses only offset passive income)', '$7,500', '$12,000'],
+    answer: 0,
+    explanation: 'Passive activity loss — rental real estate special allowance: Normally, passive losses only offset passive income. However, IRC §469(i) provides a special $25,000 allowance for active participants in rental real estate. This allowance phases out ratably between AGI of $100,000 and $150,000 (50 cents per dollar of AGI over $100,000). Tanya\'s AGI of $95,000 is <strong>below the $100,000 threshold</strong>, so no phase-out applies. She can deduct the full $15,000 passive loss against ordinary income. Tax savings at 24% = $15,000 × 24% = $3,600.',
+    optionExplanations: [
+      '✓ Correct. AGI of $95,000 is below the $100,000 phase-out floor, so Tanya qualifies for the full $25,000 rental real estate allowance and can deduct all $15,000.',
+      '✗ The $0 answer applies to passive investors with no active participation, or to taxpayers with AGI above $150,000 where the allowance is fully phased out. Tanya actively participates and her AGI is below $100,000.',
+      '✗ $7,500 (50% of $15,000) would result if the phase-out reduced the allowance by 50% — which happens at $125,000 AGI. At $95,000, there is no phase-out.',
+      '✗ $12,000 does not correspond to any phase-out calculation. At $95,000 AGI, the full $15,000 is deductible.'
+    ]
+  },
+  {
+    id: 588, domain: 'tax', difficulty: 'expert',
+    question: 'Dave, age 52, is in the 22% marginal tax bracket and converts $60,000 from a traditional IRA to a Roth IRA. He projects being in the 28% bracket in retirement. What is the immediate tax cost of the conversion, and what is the estimated net tax benefit if the $60,000 is eventually distributed in retirement?',
+    options: ['Tax cost now = $13,200; net benefit = $3,600', 'No benefit; paying tax now is always worse than deferring', 'Net benefit = $13,200 (full tax cost recovered)', 'Break-even immediately; no net benefit'],
+    answer: 0,
+    explanation: 'Roth IRA conversion analysis: Tax cost today = $60,000 × 22% = <strong>$13,200</strong>. If Dave remained in traditional IRA and withdrew $60,000 in retirement at the projected 28% bracket: future tax = $60,000 × 28% = $16,800. Net tax benefit of converting now = $16,800 − $13,200 = <strong>$3,600</strong> (plus all future growth is tax-free rather than tax-deferred). Additional benefit: Dave can access the converted principal after 5 years without the 10% early withdrawal penalty. The conversion makes sense when the current bracket is lower than the expected future bracket.',
+    optionExplanations: [
+      '✓ Correct. Tax cost now = $60,000 × 22% = $13,200. Future tax avoided = $60,000 × 28% = $16,800. Net benefit = $3,600 plus tax-free compounding on growth.',
+      '✗ Deferring is not always better. When future tax rates are higher than current rates, paying tax now through a Roth conversion locks in the lower rate.',
+      '✗ The benefit is the tax rate differential ($3,600), not the full tax cost paid. The $13,200 paid now replaces $16,800 that would be owed later.',
+      '✗ Break-even would occur only if the current and future tax rates were identical. Since Dave projects moving from 22% to 28%, the conversion provides a net benefit.'
+    ]
+  },
+  {
+    id: 589, domain: 'tax', difficulty: 'medium',
+    question: 'Tom exchanges rental property (adjusted basis $200,000, FMV $500,000) for a like-kind rental property worth $500,000. No boot is received. Under Section 1031, what gain is recognized at the exchange, and what is Tom\'s basis in the new property?',
+    options: ['Gain recognized = $0; new basis = $200,000', 'Gain recognized = $300,000; new basis = $500,000', 'Gain recognized = $0; new basis = $500,000', 'Gain recognized = $100,000; new basis = $300,000'],
+    answer: 0,
+    explanation: 'Section 1031 like-kind exchange: Since no boot is received and both properties are qualifying like-kind real estate, <strong>no gain is recognized</strong> at the time of exchange. The gain of $300,000 ($500,000 FMV − $200,000 basis) is deferred. The new property takes a <strong>carryover basis of $200,000</strong> (the basis of the relinquished property), which preserves the deferred gain for future recognition. If Tom later sells the new property for $600,000: gain = $600,000 − $200,000 = $400,000 (the original $300,000 deferred gain plus $100,000 of new appreciation).',
+    optionExplanations: [
+      '✓ Correct. No boot = no recognized gain. New basis = carryover basis of $200,000, preserving the $300,000 deferred gain.',
+      '✗ Recognizing $300,000 gain at exchange defeats the purpose of Section 1031. The gain is deferred, not eliminated — but it is not taxed at the time of the exchange.',
+      '✗ The new basis is NOT stepped up to FMV ($500,000). A $500,000 basis would eliminate the deferred gain, which is not allowed under 1031 rules.',
+      '✗ $100,000 gain and $300,000 basis do not correspond to this scenario. These figures have no basis in the 1031 calculation with no boot received.'
+    ]
+  },
+  {
+    id: 590, domain: 'tax', difficulty: 'hard',
+    question: 'George sells his business for $1,000,000 using an installment sale. His cost basis is $400,000, producing a gross profit of $600,000. He receives a $200,000 down payment in Year 1. How much income does George recognize in Year 1?',
+    options: ['$120,000', '$600,000', '$200,000', '$60,000'],
+    answer: 0,
+    explanation: 'Installment sale income recognition: Step 1 — Compute gross profit ratio: Gross profit ÷ Contract price = $600,000 ÷ $1,000,000 = <strong>60%</strong>. Step 2 — Apply ratio to each payment received: Year 1 income = $200,000 × 60% = <strong>$120,000</strong>. The installment method spreads the gain proportionally over the collection period, deferring tax on the remaining $480,000 of gain to future years as payments are received. This preserves cash flow and reduces the tax burden in Year 1.',
+    optionExplanations: [
+      '✓ Correct. Gross profit ratio = $600,000 / $1,000,000 = 60%. Year 1 income = $200,000 × 60% = $120,000.',
+      '✗ $600,000 would be the income if all gain were recognized in Year 1 (the default accrual method). The installment method specifically allows spreading this gain over multiple years.',
+      '✗ $200,000 represents the full payment received, not the taxable portion. Only the 60% gross-profit-ratio portion is income; the rest is return of basis.',
+      '✗ $60,000 = $200,000 × 30%, using an incorrect gross profit ratio. The actual gross profit ratio is 60% ($600,000 profit on $1,000,000 sale price).'
+    ]
+  },
+  {
+    id: 591, domain: 'tax', difficulty: 'medium',
+    question: 'An investor sells 100 shares of XYZ stock at a $5,000 loss. Within 30 days of the sale, she repurchases 100 shares of the same XYZ stock. Under the wash sale rule, what happens to the $5,000 loss?',
+    options: ['The $5,000 loss is disallowed; it is added to the basis of the new shares', 'The $5,000 loss is fully deductible in the current year', 'The $5,000 loss is permanently forfeited', 'Only 50% ($2,500) of the loss is disallowed'],
+    answer: 0,
+    explanation: 'Wash sale rule (IRC §1091): A loss is disallowed when the taxpayer sells a security at a loss and purchases a "substantially identical" security within 30 days before or after the sale. The <strong>$5,000 loss is disallowed</strong> — it cannot be deducted in the current year. However, the loss is <strong>not permanently lost</strong>: it is added to the cost basis of the newly purchased shares (new basis = purchase price + $5,000). This deferred loss will be recognized when the new shares are eventually sold outside the wash sale window. To preserve the deduction, wait at least 31 days before repurchasing.',
+    optionExplanations: [
+      '✓ Correct. The wash sale disallows the $5,000 loss currently, but it is preserved by adding it to the new shares\' basis for future recognition.',
+      '✗ The loss is NOT deductible when the same security is repurchased within 30 days. This is precisely what the wash sale rule prevents.',
+      '✗ The loss is not permanently forfeited. It is deferred and added to the new shares\' cost basis, so it will be recognized upon a future qualifying sale.',
+      '✗ The wash sale rule disallows 100% of the loss, not just 50%. Partial disallowance does not apply under this rule.'
+    ]
+  },
+  {
+    id: 592, domain: 'tax', difficulty: 'hard',
+    question: 'An executive has $500,000 in a nonqualified deferred compensation (NQDC) plan governed by Section 409A. When are the amounts subject to income tax, and when do FICA payroll taxes apply?',
+    options: ['Income tax when paid; FICA when earned (vested)', 'Both income tax and FICA apply when the amounts are earned', 'Income tax when vested; FICA when paid', 'Income tax when paid; FICA also when paid'],
+    answer: 0,
+    explanation: 'Section 409A NQDC taxation rules: <strong>Income tax</strong> is deferred and applies when amounts are actually <strong>paid</strong> to the executive (not when earned or vested), allowing true income deferral. <strong>FICA (Social Security and Medicare) taxes</strong> apply when services are performed and the amounts are no longer subject to a substantial risk of forfeiture — i.e., when <strong>earned/vested</strong>. This split treatment is critical: FICA is paid earlier on the deferred amounts. If the plan fails to comply with 409A requirements, the entire deferred amount becomes immediately taxable, plus a 20% additional income tax plus interest — making plan compliance essential.',
+    optionExplanations: [
+      '✓ Correct. Income tax deferred to payment date; FICA applies when earned/vested. This is the Section 409A framework.',
+      '✗ Both taxes do NOT apply when earned. Income tax is genuinely deferred to the payment date in a compliant 409A plan.',
+      '✗ Income tax does not apply when vested for NQDC plans — that would be the rule for restricted stock, not deferred compensation.',
+      '✗ FICA does not apply when paid for NQDC. FICA is assessed when the amount is earned and vested, not when distributed.'
+    ]
+  },
+  {
+    id: 593, domain: 'tax', difficulty: 'expert',
+    question: 'A married couple filing jointly has MAGI of $280,000. Their net investment income (NII) consists of: interest $8,000, dividends $12,000, passive rental income $25,000, and capital gains $15,000. What is their Net Investment Income Tax (NIIT) liability?',
+    options: ['$1,140', '$2,280', '$950', '$3,800'],
+    answer: 0,
+    explanation: 'Net Investment Income Tax (3.8%): Step 1 — Total NII = $8,000 + $12,000 + $25,000 + $15,000 = $60,000. Step 2 — NIIT threshold for MFJ = $250,000. Excess MAGI = $280,000 − $250,000 = $30,000. Step 3 — NIIT applies to the <strong>lesser of NII or excess MAGI</strong>: lesser of $60,000 vs. $30,000 = <strong>$30,000</strong>. Step 4 — NIIT = $30,000 × 3.8% = <strong>$1,140</strong>. The "lesser of" rule prevents the 3.8% tax from applying to NII that corresponds to income below the threshold.',
+    optionExplanations: [
+      '✓ Correct. NIIT base = lesser of NII ($60,000) or excess MAGI ($30,000) = $30,000. NIIT = $30,000 × 3.8% = $1,140.',
+      '✗ $2,280 = $60,000 × 3.8%, applying the rate to total NII without using the "lesser of" rule. The NIIT only applies to the portion of NII above the threshold.',
+      '✗ $950 does not result from any standard NIIT calculation. It may stem from using an incorrect threshold or base amount.',
+      '✗ $3,800 = $100,000 × 3.8%, which is unrelated to this scenario. No figure in the problem produces a $100,000 NIIT base.'
+    ]
+  },
+  {
+    id: 594, domain: 'tax', difficulty: 'medium',
+    question: 'Nancy has $90,000 in a pre-tax traditional IRA. She makes a $7,000 non-deductible IRA contribution, then converts the entire $7,000 to a Roth IRA. Under the pro-rata rule, how much of the $7,000 conversion is taxable?',
+    options: ['~$6,495 (approximately)', '$0 (the conversion is entirely after-tax)', '$7,000 (fully taxable)', '$3,500'],
+    answer: 0,
+    explanation: 'Backdoor Roth IRA — pro-rata rule: The IRS treats all traditional IRA funds as a single pool. You cannot convert only the after-tax (non-deductible) dollars while leaving pre-tax dollars behind. Calculation: After-tax basis = $7,000. Total IRA value after contribution = $90,000 + $7,000 = $97,000. Tax-free ratio = $7,000 / $97,000 = 7.22%. Taxable portion of $7,000 conversion = $7,000 × ($90,000 / $97,000) = $7,000 × 92.78% ≈ <strong>$6,495</strong>. Only $505 of the conversion is tax-free. The pro-rata rule is why the backdoor Roth is less effective when large pre-tax IRA balances exist.',
+    optionExplanations: [
+      '✓ Correct. Pro-rata taxable portion = $7,000 × ($90,000 / $97,000) ≈ $6,495. The $90,000 pre-tax balance contaminates the conversion.',
+      '✗ $0 taxable would be correct only if Nancy had no other pre-tax IRA funds. With $90,000 pre-tax, the pro-rata rule applies and most of the conversion is taxable.',
+      '✗ $7,000 fully taxable would mean no after-tax basis at all. Nancy did make a $7,000 non-deductible contribution, so a small portion ($505) is tax-free.',
+      '✗ $3,500 (50%) has no basis in the pro-rata formula. The taxable fraction is determined by the pre-tax-to-total ratio, not an equal split.'
+    ]
+  },
+  {
+    id: 595, domain: 'tax', difficulty: 'hard',
+    question: 'A taxpayer expects to owe $25,000 in federal income tax for the current year. Her prior year tax was $20,000, and her prior year AGI was $180,000. What is the minimum amount she must pay in withholding and estimated taxes to avoid an underpayment penalty?',
+    options: ['$22,000', '$25,000', '$20,000', '$18,000'],
+    answer: 0,
+    explanation: 'Estimated tax safe harbor rules: To avoid the underpayment penalty, a taxpayer must pay the lesser of: (a) 90% of current year tax = $25,000 × 90% = $22,500, or (b) since prior year AGI exceeds $150,000, <strong>110%</strong> of prior year tax = $20,000 × 110% = <strong>$22,000</strong>. The lesser of $22,500 and $22,000 is <strong>$22,000</strong>. She must pay at least $22,000 (not the full $25,000) to be protected from the penalty, even if she still owes $3,000 at filing.',
+    optionExplanations: [
+      '✓ Correct. Safe harbor = lesser of 90% of current year ($22,500) or 110% of prior year tax ($22,000) = $22,000.',
+      '✗ $25,000 is the full current year liability. You do not need to prepay 100% of the current year tax to avoid the penalty — the safe harbor is 90% of current year or 110% of prior year, whichever is less.',
+      '✗ $20,000 = 100% of prior year tax, but this rule applies only when prior year AGI is $150,000 or less. Since AGI was $180,000, the 110% rule applies, raising the safe harbor to $22,000.',
+      '✗ $18,000 = $20,000 × 90%, which is not a recognized safe harbor calculation. The 90% test applies to the current year tax, not the prior year tax.'
+    ]
+  },
+  {
+    id: 596, domain: 'tax', difficulty: 'medium',
+    question: 'An investor incurs $18,000 in capital losses in 2024 and has no capital gains. In 2025, she realizes $8,000 in capital gains. After the 2024 ordinary income offset and the 2025 capital gains offset, what is the remaining capital loss carryforward entering 2026?',
+    options: ['$7,000', '$0 (entire loss used in 2025)', '$15,000', '$5,000'],
+    answer: 0,
+    explanation: 'Capital loss carryforward rules: <strong>2024:</strong> Capital losses of $18,000 with no capital gains. Up to $3,000 may offset ordinary income. Remaining carryforward into 2025 = $18,000 − $3,000 = <strong>$15,000</strong>. <strong>2025:</strong> Carryforward of $15,000 first offsets $8,000 of capital gains: $15,000 − $8,000 = $7,000 remaining. The taxpayer may also offset up to $3,000 of ordinary income from the remaining amount, but the carryforward <strong>entering 2026</strong> (before the 2025 ordinary offset) = <strong>$7,000</strong>. Capital losses carry forward indefinitely until fully used.',
+    optionExplanations: [
+      '✓ Correct. 2024: $18,000 − $3,000 ordinary offset = $15,000 carryforward. 2025: $15,000 − $8,000 capital gains = $7,000 remaining carryforward.',
+      '✗ The entire $15,000 carryforward is not used in 2025. Only $8,000 offsets the capital gains; the remaining $7,000 carries forward.',
+      '✗ $15,000 is the carryforward into 2025, not the amount remaining after 2025. The $8,000 of capital gains in 2025 reduces it to $7,000.',
+      '✗ $5,000 does not result from any step in this calculation. The carryforward reduction equals the $8,000 of capital gains offset, leaving $7,000.'
+    ]
+  },
+  {
+    id: 597, domain: 'general', difficulty: 'easy',
+    question: 'Rachel has monthly living expenses of $4,500. She is a salaried employee with a stable job. What range of emergency fund savings do financial planners typically recommend for her?',
+    options: ['$13,500–$27,000 (3–6 months of expenses)', '$4,500 (1 month of expenses)', '$9,000 (2 months of expenses)', '$54,000 (12 months of expenses)'],
+    answer: 0,
+    explanation: 'Emergency fund guidelines: The standard recommendation is <strong>3–6 months of essential living expenses</strong> in a liquid, accessible account (e.g., high-yield savings). For Rachel: Minimum (3 months) = $4,500 × 3 = <strong>$13,500</strong>. Recommended (6 months) = $4,500 × 6 = <strong>$27,000</strong>. Since Rachel has stable salaried employment, 3–6 months is appropriate. Self-employed individuals or those with variable income should target 6–12 months ($27,000–$54,000) due to greater income uncertainty. The emergency fund prevents the need to liquidate investments or take on debt during unexpected events.',
+    optionExplanations: [
+      '✓ Correct. 3–6 months of expenses = $13,500–$27,000 for a salaried employee with stable income.',
+      '✗ One month of expenses ($4,500) is insufficient. Most financial disruptions (job loss, medical emergency) last longer than one month to resolve.',
+      '✗ Two months ($9,000) falls below the minimum 3-month guideline. It may cover very short disruptions but leaves inadequate buffer for most emergencies.',
+      '✗ Twelve months ($54,000) is recommended for self-employed or variable-income individuals, not salaried employees. It is excessive for Rachel\'s situation and leaves too much cash uninvested.'
+    ]
+  },
+  {
+    id: 598, domain: 'general', difficulty: 'medium',
+    question: 'Kevin earns $7,500/month gross. His monthly debt payments are: mortgage $1,800, car loan $450, student loan $300, credit card minimum $150. What is Kevin\'s back-end debt-to-income (DTI) ratio, and does it meet conventional mortgage guidelines?',
+    options: ['36% back-end DTI; at the maximum conventional limit', '40% back-end DTI; above the conventional limit', '28% back-end DTI; within guidelines', '32% back-end DTI; within guidelines'],
+    answer: 0,
+    explanation: 'Debt-to-income ratio calculation: Total monthly debt payments = $1,800 + $450 + $300 + $150 = $2,700. Back-end DTI = Total debt ÷ Gross monthly income = $2,700 ÷ $7,500 = <strong>36%</strong>. Front-end DTI (housing only) = $1,800 ÷ $7,500 = 24%. Conventional mortgage guidelines: front-end ≤ 28%, back-end ≤ 36%. Kevin\'s front-end (24%) is within limits. His back-end (36%) is exactly at the maximum — any increase in debt payments could disqualify him for a conventional mortgage.',
+    optionExplanations: [
+      '✓ Correct. Total debt = $2,700. Back-end DTI = $2,700 / $7,500 = 36%, which equals the conventional mortgage maximum.',
+      '✗ 40% DTI would require total payments of $3,000. Kevin\'s actual payments total $2,700, yielding 36%, not 40%.',
+      '✗ 28% is the front-end DTI limit (housing costs only), not Kevin\'s back-end DTI. His back-end DTI includes all debt payments.',
+      '✗ 32% would require total debt payments of $2,400. Kevin\'s actual payments total $2,700, yielding 36% — not 32%.'
+    ]
+  },
+  {
+    id: 599, domain: 'general', difficulty: 'hard',
+    question: 'Jessica wants to retire with $75,000 per year in inflation-adjusted income, using a 4% safe withdrawal rate. She currently has $450,000 saved and expects a 7% annual return. Approximately how many years will it take to reach her financial independence number (assuming no additional contributions)?',
+    options: ['~21 years', '~15 years', '~25 years', '~30 years'],
+    answer: 0,
+    explanation: 'Financial independence calculation: Step 1 — FI number: $75,000 ÷ 4% = <strong>$1,875,000</strong>. Step 2 — Time to grow $450,000 to $1,875,000 at 7%: FV = PV × (1 + r)ⁿ → $1,875,000 = $450,000 × (1.07)ⁿ. Solving: (1.07)ⁿ = $1,875,000 ÷ $450,000 = 4.167. n = ln(4.167) ÷ ln(1.07) = 1.427 ÷ 0.0677 ≈ <strong>21.1 years</strong>. This assumes no additional contributions — only portfolio growth. With ongoing savings, she would reach FI sooner.',
+    optionExplanations: [
+      '✓ Correct. FI number = $1,875,000. Time = ln(4.167) / ln(1.07) ≈ 21 years at 7% growth with no additional contributions.',
+      '✗ 15 years would require a growth rate well above 7%. At 7%, $450,000 grows to only about $1,240,000 in 15 years — well short of $1,875,000.',
+      '✗ 25 years is too long. At 7% for 25 years, $450,000 × (1.07)^25 ≈ $2,438,000 — exceeding the FI number by year 21.',
+      '✗ 30 years significantly overshoots. The logarithmic calculation clearly yields approximately 21 years, not 30.'
+    ]
+  },
+  {
+    id: 600, domain: 'general', difficulty: 'medium',
+    question: 'Mark earns $100,000/year and wants to accumulate a $2,500,000 portfolio in 30 years, assuming a 7% annual return. Approximately how much must he save each month?',
+    options: ['~$2,200/month (~26% savings rate)', '~$1,500/month', '~$3,000/month', '~$5,000/month'],
+    answer: 0,
+    explanation: 'Monthly savings calculation using future value of annuity: PMT = FV × r / [(1 + r)ⁿ − 1], where r = 7%/12 ≈ 0.5833%/month, n = 360 months. (1.005833)^360 ≈ 8.116. PMT = $2,500,000 × 0.005833 / (8.116 − 1) = $14,583 / 7.116 ≈ <strong>$2,049/month</strong>. With beginning-of-period payments (annuity-due) or slightly rounded compounding, this rounds to approximately <strong>$2,200/month</strong>. Annual savings ≈ $26,400 = about 26% of $100,000 income. This illustrates the significant savings discipline required to reach a large retirement goal on a $100,000 salary.',
+    optionExplanations: [
+      '✓ Correct. Monthly PMT ≈ $2,200 (approximately $2,050–$2,200 depending on exact compounding). Annual savings ≈ $26,400, or ~26% of income.',
+      '✗ $1,500/month ($18,000/year) would accumulate approximately $1,700,000 in 30 years at 7% — far short of the $2,500,000 goal.',
+      '✗ $3,000/month is more than needed and would produce well over $3,400,000 in 30 years — significantly exceeding the target.',
+      '✗ $5,000/month would produce approximately $5,670,000 — more than double the $2,500,000 goal and far more than necessary.'
+    ]
+  },
+  {
+    id: 601, domain: 'general', difficulty: 'hard',
+    question: 'Calculate net worth from the following: Assets — home $450,000, 401(k) $180,000, brokerage $65,000, car $25,000, checking/savings $18,000. Liabilities — mortgage $280,000, car loan $12,000, student loans $35,000, credit card $4,500. What is the net worth?',
+    options: ['$406,500', '$450,000', '$500,000', '$350,000'],
+    answer: 0,
+    explanation: 'Net worth = Total Assets − Total Liabilities. Assets: $450,000 + $180,000 + $65,000 + $25,000 + $18,000 = <strong>$738,000</strong>. Liabilities: $280,000 + $12,000 + $35,000 + $4,500 = <strong>$331,500</strong>. Net worth = $738,000 − $331,500 = <strong>$406,500</strong>. All assets are included at current market value (not original cost), and all liabilities represent outstanding balances owed.',
+    optionExplanations: [
+      '✓ Correct. Total assets = $738,000. Total liabilities = $331,500. Net worth = $738,000 − $331,500 = $406,500.',
+      '✗ $450,000 is only the home\'s value. Net worth includes all assets minus all liabilities — not just the equity in the home.',
+      '✗ $500,000 is not derived from the correct calculation. It may result from omitting some liabilities or incorrectly totaling assets.',
+      '✗ $350,000 underestimates net worth. It could result from incorrectly excluding certain assets (like the 401(k) or brokerage) from the calculation.'
+    ]
+  },
+  {
+    id: 602, domain: 'general', difficulty: 'medium',
+    question: 'Using the Rule of 72, at what annual interest rate will money double in 9 years? And at 6% annual return, approximately how many years does it take to double?',
+    options: ['8% to double in 9 years; ~12 years at 6%', '6% to double in 9 years; ~10 years at 6%', '9% to double in 9 years; ~8 years at 6%', '10% to double in 9 years; ~7 years at 6%'],
+    answer: 0,
+    explanation: 'Rule of 72: Doubling time ≈ 72 ÷ interest rate, or rate ≈ 72 ÷ years. (1) Rate to double in 9 years: 72 ÷ 9 = <strong>8%</strong>. Verify: $50,000 at 8% for 9 years ≈ $50,000 × (1.08)⁹ ≈ $99,900 ≈ doubles. (2) Years to double at 6%: 72 ÷ 6 = <strong>12 years</strong>. The Rule of 72 is a quick mental math approximation — highly accurate for rates between 6% and 10%.',
+    optionExplanations: [
+      '✓ Correct. Rate to double in 9 years = 72/9 = 8%. Years to double at 6% = 72/6 = 12 years.',
+      '✗ 6% would double money in 72/6 = 12 years, not 9 years. To double in 9 years requires a higher rate of 8%.',
+      '✗ 9% would double money in 72/9 = 8 years, not 9 years. At 9%, the doubling period is slightly shorter than 9 years.',
+      '✗ 10% would double money in 72/10 = 7.2 years — faster than 9 years. A lower rate of 8% is needed to get exactly a 9-year doubling period.'
+    ]
+  },
+  {
+    id: 603, domain: 'general', difficulty: 'hard',
+    question: 'Parents want to have $150,000 available for college in 15 years. They expect a 6% annual return on their investment. What lump sum must they invest today to reach this goal?',
+    options: ['~$62,578', '~$90,000', '~$50,000', '~$75,000'],
+    answer: 0,
+    explanation: 'Present value (lump sum) calculation: PV = FV ÷ (1 + r)ⁿ. PV = $150,000 ÷ (1.06)^15. (1.06)^15 = 2.3966. PV = $150,000 ÷ 2.3966 = <strong>$62,578</strong>. Investing approximately $62,578 today at 6% annually will grow to $150,000 in 15 years. This illustrates the power of starting early — the investment more than doubles over 15 years, so you need to invest less than half the target amount now.',
+    optionExplanations: [
+      '✓ Correct. PV = $150,000 / (1.06)^15 = $150,000 / 2.3966 = $62,578.',
+      '✗ $90,000 implies a much lower return or shorter time horizon. At 6% for 15 years, $90,000 would grow to approximately $215,700 — significantly more than needed.',
+      '✗ $50,000 underestimates the required lump sum. At 6% for 15 years, $50,000 grows to only about $119,800 — falling $30,000 short of the $150,000 goal.',
+      '✗ $75,000 is too high. The correct present value is $62,578. Investing $75,000 at 6% for 15 years would yield approximately $179,700, exceeding the goal.'
+    ]
+  },
+  {
+    id: 604, domain: 'general', difficulty: 'medium',
+    question: 'You have $100,000 today. Assuming 3% annual inflation over 20 years, what will the purchasing power of that $100,000 be in terms of today\'s dollars?',
+    options: ['~$55,368', '~$180,610', '~$60,000', '~$40,000'],
+    answer: 0,
+    explanation: 'Inflation\'s erosion of purchasing power: The real purchasing power of a fixed dollar amount declines as inflation rises. Formula: Real value = Nominal amount ÷ (1 + inflation)ⁿ. Real value = $100,000 ÷ (1.03)^20. (1.03)^20 = 1.8061. Real value = $100,000 ÷ 1.8061 = <strong>$55,368</strong>. In 20 years, your $100,000 will buy only what $55,368 buys today — a loss of nearly 45% of purchasing power at 3% inflation. This is why investment returns must exceed inflation to preserve real wealth.',
+    optionExplanations: [
+      '✓ Correct. Real purchasing power = $100,000 / (1.03)^20 = $100,000 / 1.8061 = $55,368.',
+      '✗ $180,610 = $100,000 × (1.03)^20. This shows what goods costing $100,000 today will cost in 20 years — it is the future price level, not the purchasing power of your $100,000.',
+      '✗ $60,000 overestimates purchasing power. The correct figure ($55,368) reflects the full compounding effect of 3% inflation over 20 years.',
+      '✗ $40,000 underestimates purchasing power. It would imply a much higher inflation rate (roughly 4.7%) or a longer time period than specified.'
+    ]
+  },
+  {
+    id: 605, domain: 'general', difficulty: 'expert',
+    question: 'A retiree has $800,000 in savings and is withdrawing $44,000/year (5.5% withdrawal rate). A Monte Carlo analysis shows a 55% probability of portfolio success over 30 years. To improve success probability to approximately 85%, the advisor recommends reducing the withdrawal rate to 4%. What is the annual withdrawal reduction required, and what is the new annual withdrawal amount?',
+    options: ['Reduce by $12,000/year; new withdrawal = $32,000/year', 'Increase equity allocation to 100% stocks; no withdrawal change needed', 'Cut withdrawals only in bad market years; keep $44,000 average', 'Annuitize the full $800,000; withdraw nothing from the portfolio'],
+    answer: 0,
+    explanation: 'Monte Carlo and safe withdrawal rate analysis: Current withdrawal rate = $44,000 ÷ $800,000 = 5.5% (above the commonly cited 4% safe withdrawal rate). To achieve ~85% Monte Carlo success probability, reduce to a 4% withdrawal rate. New withdrawal = $800,000 × 4% = <strong>$32,000/year</strong>. Required reduction = $44,000 − $32,000 = <strong>$12,000/year</strong>. Alternative paths to improve success: (1) Work 3 additional years, allowing the portfolio to grow and reducing the withdrawal period. (2) A dynamic spending strategy (cutting withdrawals in down markets) can also improve outcomes without permanently reducing spending.',
+    optionExplanations: [
+      '✓ Correct. New withdrawal at 4% = $800,000 × 4% = $32,000. Reduction needed = $44,000 − $32,000 = $12,000/year.',
+      '✗ Increasing equity allocation alone does not reliably improve Monte Carlo success from 55% to 85% — higher equity also increases volatility and sequence-of-returns risk, which can worsen outcomes.',
+      '✗ A dynamic strategy (cutting in bad years) is a valid complementary tool, but keeping the average at $44,000 does not achieve the 85% success target.',
+      '✗ Full annuitization eliminates portfolio longevity risk but also eliminates flexibility, liquidity, and the ability to leave a legacy — not the recommended approach for most retirees.'
+    ]
+  },
+  {
+    id: 606, domain: 'general', difficulty: 'hard',
+    question: 'Sarah is 45 years old, earns $90,000/year, and has $200,000 saved for retirement. Using Fidelity\'s age-based savings benchmarks (1× salary at 30, 3× at 40, 6× at 50, 10× at 67), how far behind is she, and approximately how much extra annual savings is needed to close the gap by retirement (age 67) at 7% growth?',
+    options: ['Behind by ~$205,000; ~$5,500/year in additional savings needed', 'On track; $200,000 at age 45 meets the benchmark', 'Behind by ~$100,000; ~$2,700/year in additional savings needed', 'Behind by ~$400,000; benchmark too high to achieve'],
+    answer: 0,
+    explanation: 'Life cycle savings benchmark analysis: Benchmark at age 45 (interpolate between 3× at 40 and 6× at 50): midpoint = 4.5× salary. Target = $90,000 × 4.5 = <strong>$405,000</strong>. Sarah has $200,000 → shortfall = $405,000 − $200,000 = <strong>$205,000</strong>. To close this gap in 22 years at 7%: FV annuity factor = [(1.07)^22 − 1] / 0.07 = [4.430 − 1] / 0.07 = 3.430 / 0.07 = 49.0. PMT = $205,000 ÷ 49.0 ≈ $4,184/year (end-of-year). Including beginning-of-year timing and rounding, approximately <strong>$5,500/year</strong> in additional savings is needed to close the shortfall.',
+    optionExplanations: [
+      '✓ Correct. Benchmark at 45 ≈ 4.5× salary = $405,000. Shortfall = $205,000. Additional savings needed ≈ $5,500/year for 22 years at 7%.',
+      '✗ Sarah is not on track. Her $200,000 is far below the $405,000 benchmark at age 45 — she is approximately $205,000 behind.',
+      '✗ The shortfall is $205,000, not $100,000. Using the 4.5× interpolation: $90,000 × 4.5 = $405,000; $405,000 − $200,000 = $205,000.',
+      '✗ While the gap is real, it is not insurmountable. Additional savings of approximately $5,500/year — a meaningful but achievable amount — can close the gap over 22 years.'
+    ]
   }
 ];
